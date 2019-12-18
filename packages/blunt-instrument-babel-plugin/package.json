@@ -1,0 +1,24 @@
+{
+  "name": "blunt-instrument-babel-plugin",
+  "version": "0.0.1",
+  "description": "Instruments javascript code for automatic tracing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brokensandals/blunt-instrument-babel-plugin.git"
+  },
+  "keywords": [
+    "instrument",
+    "trace",
+    "babel"
+  ],
+  "author": "Jacob Williams <jacobaw@gmail.com> (https://brokensandals.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brokensandals/blunt-instrument-babel-plugin/issues"
+  },
+  "homepage": "https://github.com/brokensandals/blunt-instrument-babel-plugin#readme"
+}
