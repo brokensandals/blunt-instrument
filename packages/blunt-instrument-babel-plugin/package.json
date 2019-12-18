@@ -4,7 +4,7 @@
   "description": "Instruments javascript code for automatic tracing.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/brokensandals/blunt-instrument-babel-plugin/issues"
   },
-  "homepage": "https://github.com/brokensandals/blunt-instrument-babel-plugin#readme"
+  "homepage": "https://github.com/brokensandals/blunt-instrument-babel-plugin#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "jest": "^24.9.0"
+  }
 }
