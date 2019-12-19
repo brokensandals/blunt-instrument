@@ -4,6 +4,8 @@ const visitor = {
   }
 };
 
-export const bluntInstrumentPlugin = {
-  visitor: visitor
-};
+export function bluntInstrumentPlugin(babel) {
+  return {
+    visitor: visitor
+  }
+}
