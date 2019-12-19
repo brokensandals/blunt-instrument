@@ -40,6 +40,10 @@ function addInstrumenterInit(path) {
   return state;
 }
 
+function findOrCreateEnclosingBlock(path) {
+  
+}
+
 function addExpressionTrace(path, { traceFnId }) {
   
 }
