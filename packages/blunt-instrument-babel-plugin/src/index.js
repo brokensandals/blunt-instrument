@@ -40,9 +40,19 @@ function addInstrumenterInit(path) {
   return state;
 }
 
+function addExpressionTrace(path, { traceFnId }) {
+  
+}
+
 const instrumentVisitor = {
-  Expression(path) {
-    
+  Identifier: {
+    exit(path) {
+      if (!path.node.nodeId) return;
+
+      const id = path.scope.generateUidIdentifier('node' + path.node.nodeId);
+      
+      path.replaceWith(id);
+    }
   }
 };
 
@@ -50,7 +60,7 @@ const rootVisitor = {
   Program(path) {
     annotateWithNodeIds(path);
     const state = addInstrumenterInit(path);
-    path.traverse(instrumentVisitor);
+    path.traverse(instrumentVisitor, state);
   }
 };
 
