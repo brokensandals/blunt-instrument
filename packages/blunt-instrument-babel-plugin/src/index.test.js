@@ -11,7 +11,7 @@ test('testing', () => {
   eval(code + '; console.log(fac(7));');
 });
 
-// test('tmp', () => {
-//   const { code } = babel.transform(`x = function() {b}`, { plugins: [bluntInstrumentPlugin ]});
-//   console.log(code);
-// });
+test('tmp', () => {
+  const { code } = babel.transform(`x && y`, { plugins: [bluntInstrumentPlugin ]});
+  console.log(code);
+});

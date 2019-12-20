@@ -60,7 +60,7 @@ function addExpressionTrace(path, { traceFnId }) {
 }
 
 const instrumentVisitor = {
-  Identifier: {
+  Expression: {
     exit(path) {
       if (!(path.node.nodeId && path.isExpression())) return;
       addExpressionTrace(path, this);
