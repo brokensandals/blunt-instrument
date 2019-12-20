@@ -8,5 +8,10 @@ const SOURCE_FAC = `function fac(n) {
 test('testing', () => {
   const { code } = babel.transform(SOURCE_FAC, { plugins: [bluntInstrumentPlugin] });
   console.log(code);
-  eval(code);
+  eval(code + '; console.log(fac(7));');
 });
+
+// test('tmp', () => {
+//   const { code } = babel.transform(`x = function() {b}`, { plugins: [bluntInstrumentPlugin ]});
+//   console.log(code);
+// });

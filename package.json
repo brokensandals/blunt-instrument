@@ -12,6 +12,7 @@
     "lerna": "^3.19.0"
   },
   "scripts": {
+    "lint": "eslint packages/*/src",
     "test": "jest",
     "test:watch": "jest --watch"
   }

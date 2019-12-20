@@ -40,22 +40,32 @@ function addInstrumenterInit(path) {
   return state;
 }
 
-function findOrCreateEnclosingBlock(path) {
-  
-}
+const buildExpressionTrace = template(`
+  (() => {
+    const %%tempId%% = %%expression%%;
+    %%traceFnId%%(%%nodeId%%, %%tempId%%);
+    return %%tempId%%;
+  })()
+`);
 
 function addExpressionTrace(path, { traceFnId }) {
-  
+  const node = path.node;
+  const { nodeId, ...rest } = node;
+  const id = path.scope.generateUidIdentifier('node' + nodeId);
+  const trace = buildExpressionTrace({
+    traceFnId,
+    nodeId: types.numericLiteral(nodeId),
+    expression: rest,
+    tempId: id
+  });
+  path.replaceWith(trace);
 }
 
 const instrumentVisitor = {
   Identifier: {
     exit(path) {
       if (!path.node.nodeId) return;
-
-      const id = path.scope.generateUidIdentifier('node' + path.node.nodeId);
-      
-      path.replaceWith(id);
+      addExpressionTrace(path, this);
     }
   }
 };
