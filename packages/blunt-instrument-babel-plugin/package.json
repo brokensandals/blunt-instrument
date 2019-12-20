@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brokensandals/blunt-instrument-babel-plugin.git"
+    "url": "git+https://github.com/brokensandals/blunt-instrument.git"
   },
   "keywords": [
     "instrument",
@@ -15,7 +15,7 @@
   "author": "Jacob Williams <jacobaw@gmail.com> (https://brokensandals.net)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/brokensandals/blunt-instrument-babel-plugin/issues"
+    "url": "https://github.com/brokensandals/blunt-instrument/issues"
   },
-  "homepage": "https://github.com/brokensandals/blunt-instrument-babel-plugin#readme"
+  "homepage": "https://github.com/brokensandals/blunt-instrument#readme"
 }
