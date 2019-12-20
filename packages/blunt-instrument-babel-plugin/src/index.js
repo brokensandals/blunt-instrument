@@ -63,7 +63,7 @@ const instrumentVisitor = {
   Expression: {
     exit(path) {
       if (!(path.node.nodeId && path.isExpression())) return;
-      addExpressionTrace(path, this);
+      addExpressionTrace(path, this.state);
     }
   }
 };
@@ -72,7 +72,7 @@ const rootVisitor = {
   Program(path) {
     annotateWithNodeIds(path);
     const state = addInstrumenterInit(path);
-    path.traverse(instrumentVisitor, state);
+    path.traverse(instrumentVisitor, { state });
   }
 };
 
