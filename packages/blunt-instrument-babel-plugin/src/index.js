@@ -1,15 +1,13 @@
 import template from '@babel/template';
 import * as types from '@babel/types';
 
-const idVisitor = {
-  "Expression|Statement"(path) {
-    path.node.nodeId = this.nextId;
-    this.nextId += 1;
-  }
-};
-
 function annotateWithNodeIds(path) {
-  path.traverse(idVisitor, { nextId: 1 });
+  let nextId = 1;
+  types.traverseFast(path.node, (node) => {
+    const nodeId = nextId;
+    nextId += 1;
+    node.nodeId = nodeId;
+  });
 }
 
 const buildStoreAst = template(`
@@ -64,7 +62,7 @@ function addExpressionTrace(path, { traceFnId }) {
 const instrumentVisitor = {
   Identifier: {
     exit(path) {
-      if (!path.node.nodeId) return;
+      if (!(path.node.nodeId && path.isExpression())) return;
       addExpressionTrace(path, this);
     }
   }
