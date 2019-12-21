@@ -2,18 +2,12 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.7",
     "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.19.1",
-    "jest": "^24.9.0",
     "lerna": "^3.19.0"
   },
   "scripts": {
-    "lint": "eslint packages/*/src",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "lint": "eslint packages/*/src"
   }
 }
