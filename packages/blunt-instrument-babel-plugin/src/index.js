@@ -10,8 +10,14 @@ function annotateWithNodeIds(path) {
   });
 }
 
-const buildStoreAst = template(`
+const buildDeclarations = template(`
+  const %%eventsId%% = [];
   const %%astId%% = JSON.parse(%%astString%%);
+`);
+
+const buildExports = template(`
+  export const %%eventsId%% = [];
+  export const %%astId%% = JSON.parse(%%astString%%);
 `);
 
 // TODO: clone mutable objects
@@ -22,34 +28,26 @@ const buildAddTraceFn = template(`
 `);
 
 function addInstrumenterInit(path) {
+  // TODO: make IDs configurable
   const state = {
-    astId: path.scope.generateUidIdentifier('bi_ast'),
-    eventsId: path.scope.generateUidIdentifier('bi_events'),
+    astId: types.identifier('biAST'),
+    eventsId: types.identifier('biEvents'),
     traceFnId: path.scope.generateUidIdentifier('bi_trace')
   };
 
-  const storeAst = buildStoreAst({
+  const constsArgs = {
     astId: state.astId,
+    eventsId: state.eventsId,
     astString: types.stringLiteral(JSON.stringify(path.node)) // TODO insert object directly instead of via json
-  });
+  };
+  const consts = path.node.sourceType === 'module' ?
+    buildExports(constsArgs) : buildDeclarations(constsArgs);
 
   const addTraceFn = buildAddTraceFn({ eventsId: state.eventsId, traceFnId: state.traceFnId });
 
-  path.scope.push({ id: state.eventsId, init: types.arrayExpression() });
-
-  path.node.body.unshift(storeAst, addTraceFn);
+  path.node.body.unshift(...consts, addTraceFn);
 
   return state;
-}
-
-const buildExports = template(`
-  export const biAST = %%astId%%;
-  export const biEvents = %%eventsId%%;
-`);
-
-function addInstrumenterExports(path, { astId, eventsId }) {
-  const exports = buildExports({ astId, eventsId });
-  path.node.body.push(...exports);
 }
 
 const buildExpressionTrace = template(`
@@ -87,7 +85,6 @@ const rootVisitor = {
     annotateWithNodeIds(path);
     const state = addInstrumenterInit(path);
     path.traverse(instrumentVisitor, { state });
-    addInstrumenterExports(path, state);
   }
 };
 

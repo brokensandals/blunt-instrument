@@ -5,10 +5,13 @@ export class ASTQuerier {
     this.ast = ast;
     const nodesById = new Map();
     types.traverseFast(ast, (node) => {
+      if (!node.type) {
+        return;
+      }
       if (!node.nodeId) {
         throw new Error('Node is missing nodeId: ' + node);
       }
-      nodesById.set(nodeId, node);
+      nodesById.set(node.nodeId, node);
     });
     this.nodesById = nodesById;
   }
