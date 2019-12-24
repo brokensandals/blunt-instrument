@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+function AppView() {
   return (
     <div className="App">
       <div className="blurb">
@@ -11,4 +11,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppView;
