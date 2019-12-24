@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin'
 
 function AppView() {
   return (
