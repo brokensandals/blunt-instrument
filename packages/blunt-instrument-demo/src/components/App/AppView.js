@@ -1,28 +1,13 @@
 import React from 'react';
 import './App.css';
-import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin'
-import { TraceQuerier } from 'blunt-instrument-querier'
+import { instrumentedEval } from 'blunt-instrument-eval';
 
-const sampleCode = `function insertionSort(array) {
-  let shifts = 0;
-
-  for (let i = 0; i < array.length; i++) {
-    for (let j = i - 1; j >= 0; j--) {
-      if (array[j] <= array[j + 1]) {
-        break;
-      }
-
-      shifts++;
-      const tmp = array[j + 1];
-      array[j + 1] = array[j];
-      array[j] = tmp;
-    }
-  }
-
-  return shifts;
+const sampleCode = `function fac(n) {
+  return n == 1 ? 1 : n * fac(n - 1);
 }`;
 
 function AppView() {
+  instrumentedEval(sampleCode);
   return (
     <div className="App">
       <div className="blurb">
