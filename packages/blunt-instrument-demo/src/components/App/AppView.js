@@ -1,20 +1,23 @@
 import React from 'react';
 import './App.css';
-import { instrumentedEval } from 'blunt-instrument-eval';
 import AnnotatedSource from '../AnnotatedSource';
 import ASTNav from '../ASTNav';
 
-const sampleCode = `function fac(n) {
-  return n == 1 ? 1 : n * fac(n - 1);
-}
-fac(3);`;
-
-function AppView() {
-  const querier = instrumentedEval(sampleCode);
+function AppView({
+  ast,
+  highlightedNodeId,
+  onHoveredNodeChange,
+  source
+}) {
   return (
     <div className="App">
-      <AnnotatedSource ast={querier.astq.ast} source={sampleCode} />}
-      <ASTNav ast={querier.astq.ast} />
+      <AnnotatedSource ast={ast}
+                       highlightedNodeId={highlightedNodeId}
+                       onHoveredNodeChange={onHoveredNodeChange}
+                       source={source} />}
+      <ASTNav ast={ast}
+              highlightedNodeId={highlightedNodeId}
+              onHoveredNodeChange={onHoveredNodeChange} />
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>
