@@ -1,0 +1,7 @@
+.AnnotatedSource {
+  padding: 0 10px;
+}
+
+.AnnotatedSource .highlighted {
+  background-color: yellow;
+}

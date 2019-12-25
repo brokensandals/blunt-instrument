@@ -1,11 +1,17 @@
 .App {
   height: 100vh;
   display: grid;
-  grid-template-rows: calc(100vh - 2em) 2em;
+  grid-template-rows: calc(39vh - 1em) calc(59vh - 1em) 2em;
+}
+
+.AnnotatedSource {
+  grid-row: 1;
+  
+  overflow: scroll;
 }
 
 .ASTNav {
-  grid-row: 1;
+  grid-row: 2;
   height: 100%;
   overflow: scroll;
 }
@@ -15,7 +21,7 @@
 }
 
 .blurb {
-  grid-row: 2;
+  grid-row: 3;
   height: 1em;
   text-align: right;
   padding: 0.5em;

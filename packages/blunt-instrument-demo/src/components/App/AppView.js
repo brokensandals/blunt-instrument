@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { instrumentedEval } from 'blunt-instrument-eval';
+import AnnotatedSource from '../AnnotatedSource';
 import ASTNav from '../ASTNav';
 
 const sampleCode = `function fac(n) {
@@ -12,6 +13,7 @@ function AppView() {
   const querier = instrumentedEval(sampleCode);
   return (
     <div className="App">
+      <AnnotatedSource ast={querier.astq.ast} source={sampleCode} />}
       <ASTNav ast={querier.astq.ast} />
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
