@@ -33,7 +33,9 @@ insertionSort([3, 1, 2, 5, 4])`,
 function AppView({
   ast,
   events,
+  highlightedEventId,
   highlightedNodeId,
+  onHoveredEventChange,
   onHoveredNodeChange,
   onRun,
   onSourceDraftChange,
@@ -74,8 +76,9 @@ function AppView({
               highlightedNodeId={highlightedNodeId}
               onHoveredNodeChange={onHoveredNodeChange} />
       <EventTable events={events}
+                  highlightedEventId={highlightedEventId}
                   highlightedNodeId={highlightedNodeId}
-                  onHoveredNodeChange={onHoveredNodeChange} />
+                  onHoveredEventChange={onHoveredEventChange} />
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>

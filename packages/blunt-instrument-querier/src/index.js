@@ -37,7 +37,7 @@ export class TraceQuerier {
   query({ include } = { include: DEFAULT_INCLUDE }) {
     const results = [];
 
-    let step = 1; // TODO store on the events
+    let step = 0; // TODO store on the events
     for (const event of this.events) {
       const result = {};
       if (include.nodeId) {

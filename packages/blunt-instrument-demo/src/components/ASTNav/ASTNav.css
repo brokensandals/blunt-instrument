@@ -38,7 +38,7 @@
 }
 
 .ASTNav .node.highlighted {
-  background-color: yellow;
+  background-color: orange;
 }
 
 .ASTNav .type {

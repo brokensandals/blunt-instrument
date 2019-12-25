@@ -27,13 +27,21 @@ class AppContainer extends React.Component {
     super(props)
     this.state = {};
     this.state = {
+      highlightedEventId: null,
       highlightedNodeId: null,
       ...doRun(examples.factorial)
     };
 
+    this.handleHoveredEventChange = this.handleHoveredEventChange.bind(this);
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
     this.handleRun = this.handleRun.bind(this);
     this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
+  }
+
+  handleHoveredEventChange(eventId) {
+    // TODO actually create concept of eventId...
+    this.handleHoveredNodeChange(eventId == null ? null : this.state.events[eventId].nodeId);
+    this.setState({ highlightedEventId: eventId });
   }
 
   handleHoveredNodeChange(nodeId) {
@@ -54,7 +62,9 @@ class AppContainer extends React.Component {
                events={this.state.events}
                source={this.state.source}
                sourceDraft={this.state.sourceDraft}
+               highlightedEventId={this.state.highlightedEventId}
                highlightedNodeId={this.state.highlightedNodeId}
+               onHoveredEventChange={this.handleHoveredEventChange}
                onHoveredNodeChange={this.handleHoveredNodeChange}
                onRun={this.handleRun}
                onSourceDraftChange={this.handleSourceDraftChange}

@@ -29,14 +29,24 @@ function ValueDisplay({ value }) {
 
 function EventTableView({
   events,
+  highlightedEventId,
   highlightedNodeId,
-  onHoveredNodeChange,
+  onHoveredEventChange,
 }) {
   const entries = [];
 
   for (const event of events) {
+    const handleMouseOver = onHoveredEventChange ? (ev) => {
+      onHoveredEventChange(event.step); // TODO create real eventId
+    } : null;
+
+    const className = [
+      highlightedEventId != null && event.step === highlightedEventId ? 'highlighted-event' : null,
+      highlightedNodeId != null && event.nodeId === highlightedNodeId ? 'highlighted-node' : null,
+    ].join(' ');
+
     entries.push(
-      <tr key={event.step}>
+      <tr key={event.step} onMouseOver={handleMouseOver} className={className}>
         <td>{event.step}</td>
         <td><code>{event.source}</code></td>
         <td><ValueDisplay value={event.value} /></td>
@@ -44,9 +54,11 @@ function EventTableView({
     );
   }
 
+  const clearHover = onHoveredEventChange ? () => onHoveredEventChange(null) : null;
+
   return (
     <div className="EventTable">
-      <table>
+      <table onMouseLeave={clearHover}>
         <thead>
           <tr>
             <th>step</th>

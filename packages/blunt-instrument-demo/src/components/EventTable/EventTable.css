@@ -3,10 +3,18 @@
   padding-left: 10px;
 }
 
-.EventTable tbody tr:nth-child(odd) {
+.EventTable tbody tr:nth-child(odd):not(.highlighted-node, .highlighted-event) {
   background-color: rgb(238, 238, 238);
 }
 
 .EventTable .primitive {
   color: slateblue;
+}
+
+.EventTable .highlighted-node {
+  background-color: orange;
+}
+
+.EventTable .highlighted-event {
+  background-color: yellow;
 }
