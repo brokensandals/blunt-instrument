@@ -14,7 +14,7 @@ function AppView({
       <AnnotatedSource ast={ast}
                        highlightedNodeId={highlightedNodeId}
                        onHoveredNodeChange={onHoveredNodeChange}
-                       source={source} />}
+                       source={source} />
       <ASTNav ast={ast}
               highlightedNodeId={highlightedNodeId}
               onHoveredNodeChange={onHoveredNodeChange} />
