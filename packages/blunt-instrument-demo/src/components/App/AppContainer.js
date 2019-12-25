@@ -12,22 +12,40 @@ class AppContainer extends React.Component {
     super(props)
     this.state = {
       highlightedNodeId: null,
-      querier: instrumentedEval(sampleCode)
+      querier: instrumentedEval(sampleCode),
+      source: sampleCode,
+      sourceDraft: sampleCode,
     };
 
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
+    this.handleRun = this.handleRun.bind(this);
+    this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
   }
 
   handleHoveredNodeChange(nodeId) {
     this.setState({ highlightedNodeId: nodeId });
   }
 
+  handleRun() {
+    this.setState({
+      querier: instrumentedEval(this.state.sourceDraft),
+      source: this.state.sourceDraft,
+    });
+  }
+
+  handleSourceDraftChange(sourceDraft) {
+    this.setState({ sourceDraft });
+  }
+
   render() {
     return (
       <AppView ast={this.state.querier.astq.ast}
-               source={sampleCode}
+               source={this.state.source}
+               sourceDraft={this.state.sourceDraft}
                highlightedNodeId={this.state.highlightedNodeId}
-               onHoveredNodeChange={this.handleHoveredNodeChange} />
+               onHoveredNodeChange={this.handleHoveredNodeChange}
+               onRun={this.handleRun}
+               onSourceDraftChange={this.handleSourceDraftChange} />
     )
   }
 }

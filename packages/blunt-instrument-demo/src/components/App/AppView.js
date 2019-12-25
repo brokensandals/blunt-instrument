@@ -7,10 +7,25 @@ function AppView({
   ast,
   highlightedNodeId,
   onHoveredNodeChange,
-  source
+  onRun,
+  onSourceDraftChange,
+  source,
+  sourceDraft,
 }) {
+  const handleRun = (event) => {
+    event.preventDefault();
+    onRun();
+  };
+  const handleSourceDraftChange =
+    (event) => onSourceDraftChange(event.target.value);
+
   return (
     <div className="App">
+      <form className="source-form">
+        <p className="instructions">Enter javascript code here, then click "Run" to see the trace.</p>
+        <textarea value={sourceDraft} onChange={handleSourceDraftChange} />
+        <button className="run" onClick={handleRun}>Run</button>
+      </form>
       <AnnotatedSource ast={ast}
                        highlightedNodeId={highlightedNodeId}
                        onHoveredNodeChange={onHoveredNodeChange}
