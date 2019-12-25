@@ -39,7 +39,7 @@ class AppContainer extends React.Component {
   }
 
   handleHoveredEventChange(eventId) {
-    // TODO actually create concept of eventId...
+    // TODO use an abstraction for looking up events by id?
     this.handleHoveredNodeChange(eventId == null ? null : this.state.events[eventId].nodeId);
     this.setState({ highlightedEventId: eventId });
   }

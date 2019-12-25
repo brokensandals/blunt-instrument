@@ -23,7 +23,7 @@ const buildExports = template(`
 // TODO: clone mutable objects
 const buildAddTraceFn = template(`
   function %%traceFnId%%(nodeId, value) {
-    %%eventsId%%.push({ nodeId: nodeId, value: value });
+    %%eventsId%%.push({ eventId: %%eventsId%%.length, nodeId: nodeId, value: value });
   }
 `);
 

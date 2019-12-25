@@ -18,8 +18,8 @@ export class ASTQuerier {
 }
 
 const DEFAULT_INCLUDE = {
+  eventId: true,
   nodeId: true,
-  step: true,
   source: true,
   value: true
 };
@@ -37,14 +37,13 @@ export class TraceQuerier {
   query({ include } = { include: DEFAULT_INCLUDE }) {
     const results = [];
 
-    let step = 0; // TODO store on the events
     for (const event of this.events) {
       const result = {};
+      if (include.eventId) {
+        result.eventId = event.eventId;
+      }
       if (include.nodeId) {
         result.nodeId = event.nodeId;
-      }
-      if (include.step) {
-        result.step = step;
       }
       if (include.source && this.source) {
         const node = this.astq.nodesById.get(event.nodeId);
@@ -57,8 +56,6 @@ export class TraceQuerier {
       }
 
       results.push(result);
-
-      step++;
     }
 
     return results;

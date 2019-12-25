@@ -37,17 +37,17 @@ function EventTableView({
 
   for (const event of events) {
     const handleMouseOver = onHoveredEventChange ? (ev) => {
-      onHoveredEventChange(event.step); // TODO create real eventId
+      onHoveredEventChange(event.eventId);
     } : null;
 
     const className = [
-      highlightedEventId != null && event.step === highlightedEventId ? 'highlighted-event' : null,
+      highlightedEventId != null && event.eventId === highlightedEventId ? 'highlighted-event' : null,
       highlightedNodeId != null && event.nodeId === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
     entries.push(
       <tr key={event.step} onMouseOver={handleMouseOver} className={className}>
-        <td>{event.step}</td>
+        <td>{event.eventId}</td>
         <td><code>{event.source}</code></td>
         <td><ValueDisplay value={event.value} /></td>
       </tr>
@@ -61,7 +61,7 @@ function EventTableView({
       <table onMouseLeave={clearHover}>
         <thead>
           <tr>
-            <th>step</th>
+            <th>id</th>
             <th>code</th>
             <th>value</th>
           </tr>
