@@ -3,15 +3,32 @@ import AppView from './AppView';
 import { examples } from './AppView';
 import { instrumentedEval } from 'blunt-instrument-eval';
 
+function doRun(source) {
+  let querier;
+  try {
+    querier = instrumentedEval(source);
+  } catch (error) {
+    console.log(error)
+    return { runError: error };
+  }
+
+  const events = querier.query();
+  return {
+    events,
+    querier,
+    runError: null,
+    source,
+    sourceDraft: source,
+  };
+}
+
 class AppContainer extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {};
     this.state = {
       highlightedNodeId: null,
-      querier: instrumentedEval(examples.factorial),
-      runError: null,
-      source: examples.factorial,
-      sourceDraft: examples.factorial,
+      ...doRun(examples.factorial)
     };
 
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
@@ -24,18 +41,7 @@ class AppContainer extends React.Component {
   }
 
   handleRun(source) {
-    let querier;
-    try {
-      querier = instrumentedEval(source);
-      this.setState({
-        runError: null,
-        querier: instrumentedEval(source),
-        source: source,
-        sourceDraft: source,
-      });
-    } catch (error) {
-      this.setState({ runError: error });
-    }
+    this.setState(doRun(source));
   }
 
   handleSourceDraftChange(sourceDraft) {
@@ -45,6 +51,7 @@ class AppContainer extends React.Component {
   render() {
     return (
       <AppView ast={this.state.querier.astq.ast}
+               events={this.state.events}
                source={this.state.source}
                sourceDraft={this.state.sourceDraft}
                highlightedNodeId={this.state.highlightedNodeId}

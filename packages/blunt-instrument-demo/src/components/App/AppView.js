@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import AnnotatedSource from '../AnnotatedSource';
 import ASTNav from '../ASTNav';
+import EventTable from '../EventTable';
 
 export const examples = {
   factorial: `function fac(n) {
@@ -31,6 +32,7 @@ insertionSort([3, 1, 2, 5, 4])`,
 
 function AppView({
   ast,
+  events,
   highlightedNodeId,
   onHoveredNodeChange,
   onRun,
@@ -71,6 +73,9 @@ function AppView({
       <ASTNav ast={ast}
               highlightedNodeId={highlightedNodeId}
               onHoveredNodeChange={onHoveredNodeChange} />
+      <EventTable events={events}
+                  highlightedNodeId={highlightedNodeId}
+                  onHoveredNodeChange={onHoveredNodeChange} />
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>

@@ -1,0 +1,12 @@
+.EventTable td, .EventTable th {
+  text-align: left;
+  padding-left: 10px;
+}
+
+.EventTable tbody tr:nth-child(odd) {
+  background-color: rgb(238, 238, 238);
+}
+
+.EventTable .primitive {
+  color: slateblue;
+}

@@ -65,6 +65,15 @@
   display: none;
 }
 
+.EventTable {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column: 1;
+  height: 100%;
+  overflow: scroll;
+  font-size: small;
+}
+
 .blurb {
   grid-row: 4;
   grid-column-start: 1;
