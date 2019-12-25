@@ -8,30 +8,45 @@
   grid-row: 1;
   display: grid;
   grid-template-rows: 1.5em 1fr 1.5em;
+  grid-template-columns: 1fr 100px;
   border-bottom: 3px solid gray;
 }
 
-.source-form .instructions {
-  grid-row: 1;
+.source-form p {
   display: block;
   margin: 0;
   padding: 5px;
   font-size: small;
 }
 
+.source-form .instructions {
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
 .source-form textarea {
   grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
   overflow: scroll;
   resize: none;
 }
 
+.source-form .error {
+  grid-row: 3;
+  grid-column: 1;
+  color: red;
+}
+
 .source-form .run {
   grid-row: 3;
+  grid-column: 2;
 }
 
 .AnnotatedSource {
   grid-row: 2;
-  
+  font-size: small;
   overflow: scroll;
 }
 

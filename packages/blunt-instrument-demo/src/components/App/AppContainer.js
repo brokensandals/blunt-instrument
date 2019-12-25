@@ -1,20 +1,17 @@
 import React from 'react';
 import AppView from './AppView';
+import { examples } from './AppView';
 import { instrumentedEval } from 'blunt-instrument-eval';
-
-const sampleCode = `function fac(n) {
-  return n == 1 ? 1 : n * fac(n - 1);
-}
-fac(3);`;
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       highlightedNodeId: null,
-      querier: instrumentedEval(sampleCode),
-      source: sampleCode,
-      sourceDraft: sampleCode,
+      querier: instrumentedEval(examples.factorial),
+      runError: null,
+      source: examples.factorial,
+      sourceDraft: examples.factorial,
     };
 
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
@@ -26,11 +23,19 @@ class AppContainer extends React.Component {
     this.setState({ highlightedNodeId: nodeId });
   }
 
-  handleRun() {
-    this.setState({
-      querier: instrumentedEval(this.state.sourceDraft),
-      source: this.state.sourceDraft,
-    });
+  handleRun(source) {
+    let querier;
+    try {
+      querier = instrumentedEval(source);
+      this.setState({
+        runError: null,
+        querier: instrumentedEval(source),
+        source: source,
+        sourceDraft: source,
+      });
+    } catch (error) {
+      this.setState({ runError: error });
+    }
   }
 
   handleSourceDraftChange(sourceDraft) {
@@ -45,7 +50,8 @@ class AppContainer extends React.Component {
                highlightedNodeId={this.state.highlightedNodeId}
                onHoveredNodeChange={this.handleHoveredNodeChange}
                onRun={this.handleRun}
-               onSourceDraftChange={this.handleSourceDraftChange} />
+               onSourceDraftChange={this.handleSourceDraftChange}
+               runError={this.state.runError} />
     )
   }
 }
