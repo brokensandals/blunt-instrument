@@ -2,10 +2,13 @@
   height: 100vh;
   display: grid;
   grid-template-rows: 20vh calc(29vh - 1em) calc(49vh - 1em) 2em;
+  grid-template-columns: 50% 50%;
 }
 
 .source-form {
   grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
   display: grid;
   grid-template-rows: 1.5em 1fr 1.5em;
   grid-template-columns: 1fr 100px;
@@ -46,12 +49,14 @@
 
 .AnnotatedSource {
   grid-row: 2;
+  grid-column: 2;
   font-size: small;
   overflow: scroll;
 }
 
 .ASTNav {
   grid-row: 3;
+  grid-column: 2;
   height: 100%;
   overflow: scroll;
 }
@@ -62,6 +67,8 @@
 
 .blurb {
   grid-row: 4;
+  grid-column-start: 1;
+  grid-column-end: 3;
   height: 1em;
   text-align: right;
   padding: 0.5em;
