@@ -1,0 +1,49 @@
+.ASTNav dl {
+  margin: 0;
+}
+
+.ASTNav dt {
+  font-size: .8em;
+}
+
+.ASTNav dt::after {
+  content: ":";
+}
+
+.ASTNav dd {
+  margin-left: 15px;
+}
+
+.ASTNav ol {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.ASTNav .primitive {
+  font-size: .9em;
+  color: slateblue;
+}
+
+.ASTNav .object {
+  border-left: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  padding-left: 3px;
+  padding-top: 3px;
+  margin-top: 4px;
+}
+
+.ASTNav .object.highlighted {
+  background-color: yellow;
+}
+
+.ASTNav .type {
+  font-size: .9em;
+  color: gray;
+}
+
+.ASTNav .loc {
+  font-size: .7em;
+  color: brown;
+}
+
