@@ -26,18 +26,18 @@
 }
 
 .ASTNav .object {
-  border-left: 1px solid lightgray;
-  border-top: 1px solid lightgray;
   padding-left: 3px;
   padding-top: 3px;
   margin-top: 4px;
 }
 
-.ASTNav .object {
+.ASTNav .node {
+  border-left: 1px solid lightgray;
+  border-top: 1px solid lightgray;
   background-color: white;
 }
 
-.ASTNav .object.highlighted {
+.ASTNav .node.highlighted {
   background-color: yellow;
 }
 

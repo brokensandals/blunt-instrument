@@ -64,6 +64,7 @@ function ASTObjectView({
 
   const className = [
     'object',
+    nodeId ? 'node' : null,
     nodeId && nodeId === highlightedNodeId ? 'highlighted' : null
   ].join(' ');
 
