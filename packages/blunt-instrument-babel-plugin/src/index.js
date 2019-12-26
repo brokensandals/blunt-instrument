@@ -22,8 +22,12 @@ const buildExports = template(`
 
 // TODO: clone mutable objects
 const buildAddTraceFn = template(`
-  function %%traceFnId%%(nodeId, value) {
-    %%eventsId%%.push({ eventId: %%eventsId%%.length, nodeId: nodeId, value: value });
+  function %%traceFnId%%(nodeId, type, value) {
+    %%eventsId%%.push({
+      id: %%eventsId%%.length,
+      nodeId,
+      type,
+      value, });
   }
 `);
 
@@ -53,7 +57,7 @@ function addInstrumenterInit(path) {
 const buildExpressionTrace = template(`
   (() => {
     const %%tempId%% = %%expression%%;
-    %%traceFnId%%(%%nodeId%%, %%tempId%%);
+    %%traceFnId%%(%%nodeId%%, 'eval', %%tempId%%);
     return %%tempId%%;
   })()
 `);

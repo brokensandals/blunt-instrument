@@ -23,7 +23,7 @@ class AppContainer extends React.Component {
     this.state = {
       eventQuery: {
         fields: {
-          eventId: true,
+          id: true,
           nodeId: true,
           source: true,
           value: true,
@@ -45,10 +45,10 @@ class AppContainer extends React.Component {
     this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
   }
 
-  handleHoveredEventChange(eventId) {
+  handleHoveredEventChange(id) {
     // TODO use an abstraction for looking up events by id?
-    this.handleHoveredNodeChange(eventId == null ? null : this.state.querier.events[eventId].nodeId);
-    this.setState({ highlightedEventId: eventId });
+    this.handleHoveredNodeChange(id == null ? null : this.state.querier.events[id].nodeId);
+    this.setState({ highlightedEventId: id });
   }
 
   handleHoveredNodeChange(nodeId) {

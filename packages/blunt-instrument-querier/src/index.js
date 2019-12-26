@@ -18,9 +18,10 @@ export class ASTQuerier {
 }
 
 const DEFAULT_FIELDS = {
-  eventId: true,
+  id: true,
   nodeId: true,
   source: true,
+  type: true,
   value: true
 };
 
@@ -60,14 +61,17 @@ export class TraceQuerier {
       }
 
       const result = {};
-      if (fields.eventId) {
-        result.eventId = event.eventId;
+      if (fields.id) {
+        result.id = event.id;
       }
       if (fields.nodeId) {
         result.nodeId = event.nodeId;
       }
       if (fields.source && this.source) {
         result.source = this.source.slice(node.start, node.end);
+      }
+      if (fields.type) {
+        result.type = event.type;
       }
       if (fields.value) {
         result.value = event.value;
