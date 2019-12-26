@@ -54,7 +54,7 @@ function AppView({
     (event) => onSourceDraftChange(event.target.value);
   
   const exampleLinks = Object.keys(examples).map(key => 
-    <button onClick={runHandler(examples[key])}>{key}</button>);
+    <button key={key} onClick={runHandler(examples[key])}>{key}</button>);
 
   return (
     <div className="App">

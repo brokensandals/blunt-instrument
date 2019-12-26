@@ -7,7 +7,7 @@ function ValueDisplay({ value }) {
     case true:
     case false:
     case undefined:
-      return <span class="primitive">{'' + value}</span>
+      return <span className="primitive">{'' + value}</span>
     
     default:
       switch (typeof value) {
@@ -20,9 +20,11 @@ function ValueDisplay({ value }) {
         case 'number':
         case 'bigint':
         case 'string':
-          return <span class="primitive">{JSON.stringify(value)}</span>;
+          return <span className="primitive">{JSON.stringify(value)}</span>;
         case 'symbol':
-          return <span class="primitive">{value.toString()}</span>;
+          return <span className="primitive">{value.toString()}</span>;
+        default:
+          return typeof value;
       }
   }
 }
@@ -46,7 +48,7 @@ function EventTableView({
     ].join(' ');
 
     entries.push(
-      <tr key={event.step} onMouseOver={handleMouseOver} className={className}>
+      <tr key={event.eventId} onMouseOver={handleMouseOver} className={className}>
         <td>{event.eventId}</td>
         <td><code>{event.source}</code></td>
         <td><ValueDisplay value={event.value} /></td>
