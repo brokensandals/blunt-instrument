@@ -69,12 +69,12 @@ function AppView({
         {runError ? <p className="error">{runError.toString()}</p> : null}
         <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
       </form>
-      <AnnotatedSource ast={runResult.querier.astq.ast}
+      <AnnotatedSource ast={runResult.instrumented.ast}
                        highlightedNodeId={highlightedNodeId}
                        onHoveredNodeChange={onHoveredNodeChange}
                        onNodeSelectedToggle={onNodeSelectedToggle}
                        selectedNodeIds={eventQuery.filters.includeNodeIds || []}
-                       source={runResult.querier.source} />
+                       source={runResult.instrumented.source} />
       <ASTNav ast={runResult.querier.astq.ast}
               highlightedNodeId={highlightedNodeId}
               onHoveredNodeChange={onHoveredNodeChange}

@@ -68,7 +68,7 @@ class AppContainer extends React.Component {
   doRun(source, eventQuery) {
     let runResult;
     try {
-      runResult = instrumentedEval(source);
+      runResult = instrumentedEval(source, { returnInstrumented: { source: true, ast: true } });
     } catch (error) {
       console.log(error)
       return { runError: error };
