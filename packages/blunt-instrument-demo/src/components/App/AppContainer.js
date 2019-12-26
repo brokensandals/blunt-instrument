@@ -3,34 +3,25 @@ import AppView from './AppView';
 import { examples } from './AppView';
 import { instrumentedEval } from 'blunt-instrument-eval';
 
-function doRun(source) {
-  let querier;
-  try {
-    querier = instrumentedEval(source);
-  } catch (error) {
-    console.log(error)
-    return { runError: error };
-  }
-
-  const events = querier.query();
-  return {
-    events,
-    querier,
-    runError: null,
-    source,
-    sourceDraft: source,
-  };
-}
-
 class AppContainer extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {};
     this.state = {
+      eventQuery: {
+        fields: {
+          eventId: true,
+          nodeId: true,
+          source: true,
+          value: true,
+        },
+        filters: {
+          excludeTypes: ['Identifier', 'Literal']
+        }
+      },
       highlightedEventId: null,
       highlightedNodeId: null,
-      ...doRun(examples.factorial)
     };
+    Object.assign(this.state, this.doRun(examples.factorial));
 
     this.handleHoveredEventChange = this.handleHoveredEventChange.bind(this);
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
@@ -40,7 +31,7 @@ class AppContainer extends React.Component {
 
   handleHoveredEventChange(eventId) {
     // TODO use an abstraction for looking up events by id?
-    this.handleHoveredNodeChange(eventId == null ? null : this.state.events[eventId].nodeId);
+    this.handleHoveredNodeChange(eventId == null ? null : this.state.querier.events[eventId].nodeId);
     this.setState({ highlightedEventId: eventId });
   }
 
@@ -48,8 +39,27 @@ class AppContainer extends React.Component {
     this.setState({ highlightedNodeId: nodeId });
   }
 
+  doRun(source) {
+    let querier;
+    try {
+      querier = instrumentedEval(source);
+    } catch (error) {
+      console.log(error)
+      return { runError: error };
+    }
+  
+    const events = querier.query(this.state.eventQuery);
+    return {
+      events,
+      querier,
+      runError: null,
+      source,
+      sourceDraft: source,
+    };
+  }
+
   handleRun(source) {
-    this.setState(doRun(source));
+    this.setState(this.doRun(source));
   }
 
   handleSourceDraftChange(sourceDraft) {

@@ -17,7 +17,7 @@ export class ASTQuerier {
   }
 }
 
-const DEFAULT_INCLUDE = {
+const DEFAULT_FIELDS = {
   eventId: true,
   nodeId: true,
   source: true,
@@ -34,24 +34,37 @@ export class TraceQuerier {
     this.events = events;
     this.source = source;
   }
-  query({ include } = { include: DEFAULT_INCLUDE }) {
+  query({ filters, fields } = { fields: DEFAULT_FIELDS }) {
     const results = [];
 
+    eachEvent:
     for (const event of this.events) {
-      const result = {};
-      if (include.eventId) {
-        result.eventId = event.eventId;
+      const node = this.astq.nodesById.get(event.nodeId);
+      if (!node) {
+        throw new Error('Cannot find node for ID: ' + event.nodeId);
       }
-      if (include.nodeId) {
-        result.nodeId = event.nodeId;
-      }
-      if (include.source && this.source) {
-        const node = this.astq.nodesById.get(event.nodeId);
-        if (node) {
-          result.source = this.source.slice(node.start, node.end);
+
+      if (filters) {
+        if (filters.excludeTypes) {
+          for (const type of filters.excludeTypes) {
+            if (types.is(type, node)) {
+              continue eachEvent;
+            }
+          }
         }
       }
-      if (include.value) {
+
+      const result = {};
+      if (fields.eventId) {
+        result.eventId = event.eventId;
+      }
+      if (fields.nodeId) {
+        result.nodeId = event.nodeId;
+      }
+      if (fields.source && this.source) {
+        result.source = this.source.slice(node.start, node.end);
+      }
+      if (fields.value) {
         result.value = event.value;
       }
 
