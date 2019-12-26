@@ -31,7 +31,6 @@ insertionSort([3, 1, 2, 5, 4])`,
 };
 
 function AppView({
-  ast,
   eventQuery,
   events,
   highlightedEventId,
@@ -42,7 +41,7 @@ function AppView({
   onRun,
   onSourceDraftChange,
   runError,
-  source,
+  runResult,
   sourceDraft,
 }) {
   function runHandler(source) {
@@ -70,13 +69,13 @@ function AppView({
         {runError ? <p className="error">{runError.toString()}</p> : null}
         <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
       </form>
-      <AnnotatedSource ast={ast}
+      <AnnotatedSource ast={runResult.querier.astq.ast}
                        highlightedNodeId={highlightedNodeId}
                        onHoveredNodeChange={onHoveredNodeChange}
                        onNodeSelectedToggle={onNodeSelectedToggle}
                        selectedNodeIds={eventQuery.filters.includeNodeIds || []}
-                       source={source} />
-      <ASTNav ast={ast}
+                       source={runResult.querier.source} />
+      <ASTNav ast={runResult.querier.astq.ast}
               highlightedNodeId={highlightedNodeId}
               onHoveredNodeChange={onHoveredNodeChange}
               onNodeSelectedToggle={onNodeSelectedToggle}

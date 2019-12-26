@@ -5,8 +5,13 @@ import { TraceQuerier } from 'blunt-instrument-querier';
 const babelOpts = { plugins: [bluntInstrumentPlugin] };
 
 export function instrumentedEval(source) {
-  const { code } = babel.transformSync(source, { sourceType: 'script', ...babelOpts });
+  const babelResult = babel.transformSync(source, { sourceType: 'script', ...babelOpts });
+  const { code } = babelResult;
   const wrapped = code + '; [biAST, biEvents]'; // TODO: be less hacky
   const [ast, events] = (0, eval)(wrapped);
-  return new TraceQuerier(ast, events, source);
+  const querier = new TraceQuerier(ast, events, source);
+  return {
+    babelResult,
+    querier
+  };
 }
