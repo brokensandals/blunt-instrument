@@ -32,11 +32,13 @@ insertionSort([3, 1, 2, 5, 4])`,
 
 function AppView({
   ast,
+  eventQuery,
   events,
   highlightedEventId,
   highlightedNodeId,
   onHoveredEventChange,
   onHoveredNodeChange,
+  onNodeSelectedToggle,
   onRun,
   onSourceDraftChange,
   runError,
@@ -71,10 +73,14 @@ function AppView({
       <AnnotatedSource ast={ast}
                        highlightedNodeId={highlightedNodeId}
                        onHoveredNodeChange={onHoveredNodeChange}
+                       onNodeSelectedToggle={onNodeSelectedToggle}
+                       selectedNodeIds={eventQuery.filters.includeNodeIds || []}
                        source={source} />
       <ASTNav ast={ast}
               highlightedNodeId={highlightedNodeId}
-              onHoveredNodeChange={onHoveredNodeChange} />
+              onHoveredNodeChange={onHoveredNodeChange}
+              onNodeSelectedToggle={onNodeSelectedToggle}
+              selectedNodeIds={eventQuery.filters.includeNodeIds || []} />
       <EventTable events={events}
                   highlightedEventId={highlightedEventId}
                   highlightedNodeId={highlightedNodeId}

@@ -2,6 +2,13 @@
   padding: 0 10px;
 }
 
+.AnnotatedSource .selected {
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  border-radius: 2px;
+  background-color: lightgray;
+}
+
 .AnnotatedSource .highlighted {
   background-color: orange;
 }

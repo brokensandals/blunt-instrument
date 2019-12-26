@@ -52,6 +52,11 @@ export class TraceQuerier {
             }
           }
         }
+        if (filters.includeNodeIds) {
+          if (!filters.includeNodeIds.includes(event.nodeId)) {
+            continue eachEvent;
+          }
+        }
       }
 
       const result = {};

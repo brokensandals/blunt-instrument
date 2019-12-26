@@ -9,7 +9,9 @@ function locString({ start, end }) {
 function ASTObjectView({
   highlightedNodeId,
   object,
-  onHoveredNodeChange
+  onHoveredNodeChange,
+  onNodeSelectedToggle,
+  selectedNodeIds,
 }) {
   const {
     nodeId = null,
@@ -39,7 +41,9 @@ function ASTObjectView({
             <li key={index}>
               <ASTObjectView object={item}
                              highlightedNodeId={highlightedNodeId}
-                             onHoveredNodeChange={onHoveredNodeChange} />
+                             onHoveredNodeChange={onHoveredNodeChange}
+                             onNodeSelectedToggle={onNodeSelectedToggle}
+                             selectedNodeIds={selectedNodeIds} />
             </li>
           ))}
         </ol>
@@ -48,7 +52,9 @@ function ASTObjectView({
       entries.push([1, key,
         <ASTObjectView object={val}
                        highlightedNodeId={highlightedNodeId}
-                       onHoveredNodeChange={onHoveredNodeChange} />
+                       onHoveredNodeChange={onHoveredNodeChange}
+                       onNodeSelectedToggle={onNodeSelectedToggle}
+                       selectedNodeIds={selectedNodeIds} />
       ]);
     } else {
       entries.push([0, key, <span className="primitive">{JSON.stringify(val)}</span>]);
@@ -62,14 +68,20 @@ function ASTObjectView({
     event.stopPropagation();
   } : null;
 
+  const handleClick = nodeId && onNodeSelectedToggle ? (event) => {
+    onNodeSelectedToggle(nodeId);
+    event.stopPropagation();
+  } : null;
+
   const className = [
     'object',
     nodeId ? 'node' : null,
-    nodeId && nodeId === highlightedNodeId ? 'highlighted' : null
+    nodeId && nodeId === highlightedNodeId ? 'highlighted' : null,
+    nodeId && selectedNodeIds.includes(nodeId) ? 'selected' : null,
   ].join(' ');
 
   return (
-    <div className={className} onMouseOver={handleMouseOver}>
+    <div className={className} onMouseOver={handleMouseOver} onClick={handleClick}>
       {typeEl} {locEl}
       <dl>
         {entries.map(([_, key, val], index) =>
@@ -86,7 +98,9 @@ function ASTObjectView({
 function ASTNavView({
   ast,
   highlightedNodeId,
-  onHoveredNodeChange = null
+  onHoveredNodeChange = null,
+  onNodeSelectedToggle = null,
+  selectedNodeIds,
 }) {
   const clearHover = onHoveredNodeChange ? () => onHoveredNodeChange(null) : null;
 
@@ -94,7 +108,9 @@ function ASTNavView({
     <div className="ASTNav" onMouseLeave={clearHover}>
       <ASTObjectView object={ast}
                      highlightedNodeId={highlightedNodeId}
-                     onHoveredNodeChange={onHoveredNodeChange} />
+                     onHoveredNodeChange={onHoveredNodeChange}
+                     onNodeSelectedToggle={onNodeSelectedToggle}
+                     selectedNodeIds={selectedNodeIds} />
     </div>
   );
 }

@@ -37,6 +37,10 @@
   background-color: white;
 }
 
+.ASTNav .node.selected {
+  background-color: lightgray;
+}
+
 .ASTNav .node.highlighted {
   background-color: orange;
 }

@@ -26,6 +26,8 @@ function SourceForNode({
   highlightedNodeId,
   node,
   onHoveredNodeChange,
+  onNodeSelectedToggle,
+  selectedNodeIds,
   source
 }) {
   const { nodeId, start, end } = node;
@@ -43,8 +45,10 @@ function SourceForNode({
       <SourceForNode key={child.nodeId}
                      highlightedNodeId={highlightedNodeId}
                      node={child}
+                     selectedNodeIds={selectedNodeIds}
                      source={source}
-                     onHoveredNodeChange={onHoveredNodeChange} />
+                     onHoveredNodeChange={onHoveredNodeChange}
+                     onNodeSelectedToggle={onNodeSelectedToggle} />
     );
 
     cur = child.end;
@@ -59,9 +63,19 @@ function SourceForNode({
     event.stopPropagation();
   } : null;
 
-  const className = nodeId === highlightedNodeId ? 'highlighted' : '';
+  const handleClick = onNodeSelectedToggle ? (event) => {
+    onNodeSelectedToggle(nodeId);
+    event.stopPropagation();
+  } : null;
 
-  return <span className={className} onMouseOver={handleMouseOver}>
+  const className = [
+    nodeId === highlightedNodeId ? 'highlighted' : '',
+    selectedNodeIds.includes(nodeId) ? 'selected' : '',
+  ].join(' ')
+
+  return <span className={className}
+               onClick={handleClick}
+               onMouseOver={handleMouseOver}>
     {elements}
   </span>
 }
@@ -70,6 +84,8 @@ function AnnotatedSourceView({
   ast,
   highlightedNodeId,
   onHoveredNodeChange = null,
+  onNodeSelectedToggle = null,
+  selectedNodeIds,
   source
 }) {
   const clearHover = onHoveredNodeChange ? () => onHoveredNodeChange(null) : null;
@@ -78,8 +94,10 @@ function AnnotatedSourceView({
       <code>
         <SourceForNode highlightedNodeId={highlightedNodeId}
                        node={ast}
+                       selectedNodeIds={selectedNodeIds}
                        source={source}
-                       onHoveredNodeChange={onHoveredNodeChange} />
+                       onHoveredNodeChange={onHoveredNodeChange}
+                       onNodeSelectedToggle={onNodeSelectedToggle} />
       </code>
     </pre>
   );
