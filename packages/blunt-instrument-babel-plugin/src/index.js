@@ -61,12 +61,12 @@ const buildExpressionTrace = template(`
 
 function addExpressionTrace(path, { traceExprFnId }) {
   const node = path.node;
-  const { nodeId, ...rest } = node;
   const trace = buildExpressionTrace({
     traceExprFnId,
-    nodeId: types.numericLiteral(nodeId),
-    expression: rest,
+    nodeId: types.numericLiteral(node.nodeId),
+    expression: node,
   });
+  node.traced = true;
   path.replaceWith(trace);
 }
 
@@ -107,7 +107,7 @@ const instrumentVisitor = {
 
   Expression: {
     exit(path) {
-      if (!(path.node.nodeId && path.isReferenced())) return;
+      if (!(path.node.nodeId && !path.node.traced && path.isReferenced())) return;
       addExpressionTrace(path, this.state);
     }
   }
