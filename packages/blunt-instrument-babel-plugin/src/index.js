@@ -21,13 +21,14 @@ const buildExports = template(`
 `);
 
 // TODO: clone mutable objects
-const buildAddTraceFn = template(`
-  function %%traceFnId%%(nodeId, type, value) {
+const buildTraceExprFn = template(`
+  function %%traceExprFnId%%(nodeId, value) {
     %%eventsId%%.push({
       id: %%eventsId%%.length,
       nodeId,
-      type,
+      type: 'expr',
       value, });
+    return value;
   }
 `);
 
@@ -36,7 +37,7 @@ function addInstrumenterInit(path) {
   const state = {
     astId: types.identifier('biAST'),
     eventsId: types.identifier('biEvents'),
-    traceFnId: path.scope.generateUidIdentifier('bi_trace')
+    traceExprFnId: path.scope.generateUidIdentifier('biTraceExpr')
   };
 
   const constsArgs = {
@@ -47,30 +48,24 @@ function addInstrumenterInit(path) {
   const consts = path.node.sourceType === 'module' ?
     buildExports(constsArgs) : buildDeclarations(constsArgs);
 
-  const addTraceFn = buildAddTraceFn({ eventsId: state.eventsId, traceFnId: state.traceFnId });
+  const traceExprFn = buildTraceExprFn({ eventsId: state.eventsId, traceExprFnId: state.traceExprFnId });
 
-  path.node.body.unshift(...consts, addTraceFn);
+  path.node.body.unshift(...consts, traceExprFn);
 
   return state;
 }
 
 const buildExpressionTrace = template(`
-  (() => {
-    const %%tempId%% = %%expression%%;
-    %%traceFnId%%(%%nodeId%%, 'eval', %%tempId%%);
-    return %%tempId%%;
-  })()
+  %%traceExprFnId%%(%%nodeId%%, %%expression%%)
 `);
 
-function addExpressionTrace(path, { traceFnId }) {
+function addExpressionTrace(path, { traceExprFnId }) {
   const node = path.node;
   const { nodeId, ...rest } = node;
-  const id = path.scope.generateUidIdentifier('node' + nodeId);
   const trace = buildExpressionTrace({
-    traceFnId,
+    traceExprFnId,
     nodeId: types.numericLiteral(nodeId),
     expression: rest,
-    tempId: id
   });
   path.replaceWith(trace);
 }
@@ -87,7 +82,7 @@ const instrumentVisitor = {
   UpdateExpression(path) {
     // TODO this is super hacky
     // Without this code, we'd be rewriting things like x++ into
-    // (() => ...)()++, which is an error.
+    // biTraceExpr(...)++, which is an error.
     const op = path.node.operator[0] + '=';
     if (path.node.prefix) {
       // Change ++x to x += 1

@@ -15,6 +15,7 @@ function run(code) {
 
 test('testing', () => {
   const { code, ...rest } = babel.transform(SOURCE_FAC, { plugins: [bluntInstrumentPlugin] });
+  console.log(code);
   run(code);
 });
 
