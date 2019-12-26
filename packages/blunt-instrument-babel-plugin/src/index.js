@@ -66,7 +66,7 @@ function addExpressionTrace(path, { traceExprFnId }) {
     nodeId: types.numericLiteral(node.nodeId),
     expression: node,
   });
-  node.traced = true;
+  node.traced = true; // TODO: move nodeId and traced to a better spot on the object?
   path.replaceWith(trace);
 }
 
