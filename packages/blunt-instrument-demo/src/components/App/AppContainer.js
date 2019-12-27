@@ -103,6 +103,7 @@ class AppContainer extends React.Component {
                sourceDraft={this.state.sourceDraft}
                highlightedEventId={this.state.highlightedEventId}
                highlightedNodeId={this.state.highlightedNodeId}
+               onEventQueryChange={this.handleEventQueryChange}
                onHoveredEventChange={this.handleHoveredEventChange}
                onHoveredNodeChange={this.handleHoveredNodeChange}
                onNodeSelectedToggle={this.handleNodeSelectedToggle}

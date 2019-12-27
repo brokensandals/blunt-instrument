@@ -38,6 +38,7 @@ function AppView({
   events,
   highlightedEventId,
   highlightedNodeId,
+  onEventQueryChange,
   onHoveredEventChange,
   onHoveredNodeChange,
   onNodeSelectedToggle,
@@ -125,6 +126,7 @@ function AppView({
         </Tabs>
       </div>
       <EventQueryForm highlightedNodeId={highlightedNodeId}
+                      onEventQueryChange={onEventQueryChange}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
                       querier={querier}

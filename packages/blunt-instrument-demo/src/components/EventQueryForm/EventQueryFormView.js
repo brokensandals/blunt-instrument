@@ -61,6 +61,7 @@ function NodeFilter({
 
 export function EventQueryFormView({
   highlightedNodeId,
+  onEventQueryChange = null,
   onHoveredNodeChange = null,
   onNodeSelectedToggle = null,
   querier,
@@ -82,10 +83,10 @@ export function EventQueryFormView({
 
   return (
     <form className="EventQueryForm">
-      <p className="node-filters">
+      <div className="node-filters">
         {nodeFilters.length > 0 ? 'Only showing values for:' : ''}
         <ul>{nodeFilters}</ul>
-      </p>
+      </div>
     </form>
   );
 }
