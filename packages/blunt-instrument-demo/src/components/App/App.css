@@ -47,11 +47,27 @@
   grid-column: 2;
 }
 
-.AnnotatedSource {
+.source-tabs {
   grid-row: 2;
   grid-column: 2;
-  font-size: small;
+}
+
+.react-tabs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.react-tabs__tab-panel {
   overflow: scroll;
+}
+
+.react-tabs__tab {
+  font-size: small;
+}
+
+.AnnotatedSource {
+  font-size: small;
 }
 
 .ASTNav {

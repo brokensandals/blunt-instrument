@@ -3,6 +3,8 @@ import './App.css';
 import AnnotatedSource from '../AnnotatedSource';
 import ASTNav from '../ASTNav';
 import EventTable from '../EventTable';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 export const examples = {
   factorial: `function fac(n) {
@@ -69,12 +71,34 @@ function AppView({
         {runError ? <p className="error">{runError.toString()}</p> : null}
         <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
       </form>
-      <AnnotatedSource ast={runResult.instrumented.ast}
-                       highlightedNodeId={highlightedNodeId}
-                       onHoveredNodeChange={onHoveredNodeChange}
-                       onNodeSelectedToggle={onNodeSelectedToggle}
-                       selectedNodeIds={eventQuery.filters.includeNodeIds || []}
-                       source={runResult.instrumented.source} />
+
+      <div className="source-tabs">
+        <Tabs>
+          <TabList>
+            <Tab>Original Source</Tab>
+            <Tab>Instrumented Source</Tab>
+          </TabList>
+
+          <TabPanel>
+            <AnnotatedSource ast={runResult.querier.astq.ast}
+                            highlightedNodeId={highlightedNodeId}
+                            onHoveredNodeChange={onHoveredNodeChange}
+                            onNodeSelectedToggle={onNodeSelectedToggle}
+                            selectedNodeIds={eventQuery.filters.includeNodeIds || []}
+                            source={runResult.querier.source} />
+          </TabPanel>
+          
+          <TabPanel>
+            <AnnotatedSource ast={runResult.instrumented.ast}
+                            highlightedNodeId={highlightedNodeId}
+                            onHoveredNodeChange={onHoveredNodeChange}
+                            onNodeSelectedToggle={onNodeSelectedToggle}
+                            selectedNodeIds={eventQuery.filters.includeNodeIds || []}
+                            source={runResult.instrumented.source} />
+          </TabPanel>
+        </Tabs>
+      </div>
+      
       <ASTNav ast={runResult.querier.astq.ast}
               highlightedNodeId={highlightedNodeId}
               onHoveredNodeChange={onHoveredNodeChange}
