@@ -1,6 +1,17 @@
 import React from 'react';
 import './EventQueryForm.css';
 
+function findNodeMultiQuerier(nodeId, astQueriers) {
+  const { input, ...rest } = astQueriers;
+  for (const astq of [input, ...Object.values(rest)]) {
+    const node = astq.nodesById.get(nodeId);
+    if (node) {
+      return node;
+    }
+  }
+  return null;
+}
+
 function NodeFilter({
   highlighted,
   nodeId,
@@ -8,16 +19,17 @@ function NodeFilter({
   onNodeSelectedToggle,
   querier,
 }) {
-  // TODO: handle nodes from instrumented ast
-  const node = querier.astq.nodesById.get(nodeId);
+  const node = findNodeMultiQuerier(nodeId, querier.astQueriers);
   if (!node) {
     console.log('No node for nodeId: ' + nodeId);
   }
 
-  let summary = '#' + nodeId;
+  const summary = [<span className="id">{nodeId}</span>]
   if (node) {
-    summary = summary + ':' + node.type;
-    // TODO: show source code in summary
+    summary.push(<code className="summary">{node.extra.code.slice(0, 15)}</code>);
+    if (node.extra.code.length > 15) {
+      summary.push('...');
+    }
   }
 
   const handleMouseLeave = onHoveredNodeChange ? () => {

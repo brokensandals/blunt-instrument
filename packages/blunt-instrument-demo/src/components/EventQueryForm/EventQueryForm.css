@@ -10,6 +10,20 @@
   background-color: orange;
 }
 
+.EventQueryForm .node .id::before {
+  content: '#'
+}
+
+.EventQueryForm .node .id {
+  font-size: 50%;
+  margin-right: 2px;
+}
+
+.EventQueryForm .node .summary {
+  padding-left: 2px;
+  border-left: 1px solid black;
+}
+
 .EventQueryForm .node-filters {
   display: block;
   height: 1em;
