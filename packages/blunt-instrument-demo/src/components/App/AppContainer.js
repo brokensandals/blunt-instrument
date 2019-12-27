@@ -23,7 +23,7 @@ class AppContainer extends React.Component {
     this.state = {
       eventQuery: {
         filters: {
-          excludeTypes: ['Identifier', 'Literal'],
+          excludeNodeTypes: ['Identifier', 'Literal'],
           includeNodeIds: null,
         }
       },
@@ -32,11 +32,16 @@ class AppContainer extends React.Component {
     };
     Object.assign(this.state, this.doRun(examples.factorial, this.state.eventQuery));
 
+    this.handleEventQueryChange = this.handleEventQueryChange.bind(this);
     this.handleHoveredEventChange = this.handleHoveredEventChange.bind(this);
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
     this.handleNodeSelectedToggle = this.handleNodeSelectedToggle.bind(this);
     this.handleRun = this.handleRun.bind(this);
     this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
+  }
+
+  handleEventQueryChange(eventQuery) {
+    this.setState(this.doQuery(this.state.querier, eventQuery));
   }
 
   handleHoveredEventChange(id) {
@@ -50,13 +55,11 @@ class AppContainer extends React.Component {
   }
 
   handleNodeSelectedToggle(nodeId) {
-    this.setState(update(this.state, { $merge:
-      this.doQuery(this.state.querier,
-        update(this.state.eventQuery, {
-          filters: { includeNodeIds:
-            { $apply: (ids) => toggleInclusionArray(ids, nodeId) }}
-        }))
-    }));
+    this.handleEventQueryChange(
+      update(this.state.eventQuery, {
+        filters: { includeNodeIds:
+          { $apply: (ids) => toggleInclusionArray(ids, nodeId) }}
+      }));
   }
 
   doRun(source, eventQuery) {

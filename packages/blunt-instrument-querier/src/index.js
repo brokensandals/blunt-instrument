@@ -46,8 +46,8 @@ export class TraceQuerier {
         throw new Error('Cannot find node for ID: ' + event.nodeId);
       }
 
-      if (filters.excludeTypes) {
-        for (const type of filters.excludeTypes) {
+      if (filters.excludeNodeTypes) {
+        for (const type of filters.excludeNodeTypes) {
           if (types.is(type, node)) {
             continue eachEvent;
           }
