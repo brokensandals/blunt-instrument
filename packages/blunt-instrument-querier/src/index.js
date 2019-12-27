@@ -15,9 +15,7 @@ export class ASTQuerier {
       }
 
       // TODO avoid destructive modification
-      if (node.start && node.end) {
-        node.extra.code = code.slice(node.start, node.end);
-      }
+      node.extra.code = code.slice(node.start, node.end);
 
       nodesById.set(node.extra.biNodeId, node);
     });
