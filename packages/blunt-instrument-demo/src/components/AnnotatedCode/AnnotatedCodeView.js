@@ -1,5 +1,5 @@
 import React from 'react';
-import './AnnotatedSource.css';
+import './AnnotatedCode.css';
 
 // TODO babel probably provides a better way to do this
 function findNodes(object) {
@@ -22,7 +22,7 @@ function findChildNodes(node) {
   return Object.keys(node).flatMap(k => findNodes(node[k]));
 }
 
-function SourceForNode({
+function CodeForNode({
   code,
   highlightedNodeId,
   node,
@@ -42,7 +42,7 @@ function SourceForNode({
     }
     
     elements.push(
-      <SourceForNode key={child.nodeId}
+      <CodeForNode key={child.nodeId}
                      highlightedNodeId={highlightedNodeId}
                      node={child}
                      selectedNodeIds={selectedNodeIds}
@@ -80,7 +80,7 @@ function SourceForNode({
   </span>
 }
 
-function AnnotatedSourceView({
+function AnnotatedCodeView({
   astQuerier,
   highlightedNodeId,
   onHoveredNodeChange = null,
@@ -89,9 +89,9 @@ function AnnotatedSourceView({
 }) {
   const clearHover = onHoveredNodeChange ? () => onHoveredNodeChange(null) : null;
   return (
-    <pre className="AnnotatedSource" onMouseLeave={clearHover}>
+    <pre className="AnnotatedCode" onMouseLeave={clearHover}>
       <code>
-        <SourceForNode highlightedNodeId={highlightedNodeId}
+        <CodeForNode highlightedNodeId={highlightedNodeId}
                        node={astQuerier.ast}
                        selectedNodeIds={selectedNodeIds}
                        code={astQuerier.code}
@@ -102,4 +102,4 @@ function AnnotatedSourceView({
   );
 }
 
-export default AnnotatedSourceView;
+export default AnnotatedCodeView;

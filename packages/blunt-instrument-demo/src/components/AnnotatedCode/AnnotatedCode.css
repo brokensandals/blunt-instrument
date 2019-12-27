@@ -1,14 +1,14 @@
-.AnnotatedSource {
+.AnnotatedCode {
   padding: 0 10px;
 }
 
-.AnnotatedSource .selected {
+.AnnotatedCode .selected {
   border-left: 3px solid black;
   border-right: 3px solid black;
   border-radius: 2px;
   background-color: lightgray;
 }
 
-.AnnotatedSource .highlighted {
+.AnnotatedCode .highlighted {
   background-color: orange;
 }

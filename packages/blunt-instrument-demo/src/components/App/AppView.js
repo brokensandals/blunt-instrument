@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import AnnotatedSource from '../AnnotatedSource';
+import AnnotatedCode from '../AnnotatedCode';
 import ASTNav from '../ASTNav';
 import EventTable from '../EventTable';
 import EventQueryForm from '../EventQueryForm';
@@ -75,27 +75,27 @@ function AppView({
         <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
       </form>
 
-      <div className="source-tabs">
+      <div className="code-tabs">
         <Tabs>
           <TabList>
-            <Tab>Original Source</Tab>
-            <Tab>Instrumented Source</Tab>
+            <Tab>Original Code</Tab>
+            <Tab>Instrumented Code</Tab>
           </TabList>
 
           <TabPanel>
-            <AnnotatedSource astQuerier={querier.astq}
-                             highlightedNodeId={highlightedNodeId}
-                             onHoveredNodeChange={onHoveredNodeChange}
-                             onNodeSelectedToggle={onNodeSelectedToggle}
-                             selectedNodeIds={selectedNodeIds} />
+            <AnnotatedCode astQuerier={querier.astq}
+                           highlightedNodeId={highlightedNodeId}
+                           onHoveredNodeChange={onHoveredNodeChange}
+                           onNodeSelectedToggle={onNodeSelectedToggle}
+                           selectedNodeIds={selectedNodeIds} />
           </TabPanel>
           
           <TabPanel>
-            <AnnotatedSource astQuerier={querier.astQueriers.instrumented}
-                             highlightedNodeId={highlightedNodeId}
-                             onHoveredNodeChange={onHoveredNodeChange}
-                             onNodeSelectedToggle={onNodeSelectedToggle}
-                             selectedNodeIds={selectedNodeIds} />
+            <AnnotatedCode astQuerier={querier.astQueriers.instrumented}
+                           highlightedNodeId={highlightedNodeId}
+                           onHoveredNodeChange={onHoveredNodeChange}
+                           onNodeSelectedToggle={onNodeSelectedToggle}
+                           selectedNodeIds={selectedNodeIds} />
           </TabPanel>
         </Tabs>
       </div>

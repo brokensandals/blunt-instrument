@@ -5,8 +5,8 @@
   grid-template-columns: 50% 50%;
   grid-template-areas:
     "source-form source-form"
-    "event-query-form source-tabs"
-    "event-table source-tabs"
+    "event-query-form code-tabs"
+    "event-table code-tabs"
     "event-table ast-tabs"
     "blurb blurb"
 }
@@ -51,8 +51,8 @@
   grid-column: 2;
 }
 
-.source-tabs {
-  grid-area: source-tabs;
+.code-tabs {
+  grid-area: code-tabs;
 }
 
 .react-tabs {
@@ -69,7 +69,7 @@
   font-size: small;
 }
 
-.AnnotatedSource {
+.AnnotatedCode {
   font-size: small;
 }
 
