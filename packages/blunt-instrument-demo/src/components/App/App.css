@@ -1,14 +1,17 @@
 .App {
   height: 100vh;
   display: grid;
-  grid-template-rows: 20vh calc(29vh - 1em) calc(49vh - 1em) 2em;
+  grid-template-rows: 20% 30% calc(50% - 2em) 2em;
   grid-template-columns: 50% 50%;
+  grid-template-areas:
+    "source-form source-form"
+    "event-table source-tabs"
+    "event-table ast-tabs"
+    "blurb blurb"
 }
 
 .source-form {
-  grid-row: 1;
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-area: source-form;
   display: grid;
   grid-template-rows: 1.5em 1fr 1.5em;
   grid-template-columns: 1fr 100px;
@@ -48,8 +51,7 @@
 }
 
 .source-tabs {
-  grid-row: 2;
-  grid-column: 2;
+  grid-area: source-tabs;
 }
 
 .react-tabs {
@@ -71,8 +73,7 @@
 }
 
 .ast-tabs {
-  grid-row: 3;
-  grid-column: 2;
+  grid-area: ast-tabs;
 }
 
 .ASTNav .loc {
@@ -80,18 +81,13 @@
 }
 
 .EventTable {
-  grid-row-start: 2;
-  grid-row-end: 4;
-  grid-column: 1;
-  height: 100%;
+  grid-area: event-table;
   overflow: scroll;
   font-size: small;
 }
 
 .blurb {
-  grid-row: 4;
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-area: blurb;
   height: 1em;
   text-align: right;
   padding: 0.5em;
