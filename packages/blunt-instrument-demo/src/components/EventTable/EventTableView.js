@@ -44,13 +44,13 @@ function EventTableView({
 
     const className = [
       highlightedEventId != null && event.id === highlightedEventId ? 'highlighted-event' : null,
-      highlightedNodeId != null && event.nodeId === highlightedNodeId ? 'highlighted-node' : null,
+      highlightedNodeId != null && event.node.nodeId === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
     entries.push(
       <tr key={event.id} onMouseOver={handleMouseOver} className={className}>
         <td>{event.id}</td>
-        <td><code>{event.source}</code></td>
+        <td><code>{event.node.extra.code}</code></td>
         <td><ValueDisplay value={event.value} /></td>
       </tr>
     );

@@ -43,8 +43,8 @@ function AppView({
   onNodeSelectedToggle,
   onRun,
   onSourceDraftChange,
+  querier,
   runError,
-  runResult,
   sourceDraft,
 }) {
   function runHandler(source) {
@@ -83,21 +83,19 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            <AnnotatedSource ast={runResult.querier.astq.ast}
-                            highlightedNodeId={highlightedNodeId}
-                            onHoveredNodeChange={onHoveredNodeChange}
-                            onNodeSelectedToggle={onNodeSelectedToggle}
-                            selectedNodeIds={selectedNodeIds}
-                            source={runResult.querier.source} />
+            <AnnotatedSource astQuerier={querier.astq}
+                             highlightedNodeId={highlightedNodeId}
+                             onHoveredNodeChange={onHoveredNodeChange}
+                             onNodeSelectedToggle={onNodeSelectedToggle}
+                             selectedNodeIds={selectedNodeIds} />
           </TabPanel>
           
           <TabPanel>
-            <AnnotatedSource ast={runResult.instrumented.ast}
-                            highlightedNodeId={highlightedNodeId}
-                            onHoveredNodeChange={onHoveredNodeChange}
-                            onNodeSelectedToggle={onNodeSelectedToggle}
-                            selectedNodeIds={selectedNodeIds}
-                            source={runResult.instrumented.source} />
+            <AnnotatedSource astQuerier={querier.astQueriers.instrumented}
+                             highlightedNodeId={highlightedNodeId}
+                             onHoveredNodeChange={onHoveredNodeChange}
+                             onNodeSelectedToggle={onNodeSelectedToggle}
+                             selectedNodeIds={selectedNodeIds} />
           </TabPanel>
         </Tabs>
       </div>
@@ -110,7 +108,7 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            <ASTNav ast={runResult.querier.astq.ast}
+            <ASTNav astQuerier={querier.astq}
                     highlightedNodeId={highlightedNodeId}
                     onHoveredNodeChange={onHoveredNodeChange}
                     onNodeSelectedToggle={onNodeSelectedToggle}
@@ -118,7 +116,7 @@ function AppView({
           </TabPanel>
             
           <TabPanel>
-            <ASTNav ast={runResult.instrumented.ast}
+            <ASTNav astQuerier={querier.astQueriers.instrumented}
                       highlightedNodeId={highlightedNodeId}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
@@ -129,7 +127,7 @@ function AppView({
       <EventQueryForm highlightedNodeId={highlightedNodeId}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
-                      querier={runResult.querier}
+                      querier={querier}
                       query={eventQuery} />
       <EventTable events={events}
                   highlightedEventId={highlightedEventId}

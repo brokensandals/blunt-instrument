@@ -1,8 +1,10 @@
 import * as types from '@babel/types';
 
 export class ASTQuerier {
-  constructor(ast) {
+  constructor(ast, code) {
     this.ast = ast;
+    this.code = code;
+
     const nodesById = new Map();
     types.traverseFast(ast, (node) => {
       if (!node.type) {
@@ -11,31 +13,33 @@ export class ASTQuerier {
       if (!node.nodeId) {
         throw new Error('Node is missing nodeId: ' + node);
       }
+
+      // TODO avoid destructive modification
+      if (!node.extra) {
+        node.extra = {};
+      }
+      if (node.start && node.end) {
+        node.extra.code = code.slice(node.start, node.end);
+      }
+
       nodesById.set(node.nodeId, node);
     });
+
     this.nodesById = nodesById;
   }
 }
 
-const DEFAULT_FIELDS = {
-  id: true,
-  nodeId: true,
-  source: true,
-  type: true,
-  value: true
-};
-
 export class TraceQuerier {
-  constructor(ast, events, source = null) {
-    if (ast instanceof ASTQuerier) {
-      this.astq = ast;
-    } else {
-      this.astq = new ASTQuerier(ast);
+  constructor(astQueriers, events) {
+    if (!(astQueriers && astQueriers.input)) {
+      throw new Error('missing ASTQuerier for "input" to represent original code');
     }
+    this.astq = astQueriers.input;
+    this.astQueriers = astQueriers;
     this.events = events;
-    this.source = source;
   }
-  query({ filters, fields } = { fields: DEFAULT_FIELDS }) {
+
+  query({ filters = {} } = {}) {
     const results = [];
 
     eachEvent:
@@ -45,39 +49,25 @@ export class TraceQuerier {
         throw new Error('Cannot find node for ID: ' + event.nodeId);
       }
 
-      if (filters) {
-        if (filters.excludeTypes) {
-          for (const type of filters.excludeTypes) {
-            if (types.is(type, node)) {
-              continue eachEvent;
-            }
-          }
-        }
-        if (filters.includeNodeIds) {
-          if (!filters.includeNodeIds.includes(event.nodeId)) {
+      if (filters.excludeTypes) {
+        for (const type of filters.excludeTypes) {
+          if (types.is(type, node)) {
             continue eachEvent;
           }
         }
       }
-
-      const result = {};
-      if (fields.id) {
-        result.id = event.id;
-      }
-      if (fields.nodeId) {
-        result.nodeId = event.nodeId;
-      }
-      if (fields.source && this.source) {
-        result.source = this.source.slice(node.start, node.end);
-      }
-      if (fields.type) {
-        result.type = event.type;
-      }
-      if (fields.value) {
-        result.value = event.value;
+      if (filters.includeNodeIds) {
+        if (!filters.includeNodeIds.includes(event.nodeId)) {
+          continue eachEvent;
+        }
       }
 
-      results.push(result);
+      results.push({
+        id: event.id,
+        node: node,
+        type: event.type,
+        value: event.value,
+      });
     }
 
     return results;

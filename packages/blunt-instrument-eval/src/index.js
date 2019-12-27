@@ -1,7 +1,7 @@
 import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin';
-import { TraceQuerier } from 'blunt-instrument-querier';
+import { TraceQuerier, ASTQuerier } from 'blunt-instrument-querier';
 
 function nodeArray(ast) {
   const array = [];
@@ -25,9 +25,9 @@ function copyNodeIds(from, to) {
   }
 }
 
-export function instrumentedEval(source, opts = {}) {
+export function instrumentedEval(source, { saveInstrumented = false } = {}) {
   const babelOpts = { plugins: [bluntInstrumentPlugin] };
-  if (opts.returnInstrumented && opts.returnInstrumented.ast) {
+  if (saveInstrumented) {
     babelOpts.ast = true;
   }
 
@@ -35,20 +35,16 @@ export function instrumentedEval(source, opts = {}) {
   const { code } = babelResult;
   const wrapped = code + '; [biAST, biEvents]'; // TODO: be less hacky
   const [ast, events] = (0, eval)(wrapped);
-  const querier = new TraceQuerier(ast, events, source);
 
-  const result = { querier };
-  if (opts.returnInstrumented) {
-    result.instrumented = {};
-    if (opts.returnInstrumented.ast) {
-      const parsed = babel.parseSync(code);
-      copyNodeIds(babelResult.ast, parsed);
-      result.instrumented.ast = parsed;
-    }
-    if (opts.returnInstrumented.source) {
-      result.instrumented.source = code;
-    }
+  const astQueriers = {
+    input: new ASTQuerier(ast, source),
+  };
+
+  if (saveInstrumented) {
+    const parsed = babel.parseSync(code);
+    copyNodeIds(babelResult.ast, parsed);
+    astQueriers.instrumented = new ASTQuerier(parsed, code);
   }
 
-  return result;
+  return new TraceQuerier(astQueriers, events);
 }

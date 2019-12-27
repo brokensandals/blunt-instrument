@@ -97,7 +97,7 @@ function ASTObjectView({
 }
 
 function ASTNavView({
-  ast,
+  astQuerier,
   highlightedNodeId,
   onHoveredNodeChange = null,
   onNodeSelectedToggle = null,
@@ -107,7 +107,7 @@ function ASTNavView({
 
   return (
     <div className="ASTNav" onMouseLeave={clearHover}>
-      <ASTObjectView object={ast}
+      <ASTObjectView object={astQuerier.ast}
                      highlightedNodeId={highlightedNodeId}
                      onHoveredNodeChange={onHoveredNodeChange}
                      onNodeSelectedToggle={onNodeSelectedToggle}

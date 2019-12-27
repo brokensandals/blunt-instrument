@@ -22,12 +22,6 @@ class AppContainer extends React.Component {
     super(props)
     this.state = {
       eventQuery: {
-        fields: {
-          id: true,
-          nodeId: true,
-          source: true,
-          value: true,
-        },
         filters: {
           excludeTypes: ['Identifier', 'Literal'],
           includeNodeIds: null,
@@ -47,7 +41,7 @@ class AppContainer extends React.Component {
 
   handleHoveredEventChange(id) {
     // TODO use an abstraction for looking up events by id?
-    this.handleHoveredNodeChange(id == null ? null : this.state.runResult.querier.events[id].nodeId);
+    this.handleHoveredNodeChange(id == null ? null : this.state.querier.events[id].nodeId);
     this.setState({ highlightedEventId: id });
   }
 
@@ -57,7 +51,7 @@ class AppContainer extends React.Component {
 
   handleNodeSelectedToggle(nodeId) {
     this.setState(update(this.state, { $merge:
-      this.doQuery(this.state.runResult,
+      this.doQuery(this.state.querier,
         update(this.state.eventQuery, {
           filters: { includeNodeIds:
             { $apply: (ids) => toggleInclusionArray(ids, nodeId) }}
@@ -66,9 +60,9 @@ class AppContainer extends React.Component {
   }
 
   doRun(source, eventQuery) {
-    let runResult;
+    let querier;
     try {
-      runResult = instrumentedEval(source, { returnInstrumented: { source: true, ast: true } });
+      querier = instrumentedEval(source, { saveInstrumented: true });
     } catch (error) {
       console.log(error)
       return { runError: error };
@@ -77,14 +71,14 @@ class AppContainer extends React.Component {
 
     return {
       runError: null,
-      runResult,
+      querier,
       sourceDraft: source,
-      ...this.doQuery(runResult, eventQuery),
+      ...this.doQuery(querier, eventQuery),
     };
   }
 
-  doQuery(runResult, eventQuery) {
-    const events = runResult.querier.query(eventQuery);
+  doQuery(querier, eventQuery) {
+    const events = querier.query(eventQuery);
     return {
       events,
       eventQuery,
@@ -111,8 +105,8 @@ class AppContainer extends React.Component {
                onNodeSelectedToggle={this.handleNodeSelectedToggle}
                onRun={this.handleRun}
                onSourceDraftChange={this.handleSourceDraftChange}
-               runError={this.state.runError}
-               runResult={this.state.runResult} />
+               querier={this.state.querier}
+               runError={this.state.runError} />
     )
   }
 }

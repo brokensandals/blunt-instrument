@@ -23,12 +23,12 @@ function findChildNodes(node) {
 }
 
 function SourceForNode({
+  code,
   highlightedNodeId,
   node,
   onHoveredNodeChange,
   onNodeSelectedToggle,
   selectedNodeIds,
-  source
 }) {
   const { nodeId, start, end } = node;
   let cur = start;
@@ -38,7 +38,7 @@ function SourceForNode({
   const children = findChildNodes(node).sort((a, b) => a.start - b.start);
   for (const child of children) {
     if (cur < child.start) {
-      elements.push(source.slice(cur, child.start));
+      elements.push(code.slice(cur, child.start));
     }
     
     elements.push(
@@ -46,7 +46,7 @@ function SourceForNode({
                      highlightedNodeId={highlightedNodeId}
                      node={child}
                      selectedNodeIds={selectedNodeIds}
-                     source={source}
+                     code={code}
                      onHoveredNodeChange={onHoveredNodeChange}
                      onNodeSelectedToggle={onNodeSelectedToggle} />
     );
@@ -55,7 +55,7 @@ function SourceForNode({
   }
 
   if (cur < end) {
-    elements.push(source.slice(cur, end));
+    elements.push(code.slice(cur, end));
   }
 
   const handleMouseOver = onHoveredNodeChange ? (event) => {
@@ -81,21 +81,20 @@ function SourceForNode({
 }
 
 function AnnotatedSourceView({
-  ast,
+  astQuerier,
   highlightedNodeId,
   onHoveredNodeChange = null,
   onNodeSelectedToggle = null,
   selectedNodeIds,
-  source
 }) {
   const clearHover = onHoveredNodeChange ? () => onHoveredNodeChange(null) : null;
   return (
     <pre className="AnnotatedSource" onMouseLeave={clearHover}>
       <code>
         <SourceForNode highlightedNodeId={highlightedNodeId}
-                       node={ast}
+                       node={astQuerier.ast}
                        selectedNodeIds={selectedNodeIds}
-                       source={source}
+                       code={astQuerier.code}
                        onHoveredNodeChange={onHoveredNodeChange}
                        onNodeSelectedToggle={onNodeSelectedToggle} />
       </code>
