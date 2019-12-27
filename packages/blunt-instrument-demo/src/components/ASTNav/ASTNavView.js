@@ -31,7 +31,8 @@ function ASTObjectView({
     const val = object[key];
 
     if ((Array.isArray(val) && val.length == 0) ||
-        (typeof val === 'object' && (val == null || Object.keys(val).length == 0))) {
+        (typeof val === 'object' && (val == null || Object.keys(val).length == 0)) ||
+        typeof val === 'undefined') {
       // don't display it
     }
     else if (Array.isArray(val)) {

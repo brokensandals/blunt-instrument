@@ -80,9 +80,8 @@ const buildPostfixRewrite = template(`
 
 const instrumentVisitor = {
   UpdateExpression(path) {
-    // TODO this is super hacky
-    // Without this code, we'd be rewriting things like x++ into
-    // biTraceExpr(...)++, which is an error.
+    // TODO this is super hacky, and also written when the tracing worked
+    // differently, so probably can be simplified
     const op = path.node.operator[0] + '=';
     if (path.node.prefix) {
       // Change ++x to x += 1
