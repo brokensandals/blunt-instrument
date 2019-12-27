@@ -1,10 +1,11 @@
 .App {
   height: 100vh;
   display: grid;
-  grid-template-rows: 20% 30% calc(50% - 2em) 2em;
+  grid-template-rows: 20% 15% 15% calc(50% - 2em) 2em;
   grid-template-columns: 50% 50%;
   grid-template-areas:
     "source-form source-form"
+    "event-query-form source-tabs"
     "event-table source-tabs"
     "event-table ast-tabs"
     "blurb blurb"
@@ -78,6 +79,12 @@
 
 .ASTNav .loc {
   display: none;
+}
+
+.EventQueryForm {
+  grid-area: event-query-form;
+  overflow: auto;
+  font-size: small;
 }
 
 .EventTable {

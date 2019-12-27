@@ -1,0 +1,11 @@
+.EventQueryForm .node {
+  background-color: lightgray;
+  padding: 3px 6px;
+  border-radius: 5px;
+  cursor: default;
+  margin-right: 5px;
+}
+
+.EventQueryForm .node.highlighted {
+  background-color: orange;
+}

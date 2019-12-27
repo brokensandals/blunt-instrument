@@ -3,6 +3,7 @@ import './App.css';
 import AnnotatedSource from '../AnnotatedSource';
 import ASTNav from '../ASTNav';
 import EventTable from '../EventTable';
+import EventQueryForm from '../EventQueryForm';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -53,6 +54,8 @@ function AppView({
     }
   }
 
+  const selectedNodeIds = eventQuery.filters.includeNodeIds || [];
+
   const handleSourceDraftChange =
     (event) => onSourceDraftChange(event.target.value);
   
@@ -84,7 +87,7 @@ function AppView({
                             highlightedNodeId={highlightedNodeId}
                             onHoveredNodeChange={onHoveredNodeChange}
                             onNodeSelectedToggle={onNodeSelectedToggle}
-                            selectedNodeIds={eventQuery.filters.includeNodeIds || []}
+                            selectedNodeIds={selectedNodeIds}
                             source={runResult.querier.source} />
           </TabPanel>
           
@@ -93,7 +96,7 @@ function AppView({
                             highlightedNodeId={highlightedNodeId}
                             onHoveredNodeChange={onHoveredNodeChange}
                             onNodeSelectedToggle={onNodeSelectedToggle}
-                            selectedNodeIds={eventQuery.filters.includeNodeIds || []}
+                            selectedNodeIds={selectedNodeIds}
                             source={runResult.instrumented.source} />
           </TabPanel>
         </Tabs>
@@ -111,7 +114,7 @@ function AppView({
                     highlightedNodeId={highlightedNodeId}
                     onHoveredNodeChange={onHoveredNodeChange}
                     onNodeSelectedToggle={onNodeSelectedToggle}
-                    selectedNodeIds={eventQuery.filters.includeNodeIds || []} />
+                    selectedNodeIds={selectedNodeIds} />
           </TabPanel>
             
           <TabPanel>
@@ -119,10 +122,15 @@ function AppView({
                       highlightedNodeId={highlightedNodeId}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
-                      selectedNodeIds={eventQuery.filters.includeNodeIds || []} />
+                      selectedNodeIds={selectedNodeIds} />
           </TabPanel>
         </Tabs>
       </div>
+      <EventQueryForm highlightedNodeId={highlightedNodeId}
+                      onHoveredNodeChange={onHoveredNodeChange}
+                      onNodeSelectedToggle={onNodeSelectedToggle}
+                      querier={runResult.querier}
+                      query={eventQuery} />
       <EventTable events={events}
                   highlightedEventId={highlightedEventId}
                   highlightedNodeId={highlightedNodeId}
