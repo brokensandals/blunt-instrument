@@ -44,7 +44,7 @@ function EventTableView({
 
     const className = [
       highlightedEventId != null && event.id === highlightedEventId ? 'highlighted-event' : null,
-      highlightedNodeId != null && event.node.nodeId === highlightedNodeId ? 'highlighted-node' : null,
+      highlightedNodeId != null && event.node.extra.biNodeId === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
     entries.push(

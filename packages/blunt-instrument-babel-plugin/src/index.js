@@ -4,10 +4,28 @@ import * as types from '@babel/types';
 function annotateWithNodeIds(path) {
   let nextId = 1;
   types.traverseFast(path.node, (node) => {
+    // TODO: I really have no idea whether this sort of thing is
+    // what 'extra' is for
+    if (!node.extra) {
+      node.extra = {};
+    }
+
     const nodeId = nextId;
     nextId += 1;
-    node.nodeId = nodeId;
+    node.extra.biNodeId = nodeId;
   });
+}
+
+function copyNodeId(from, to) {
+  if (!from.extra) {
+    return;
+  }
+
+  if (!to.extra) {
+    to.extra = {};
+  }
+
+  to.extra.biNodeId = from.extra.biNodeId;
 }
 
 const buildDeclarations = template(`
@@ -63,10 +81,10 @@ function addExpressionTrace(path, { traceExprFnId }) {
   const node = path.node;
   const trace = buildExpressionTrace({
     traceExprFnId,
-    nodeId: types.numericLiteral(node.nodeId),
+    nodeId: types.numericLiteral(node.extra.biNodeId),
     expression: node,
   });
-  node.traced = true; // TODO: move nodeId and traced to a better spot on the object?
+  node.extra.biTraced = true;
   path.replaceWith(trace);
 }
 
@@ -87,7 +105,7 @@ const instrumentVisitor = {
       // Change ++x to x += 1
       const replacement = types.assignmentExpression(
         op, path.node.argument, types.numericLiteral(1));
-      replacement.nodeId = path.node.nodeId;
+      copyNodeId(path.node, replacement);
       path.replaceWith(replacement);
     } else {
       // Change x++ to (() => { const _postfix = x; x += 1; return _postfix})
@@ -98,7 +116,7 @@ const instrumentVisitor = {
       const tempId = path.scope.generateUidIdentifier('postfix');
       const assignment = types.assignmentExpression(
         op, lval, types.numericLiteral(1));
-      assignment.nodeId = path.node.nodeId;
+      copyNodeId(path.node, assignment);
       const replacement = buildPostfixRewrite({ tempId, assignment, lval })
       path.replaceWith(replacement);
     }
@@ -106,7 +124,7 @@ const instrumentVisitor = {
 
   Expression: {
     exit(path) {
-      if (!(path.node.nodeId && !path.node.traced && path.isReferenced())) return;
+      if (!(path.node.extra && path.node.extra.biNodeId && !path.node.extra.biTraced && path.isReferenced())) return;
       addExpressionTrace(path, this.state);
     }
   }

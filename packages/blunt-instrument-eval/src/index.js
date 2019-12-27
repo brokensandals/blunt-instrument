@@ -16,11 +16,15 @@ function copyNodeIds(from, to) {
     throw new Error('Expected ASTs to have the same number of nodes');
   }
   for (let i = 0; i < fromNodes.length; i++) {
-    const orig = fromNodes[i].nodeId;
+    if (!toNodes[i].extra) {
+      toNodes[i].extra = {};
+    }
+
+    const orig = fromNodes[i].extra ? fromNodes[i].extra.biNodeId : null;
     if (orig == null) {
-      toNodes[i].nodeId = 'instr' + i;
+      toNodes[i].extra.biNodeId = 'instr' + i;
     } else {
-      toNodes[i].nodeId = orig;
+      toNodes[i].extra.biNodeId = orig;
     }
   }
 }

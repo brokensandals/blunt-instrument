@@ -10,19 +10,16 @@ export class ASTQuerier {
       if (!node.type) {
         return;
       }
-      if (!node.nodeId) {
-        throw new Error('Node is missing nodeId: ' + node);
+      if (!(node.extra && node.extra.biNodeId)) {
+        throw new Error('Node is missing biNodeId: ' + node);
       }
 
       // TODO avoid destructive modification
-      if (!node.extra) {
-        node.extra = {};
-      }
       if (node.start && node.end) {
         node.extra.code = code.slice(node.start, node.end);
       }
 
-      nodesById.set(node.nodeId, node);
+      nodesById.set(node.extra.biNodeId, node);
     });
 
     this.nodesById = nodesById;

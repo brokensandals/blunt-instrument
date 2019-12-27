@@ -14,13 +14,13 @@ function ASTObjectView({
   selectedNodeIds,
 }) {
   const {
-    nodeId = null,
     type = null,
     loc = null,
     start = null,
     end = null,
     ...rest
   } = object;
+  const nodeId = object.extra ? object.extra.biNodeId : null;
 
   const typeEl = type ? <span className="type">{type}</span> : null;
   const locEl = loc ? <span className="loc">{locString(loc)}</span> : null; //TODO

@@ -30,7 +30,7 @@ function CodeForNode({
   onNodeSelectedToggle,
   selectedNodeIds,
 }) {
-  const { nodeId, start, end } = node;
+  const { extra: { biNodeId: nodeId }, start, end } = node;
   let cur = start;
   const elements = [];
 
@@ -42,7 +42,7 @@ function CodeForNode({
     }
     
     elements.push(
-      <CodeForNode key={child.nodeId}
+      <CodeForNode key={child.extra.biNodeId}
                      highlightedNodeId={highlightedNodeId}
                      node={child}
                      selectedNodeIds={selectedNodeIds}
