@@ -54,23 +54,26 @@ export function EventQueryFormView({
   querier,
   query,
 }) {
-  let nodesFilter = null;
+  const nodeFilters = [];
   if (query.filters.includeNodeIds) {
-    const elements = [];
     for (const nodeId of query.filters.includeNodeIds) {
-      elements.push(
-        <NodeFilter highlighted={highlightedNodeId === nodeId}
-                    nodeId={nodeId}
-                    querier={querier}
-                    onHoveredNodeChange={onHoveredNodeChange}
-                    onNodeSelectedToggle={onNodeSelectedToggle} />);
+      nodeFilters.push(
+        <li key={nodeId}>
+          <NodeFilter highlighted={highlightedNodeId === nodeId}
+                      nodeId={nodeId}
+                      querier={querier}
+                      onHoveredNodeChange={onHoveredNodeChange}
+                      onNodeSelectedToggle={onNodeSelectedToggle} />
+        </li>);
     }
-    nodesFilter = <p>Only showing values for: {elements}</p>
   }
 
   return (
     <form className="EventQueryForm">
-      {nodesFilter}
+      <p className="node-filters">
+        {nodeFilters.length > 0 ? 'Only showing values for:' : ''}
+        <ul>{nodeFilters}</ul>
+      </p>
     </form>
   );
 }

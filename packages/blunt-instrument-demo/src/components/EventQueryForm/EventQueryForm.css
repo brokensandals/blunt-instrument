@@ -9,3 +9,21 @@
 .EventQueryForm .node.highlighted {
   background-color: orange;
 }
+
+.EventQueryForm .node-filters {
+  display: block;
+  height: 1em;
+  white-space: nowrap;
+  padding-left: 5px;
+}
+
+.EventQueryForm .node-filters ul {
+  list-style-type: none;
+  margin: 0 0 0 5px;
+  padding: 0;
+  display: inline;
+}
+
+.EventQueryForm .node-filters li {
+  display: inline;
+}
