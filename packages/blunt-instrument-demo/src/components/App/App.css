@@ -70,11 +70,9 @@
   font-size: small;
 }
 
-.ASTNav {
+.ast-tabs {
   grid-row: 3;
   grid-column: 2;
-  height: 100%;
-  overflow: scroll;
 }
 
 .ASTNav .loc {

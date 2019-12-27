@@ -98,12 +98,31 @@ function AppView({
           </TabPanel>
         </Tabs>
       </div>
-      
-      <ASTNav ast={runResult.querier.astq.ast}
-              highlightedNodeId={highlightedNodeId}
-              onHoveredNodeChange={onHoveredNodeChange}
-              onNodeSelectedToggle={onNodeSelectedToggle}
-              selectedNodeIds={eventQuery.filters.includeNodeIds || []} />
+
+      <div className="ast-tabs">
+        <Tabs>
+          <TabList>
+            <Tab>Original AST</Tab>
+            <Tab>Instrumented AST</Tab>
+          </TabList>
+
+          <TabPanel>
+            <ASTNav ast={runResult.querier.astq.ast}
+                    highlightedNodeId={highlightedNodeId}
+                    onHoveredNodeChange={onHoveredNodeChange}
+                    onNodeSelectedToggle={onNodeSelectedToggle}
+                    selectedNodeIds={eventQuery.filters.includeNodeIds || []} />
+          </TabPanel>
+            
+          <TabPanel>
+            <ASTNav ast={runResult.instrumented.ast}
+                      highlightedNodeId={highlightedNodeId}
+                      onHoveredNodeChange={onHoveredNodeChange}
+                      onNodeSelectedToggle={onNodeSelectedToggle}
+                      selectedNodeIds={eventQuery.filters.includeNodeIds || []} />
+          </TabPanel>
+        </Tabs>
+      </div>
       <EventTable events={events}
                   highlightedEventId={highlightedEventId}
                   highlightedNodeId={highlightedNodeId}
