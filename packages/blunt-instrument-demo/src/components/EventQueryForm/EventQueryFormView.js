@@ -26,8 +26,8 @@ function NodeFilter({
 
   const summary = [<span className="id">{nodeId}</span>]
   if (node) {
-    summary.push(<code className="summary">{node.extra.code.slice(0, 15)}</code>);
-    if (node.extra.code.length > 15) {
+    summary.push(<code className="summary">{node.extra.code.slice(0, 20)}</code>);
+    if (node.extra.code.length > 20) {
       summary.push('...');
     }
   }

@@ -134,7 +134,8 @@ function AppView({
       <EventTable events={events}
                   highlightedEventId={highlightedEventId}
                   highlightedNodeId={highlightedNodeId}
-                  onHoveredEventChange={onHoveredEventChange} />
+                  onHoveredEventChange={onHoveredEventChange}
+                  onNodeSelectedToggle={onNodeSelectedToggle} />
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>

@@ -1,6 +1,7 @@
 .EventTable td, .EventTable th {
   text-align: left;
   padding-left: 10px;
+  border: 1px solid transparent;
 }
 
 .EventTable tbody tr:nth-child(odd):not(.highlighted-node, .highlighted-event) {
@@ -17,4 +18,12 @@
 
 .EventTable .highlighted-event {
   background-color: yellow;
+}
+
+.EventTable .node {
+  cursor: default;
+}
+
+.EventTable .node:hover {
+  border: 1px solid orange;
 }
