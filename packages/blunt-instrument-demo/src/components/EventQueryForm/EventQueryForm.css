@@ -4,6 +4,11 @@
   border-radius: 5px;
   cursor: default;
   margin-right: 5px;
+  max-width: 25ex;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .EventQueryForm .node.highlighted {

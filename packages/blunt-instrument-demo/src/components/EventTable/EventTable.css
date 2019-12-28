@@ -1,3 +1,7 @@
+.EventTable table {
+  width: 100%;
+}
+
 .EventTable td, .EventTable th {
   text-align: left;
   padding-left: 10px;
@@ -20,10 +24,22 @@
   background-color: yellow;
 }
 
-.EventTable .node {
+.EventTable tbody .node {
   cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 
-.EventTable .node:hover {
+.EventTable tbody .node:hover {
   border: 1px solid orange;
+}
+
+.EventTable .id {
+  width: 4ex;
+}
+
+.EventTable .node {
+  width: 25ex;
 }

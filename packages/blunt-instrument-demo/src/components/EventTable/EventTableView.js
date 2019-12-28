@@ -48,24 +48,18 @@ function EventTableView({
       highlightedNodeId != null && event.node.extra.biNodeId === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
-    const code = event.node.extra.code;
-    let codeEl = [
-      <code>{code.slice(0, 20)}</code>,
-      code.length > 20 ? '...' : null
-    ];
-
     function codeClickHandler(nodeId) {
       return onNodeSelectedToggle ? () => onNodeSelectedToggle(nodeId) : null;
     }
 
     entries.push(
       <tr key={event.id} onMouseOver={handleMouseOver} className={className}>
-        <td>{event.id}</td>
+        <td className="id">{event.id}</td>
         <td className="node"
             onClick={codeClickHandler(event.node.extra.biNodeId)}>
-          {codeEl}
+          <code>{event.node.extra.code}</code>
         </td>
-        <td><ValueDisplay value={event.value} /></td>
+        <td className="value"><ValueDisplay value={event.value} /></td>
       </tr>
     );
   }
@@ -77,9 +71,9 @@ function EventTableView({
       <table onMouseLeave={clearHover}>
         <thead>
           <tr>
-            <th>id</th>
-            <th>code</th>
-            <th>value</th>
+            <th className="id">id</th>
+            <th className="node">code</th>
+            <th className="value">value</th>
           </tr>
         </thead>
         <tbody>
