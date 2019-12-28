@@ -1,5 +1,6 @@
 import React from 'react';
 import './EventQueryForm.css';
+import update from 'immutability-helper';
 
 function findNodeMultiQuerier(nodeId, astQueriers) {
   const { input, ...rest } = astQueriers;
@@ -29,18 +30,13 @@ function NodeFilter({
     summary.push(<code className="summary">{node.extra.code}</code>);
   }
 
-  const handleMouseLeave = onHoveredNodeChange ? () => {
-    onHoveredNodeChange(null);
-  } : null;
+  const handleMouseLeave = () => onHoveredNodeChange(null);
+  const handleMouseOver = () => onHoveredNodeChange(nodeId);
 
-  const handleMouseOver = onHoveredNodeChange ? () => {
-    onHoveredNodeChange(nodeId);
-  } : null;
-
-  const handleClick = onNodeSelectedToggle ? (event) => {
+  const handleClick = (event) => {
     onNodeSelectedToggle(nodeId);
     event.preventDefault();
-  } : null;
+  };
 
   const className = [
     'node',
@@ -58,15 +54,18 @@ function NodeFilter({
 
 export function EventQueryFormView({
   highlightedNodeId,
-  onEventQueryChange = null,
-  onHoveredNodeChange = null,
-  onNodeSelectedToggle = null,
+  onEventQueryChange = (query) => {},
+  onHoveredNodeChange = (nodeId) => {},
+  onNodeSelectedToggle = (nodeId) => {},
   querier,
   query,
 }) {
   const nodeFilters = [];
-  if (query.filters.includeNodeIds) {
-    for (const nodeId of query.filters.includeNodeIds) {
+  const onlyNodeIds = query.filters.onlyNodeIds ?
+    Object.keys(query.filters.onlyNodeIds)
+      .filter(k => query.filters.onlyNodeIds[k]) : [];
+  if (onlyNodeIds.length > 0) {
+    for (const nodeId of onlyNodeIds) {
       nodeFilters.push(
         <li key={nodeId}>
           <NodeFilter highlighted={highlightedNodeId === nodeId}
@@ -83,6 +82,10 @@ export function EventQueryFormView({
       <div className="node-filters">
         {nodeFilters.length > 0 ? 'Only showing values for:' : ''}
         <ul>{nodeFilters}</ul>
+      </div>
+
+      <div className="node-type-filters">
+
       </div>
     </form>
   );

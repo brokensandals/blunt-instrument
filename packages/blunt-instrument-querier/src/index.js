@@ -37,6 +37,9 @@ export class TraceQuerier {
   query({ filters = {} } = {}) {
     const results = [];
 
+    const onlySpecificNodes = filters.onlyNodeIds &&
+      Object.values(filters.onlyNodeIds).some(Boolean);
+
     eachEvent:
     for (const event of this.events) {
       const node = this.astq.nodesById.get(event.nodeId);
@@ -51,8 +54,8 @@ export class TraceQuerier {
           }
         }
       }
-      if (filters.includeNodeIds) {
-        if (!filters.includeNodeIds.includes(event.nodeId)) {
+      if (onlySpecificNodes) {
+        if (!filters.onlyNodeIds[event.nodeId]) {
           continue eachEvent;
         }
       }

@@ -55,7 +55,9 @@ function AppView({
     }
   }
 
-  const selectedNodeIds = eventQuery.filters.includeNodeIds || [];
+  const selectedNodeIds =
+    Object.keys(eventQuery.filters.onlyNodeIds).filter(
+      key => eventQuery.filters.onlyNodeIds[key]);
 
   const handleSourceDraftChange =
     (event) => onSourceDraftChange(event.target.value);

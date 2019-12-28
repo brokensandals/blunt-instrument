@@ -4,19 +4,6 @@ import AppView from './AppView';
 import { examples } from './AppView';
 import { instrumentedEval } from 'blunt-instrument-eval';
 
-function toggleInclusionArray(array, item) {
-  if (array == null) {
-    return [item];
-  }
-
-  if (array.includes(item)) {
-    const filtered = array.filter(x => x !== item);
-    return filtered.length > 0 ? filtered : null;
-  }
-
-  return [...array, item];
-}
-
 class AppContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -24,7 +11,7 @@ class AppContainer extends React.Component {
       eventQuery: {
         filters: {
           excludeNodeTypes: ['Identifier', 'Literal'],
-          includeNodeIds: null,
+          onlyNodeIds: {},
         }
       },
       highlightedEventId: null,
@@ -57,8 +44,8 @@ class AppContainer extends React.Component {
   handleNodeSelectedToggle(nodeId) {
     this.handleEventQueryChange(
       update(this.state.eventQuery, {
-        filters: { includeNodeIds:
-          { $apply: (ids) => toggleInclusionArray(ids, nodeId) }}
+        filters: { onlyNodeIds:
+          { $toggle: [nodeId] }}
       }));
   }
 

@@ -10,7 +10,7 @@ function annotateWithNodeIds(path) {
       node.extra = {};
     }
 
-    const nodeId = nextId;
+    const nodeId = '' + nextId;
     nextId += 1;
     node.extra.biNodeId = nodeId;
   });
@@ -81,7 +81,7 @@ function addExpressionTrace(path, { traceExprFnId }) {
   const node = path.node;
   const trace = buildExpressionTrace({
     traceExprFnId,
-    nodeId: types.numericLiteral(node.extra.biNodeId),
+    nodeId: types.stringLiteral(node.extra.biNodeId),
     expression: node,
   });
   node.extra.biTraced = true;
