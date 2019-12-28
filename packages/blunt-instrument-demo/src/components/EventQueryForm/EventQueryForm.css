@@ -46,3 +46,9 @@
 .EventQueryForm .node-filters li {
   display: inline;
 }
+
+.EventQueryForm .node-type-filters ul {
+  list-style-type: none;
+  margin: 10px 5px;
+  padding: 0;
+}

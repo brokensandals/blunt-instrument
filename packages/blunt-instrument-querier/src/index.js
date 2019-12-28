@@ -48,8 +48,8 @@ export class TraceQuerier {
       }
 
       if (filters.excludeNodeTypes) {
-        for (const type of filters.excludeNodeTypes) {
-          if (types.is(type, node)) {
+        for (const type of Object.keys(filters.excludeNodeTypes)) {
+          if (filters.excludeNodeTypes[type] && types.is(type, node)) {
             continue eachEvent;
           }
         }

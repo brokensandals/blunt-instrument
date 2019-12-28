@@ -77,6 +77,23 @@ export function EventQueryFormView({
     }
   }
 
+  const nodeTypeFilters = [];
+  for (const type of Object.keys(query.filters.excludeNodeTypes || {})) {
+    const handleChange = (event) => onEventQueryChange(
+      update(query, { filters: { excludeNodeTypes: { $toggle: [type] }}}));
+    
+      nodeTypeFilters.push(
+      <li key={type}>
+        <label>
+          <input type="checkbox"
+                checked={query.filters.excludeNodeTypes[type]}
+                onChange={handleChange} />
+          Hide values of {type} nodes
+        </label>
+      </li>
+    );
+  }
+
   return (
     <form className="EventQueryForm">
       <div className="node-filters">
@@ -85,7 +102,7 @@ export function EventQueryFormView({
       </div>
 
       <div className="node-type-filters">
-
+        <ul>{nodeTypeFilters}</ul>
       </div>
     </form>
   );

@@ -10,7 +10,10 @@ class AppContainer extends React.Component {
     this.state = {
       eventQuery: {
         filters: {
-          excludeNodeTypes: ['Identifier', 'Literal'],
+          excludeNodeTypes: {
+            Identifier: true,
+            Literal: true,
+          },
           onlyNodeIds: {},
         }
       },
