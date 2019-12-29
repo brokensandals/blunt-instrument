@@ -60,3 +60,15 @@
   color: green;
   font-size: 80%;
 }
+
+.EventTable tr .console-log {
+  float: right;
+  display: none;
+  margin: 0;
+  font-size: 80%;
+  padding: 0 5px;
+}
+
+.EventTable tr:hover .console-log {
+  display: inline;
+}

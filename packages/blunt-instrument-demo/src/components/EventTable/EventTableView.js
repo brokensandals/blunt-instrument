@@ -14,8 +14,22 @@ function ValueDisplay({ value }) {
         case 'function':
           return <code className="function">{value.toString()}</code>;
         case 'object':
-          // TODO
-          return 'object';
+          if (Array.isArray(value)) {
+            const items = [];
+            for (const val of value) {
+              items.push(<ValueDisplay value={val} />);
+              items.push(', ');
+            }
+            return ['[', items, ']'];
+          }
+
+          const items = [];
+          for (const key in value) {
+            items.push(key, ': ');
+            items.push(<ValueDisplay value={value[key]} />);
+            items.push(', ');
+          }
+          return ['{', items, '}'];
         case 'number':
         case 'bigint':
         case 'string':
@@ -32,8 +46,8 @@ function EventTableView({
   events,
   highlightedEventId,
   highlightedNodeId,
-  onHoveredEventChange = null,
-  onNodeSelectedToggle = null,
+  onHoveredEventChange = (eventId) => {},
+  onNodeSelectedToggle = (nodeId) => {},
 }) {
   const entries = [];
 
@@ -47,18 +61,19 @@ function EventTableView({
       highlightedNodeId != null && event.node.extra.biNodeId === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
-    function codeClickHandler(nodeId) {
-      return onNodeSelectedToggle ? () => onNodeSelectedToggle(nodeId) : null;
-    }
+    const handleCodeClick = () => onNodeSelectedToggle(event.node.extra.biNodeId);
+    const handleLogValueClick = () => console.log(event.value);
 
     entries.push(
       <tr key={event.id} onMouseOver={handleMouseOver} className={className}>
         <td className="id">{event.id}</td>
-        <td className="node"
-            onClick={codeClickHandler(event.node.extra.biNodeId)}>
+        <td className="node" onClick={handleCodeClick}>
           <code>{event.node.extra.code}</code>
         </td>
-        <td className="value"><ValueDisplay value={event.value} /></td>
+        <td className="value">
+          <ValueDisplay value={event.value} />
+          <button className="console-log" onClick={handleLogValueClick}>log</button>
+        </td>
       </tr>
     );
   }
