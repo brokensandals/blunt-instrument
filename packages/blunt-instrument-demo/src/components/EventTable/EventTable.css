@@ -6,6 +6,7 @@
   text-align: left;
   padding-left: 10px;
   border: 1px solid transparent;
+  vertical-align: top;
 }
 
 .EventTable tbody tr:nth-child(odd):not(.highlighted-node, .highlighted-event) {
@@ -29,11 +30,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: inline-block;
 }
 
 .EventTable tbody .node:hover {
   border: 1px solid orange;
+}
+
+.EventTable tbody .value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .EventTable .id {
@@ -42,4 +48,15 @@
 
 .EventTable .node {
   width: 25ex;
+  max-width: 25ex;
+}
+
+.EventTable .value {
+  width: 25ex;
+  max-width: 25ex;
+}
+
+.EventTable .function {
+  color: green;
+  font-size: 80%;
 }

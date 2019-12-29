@@ -12,8 +12,7 @@ function ValueDisplay({ value }) {
     default:
       switch (typeof value) {
         case 'function':
-          // TODO
-          return 'function';
+          return <code className="function">{value.toString()}</code>;
         case 'object':
           // TODO
           return 'object';
