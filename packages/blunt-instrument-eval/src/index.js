@@ -30,15 +30,17 @@ function copyNodeIds(from, to) {
 }
 
 export function instrumentedEval(source, { saveInstrumented = false } = {}) {
-  const babelOpts = { plugins: [bluntInstrumentPlugin] };
+  const assignTo = '_bluntInstrumentEvalRet';
+  const babelOpts = { plugins: [[bluntInstrumentPlugin, { outputs: { assignTo }}]] };
   if (saveInstrumented) {
     babelOpts.ast = true;
   }
 
-  const babelResult = babel.transformSync(source, { ast: true, sourceType: 'script', ...babelOpts });
+  const babelResult = babel.transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
   const { code } = babelResult;
-  const wrapped = code + '; [biAST, biEvents]'; // TODO: be less hacky
-  const [ast, events] = (0, eval)(wrapped);
+  const wrapped = '(function(){var ' + assignTo + ';' + code + '; return ' + assignTo + ';})()';
+  const evalResult = (0, eval)(wrapped);
+  const { ast, events } = evalResult;
 
   const astQueriers = {
     input: new ASTQuerier(ast, source),

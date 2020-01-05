@@ -5,20 +5,20 @@ import * as types from '@babel/types';
 // and unit test them
 const serializerTemplates = {};
 serializerTemplates.identity = template(`
-  function %%fnId%%(value) {
+  %%instrumentationId%%.serializeValue = (value) => {
     return value;
-  }
+  };
 `);
 
 serializerTemplates.simple = template(`
-  function %%fnId%%(value) {
+  %%instrumentationId%%.serializeValue = (value) => {
     switch (typeof value) {
       case 'object':
         return JSON.parse(JSON.stringify(value));
       default:
         return value;
     }
-  }
+  };
 `);
 
 function annotateWithNodeIds(path) {
@@ -48,65 +48,84 @@ function copyNodeId(from, to) {
   to.extra.biNodeId = from.extra.biNodeId;
 }
 
-const buildDeclarations = template(`
-  const %%eventsId%% = [];
-  const %%astId%% = JSON.parse(%%astString%%);
+const buildInstrumentationInit = template(`
+  const %%instrumentationId%% = {
+    ast: JSON.parse(%%astString%%),
+    events: []
+  };
 `);
 
-const buildExports = template(`
-  export const %%eventsId%% = [];
-  export const %%astId%% = JSON.parse(%%astString%%);
-`);
-
-// TODO: clone mutable objects
-const buildTraceExprFn = template(`
-  function %%traceExprFnId%%(nodeId, value) {
-    %%eventsId%%.push({
-      id: %%eventsId%%.length,
+const buildTraceExprFnInit = template(`
+  %%instrumentationId%%.traceExpr = (nodeId, value) => {
+    %%instrumentationId%%.events.push({
+      id: %%instrumentationId%%.events.length,
       nodeId,
       type: 'expr',
-      value: %%serializeValueFnId%%(value), });
+      value: %%instrumentationId%%.serializeValue(value),
+    });
     return value;
-  }
+  };
 `);
 
-function addInstrumenterInit(path, { valueSerializer = 'simple' }) {
-  // TODO: make IDs configurable
-  const state = {
-    astId: types.identifier('biAST'),
-    eventsId: types.identifier('biEvents'),
-    traceExprFnId: path.scope.generateUidIdentifier('biTraceExpr'),
-    serializeValueFnId: path.scope.generateUidIdentifier('biSerializeValue'),
+const buildAssignOutput = template(`
+  %%assignTo%% = %%instrumentationId%%;
+`);
+
+const buildExportOutput = template(`
+  export const %%exportAs%% = %%instrumentationId%%;
+`);
+
+const buildReturnOutput = template(`
+  return %%instrumentationId%%;
+`);
+
+function addInstrumenterInit(path,
+    {
+      outputs: {
+        assignTo = null,
+        exportAs = null,
+      } = {},
+      valueSerializer = 'simple'
+    }) {
+  
+  const ids = {
+    instrumentationId: path.scope.generateUidIdentifier('instrumentation'),
   };
 
-  const constsArgs = {
-    astId: state.astId,
-    eventsId: state.eventsId,
-    astString: types.stringLiteral(JSON.stringify(path.node)) // TODO insert object directly instead of via json
-  };
-  const consts = path.node.sourceType === 'module' ?
-    buildExports(constsArgs) : buildDeclarations(constsArgs);
+  const instrumentationInit = buildInstrumentationInit({
+    astString: types.stringLiteral(JSON.stringify(path.node)), // TODO insert object directly instead of via json
+    ...ids })
+  const traceExprFnInit = buildTraceExprFnInit(ids);
+  const serializeValueFnInit = serializerTemplates[valueSerializer](ids);
 
-  const serializeValueFn = serializerTemplates[valueSerializer]({ fnId: state.serializeValueFnId });
-  const traceExprFn = buildTraceExprFn({
-    eventsId: state.eventsId,
-    traceExprFnId: state.traceExprFnId,
-    serializeValueFnId: state.serializeValueFnId
-  });
+  const outputDecls = [];
+  if (assignTo) {
+    outputDecls.push(buildAssignOutput({ assignTo, ...ids }));
+  }
+  if (exportAs) {
+    outputDecls.push(buildExportOutput({ exportAs, ...ids }));
+  }
 
-  path.node.body.unshift(...consts, serializeValueFn, traceExprFn);
+  path.node.body.unshift(
+    instrumentationInit,
+    traceExprFnInit,
+    serializeValueFnInit,
+    ...outputDecls,
+  );
 
-  return state;
+  return ids;
 }
 
+// FIXME presumably this sort of replacement leads to incorrect
+// bindings of 'this' when calling functions on objects.
 const buildExpressionTrace = template(`
-  %%traceExprFnId%%(%%nodeId%%, %%expression%%)
+  %%instrumentationId%%.traceExpr(%%nodeId%%, %%expression%%)
 `);
 
-function addExpressionTrace(path, { traceExprFnId }) {
+function addExpressionTrace(path, { instrumentationId }) {
   const node = path.node;
   const trace = buildExpressionTrace({
-    traceExprFnId,
+    instrumentationId,
     nodeId: types.stringLiteral(node.extra.biNodeId),
     expression: node,
   });
