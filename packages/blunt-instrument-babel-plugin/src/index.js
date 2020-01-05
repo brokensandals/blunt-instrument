@@ -1,6 +1,26 @@
 import template from '@babel/template';
 import * as types from '@babel/types';
 
+// TODO move serializer functions into separate files
+// and unit test them
+const serializerTemplates = {};
+serializerTemplates.identity = template(`
+  function %%fnId%%(value) {
+    return value;
+  }
+`);
+
+serializerTemplates.simple = template(`
+  function %%fnId%%(value) {
+    switch (typeof value) {
+      case 'object':
+        return JSON.parse(JSON.stringify(value));
+      default:
+        return value;
+    }
+  }
+`);
+
 function annotateWithNodeIds(path) {
   let nextId = 1;
   types.traverseFast(path.node, (node) => {
@@ -45,17 +65,18 @@ const buildTraceExprFn = template(`
       id: %%eventsId%%.length,
       nodeId,
       type: 'expr',
-      value, });
+      value: %%serializeValueFnId%%(value), });
     return value;
   }
 `);
 
-function addInstrumenterInit(path) {
+function addInstrumenterInit(path, { valueSerializer = 'simple' }) {
   // TODO: make IDs configurable
   const state = {
     astId: types.identifier('biAST'),
     eventsId: types.identifier('biEvents'),
-    traceExprFnId: path.scope.generateUidIdentifier('biTraceExpr')
+    traceExprFnId: path.scope.generateUidIdentifier('biTraceExpr'),
+    serializeValueFnId: path.scope.generateUidIdentifier('biSerializeValue'),
   };
 
   const constsArgs = {
@@ -66,9 +87,14 @@ function addInstrumenterInit(path) {
   const consts = path.node.sourceType === 'module' ?
     buildExports(constsArgs) : buildDeclarations(constsArgs);
 
-  const traceExprFn = buildTraceExprFn({ eventsId: state.eventsId, traceExprFnId: state.traceExprFnId });
+  const serializeValueFn = serializerTemplates[valueSerializer]({ fnId: state.serializeValueFnId });
+  const traceExprFn = buildTraceExprFn({
+    eventsId: state.eventsId,
+    traceExprFnId: state.traceExprFnId,
+    serializeValueFnId: state.serializeValueFnId
+  });
 
-  path.node.body.unshift(...consts, traceExprFn);
+  path.node.body.unshift(...consts, serializeValueFn, traceExprFn);
 
   return state;
 }
@@ -131,9 +157,9 @@ const instrumentVisitor = {
 };
 
 const rootVisitor = {
-  Program(path) {
+  Program(path, misc) {
     annotateWithNodeIds(path);
-    const state = addInstrumenterInit(path);
+    const state = addInstrumenterInit(path, misc.opts);
     path.traverse(instrumentVisitor, { state });
   }
 };

@@ -16,8 +16,8 @@ function ValueDisplay({ value }) {
         case 'object':
           if (Array.isArray(value)) {
             const items = [];
-            for (const val of value) {
-              items.push(<ValueDisplay value={val} />);
+            for (let i = 0; i < value.length; i++) {
+              items.push(<ValueDisplay key={i} value={value[i]} />);
               items.push(', ');
             }
             return ['[', items, ']'];
@@ -26,7 +26,7 @@ function ValueDisplay({ value }) {
           const items = [];
           for (const key in value) {
             items.push(key, ': ');
-            items.push(<ValueDisplay value={value[key]} />);
+            items.push(<ValueDisplay key={key} value={value[key]} />);
             items.push(', ');
           }
           return ['{', items, '}'];
