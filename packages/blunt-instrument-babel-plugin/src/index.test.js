@@ -63,11 +63,15 @@ function eventsForNode({ instrumentation: { events } }, node) {
   return events.filter((event) => event.nodeId === node.extra.biNodeId);
 }
 
-function exprResult(output, target) {
+function exprResults(output, target) {
   const nodes = nodesForCode(output, target);
-  expect(nodes).toHaveLength(1);
-  const events = eventsForNode(output, nodes[0]);
+  const events = nodes.flatMap(node => eventsForNode(output, node));
   const exprEvents = events.filter((event) => event.type === 'expr');
+  return exprEvents;
+}
+
+function exprResult(output, target) {
+  const exprEvents = exprResults(output, target);
   expect(exprEvents).toHaveLength(1);
   return exprEvents[0].value;
 }
@@ -132,6 +136,41 @@ test('tmp', () => {
 });
 
 describe('special case syntax handling', () => {
+  describe('method invocations', () => {
+    test('this is bound correctly when invoking a method', () => {
+      const output = biEval(`
+        const obj = { val: 'old' };
+        const fn = function() { this.val = 'new'; };
+        obj.fn = fn;
+        obj.fn();
+        output.val = obj.val;
+      `);
+      expect(output.val).toEqual('new');
+      expect(exprResult(output, 'this')).toEqual({ val: 'old'}); // note, this would also include an fn property if the serializer were better
+      expect(exprResults(output, 'obj.fn')).toHaveLength(0);
+    });
+
+    test('this is bound correctly when invoking the result of a getter, and the getter is only called once', () => {
+      // This test exists as a reminder that translating
+      // `x.y` to `trace(x.y); x.y()` would not be acceptable.
+      const output = biEval(`
+        const obj = {
+          count: 0,
+          get fn() {
+            return function() {
+              this.count += 1;
+            }
+          },
+        };
+        obj.fn();
+        output.count = obj.count;
+      `);
+      expect(output.count).toEqual(1);
+      expect(exprResult(output, 'this')).toEqual({ count: 0 });
+      expect(exprResults(output, 'obj.fn')).toHaveLength(0);
+    });
+  });
+
   test('assign to MemberExpression', () => {
     const output = biEval('const a = [null]; a[0] = 1; output.a0 = a[0];');
     expect(output.a0).toEqual(1);

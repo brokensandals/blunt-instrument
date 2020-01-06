@@ -124,8 +124,6 @@ function addInstrumenterInit(path,
   return ids;
 }
 
-// FIXME presumably this sort of replacement leads to incorrect
-// bindings of 'this' when calling functions on objects.
 const buildExpressionTrace = template(`
   %%instrumentationId%%.traceExpr(%%nodeId%%, %%expression%%)
 `);
@@ -181,7 +179,36 @@ const instrumentVisitor = {
 
   Expression: {
     exit(path) {
-      if (!(path.node.extra && path.node.extra.biNodeId && !path.node.extra.biTraced && path.isReferenced())) return;
+      // Don't trace the retrieval of a method from an object.
+      // In other words, this if block detects if we're looking at a node like
+      // `x.y` that's part of a node like `x.y()`, and skips tracing if so.
+      // Otherwise, we'd rewrite `x.y()` to something like `trace(x.y)()`, which
+      // changes the semantics of the program: the former will bind `this` to `x`
+      // but the latter will not.
+      // I don't know how (if it's possible) to trace the value of `x.y` in this
+      // scenario without either breaking the binding of `this`, or evaluating
+      // `x.y` twice (which would change the program semantics if `y` is a getter).
+      if (types.isMemberExpression(path.node) &&
+          types.isCallExpression(path.parentPath.node) &&
+          path.node === path.parentPath.node.callee) {
+        return;
+      }
+
+      // Don't trace nodes without a node ID - those are nodes we added
+      if (!(path.node.extra && path.node.extra.biNodeId)) {
+        return;
+      }
+
+      // If biTraced is true, we've already added tracing for this node
+      if (path.node.extra.biTraced) {
+        return;
+      }
+
+      // Don't trace identifiers that aren't being evaluated, e.g. the x in `x = 4`
+      if (!(path.isReferenced())) {
+        return;
+      }
+      
       addExpressionTrace(path, this.state);
     }
   }
