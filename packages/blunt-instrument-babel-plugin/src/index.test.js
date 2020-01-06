@@ -31,6 +31,17 @@ describe('instrumentation object output', () => {
       expect(result).toHaveProperty('events');
     });
   });
+
+  describe('exportAs', () => {
+    it('exports the specified name', () => {
+      const { code } = transform('const x = 1', { outputs: { exportAs: 'result' }});
+      const wrapped = '(function(){let exports = {};(function(){' + code + '})();return exports;})()';
+      const exported = run(wrapped);
+      expect(exported.__esModule).toBe(true);
+      expect(exported.result).toHaveProperty('ast');
+      expect(exported.result).toHaveProperty('events');
+    });
+  });
 });
 
 test('testing', () => {
