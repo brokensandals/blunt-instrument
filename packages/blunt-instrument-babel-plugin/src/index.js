@@ -19,39 +19,46 @@ transcriberTemplates.simple = template(`
   };
 `);
 
-function annotateWithNodeIds(path) {
-  let nextId = 1;
-  types.traverseFast(path.node, (node) => {
-    // TODO: I really have no idea whether this sort of thing is
-    // what 'extra' is for
-    if (!node.extra) {
-      node.extra = {};
-    }
-
-    const nodeId = '' + nextId;
-    nextId += 1;
-    node.extra.biNodeId = nodeId;
-  });
-}
-
-function copyNodeId(from, to) {
-  if (!from.extra) {
-    return;
-  }
-
-  if (!to.extra) {
-    to.extra = {};
-  }
-
-  to.extra.biNodeId = from.extra.biNodeId;
-}
-
+/**
+ * Sets the node.extra.biNodeId property on an AST node,
+ * which is used for correlating traced events to AST nodes.
+ * @param {Node} node
+ * @param {string} id
+ */
 function setNodeId(node, id) {
+  // TODO: I really have no idea whether this sort of thing is
+  // what 'extra' is for
   if (!node.extra) {
     node.extra = {};
   }
 
   node.extra.biNodeId = id;
+}
+
+/**
+ * Copy the node ID from one AST node to another.
+ * @param {Node} from 
+ * @param {Node} to 
+ */
+function copyNodeId(from, to) {
+  if (!from.extra) {
+    return;
+  }
+
+  setNodeId(to, from.extra.biNodeId);
+}
+
+/**
+ * Traverse an AST and attach a unique (within the tree) identifier to each node.
+ * @param {NodePath} path - the root path containing all nodes to be annotated
+ */
+function annotateWithNodeIds(path) {
+  let nextId = 1;
+  types.traverseFast(path.node, (node) => {
+    const nodeId = '' + nextId;
+    nextId += 1;
+    setNodeId(node, nodeId);
+  });
 }
 
 const buildInstrumentationInit = template(`
@@ -93,6 +100,7 @@ const buildReturnOutput = template(`
  * @param {string} opts.outputs.assignTo - if provided, code like `${assignTo} = _instrumentation;` will be generated
  * @param {string} opts.outputs.exportAs - if provided, code like `export const ${exportAs} = _instrumentation;` will be generated
  * @param {string} opts.valueTranscriber - which value copying mechanism to use, currently may be 'none' or 'simple'
+ * @return {object} an object containing identifiers generated during init that will need to be used by instrumentation code
  */
 function addInstrumenterInit(path,
     {
@@ -235,6 +243,13 @@ const rootVisitor = {
   }
 };
 
+/**
+ * Babel plugin that instruments source code for automatic tracing.
+ * 
+ * See README for usage and options.
+ * 
+ * @param {*} babel 
+ */
 export function bluntInstrumentPlugin(babel) {
   return {
     visitor: rootVisitor
