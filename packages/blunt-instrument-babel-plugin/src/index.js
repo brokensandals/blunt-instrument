@@ -1,17 +1,15 @@
 import template from '@babel/template';
 import * as types from '@babel/types';
 
-// TODO move serializer functions into separate files
-// and unit test them
-const serializerTemplates = {};
-serializerTemplates.identity = template(`
-  %%instrumentationId%%.serializeValue = (value) => {
+const transcriberTemplates = {};
+transcriberTemplates.none = template(`
+  %%instrumentationId%%.transcribeValue = (value) => {
     return value;
   };
 `);
 
-serializerTemplates.simple = template(`
-  %%instrumentationId%%.serializeValue = (value) => {
+transcriberTemplates.simple = template(`
+  %%instrumentationId%%.transcribeValue = (value) => {
     switch (typeof value) {
       case 'object':
         return JSON.parse(JSON.stringify(value));
@@ -69,7 +67,7 @@ const buildTraceExprFnInit = template(`
       id: %%instrumentationId%%.events.length,
       nodeId,
       type: 'expr',
-      value: %%instrumentationId%%.serializeValue(value),
+      value: %%instrumentationId%%.transcribeValue(value),
     });
     return value;
   };
@@ -87,13 +85,22 @@ const buildReturnOutput = template(`
   return %%instrumentationId%%;
 `);
 
+/**
+ * Adds initialization code for blunt-instrument to the given AST.
+ * @param {NodePath} path - path containing the root node of the AST
+ * @param {object} opts
+ * @param {object} opts.outputs
+ * @param {string} opts.outputs.assignTo - if provided, code like `${assignTo} = _instrumentation;` will be generated
+ * @param {string} opts.outputs.exportAs - if provided, code like `export const ${exportAs} = _instrumentation;` will be generated
+ * @param {string} opts.valueTranscriber - which value copying mechanism to use, currently may be 'none' or 'simple'
+ */
 function addInstrumenterInit(path,
     {
       outputs: {
         assignTo = null,
         exportAs = null,
       } = {},
-      valueSerializer = 'simple'
+      valueTranscriber = 'simple'
     }) {
   
   const ids = {
@@ -104,7 +111,7 @@ function addInstrumenterInit(path,
     astString: types.stringLiteral(JSON.stringify(path.node)), // TODO insert object directly instead of via json
     ...ids })
   const traceExprFnInit = buildTraceExprFnInit(ids);
-  const serializeValueFnInit = serializerTemplates[valueSerializer](ids);
+  const transcribeValueFnInit = transcriberTemplates[valueTranscriber](ids);
 
   const outputDecls = [];
   if (assignTo) {
@@ -117,7 +124,7 @@ function addInstrumenterInit(path,
   path.node.body.unshift(
     instrumentationInit,
     traceExprFnInit,
-    serializeValueFnInit,
+    transcribeValueFnInit,
     ...outputDecls,
   );
 
@@ -128,6 +135,12 @@ const buildExpressionTrace = template(`
   %%instrumentationId%%.traceExpr(%%nodeId%%, %%expression%%)
 `);
 
+/**
+ * Replaces an expression node with a traced equivalent.
+ * For example, rewrites `x + 1` to `_instrumentation.traceExpr('NODEID', x + 1)`
+ * @param {NodePath} path - path containing expression node 
+ * @param {object} state - metadata returned from addInstrumenterInit
+ */
 function addExpressionTrace(path, { instrumentationId }) {
   const node = path.node;
   const trace = buildExpressionTrace({
