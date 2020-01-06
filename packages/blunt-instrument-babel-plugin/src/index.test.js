@@ -37,7 +37,6 @@ function codeEval(code) {
  */
 function biEval(code) {
   const { code: instrumented } = transform(code, { outputs: { assignTo: 'output.instrumentation' }});
-  console.log(instrumented)
   const wrapped = `
     (function() {
       let output = {};
@@ -47,6 +46,8 @@ function biEval(code) {
   `;
   return codeEval(wrapped);
 }
+
+
 
 describe('instrumentation object output', () => {
   describe('assignTo', () => {
