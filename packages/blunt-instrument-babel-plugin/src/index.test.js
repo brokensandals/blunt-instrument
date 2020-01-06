@@ -17,7 +17,13 @@ describe('instrumentation object output', () => {
   describe('assignTo', () => {
     it('assigns to a specified variable', () => {
       const { code } = transform('const x = 1', { outputs: { assignTo: 'result' }});
-      const wrapped = '(function(){let result;(function(){' + code + '})();return result;})()';
+      const wrapped = `
+        (function() {
+          let result;
+          (function() {${code}})()
+          return result;
+        })()
+      `;
       const result = run(wrapped);
       expect(result).toHaveProperty('ast');
       expect(result).toHaveProperty('events');
@@ -25,7 +31,14 @@ describe('instrumentation object output', () => {
 
     it('assigns to an object member', () => {
       const { code } = transform('const x = 1', { outputs: { assignTo: 'this.result' }});
-      const wrapped = '(function(){let obj = {};obj.f = function(){' + code + '};obj.f();return obj.result;})()';
+      const wrapped = `
+        (function() {
+          let obj = {};
+          obj.fn = function(){${code}};
+          obj.fn();
+          return obj.result;
+        })()
+      `;
       const result = run(wrapped);
       expect(result).toHaveProperty('ast');
       expect(result).toHaveProperty('events');
@@ -35,7 +48,13 @@ describe('instrumentation object output', () => {
   describe('exportAs', () => {
     it('exports the specified name', () => {
       const { code } = transform('const x = 1', { outputs: { exportAs: 'result' }});
-      const wrapped = '(function(){let exports = {};(function(){' + code + '})();return exports;})()';
+      const wrapped = `
+        (function() {
+          let exports = {};
+          (function(){${code}})();
+          return exports;
+        })()
+      `;
       const exported = run(wrapped);
       expect(exported.__esModule).toBe(true);
       expect(exported.result).toHaveProperty('ast');
