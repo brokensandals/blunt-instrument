@@ -162,6 +162,12 @@ const instrumentVisitor = {
       path.replaceWith(replacement);
     } else {
       // Change x++ to (() => { const _postfix = x; x += 1; return _postfix})()
+      // TODO: currently, for x++, the original value of x is traced twice:
+      // once for the AST node corresponding to 'x' and once for the node corresponding
+      // to 'x++'. This seems correct (though tracing the node for 'x' at all may be
+      // superfluous) since the original value is the actual value returned by the
+      // expression. However, it might be desirable to add a third trace event of
+      // a different type to trace the fact that 'x' is being updated to a new value.
       const lval = path.node.argument;
       const tempId = path.scope.generateUidIdentifier('postfix');
       const replacement = buildPostfixRewrite({ tempId, lval });
