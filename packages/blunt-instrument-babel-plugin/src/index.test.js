@@ -2,10 +2,6 @@ import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from '.';
 
-const SOURCE_FAC = `function fac(n) {
-  return n == 1 ? 1 : n * fac(n - 1);
-}`;
-
 /**
  * Runs blunt-instrument-babel-plugin on the given code and returns the instrumented code.
  * @param {string} code
@@ -63,17 +59,17 @@ function eventsForNode({ instrumentation: { events } }, node) {
   return events.filter((event) => event.nodeId === node.extra.biNodeId);
 }
 
-function exprResults(output, target) {
+function exprValues(output, target) {
   const nodes = nodesForCode(output, target);
   const events = nodes.flatMap(node => eventsForNode(output, node));
   const exprEvents = events.filter((event) => event.type === 'expr');
-  return exprEvents;
+  return exprEvents.map(event => event.value);
 }
 
-function exprResult(output, target) {
-  const exprEvents = exprResults(output, target);
-  expect(exprEvents).toHaveLength(1);
-  return exprEvents[0].value;
+function exprValue(output, target) {
+  const vals = exprValues(output, target);
+  expect(vals).toHaveLength(1);
+  return vals[0];
 }
 
 describe('instrumentation object output', () => {
@@ -126,13 +122,19 @@ describe('instrumentation object output', () => {
   });
 });
 
-test('testing', () => {
-  const { code, ...rest } = babel.transform(SOURCE_FAC, { plugins: [bluntInstrumentPlugin] });
-  codeEval(code);
-});
+describe('general examples', () => {
+  test('factorial', () => {
+    const output = biEval(`
+      function fac(n) {
+        return n == 1 ? 1 : n * fac(n - 1);
+      }
 
-test('tmp', () => {
-  const { code } = babel.transform(`x && y`, { plugins: [bluntInstrumentPlugin ]});
+      output.fac5 = fac(5);
+    `);
+    expect(output.fac5).toEqual(120);
+    expect(exprValues(output, 'fac(n - 1)')).toEqual([1, 2, 6, 24]);
+    expect(exprValues(output, 'n == 1')).toEqual([false, false, false, false, true]);
+  });
 });
 
 describe('special case syntax handling', () => {
@@ -146,8 +148,8 @@ describe('special case syntax handling', () => {
         output.val = obj.val;
       `);
       expect(output.val).toEqual('new');
-      expect(exprResult(output, 'this')).toEqual({ val: 'old'}); // note, this would also include an fn property if the serializer were better
-      expect(exprResults(output, 'obj.fn')).toHaveLength(0);
+      expect(exprValue(output, 'this')).toEqual({ val: 'old'}); // note, this would also include an fn property if the serializer were better
+      expect(exprValues(output, 'obj.fn')).toHaveLength(0);
     });
 
     test('this is bound correctly when invoking the result of a getter, and the getter is only called once', () => {
@@ -166,15 +168,15 @@ describe('special case syntax handling', () => {
         output.count = obj.count;
       `);
       expect(output.count).toEqual(1);
-      expect(exprResult(output, 'this')).toEqual({ count: 0 });
-      expect(exprResults(output, 'obj.fn')).toHaveLength(0);
+      expect(exprValue(output, 'this')).toEqual({ count: 0 });
+      expect(exprValues(output, 'obj.fn')).toHaveLength(0);
     });
   });
 
   test('assign to MemberExpression', () => {
     const output = biEval('const a = [null]; a[0] = 1; output.a0 = a[0];');
     expect(output.a0).toEqual(1);
-    expect(exprResult(output, 'a[0] = 1')).toEqual(1);
+    expect(exprValue(output, 'a[0] = 1')).toEqual(1);
   });
 
   describe('UpdateExpression handling', () => {
@@ -182,21 +184,21 @@ describe('special case syntax handling', () => {
       const output = biEval('let x = 1; const a = x++; output.a = a; output.x = x;');
       expect(output.a).toEqual(1);
       expect(output.x).toEqual(2);
-      expect(exprResult(output, 'x++')).toEqual(1);
+      expect(exprValue(output, 'x++')).toEqual(1);
     });
     
     test('prefix ++ operator', () => {
       const output = biEval('let x = 1; const a = ++x; output.a = a; output.x = x;');
       expect(output.a).toEqual(2);
       expect(output.x).toEqual(2);
-      expect(exprResult(output, '++x')).toEqual(2);
+      expect(exprValue(output, '++x')).toEqual(2);
     });
     
     test('+= operator', () => {
       const output = biEval('let x = 1; const a = x += 1; output.a = a; output.x = x;');
       expect(output.a).toEqual(2);
       expect(output.x).toEqual(2);
-      expect(exprResult(output, 'x += 1')).toEqual(2);
+      expect(exprValue(output, 'x += 1')).toEqual(2);
     });
   });
 });
