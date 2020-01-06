@@ -48,6 +48,14 @@ function copyNodeId(from, to) {
   to.extra.biNodeId = from.extra.biNodeId;
 }
 
+function setNodeId(node, id) {
+  if (!node.extra) {
+    node.extra = {};
+  }
+
+  node.extra.biNodeId = id;
+}
+
 const buildInstrumentationInit = template(`
   const %%instrumentationId%% = {
     ast: JSON.parse(%%astString%%),
@@ -136,7 +144,7 @@ function addExpressionTrace(path, { instrumentationId }) {
 const buildPostfixRewrite = template(`
   (() => {
     const %%tempId%% = %%lval%%;
-    %%assignment%%;
+    %%lval%% += 1;
     return %%tempId%%;
   })()
 `);
@@ -153,17 +161,15 @@ const instrumentVisitor = {
       copyNodeId(path.node, replacement);
       path.replaceWith(replacement);
     } else {
-      // Change x++ to (() => { const _postfix = x; x += 1; return _postfix})
-      // TODO I feel like this code should lead to double-tracing of the lval.
-      // I don't know if I'm too tired to understand why it doesn't, or too tired
-      // to see that it really does
+      // Change x++ to (() => { const _postfix = x; x += 1; return _postfix})()
       const lval = path.node.argument;
       const tempId = path.scope.generateUidIdentifier('postfix');
-      const assignment = types.assignmentExpression(
-        op, lval, types.numericLiteral(1));
-      copyNodeId(path.node, assignment);
-      const replacement = buildPostfixRewrite({ tempId, assignment, lval })
+      const replacement = buildPostfixRewrite({ tempId, lval });
+      const nodeId = path.node.extra.biNodeId;
       path.replaceWith(replacement);
+      // replaceWith appears to drop the 'extra' property, so we must set biNodeId
+      // afterward, not before
+      setNodeId(path.node, nodeId);
     }
   },
 
