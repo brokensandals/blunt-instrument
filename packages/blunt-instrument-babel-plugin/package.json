@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Instruments javascript code for automatic tracing.",
   "main": "src/index.js",
+  "dependencies": {
+    "blunt-instrument-ast-utils": "^0.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",

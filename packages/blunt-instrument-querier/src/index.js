@@ -1,29 +1,5 @@
 import * as types from '@babel/types';
 
-export class ASTQuerier {
-  constructor(ast, code) {
-    this.ast = ast;
-    this.code = code;
-
-    const nodesById = new Map();
-    types.traverseFast(ast, (node) => {
-      if (!node.type) {
-        return;
-      }
-      if (!(node.extra && node.extra.biNodeId)) {
-        throw new Error('Node is missing biNodeId: ' + node);
-      }
-
-      // TODO avoid destructive modification
-      node.extra.code = code.slice(node.start, node.end);
-
-      nodesById.set(node.extra.biNodeId, node);
-    });
-
-    this.nodesById = nodesById;
-  }
-}
-
 export class TraceQuerier {
   constructor(astQueriers, events) {
     if (!(astQueriers && astQueriers.input)) {

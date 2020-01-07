@@ -1,16 +1,11 @@
 {
-  "name": "blunt-instrument-eval",
+  "name": "blunt-instrument-ast-utils",
   "version": "0.0.0",
-  "description": "Instruments code with blunt-instrument and runs it.",
+  "description": "Utilities for dealing with babel ASTs for use with blunt-instrument..",
   "main": "src/index.js",
-  "dependencies": {
-    "@babel/core": "^7.7.5",
-    "blunt-instrument-ast-utils": "^0.0.0",
-    "blunt-instrument-babel-plugin": "^0.0.0",
-    "blunt-instrument-querier": "^0.0.0"
-  },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.7",
     "jest": "^24.9.0"
   },

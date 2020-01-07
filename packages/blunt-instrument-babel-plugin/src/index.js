@@ -1,5 +1,6 @@
 import template from '@babel/template';
 import * as types from '@babel/types';
+import { annotateWithNodeIds, copyNodeId, setNodeId } from 'blunt-instrument-ast-utils';
 
 const transcriberTemplates = {};
 transcriberTemplates.none = template(`
@@ -18,48 +19,6 @@ transcriberTemplates.simple = template(`
     }
   };
 `);
-
-/**
- * Sets the node.extra.biNodeId property on an AST node,
- * which is used for correlating traced events to AST nodes.
- * @param {Node} node
- * @param {string} id
- */
-function setNodeId(node, id) {
-  // TODO: I really have no idea whether this sort of thing is
-  // what 'extra' is for
-  if (!node.extra) {
-    node.extra = {};
-  }
-
-  node.extra.biNodeId = id;
-}
-
-/**
- * Copy the node ID from one AST node to another.
- * @param {Node} from 
- * @param {Node} to 
- */
-function copyNodeId(from, to) {
-  if (!from.extra) {
-    return;
-  }
-
-  setNodeId(to, from.extra.biNodeId);
-}
-
-/**
- * Traverse an AST and attach a unique (within the tree) identifier to each node.
- * @param {NodePath} path - the root path containing all nodes to be annotated
- */
-function annotateWithNodeIds(path) {
-  let nextId = 1;
-  types.traverseFast(path.node, (node) => {
-    const nodeId = '' + nextId;
-    nextId += 1;
-    setNodeId(node, nodeId);
-  });
-}
 
 const buildInstrumentationInit = template(`
   const %%instrumentationId%% = {
@@ -237,7 +196,7 @@ const instrumentVisitor = {
 
 const rootVisitor = {
   Program(path, misc) {
-    annotateWithNodeIds(path);
+    annotateWithNodeIds(path.node, 'src-');
     const state = addInstrumenterInit(path, misc.opts);
     path.traverse(instrumentVisitor, { state });
   }

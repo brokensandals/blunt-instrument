@@ -1,7 +1,8 @@
 import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin';
-import { TraceQuerier, ASTQuerier } from 'blunt-instrument-querier';
+import { ASTQuerier } from 'blunt-instrument-ast-utils';
+import { TraceQuerier } from 'blunt-instrument-querier';
 
 function nodeArray(ast) {
   const array = [];
