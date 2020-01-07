@@ -193,6 +193,20 @@ describe('special case syntax handling', () => {
       expect(output.x).toEqual(2);
       expect(exprValue(output, '++x')).toEqual(2);
     });
+
+    test('postfix -- operator', () => {
+      const output = biEval('let x = 2; const a = x--; output.a = a; output.x = x;');
+      expect(output.a).toEqual(2);
+      expect(output.x).toEqual(1);
+      expect(exprValue(output, 'x--')).toEqual(2);
+    });
+
+    test('prefix -- operator', () => {
+      const output = biEval('let x = 2; const a = --x; output.a = a; output.x = x;');
+      expect(output.a).toEqual(1);
+      expect(output.x).toEqual(1);
+      expect(exprValue(output, '--x')).toEqual(1);
+    });
     
     test('+= operator', () => {
       const output = biEval('let x = 1; const a = x += 1; output.a = a; output.x = x;');

@@ -119,13 +119,17 @@ function addExpressionTrace(path, { instrumentationId }) {
   path.replaceWith(trace);
 }
 
-const buildPostfixRewrite = template(`
+const basePostfixRewrite = `
   (() => {
     const %%tempId%% = %%lval%%;
-    %%lval%% += 1;
+    %%lval%% OPERATOR 1;
     return %%tempId%%;
   })()
-`);
+`;
+const postfixRewriteTemplates = {
+  '++': template(basePostfixRewrite.replace('OPERATOR', '+=')),
+  '--': template(basePostfixRewrite.replace('OPERATOR', '-=')),
+};
 
 const instrumentVisitor = {
   UpdateExpression(path) {
@@ -148,7 +152,7 @@ const instrumentVisitor = {
       // a different type to trace the fact that 'x' is being updated to a new value.
       const lval = path.node.argument;
       const tempId = path.scope.generateUidIdentifier('postfix');
-      const replacement = buildPostfixRewrite({ tempId, lval });
+      const replacement = postfixRewriteTemplates[path.node.operator]({ tempId, lval });
       const nodeId = path.node.extra.biNodeId;
       path.replaceWith(replacement);
       // replaceWith appears to drop the 'extra' property, so we must set biNodeId
