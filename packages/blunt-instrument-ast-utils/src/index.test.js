@@ -1,5 +1,5 @@
 
-import { getNodeId, setNodeId, copyNodeId, annotateWithNodeIds } from './index';
+import { getNodeId, setNodeId, copyNodeId, annotateWithNodeIds, annotateWithCode } from './index';
 import { parseSync } from '@babel/core';
 
 describe('getNodeId', () => {
@@ -74,5 +74,47 @@ describe('annotateWithNodeIds', () => {
     expect(getNodeId(ast.program.body[0].declarations[0])).toEqual('instr-3');
     expect(getNodeId(ast.program.body[0].declarations[0].id)).toEqual('instr-4');
     expect(getNodeId(ast.program.body[0].declarations[0].init)).toEqual('instr-5');
+  });
+});
+
+describe('annotateWithCode', () => {
+  it('assigns the code snippet to each node', () => {
+    const code = 'let x = 4';
+    const ast = parseSync(code);
+    annotateWithCode(ast, code);
+    expect(ast.extra.code).toEqual(code);
+    expect(ast.program.extra.code).toEqual(code);
+    expect(ast.program.body[0].extra.code).toEqual(code);
+    expect(ast.program.body[0].declarations[0].extra.code).toEqual('x = 4');
+    expect(ast.program.body[0].declarations[0].id.extra.code).toEqual('x');
+    expect(ast.program.body[0].declarations[0].init.extra.code).toEqual('4');
+  });
+
+  it('skips nodes missing start or end', () => {
+    const code = 'let x = 4';
+    const ast = parseSync(code);
+    delete ast.program.start;
+    delete ast.program.body[0].declarations[0].id.end;
+    annotateWithCode(ast, code);
+    expect(ast.extra.code).toEqual(code);
+    expect(ast.program.extra).toBeUndefined();
+    expect(ast.program.body[0].extra.code).toEqual(code);
+    expect(ast.program.body[0].declarations[0].extra.code).toEqual('x = 4');
+    expect(ast.program.body[0].declarations[0].id.extra).toBeUndefined();
+    expect(ast.program.body[0].declarations[0].init.extra.code).toEqual('4');
+  });
+
+  it('throws an error when start is negative', () => {
+    const code = 'let x = 4';
+    const ast = parseSync(code);
+    ast.program.start = -1;
+    expect(() => annotateWithCode(ast, code)).toThrowError('Node start [-1] or end [9] is out of range');
+  });
+
+  it('throws an error when end is beyond end of code', () => {
+    const code = 'let x = 4';
+    const ast = parseSync(code);
+    ast.program.end = 10;
+    expect(() => annotateWithCode(ast, code)).toThrowError('Node start [0] or end [10] is out of range');
   });
 });

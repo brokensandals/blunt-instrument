@@ -46,16 +46,39 @@ export function copyNodeId(from, to) {
 /**
  * Traverse an AST and attach sequential identifiers to each node.
  * Nodes which already have an ID will not be altered.
- * @param {Node} root - the parent which will be annotated along with its descendants
+ * @param {Node} ast - the parent which will be annotated along with its descendants
  * @param {string} prefix - a string to be prepended to all sequential identifiers generated
  */
-export function annotateWithNodeIds(root, prefix) {
+export function annotateWithNodeIds(ast, prefix) {
   let nextId = 1;
-  types.traverseFast(root, (node) => {
+  types.traverseFast(ast, (node) => {
     if (!getNodeId(node)) {
       const nodeId = prefix + nextId;
       nextId += 1;
       setNodeId(node, nodeId);
+    }
+  });
+}
+
+/**
+ * Attach a field `extra.code` to each node in an AST, containing the snippet of source
+ * code to which the node corresponds. Requires the node to have integer `start` and
+ * `end` fields indicating the section of code to which it corresponds.
+ * @param {Node} ast - the parent which will be annotated along with its descendants
+ * @param {string} code - full source code corresponding to the AST
+ */
+export function annotateWithCode(ast, code) {
+  types.traverseFast(ast, (node) => {
+    if (Number.isInteger(node.start) && Number.isInteger(node.end)) {
+      if (node.start < 0 || node.end > code.length) {
+        throw new Error(`Node start [${node.start}] or end [${node.end}] is out of range`);
+      }
+
+      if (!node.extra) {
+        node.extra = {};
+      }
+
+      node.extra.code = code.slice(node.start, node.end);
     }
   });
 }
@@ -82,12 +105,11 @@ export class ASTQuerier {
         throw new Error('Node is missing biNodeId: ' + node);
       }
 
-      // TODO avoid destructive modification
-      node.extra.code = code.slice(node.start, node.end);
-
       nodesById.set(node.extra.biNodeId, node);
     });
 
     this.nodesById = nodesById;
+
+    annotateWithCode(ast, code);
   }
 }
