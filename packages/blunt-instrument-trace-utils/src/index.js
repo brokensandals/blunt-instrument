@@ -38,7 +38,7 @@ export class TraceQuerier {
       filters: {
         onlyNodeIds = {},
         excludeNodeTypes = {}
-      }
+      } = {}
     } = {}) {
     const results = [];
 
