@@ -1,5 +1,6 @@
 import React from 'react';
 import './AnnotatedCode.css';
+import { getCodeSlice, getNodeId } from 'blunt-instrument-ast-utils';
 
 // TODO babel probably provides a better way to do this
 function findNodes(object) {
@@ -42,7 +43,7 @@ function CodeForNode({
     }
     
     elements.push(
-      <CodeForNode key={child.extra.biNodeId}
+      <CodeForNode key={getNodeId(child)}
                      highlightedNodeId={highlightedNodeId}
                      node={child}
                      selectedNodeIds={selectedNodeIds}
@@ -94,7 +95,7 @@ function AnnotatedCodeView({
         <CodeForNode highlightedNodeId={highlightedNodeId}
                        node={astQuerier.ast}
                        selectedNodeIds={selectedNodeIds}
-                       code={astQuerier.ast.extra.code}
+                       code={getCodeSlice(astQuerier.ast)}
                        onHoveredNodeChange={onHoveredNodeChange}
                        onNodeSelectedToggle={onNodeSelectedToggle} />
       </code>

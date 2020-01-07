@@ -2,6 +2,7 @@ import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from '.';
 import { examples } from 'blunt-instrument-test-resources';
+import { getNodeId } from 'blunt-instrument-ast-utils';
 
 /**
  * Runs blunt-instrument-babel-plugin on the given code and returns the instrumented code.
@@ -58,7 +59,7 @@ function nodesForCode({ instrumentation: { ast }, code }, target) {
 }
 
 function eventsForNode({ instrumentation: { events } }, node) {
-  return events.filter((event) => event.nodeId === node.extra.biNodeId);
+  return events.filter((event) => event.nodeId === getNodeId(node));
 }
 
 function exprValues(output, target) {

@@ -86,13 +86,31 @@ export function addNodeIdsToAST(ast, prefix) {
 }
 
 /**
- * Attach a field `extra.code` to each node in an AST, containing the snippet of source
+ * Retrieve the source code slice from a node, if it has been set.
+ * Use `attachCodeSlicesToAST` to set the code slices.
+ * @param {Node} node 
+ * @return {string} the code slice or null
+ */
+export function getCodeSlice(node) {
+  if (!node.extra) {
+    return null;
+  }
+
+  if (typeof node.extra.codeSlice !== 'string') {
+    return null;
+  }
+
+  return node.extra.codeSlice;
+}
+
+/**
+ * Attach a field `extra.codeSlice` to each node in an AST, containing the snippet of source
  * code to which the node corresponds. Requires the node to have integer `start` and
  * `end` fields indicating the section of code to which it corresponds.
  * @param {Node} ast - the parent which will be annotated along with its descendants
  * @param {string} code - full source code corresponding to the AST
  */
-export function attachCodeToAST(ast, code) {
+export function attachCodeSlicesToAST(ast, code) {
   types.traverseFast(ast, (node) => {
     if (Number.isInteger(node.start) && Number.isInteger(node.end)) {
       if (node.start < 0 || node.end > code.length) {
@@ -103,7 +121,7 @@ export function attachCodeToAST(ast, code) {
         node.extra = {};
       }
 
-      node.extra.code = code.slice(node.start, node.end);
+      node.extra.codeSlice = code.slice(node.start, node.end);
     }
   });
 }
@@ -132,5 +150,14 @@ export class ASTQuerier {
     });
 
     this.nodesById = nodesById;
+  }
+
+  /**
+   * Look up an AST node by its node ID.
+   * @param {string} id 
+   * @return {Node} the node or undefined
+   */
+  getNodeById(id) {
+    return this.nodesById.get(id);
   }
 }

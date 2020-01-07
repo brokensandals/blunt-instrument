@@ -1,5 +1,6 @@
 import React from 'react';
 import './EventTable.css';
+import { getCodeSlice, getNodeId } from 'blunt-instrument-ast-utils';
 
 function ValueDisplay({ value }) {
   switch (value) {
@@ -58,17 +59,17 @@ function EventTableView({
 
     const className = [
       highlightedEventId != null && event.id === highlightedEventId ? 'highlighted-event' : null,
-      highlightedNodeId != null && event.node.extra.biNodeId === highlightedNodeId ? 'highlighted-node' : null,
+      highlightedNodeId != null && getNodeId(event.node) === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
-    const handleCodeClick = () => onNodeSelectedToggle(event.node.extra.biNodeId);
+    const handleCodeClick = () => onNodeSelectedToggle(getNodeId(event.node));
     const handleLogValueClick = () => console.log(event.value);
 
     entries.push(
       <tr key={event.id} onMouseOver={handleMouseOver} className={className}>
         <td className="id">{event.id}</td>
         <td className="node" onClick={handleCodeClick}>
-          <code>{event.node.extra.code}</code>
+          <code>{getCodeSlice(event.node)}</code>
         </td>
         <td className="value">
           <ValueDisplay value={event.value} />

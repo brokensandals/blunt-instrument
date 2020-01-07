@@ -1,6 +1,6 @@
 import template from '@babel/template';
 import * as types from '@babel/types';
-import { addNodeIdsToAST, copyNodeId, setNodeId } from 'blunt-instrument-ast-utils';
+import { addNodeIdsToAST, copyNodeId, getNodeId, setNodeId } from 'blunt-instrument-ast-utils';
 
 const transcriberTemplates = {};
 transcriberTemplates.none = template(`
@@ -112,7 +112,7 @@ function addExpressionTrace(path, { instrumentationId }) {
   const node = path.node;
   const trace = buildExpressionTrace({
     instrumentationId,
-    nodeId: types.stringLiteral(node.extra.biNodeId),
+    nodeId: types.stringLiteral(getNodeId(node)),
     expression: node,
   });
   node.extra.biTraced = true;
@@ -153,7 +153,7 @@ const instrumentVisitor = {
       const lval = path.node.argument;
       const tempId = path.scope.generateUidIdentifier('postfix');
       const replacement = postfixRewriteTemplates[path.node.operator]({ tempId, lval });
-      const nodeId = path.node.extra.biNodeId;
+      const nodeId = getNodeId(path.node);
       path.replaceWith(replacement);
       // replaceWith appears to drop the 'extra' property, so we must set biNodeId
       // afterward, not before
@@ -179,7 +179,7 @@ const instrumentVisitor = {
       }
 
       // Don't trace nodes without a node ID - those are nodes we added
-      if (!(path.node.extra && path.node.extra.biNodeId)) {
+      if (!(path.node.extra && getNodeId(path.node))) {
         return;
       }
 

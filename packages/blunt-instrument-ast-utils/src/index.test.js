@@ -1,5 +1,5 @@
 
-import { getNodeId, setNodeId, copyNodeId, addNodeIdsToAST, attachCodeToAST, copyNodeIdsBetweenASTs, ASTQuerier } from './index';
+import { getNodeId, setNodeId, copyNodeId, addNodeIdsToAST, getCodeSlice, attachCodeSlicesToAST, copyNodeIdsBetweenASTs, ASTQuerier } from './index';
 import { parseSync } from '@babel/core';
 
 describe('getNodeId', () => {
@@ -100,17 +100,34 @@ describe('addNodeIdsToAST', () => {
   });
 });
 
-describe('attachCodeToAST', () => {
+describe('getCodeSlice', () => {
+  it('returns null when `extra` is null', () => {
+    const node = {};
+    expect(getCodeSlice(node)).toBeNull();
+  });
+
+  it('returns null when `extra.codeSlice` is missing', () => {
+    const node = { extra: { foo: 'bar' }};
+    expect(getCodeSlice(node)).toBeNull();
+  });
+
+  it('returns the code slice', () => {
+    const node = { extra: { codeSlice: 'foo' }};
+    expect(getCodeSlice(node)).toEqual('foo');
+  });
+});
+
+describe('attachCodeSlicesToAST', () => {
   it('assigns the code snippet to each node', () => {
     const code = 'let x = 4';
     const ast = parseSync(code);
-    attachCodeToAST(ast, code);
-    expect(ast.extra.code).toEqual(code);
-    expect(ast.program.extra.code).toEqual(code);
-    expect(ast.program.body[0].extra.code).toEqual(code);
-    expect(ast.program.body[0].declarations[0].extra.code).toEqual('x = 4');
-    expect(ast.program.body[0].declarations[0].id.extra.code).toEqual('x');
-    expect(ast.program.body[0].declarations[0].init.extra.code).toEqual('4');
+    attachCodeSlicesToAST(ast, code);
+    expect(ast.extra.codeSlice).toEqual(code);
+    expect(ast.program.extra.codeSlice).toEqual(code);
+    expect(ast.program.body[0].extra.codeSlice).toEqual(code);
+    expect(ast.program.body[0].declarations[0].extra.codeSlice).toEqual('x = 4');
+    expect(ast.program.body[0].declarations[0].id.extra.codeSlice).toEqual('x');
+    expect(ast.program.body[0].declarations[0].init.extra.codeSlice).toEqual('4');
   });
 
   it('skips nodes missing start or end', () => {
@@ -118,27 +135,27 @@ describe('attachCodeToAST', () => {
     const ast = parseSync(code);
     delete ast.program.start;
     delete ast.program.body[0].declarations[0].id.end;
-    attachCodeToAST(ast, code);
-    expect(ast.extra.code).toEqual(code);
+    attachCodeSlicesToAST(ast, code);
+    expect(ast.extra.codeSlice).toEqual(code);
     expect(ast.program.extra).toBeUndefined();
-    expect(ast.program.body[0].extra.code).toEqual(code);
-    expect(ast.program.body[0].declarations[0].extra.code).toEqual('x = 4');
+    expect(ast.program.body[0].extra.codeSlice).toEqual(code);
+    expect(ast.program.body[0].declarations[0].extra.codeSlice).toEqual('x = 4');
     expect(ast.program.body[0].declarations[0].id.extra).toBeUndefined();
-    expect(ast.program.body[0].declarations[0].init.extra.code).toEqual('4');
+    expect(ast.program.body[0].declarations[0].init.extra.codeSlice).toEqual('4');
   });
 
   it('throws an error when start is negative', () => {
     const code = 'let x = 4';
     const ast = parseSync(code);
     ast.program.start = -1;
-    expect(() => attachCodeToAST(ast, code)).toThrowError('Node start [-1] or end [9] is out of range');
+    expect(() => attachCodeSlicesToAST(ast, code)).toThrowError('Node start [-1] or end [9] is out of range');
   });
 
   it('throws an error when end is beyond end of code', () => {
     const code = 'let x = 4';
     const ast = parseSync(code);
     ast.program.end = 10;
-    expect(() => attachCodeToAST(ast, code)).toThrowError('Node start [0] or end [10] is out of range');
+    expect(() => attachCodeSlicesToAST(ast, code)).toThrowError('Node start [0] or end [10] is out of range');
   });
 });
 
@@ -150,13 +167,19 @@ describe('ASTQuerier', () => {
     });
   });
 
-  describe('nodesById', () => {
-    it('contains map of nodes by ID', () => {
+  describe('getNodeById', () => {
+    it('finds the requested node', () => {
       const ast = parseSync('x = 1');
       addNodeIdsToAST(ast, 'test-');
       const astq = new ASTQuerier(ast);
-      expect(astq.nodesById.size).toEqual(6);
-      expect(astq.nodesById.get('test-5').name).toEqual('x');
+      expect(astq.getNodeById('test-5').name).toEqual('x');
+    });
+
+    it('returns undefined for unknown node ID', () => {
+      const ast = parseSync('x = 1');
+      addNodeIdsToAST(ast, 'test-');
+      const astq = new ASTQuerier(ast);
+      expect(astq.getNodeById('test-100')).toBeUndefined();
     });
   });
 });

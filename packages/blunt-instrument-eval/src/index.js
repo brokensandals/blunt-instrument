@@ -1,7 +1,7 @@
 import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin';
-import { attachCodeToAST, ASTQuerier, copyNodeIdsBetweenASTs, addNodeIdsToAST } from 'blunt-instrument-ast-utils';
+import { attachCodeSlicesToAST, ASTQuerier, copyNodeIdsBetweenASTs, addNodeIdsToAST } from 'blunt-instrument-ast-utils';
 import { TraceQuerier } from 'blunt-instrument-querier';
 
 export function instrumentedEval(source, { saveInstrumented = false } = {}) {
@@ -17,7 +17,7 @@ export function instrumentedEval(source, { saveInstrumented = false } = {}) {
   const evalResult = (0, eval)(wrapped);
   const { ast, events } = evalResult;
 
-  attachCodeToAST(ast, source);
+  attachCodeSlicesToAST(ast, source);
   const astQueriers = {
     input: new ASTQuerier(ast),
   };
@@ -26,7 +26,7 @@ export function instrumentedEval(source, { saveInstrumented = false } = {}) {
     const parsed = babel.parseSync(code);
     copyNodeIdsBetweenASTs(babelResult.ast, parsed);
     addNodeIdsToAST(parsed, 'instr-');
-    attachCodeToAST(parsed, code);
+    attachCodeSlicesToAST(parsed, code);
     astQueriers.instrumented = new ASTQuerier(parsed);
   }
 

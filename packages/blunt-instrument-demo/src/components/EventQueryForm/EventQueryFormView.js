@@ -1,11 +1,12 @@
 import React from 'react';
 import './EventQueryForm.css';
+import { getCodeSlice } from 'blunt-instrument-ast-utils';
 import update from 'immutability-helper';
 
 function findNodeMultiQuerier(nodeId, astQueriers) {
   const { input, ...rest } = astQueriers;
   for (const astq of [input, ...Object.values(rest)]) {
-    const node = astq.nodesById.get(nodeId);
+    const node = astq.getNodeById(nodeId);
     if (node) {
       return node;
     }
@@ -27,7 +28,7 @@ function NodeFilter({
 
   const summary = [<span className="id">{nodeId}</span>]
   if (node) {
-    summary.push(<code className="summary">{node.extra.code}</code>);
+    summary.push(<code className="summary">{getCodeSlice(node)}</code>);
   }
 
   const handleMouseLeave = () => onHoveredNodeChange(null);

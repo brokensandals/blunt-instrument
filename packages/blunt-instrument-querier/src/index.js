@@ -18,7 +18,7 @@ export class TraceQuerier {
 
     eachEvent:
     for (const event of this.events) {
-      const node = this.astq.nodesById.get(event.nodeId);
+      const node = this.astq.getNodeById(event.nodeId);
       if (!node) {
         throw new Error('Cannot find node for ID: ' + event.nodeId);
       }
