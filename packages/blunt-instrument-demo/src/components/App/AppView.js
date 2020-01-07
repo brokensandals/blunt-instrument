@@ -6,32 +6,7 @@ import EventTable from '../EventTable';
 import EventQueryForm from '../EventQueryForm';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-
-export const examples = {
-  factorial: `function fac(n) {
-  return n == 1 ? 1 : n * fac(n - 1);
-}
-fac(3);`,
-  insertionSort: `function insertionSort(array) {
-  let shifts = 0;
-
-  for (let i = 0; i < array.length; i++) {
-    for (let j = i - 1; j >= 0; j--) {
-      if (array[j] <= array[j + 1]) {
-        break;
-      }
-
-      shifts++;
-      const tmp = array[j + 1];
-      array[j + 1] = array[j];
-      array[j] = tmp;
-    }
-  }
-
-  return shifts;
-}
-insertionSort([3, 1, 2, 5, 4])`,
-};
+import { examples } from 'blunt-instrument-test-resources';
 
 function AppView({
   eventQuery,
