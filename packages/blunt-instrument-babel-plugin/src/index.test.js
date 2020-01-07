@@ -2,7 +2,8 @@ import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from '.';
 import { examples } from 'blunt-instrument-test-resources';
-import { getNodeId } from 'blunt-instrument-ast-utils';
+import { getNodeId, attachCodeSlicesToAST, ASTQuerier } from 'blunt-instrument-ast-utils';
+import cloneDeep from 'lodash/cloneDeep';
 
 /**
  * Runs blunt-instrument-babel-plugin on the given code and returns the instrumented code.
@@ -44,18 +45,14 @@ function biEval(code) {
       return output;
     })()
   `;
-  return { code, instrumented, ...codeEval(wrapped) };
-}
-
-function nodesForCode({ instrumentation: { ast }, code }, target) {
-  const matches = [];
-  types.traverseFast(ast, (node) => {
-    const snippet = code.slice(node.start, node.end);
-    if (snippet === target) {
-      matches.push(node);
-    }
-  });
-  return matches;
+  
+  const result = codeEval(wrapped);
+  
+  const astClone = cloneDeep(result.instrumentation.ast);
+  attachCodeSlicesToAST(astClone, code);
+  const astq = new ASTQuerier(astClone);
+  
+  return { astq, code, instrumented, ...result };
 }
 
 function eventsForNode({ instrumentation: { events } }, node) {
@@ -63,7 +60,7 @@ function eventsForNode({ instrumentation: { events } }, node) {
 }
 
 function exprValues(output, target) {
-  const nodes = nodesForCode(output, target);
+  const nodes = output.astq.getNodesByCodeSlice(target);
   const events = nodes.flatMap(node => eventsForNode(output, node));
   const exprEvents = events.filter((event) => event.type === 'expr');
   return exprEvents.map(event => event.value);

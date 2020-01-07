@@ -30,6 +30,7 @@ The `ASTQuerier` class indexes an AST so you can quickly find nodes by certain c
 ```javascript
 const astq = new ASTQuerier(ast);
 astq.getNodeById('node-id-1');
+astq.getNodesByCodeSlice('x + 1'); // only works if `attachCodeSliceToAST` was used before creating the querier
 ```
 
 [babel-ast]: https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md#toc-asts

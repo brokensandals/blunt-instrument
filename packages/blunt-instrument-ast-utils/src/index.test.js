@@ -182,4 +182,25 @@ describe('ASTQuerier', () => {
       expect(astq.getNodeById('test-100')).toBeUndefined();
     });
   });
+
+  describe('getNodesByCodeSlice', () => {
+    it('finds all matching nodes', () => {
+      const code = 'x = y() + 1; z = y() + 3';
+      const ast = parseSync(code);
+      addNodeIdsToAST(ast, 'test-');
+      attachCodeSlicesToAST(ast, code);
+      const astq = new ASTQuerier(ast);
+      const expected = [ast.program.body[0].expression.right.left, ast.program.body[1].expression.right.left];
+      expect(astq.getNodesByCodeSlice('y()')).toEqual(expected);
+    });
+
+    it('returns empty array if no matching nodes', () => {
+      const code = 'x = y() + 1; z = y() + 3';
+      const ast = parseSync(code);
+      addNodeIdsToAST(ast, 'test-');
+      attachCodeSlicesToAST(ast, code);
+      const astq = new ASTQuerier(ast);
+      expect(astq.getNodesByCodeSlice('z()')).toEqual([]);
+    });
+  });
 });

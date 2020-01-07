@@ -129,6 +129,8 @@ export function attachCodeSlicesToAST(ast, code) {
 /**
  * Wraps a babel AST to enable more convenient or efficient lookups.
  * Every node should have a field `extra.biNodeId` to uniquely identify it.
+ * If you want to do lookups by source code, you should call `attachCodeSlicesToAST`
+ * on the AST before creating the querier.
  */
 export class ASTQuerier {
   /**
@@ -138,6 +140,7 @@ export class ASTQuerier {
     this.ast = ast;
 
     const nodesById = new Map();
+    const nodesByCodeSlice = new Map();
     types.traverseFast(ast, (node) => {
       if (!node.type) {
         return;
@@ -147,9 +150,20 @@ export class ASTQuerier {
       }
 
       nodesById.set(node.extra.biNodeId, node);
+      
+      const codeSlice = getCodeSlice(node);
+      if (codeSlice) {
+        let nodes = nodesByCodeSlice.get(codeSlice);
+        if (!nodes) {
+          nodes = [];
+          nodesByCodeSlice.set(codeSlice, nodes);
+        }
+        nodes.push(node);
+      }
     });
 
     this.nodesById = nodesById;
+    this.nodesByCodeSlice = nodesByCodeSlice;
   }
 
   /**
@@ -159,5 +173,16 @@ export class ASTQuerier {
    */
   getNodeById(id) {
     return this.nodesById.get(id);
+  }
+
+  /**
+   * Returns all nodes whose corresponding code snippet is exactly the
+   * given string. This only works if `attachCodeSlicesToAST` was called
+   * on the AST before creating the querier instance.
+   * @param {string} codeSlice exact code snippet to search for
+   * @returns {[Node]} array of matching nodes, possibly empty
+   */
+  getNodesByCodeSlice(codeSlice) {
+    return this.nodesByCodeSlice.get(codeSlice) || [];
   }
 }
