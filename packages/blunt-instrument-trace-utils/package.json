@@ -1,8 +1,11 @@
 {
-  "name": "blunt-instrument-querier",
+  "name": "blunt-instrument-trace-utils",
   "version": "0.0.0",
-  "description": "Allows querying the event logs produced by blunt-instrument.",
+  "description": "Utilities for interacting with traces produced by blunt-instrument.",
   "main": "src/index.js",
+  "dependencies": {
+    "blunt-instrument-ast-utils": "^0.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",

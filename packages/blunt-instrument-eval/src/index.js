@@ -1,8 +1,7 @@
 import * as babel from '@babel/core';
-import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin';
 import { attachCodeSlicesToAST, ASTQuerier, copyNodeIdsBetweenASTs, addNodeIdsToAST } from 'blunt-instrument-ast-utils';
-import { TraceQuerier } from 'blunt-instrument-querier';
+import { TraceQuerier } from 'blunt-instrument-trace-utils';
 
 export function instrumentedEval(source, { saveInstrumented = false } = {}) {
   const assignTo = '_bluntInstrumentEvalRet';

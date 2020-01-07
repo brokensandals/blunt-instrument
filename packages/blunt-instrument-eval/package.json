@@ -7,7 +7,7 @@
     "@babel/core": "^7.7.5",
     "blunt-instrument-ast-utils": "^0.0.0",
     "blunt-instrument-babel-plugin": "^0.0.0",
-    "blunt-instrument-querier": "^0.0.0"
+    "blunt-instrument-trace-utils": "^0.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
