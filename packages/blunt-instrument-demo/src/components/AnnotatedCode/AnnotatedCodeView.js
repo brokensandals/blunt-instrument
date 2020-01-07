@@ -94,7 +94,7 @@ function AnnotatedCodeView({
         <CodeForNode highlightedNodeId={highlightedNodeId}
                        node={astQuerier.ast}
                        selectedNodeIds={selectedNodeIds}
-                       code={astQuerier.code}
+                       code={astQuerier.ast.extra.code}
                        onHoveredNodeChange={onHoveredNodeChange}
                        onNodeSelectedToggle={onNodeSelectedToggle} />
       </code>

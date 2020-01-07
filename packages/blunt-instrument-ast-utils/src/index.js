@@ -90,11 +90,9 @@ export function annotateWithCode(ast, code) {
 export class ASTQuerier {
   /**
    * @param {Node} ast - root node of the babel AST
-   * @param {string} code - source code corresponding to the AST
    */
   constructor(ast, code) {
     this.ast = ast;
-    this.code = code;
 
     const nodesById = new Map();
     types.traverseFast(ast, (node) => {
@@ -109,7 +107,5 @@ export class ASTQuerier {
     });
 
     this.nodesById = nodesById;
-
-    annotateWithCode(ast, code);
   }
 }
