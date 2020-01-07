@@ -44,6 +44,31 @@ export function copyNodeId(from, to) {
 }
 
 /**
+ * Copies all node IDs from one AST to another. This should be called with
+ * two ASTs that have exactly the same shape.
+ * @param {Node} from 
+ * @param {Node} to
+ * @throws error if the two trees do not have the same number and types of nodes
+ */
+export function copyNodeIds(from, to) {
+  const fromNodes = [];
+  const toNodes = [];
+  types.traverseFast(from, node => fromNodes.push(node));
+  types.traverseFast(to, node => toNodes.push(node));
+
+  if (fromNodes.length !== toNodes.length) {
+    throw new Error(`Source tree has ${fromNodes.length} nodes but destination tree has ${toNodes.length}`);
+  }
+
+  for (let i = 0; i < fromNodes.length; i++) {
+    if (fromNodes[i].type !== toNodes[i].type) {
+      throw new Error('Source and destination tree nodes do not match');
+    }
+    copyNodeId(fromNodes[i], toNodes[i]);
+  }
+}
+
+/**
  * Traverse an AST and attach sequential identifiers to each node.
  * Nodes which already have an ID will not be altered.
  * @param {Node} ast - the parent which will be annotated along with its descendants
@@ -91,7 +116,7 @@ export class ASTQuerier {
   /**
    * @param {Node} ast - root node of the babel AST
    */
-  constructor(ast, code) {
+  constructor(ast) {
     this.ast = ast;
 
     const nodesById = new Map();
@@ -100,7 +125,7 @@ export class ASTQuerier {
         return;
       }
       if (!getNodeId(node)) {
-        throw new Error('Node is missing biNodeId: ' + node);
+        throw new Error(`Node is missing node ID: ${JSON.stringify(node)}`);
       }
 
       nodesById.set(node.extra.biNodeId, node);

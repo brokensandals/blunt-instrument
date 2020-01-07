@@ -1,5 +1,5 @@
 
-import { getNodeId, setNodeId, copyNodeId, annotateWithNodeIds, annotateWithCode } from './index';
+import { getNodeId, setNodeId, copyNodeId, annotateWithNodeIds, annotateWithCode, copyNodeIds, ASTQuerier } from './index';
 import { parseSync } from '@babel/core';
 
 describe('getNodeId', () => {
@@ -49,6 +49,29 @@ describe('copyNodeId', () => {
     setNodeId(from, 'test-1');
     copyNodeId(from, to);
     expect(getNodeId(to)).toEqual('test-1');
+  });
+});
+
+describe('copyNodeIds', () => {
+  it('throws an error if the trees are different sizes', () => {
+    const ast1 = parseSync('x = y');
+    const ast2 = parseSync('x = y()');
+    expect(() => copyNodeIds(ast1, ast2)).toThrowError('Source tree has 6 nodes but destination tree has 7');
+  });
+
+  it('throws an error if the trees have different node types', () => {
+    const ast1 = parseSync('x = y');
+    const ast2 = parseSync('x = 4');
+    expect(() => copyNodeIds(ast1, ast2)).toThrowError('Source and destination tree nodes do not match');
+  });
+
+  it('copies node IDs', () => {
+    const ast1 = parseSync('x = y');
+    annotateWithNodeIds(ast1, 'test-');
+    const ast2 = parseSync('x = y');
+    copyNodeIds(ast1, ast2);
+    expect(getNodeId(ast2)).toEqual('test-1');
+    expect(ast1).toEqual(ast2);
   });
 });
 
@@ -116,5 +139,24 @@ describe('annotateWithCode', () => {
     const ast = parseSync(code);
     ast.program.end = 10;
     expect(() => annotateWithCode(ast, code)).toThrowError('Node start [0] or end [10] is out of range');
+  });
+});
+
+describe('ASTQuerier', () => {
+  describe('constructor', () => {
+    it('throws an error if any nodes are missing node IDs', () => {
+      const ast = parseSync('x = 1');
+      expect(() => new ASTQuerier(ast)).toThrowError('Node is missing node ID');
+    });
+  });
+
+  describe('nodesById', () => {
+    it('contains map of nodes by ID', () => {
+      const ast = parseSync('x = 1');
+      annotateWithNodeIds(ast, 'test-');
+      const astq = new ASTQuerier(ast);
+      expect(astq.nodesById.size).toEqual(6);
+      expect(astq.nodesById.get('test-5').name).toEqual('x');
+    });
   });
 });

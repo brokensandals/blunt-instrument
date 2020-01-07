@@ -1,34 +1,8 @@
 import * as babel from '@babel/core';
 import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin';
-import { annotateWithCode, ASTQuerier } from 'blunt-instrument-ast-utils';
+import { annotateWithCode, ASTQuerier, copyNodeIds, annotateWithNodeIds } from 'blunt-instrument-ast-utils';
 import { TraceQuerier } from 'blunt-instrument-querier';
-
-function nodeArray(ast) {
-  const array = [];
-  types.traverseFast(ast, node => array.push(node));
-  return array;
-}
-
-function copyNodeIds(from, to) {
-  const fromNodes = nodeArray(from);
-  const toNodes = nodeArray(to);
-  if (fromNodes.length !== toNodes.length) {
-    throw new Error('Expected ASTs to have the same number of nodes');
-  }
-  for (let i = 0; i < fromNodes.length; i++) {
-    if (!toNodes[i].extra) {
-      toNodes[i].extra = {};
-    }
-
-    const orig = fromNodes[i].extra ? fromNodes[i].extra.biNodeId : null;
-    if (orig == null) {
-      toNodes[i].extra.biNodeId = 'instr' + i;
-    } else {
-      toNodes[i].extra.biNodeId = orig;
-    }
-  }
-}
 
 export function instrumentedEval(source, { saveInstrumented = false } = {}) {
   const assignTo = '_bluntInstrumentEvalRet';
@@ -51,6 +25,7 @@ export function instrumentedEval(source, { saveInstrumented = false } = {}) {
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);
     copyNodeIds(babelResult.ast, parsed);
+    annotateWithNodeIds(parsed, 'instr-');
     annotateWithCode(parsed, code);
     astQueriers.instrumented = new ASTQuerier(parsed);
   }
