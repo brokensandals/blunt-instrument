@@ -3,17 +3,6 @@ import './TraceQueryForm.css';
 import { getCodeSlice } from 'blunt-instrument-ast-utils';
 import update from 'immutability-helper';
 
-function findNodeMultiQuerier(nodeId, astQueriers) {
-  const { input, ...rest } = astQueriers;
-  for (const astq of [input, ...Object.values(rest)]) {
-    const node = astq.getNodeById(nodeId);
-    if (node) {
-      return node;
-    }
-  }
-  return null;
-}
-
 function NodeFilter({
   highlighted,
   nodeId,
@@ -21,7 +10,7 @@ function NodeFilter({
   onNodeSelectedToggle,
   querier,
 }) {
-  const node = findNodeMultiQuerier(nodeId, querier.astQueriers);
+  const node = querier.astq.getNodeById(nodeId);
   if (!node) {
     console.log('No node for nodeId: ' + nodeId);
   }

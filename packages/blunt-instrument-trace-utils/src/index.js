@@ -1,12 +1,16 @@
 import * as types from '@babel/types';
 
+/**
+ * Assists in querying a trace produced by blunt-instrument.
+ */
 export class TraceQuerier {
-  constructor(astQueriers, trace) {
-    if (!(astQueriers && astQueriers.input)) {
-      throw new Error('missing ASTQuerier for "input" to represent original code');
-    }
-    this.astq = astQueriers.input;
-    this.astQueriers = astQueriers;
+  /**
+   * 
+   * @param {ASTQuerier} astq - an ASTQuerier for the AST of the original code that blunt-instrument instrumented
+   * @param {[object]} trace - the trace produced by blunt-instrument
+   */
+  constructor(astq, trace) {
+    this.astq = astq;
     this.trace = trace;
   }
 

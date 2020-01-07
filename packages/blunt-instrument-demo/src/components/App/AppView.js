@@ -9,6 +9,7 @@ import 'react-tabs/style/react-tabs.css';
 import { examples } from 'blunt-instrument-test-resources';
 
 function AppView({
+  evalResult,
   traceQuery,
   trevs,
   highlightedTrevId,
@@ -19,7 +20,6 @@ function AppView({
   onNodeSelectedToggle,
   onRun,
   onSourceDraftChange,
-  querier,
   runError,
   sourceDraft,
 }) {
@@ -61,7 +61,7 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            <AnnotatedCode astQuerier={querier.astq}
+            <AnnotatedCode astQuerier={evalResult.traceQuerier.astq}
                            highlightedNodeId={highlightedNodeId}
                            onHoveredNodeChange={onHoveredNodeChange}
                            onNodeSelectedToggle={onNodeSelectedToggle}
@@ -69,7 +69,7 @@ function AppView({
           </TabPanel>
           
           <TabPanel>
-            <AnnotatedCode astQuerier={querier.astQueriers.instrumented}
+            <AnnotatedCode astQuerier={evalResult.instrumentedASTQuerier}
                            highlightedNodeId={highlightedNodeId}
                            onHoveredNodeChange={onHoveredNodeChange}
                            onNodeSelectedToggle={onNodeSelectedToggle}
@@ -86,7 +86,7 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            <ASTNav astQuerier={querier.astq}
+            <ASTNav astQuerier={evalResult.traceQuerier.astq}
                     highlightedNodeId={highlightedNodeId}
                     onHoveredNodeChange={onHoveredNodeChange}
                     onNodeSelectedToggle={onNodeSelectedToggle}
@@ -94,7 +94,7 @@ function AppView({
           </TabPanel>
             
           <TabPanel>
-            <ASTNav astQuerier={querier.astQueriers.instrumented}
+            <ASTNav astQuerier={evalResult.instrumentedASTQuerier}
                       highlightedNodeId={highlightedNodeId}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
@@ -106,7 +106,7 @@ function AppView({
                       onTraceQueryChange={onTraceQueryChange}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
-                      querier={querier}
+                      querier={evalResult.traceQuerier}
                       query={traceQuery} />
       <TrevTable trevs={trevs}
                  highlightedTrevId={highlightedTrevId}

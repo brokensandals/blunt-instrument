@@ -16,18 +16,19 @@ export function instrumentedEval(source, { saveInstrumented = false } = {}) {
   const evalResult = (0, eval)(wrapped);
   const { ast, trace } = evalResult;
 
+  const result = {};
+
   attachCodeSlicesToAST(ast, source);
-  const astQueriers = {
-    input: new ASTQuerier(ast),
-  };
+  const astQuerier = new ASTQuerier(ast);
+  result.traceQuerier = new TraceQuerier(astQuerier, trace);
 
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);
     copyNodeIdsBetweenASTs(babelResult.ast, parsed);
     addNodeIdsToAST(parsed, 'instr-');
     attachCodeSlicesToAST(parsed, code);
-    astQueriers.instrumented = new ASTQuerier(parsed);
+    result.instrumentedASTQuerier = new ASTQuerier(parsed);
   }
 
-  return new TraceQuerier(astQueriers, trace);
+  return result;
 }

@@ -31,12 +31,12 @@ class AppContainer extends React.Component {
   }
 
   handleTraceQueryChange(traceQuery) {
-    this.setState(this.doQuery(this.state.querier, traceQuery));
+    this.setState(this.doQuery(this.state.evalResult.traceQuerier, traceQuery));
   }
 
   handleHoveredTrevChange(id) {
     // TODO use an abstraction for looking up trevs by id?
-    this.handleHoveredNodeChange(id == null ? null : this.state.querier.trace[id].nodeId);
+    this.handleHoveredNodeChange(id == null ? null : this.state.evalResult.traceQuerier.trace[id].nodeId);
     this.setState({ highlightedTrevId: id });
   }
 
@@ -53,9 +53,9 @@ class AppContainer extends React.Component {
   }
 
   doRun(source, traceQuery) {
-    let querier;
+    let evalResult;
     try {
-      querier = instrumentedEval(source, { saveInstrumented: true });
+      evalResult = instrumentedEval(source, { saveInstrumented: true });
     } catch (error) {
       console.log(error)
       return { runError: error };
@@ -63,15 +63,15 @@ class AppContainer extends React.Component {
   
 
     return {
+      evalResult,
       runError: null,
-      querier,
       sourceDraft: source,
-      ...this.doQuery(querier, traceQuery),
+      ...this.doQuery(evalResult.traceQuerier, traceQuery),
     };
   }
 
-  doQuery(querier, traceQuery) {
-    const trevs = querier.query(traceQuery);
+  doQuery(traceQuerier, traceQuery) {
+    const trevs = traceQuerier.query(traceQuery);
     return {
       trevs,
       traceQuery,
@@ -88,7 +88,8 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <AppView trevs={this.state.trevs}
+      <AppView evalResult={this.state.evalResult}
+               trevs={this.state.trevs}
                traceQuery={this.state.traceQuery}
                sourceDraft={this.state.sourceDraft}
                highlightedTrevId={this.state.highlightedTrevId}
@@ -99,7 +100,6 @@ class AppContainer extends React.Component {
                onNodeSelectedToggle={this.handleNodeSelectedToggle}
                onRun={this.handleRun}
                onSourceDraftChange={this.handleSourceDraftChange}
-               querier={this.state.querier}
                runError={this.state.runError} />
     )
   }
