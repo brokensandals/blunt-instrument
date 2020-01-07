@@ -10,7 +10,7 @@ function NodeFilter({
   onNodeSelectedToggle,
   querier,
 }) {
-  const node = querier.astq.getNodeById(nodeId);
+  const node = querier.astQuerier.getNodeById(nodeId);
   if (!node) {
     console.log('No node for nodeId: ' + nodeId);
   }

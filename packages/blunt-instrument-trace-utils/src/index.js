@@ -6,11 +6,11 @@ import * as types from '@babel/types';
 export class TraceQuerier {
   /**
    * 
-   * @param {ASTQuerier} astq - an ASTQuerier for the AST of the original code that blunt-instrument instrumented
+   * @param {ASTQuerier} astQuerier - an ASTQuerier for the AST of the original code that blunt-instrument instrumented
    * @param {[object]} trace - the trace produced by blunt-instrument
    */
-  constructor(astq, trace) {
-    this.astq = astq;
+  constructor(astQuerier, trace) {
+    this.astQuerier = astQuerier;
     this.trace = trace;
   }
 
@@ -22,7 +22,7 @@ export class TraceQuerier {
 
     eachTrev:
     for (const trev of this.trace) {
-      const node = this.astq.getNodeById(trev.nodeId);
+      const node = this.astQuerier.getNodeById(trev.nodeId);
       if (!node) {
         throw new Error('Cannot find node for ID: ' + trev.nodeId);
       }
