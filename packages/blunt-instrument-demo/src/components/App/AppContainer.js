@@ -8,7 +8,7 @@ class AppContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      eventQuery: {
+      traceQuery: {
         filters: {
           excludeNodeTypes: {
             Identifier: true,
@@ -17,27 +17,27 @@ class AppContainer extends React.Component {
           onlyNodeIds: {},
         }
       },
-      highlightedEventId: null,
+      highlightedTrevId: null,
       highlightedNodeId: null,
     };
-    Object.assign(this.state, this.doRun(examples.factorial, this.state.eventQuery));
+    Object.assign(this.state, this.doRun(examples.factorial, this.state.traceQuery));
 
-    this.handleEventQueryChange = this.handleEventQueryChange.bind(this);
-    this.handleHoveredEventChange = this.handleHoveredEventChange.bind(this);
+    this.handleTraceQueryChange = this.handleTraceQueryChange.bind(this);
+    this.handleHoveredTrevChange = this.handleHoveredTrevChange.bind(this);
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
     this.handleNodeSelectedToggle = this.handleNodeSelectedToggle.bind(this);
     this.handleRun = this.handleRun.bind(this);
     this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
   }
 
-  handleEventQueryChange(eventQuery) {
-    this.setState(this.doQuery(this.state.querier, eventQuery));
+  handleTraceQueryChange(traceQuery) {
+    this.setState(this.doQuery(this.state.querier, traceQuery));
   }
 
-  handleHoveredEventChange(id) {
-    // TODO use an abstraction for looking up events by id?
-    this.handleHoveredNodeChange(id == null ? null : this.state.querier.events[id].nodeId);
-    this.setState({ highlightedEventId: id });
+  handleHoveredTrevChange(id) {
+    // TODO use an abstraction for looking up trevs by id?
+    this.handleHoveredNodeChange(id == null ? null : this.state.querier.trace[id].nodeId);
+    this.setState({ highlightedTrevId: id });
   }
 
   handleHoveredNodeChange(nodeId) {
@@ -45,14 +45,14 @@ class AppContainer extends React.Component {
   }
 
   handleNodeSelectedToggle(nodeId) {
-    this.handleEventQueryChange(
-      update(this.state.eventQuery, {
+    this.handleTraceQueryChange(
+      update(this.state.traceQuery, {
         filters: { onlyNodeIds:
           { $toggle: [nodeId] }}
       }));
   }
 
-  doRun(source, eventQuery) {
+  doRun(source, traceQuery) {
     let querier;
     try {
       querier = instrumentedEval(source, { saveInstrumented: true });
@@ -66,20 +66,20 @@ class AppContainer extends React.Component {
       runError: null,
       querier,
       sourceDraft: source,
-      ...this.doQuery(querier, eventQuery),
+      ...this.doQuery(querier, traceQuery),
     };
   }
 
-  doQuery(querier, eventQuery) {
-    const events = querier.query(eventQuery);
+  doQuery(querier, traceQuery) {
+    const trevs = querier.query(traceQuery);
     return {
-      events,
-      eventQuery,
+      trevs,
+      traceQuery,
     };
   }
 
   handleRun(source) {
-    this.setState(this.doRun(source, this.state.eventQuery));
+    this.setState(this.doRun(source, this.state.traceQuery));
   }
 
   handleSourceDraftChange(sourceDraft) {
@@ -88,13 +88,13 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <AppView events={this.state.events}
-               eventQuery={this.state.eventQuery}
+      <AppView trevs={this.state.trevs}
+               traceQuery={this.state.traceQuery}
                sourceDraft={this.state.sourceDraft}
-               highlightedEventId={this.state.highlightedEventId}
+               highlightedTrevId={this.state.highlightedTrevId}
                highlightedNodeId={this.state.highlightedNodeId}
-               onEventQueryChange={this.handleEventQueryChange}
-               onHoveredEventChange={this.handleHoveredEventChange}
+               onTraceQueryChange={this.handleTraceQueryChange}
+               onHoveredTrevChange={this.handleHoveredTrevChange}
                onHoveredNodeChange={this.handleHoveredNodeChange}
                onNodeSelectedToggle={this.handleNodeSelectedToggle}
                onRun={this.handleRun}

@@ -15,7 +15,7 @@ export function instrumentedEval(source, { saveInstrumented = false } = {}) {
   const { code } = babelResult;
   const wrapped = '(function(){var ' + assignTo + ';' + code + '; return ' + assignTo + ';})()';
   const evalResult = (0, eval)(wrapped);
-  const { ast, events } = evalResult;
+  const { ast, trace } = evalResult;
 
   attachCodeSlicesToAST(ast, source);
   const astQueriers = {
@@ -30,5 +30,5 @@ export function instrumentedEval(source, { saveInstrumented = false } = {}) {
     astQueriers.instrumented = new ASTQuerier(parsed);
   }
 
-  return new TraceQuerier(astQueriers, events);
+  return new TraceQuerier(astQueriers, trace);
 }

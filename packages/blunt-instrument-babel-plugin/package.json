@@ -15,7 +15,8 @@
   },
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:updateSnapshot": "jest --updateSnapshot"
   },
   "repository": {
     "type": "git",

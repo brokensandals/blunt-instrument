@@ -2,19 +2,19 @@ import React from 'react';
 import './App.css';
 import AnnotatedCode from '../AnnotatedCode';
 import ASTNav from '../ASTNav';
-import EventTable from '../EventTable';
-import EventQueryForm from '../EventQueryForm';
+import TrevTable from '../TrevTable';
+import TraceQueryForm from '../TraceQueryForm';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { examples } from 'blunt-instrument-test-resources';
 
 function AppView({
-  eventQuery,
-  events,
-  highlightedEventId,
+  traceQuery,
+  trevs,
+  highlightedTrevId,
   highlightedNodeId,
-  onEventQueryChange,
-  onHoveredEventChange,
+  onTraceQueryChange,
+  onHoveredTrevChange,
   onHoveredNodeChange,
   onNodeSelectedToggle,
   onRun,
@@ -31,8 +31,8 @@ function AppView({
   }
 
   const selectedNodeIds =
-    Object.keys(eventQuery.filters.onlyNodeIds).filter(
-      key => eventQuery.filters.onlyNodeIds[key]);
+    Object.keys(traceQuery.filters.onlyNodeIds).filter(
+      key => traceQuery.filters.onlyNodeIds[key]);
 
   const handleSourceDraftChange =
     (event) => onSourceDraftChange(event.target.value);
@@ -102,17 +102,17 @@ function AppView({
           </TabPanel>
         </Tabs>
       </div>
-      <EventQueryForm highlightedNodeId={highlightedNodeId}
-                      onEventQueryChange={onEventQueryChange}
+      <TraceQueryForm highlightedNodeId={highlightedNodeId}
+                      onTraceQueryChange={onTraceQueryChange}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
                       querier={querier}
-                      query={eventQuery} />
-      <EventTable events={events}
-                  highlightedEventId={highlightedEventId}
-                  highlightedNodeId={highlightedNodeId}
-                  onHoveredEventChange={onHoveredEventChange}
-                  onNodeSelectedToggle={onNodeSelectedToggle} />
+                      query={traceQuery} />
+      <TrevTable trevs={trevs}
+                 highlightedTrevId={highlightedTrevId}
+                 highlightedNodeId={highlightedNodeId}
+                 onHoveredTrevChange={onHoveredTrevChange}
+                 onNodeSelectedToggle={onNodeSelectedToggle} />
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>

@@ -1,4 +1,4 @@
-.EventQueryForm .node {
+.TraceQueryForm .node {
   background-color: lightgray;
   padding: 3px 6px;
   border-radius: 5px;
@@ -11,43 +11,43 @@
   text-overflow: ellipsis;
 }
 
-.EventQueryForm .node.highlighted {
+.TraceQueryForm .node.highlighted {
   background-color: orange;
 }
 
-.EventQueryForm .node .id::before {
+.TraceQueryForm .node .id::before {
   content: '#'
 }
 
-.EventQueryForm .node .id {
+.TraceQueryForm .node .id {
   font-size: 50%;
   margin-right: 2px;
 }
 
-.EventQueryForm .node .summary {
+.TraceQueryForm .node .summary {
   padding-left: 2px;
   border-left: 1px solid black;
 }
 
-.EventQueryForm .node-filters {
+.TraceQueryForm .node-filters {
   display: block;
   height: 1em;
   white-space: nowrap;
   margin: 5px 10px;
 }
 
-.EventQueryForm .node-filters ul {
+.TraceQueryForm .node-filters ul {
   list-style-type: none;
   margin: 0 0 0 5px;
   padding: 0;
   display: inline;
 }
 
-.EventQueryForm .node-filters li {
+.TraceQueryForm .node-filters li {
   display: inline;
 }
 
-.EventQueryForm .node-type-filters ul {
+.TraceQueryForm .node-type-filters ul {
   list-style-type: none;
   margin: 10px 5px;
   padding: 0;

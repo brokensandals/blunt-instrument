@@ -1,5 +1,5 @@
 import React from 'react';
-import './EventTable.css';
+import './TrevTable.css';
 import { getCodeSlice, getNodeId } from 'blunt-instrument-ast-utils';
 
 function ValueDisplay({ value }) {
@@ -43,46 +43,46 @@ function ValueDisplay({ value }) {
   }
 }
 
-function EventTableView({
-  events,
-  highlightedEventId,
+function TrevTableView({
+  trevs,
+  highlightedTrevId,
   highlightedNodeId,
-  onHoveredEventChange = (eventId) => {},
+  onHoveredTrevChange = (trevId) => {},
   onNodeSelectedToggle = (nodeId) => {},
 }) {
   const entries = [];
 
-  for (const event of events) {
-    const handleMouseOver = onHoveredEventChange ? (ev) => {
-      onHoveredEventChange(event.id);
+  for (const trev of trevs) {
+    const handleMouseOver = onHoveredTrevChange ? (ev) => {
+      onHoveredTrevChange(trev.id);
     } : null;
 
     const className = [
-      highlightedEventId != null && event.id === highlightedEventId ? 'highlighted-event' : null,
-      highlightedNodeId != null && getNodeId(event.node) === highlightedNodeId ? 'highlighted-node' : null,
+      highlightedTrevId != null && trev.id === highlightedTrevId ? 'highlighted-trev' : null,
+      highlightedNodeId != null && getNodeId(trev.node) === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
-    const handleCodeClick = () => onNodeSelectedToggle(getNodeId(event.node));
-    const handleLogValueClick = () => console.log(event.value);
+    const handleCodeClick = () => onNodeSelectedToggle(getNodeId(trev.node));
+    const handleLogValueClick = () => console.log(trev.value);
 
     entries.push(
-      <tr key={event.id} onMouseOver={handleMouseOver} className={className}>
-        <td className="id">{event.id}</td>
+      <tr key={trev.id} onMouseOver={handleMouseOver} className={className}>
+        <td className="id">{trev.id}</td>
         <td className="node" onClick={handleCodeClick}>
-          <code>{getCodeSlice(event.node)}</code>
+          <code>{getCodeSlice(trev.node)}</code>
         </td>
         <td className="value">
-          <ValueDisplay value={event.value} />
+          <ValueDisplay value={trev.value} />
           <button className="console-log" onClick={handleLogValueClick}>log</button>
         </td>
       </tr>
     );
   }
 
-  const clearHover = onHoveredEventChange ? () => onHoveredEventChange(null) : null;
+  const clearHover = onHoveredTrevChange ? () => onHoveredTrevChange(null) : null;
 
   return (
-    <div className="EventTable">
+    <div className="TrevTable">
       <table onMouseLeave={clearHover}>
         <thead>
           <tr>
@@ -99,4 +99,4 @@ function EventTableView({
   );
 }
 
-export default EventTableView;
+export default TrevTableView;

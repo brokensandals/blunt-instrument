@@ -54,15 +54,15 @@ function biEval(code) {
   return { astq, code, instrumented, ...result };
 }
 
-function eventsForNode({ instrumentation: { events } }, node) {
-  return events.filter((event) => event.nodeId === getNodeId(node));
+function trevsForNode({ instrumentation: { trace } }, node) {
+  return trace.filter((trev) => trev.nodeId === getNodeId(node));
 }
 
 function exprValues(output, target) {
   const nodes = output.astq.getNodesByCodeSlice(target);
-  const events = nodes.flatMap(node => eventsForNode(output, node));
-  const exprEvents = events.filter((event) => event.type === 'expr');
-  return exprEvents.map(event => event.value);
+  const trevs = nodes.flatMap(node => trevsForNode(output, node));
+  const exprTrevs = trevs.filter((trev) => trev.type === 'expr');
+  return exprTrevs.map(trev => trev.value);
 }
 
 function exprValue(output, target) {
@@ -84,7 +84,7 @@ describe('instrumentation object output', () => {
       `;
       const result = codeEval(wrapped);
       expect(result).toHaveProperty('ast');
-      expect(result).toHaveProperty('events');
+      expect(result).toHaveProperty('trace');
     });
 
     it('assigns to an object member', () => {
@@ -99,7 +99,7 @@ describe('instrumentation object output', () => {
       `;
       const result = codeEval(wrapped);
       expect(result).toHaveProperty('ast');
-      expect(result).toHaveProperty('events');
+      expect(result).toHaveProperty('trace');
     });
   });
 
@@ -116,7 +116,7 @@ describe('instrumentation object output', () => {
       const exported = codeEval(wrapped);
       expect(exported.__esModule).toBe(true);
       expect(exported.result).toHaveProperty('ast');
-      expect(exported.result).toHaveProperty('events');
+      expect(exported.result).toHaveProperty('trace');
     });
   });
 });
@@ -221,7 +221,7 @@ describe('demo examples', () => {
     test(key, () => {
       const output = biEval(examples[key]);
       expect(output.instrumented).toMatchSnapshot();
-      expect(output.instrumentation.events).toMatchSnapshot();
+      expect(output.instrumentation.trace).toMatchSnapshot();
     });
   }
 });

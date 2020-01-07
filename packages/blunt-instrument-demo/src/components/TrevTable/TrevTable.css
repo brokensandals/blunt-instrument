@@ -1,67 +1,67 @@
-.EventTable table {
+.TrevTable table {
   width: 100%;
 }
 
-.EventTable td, .EventTable th {
+.TrevTable td, .TrevTable th {
   text-align: left;
   padding-left: 10px;
   border: 1px solid transparent;
   vertical-align: top;
 }
 
-.EventTable tbody tr:nth-child(odd):not(.highlighted-node, .highlighted-event) {
+.TrevTable tbody tr:nth-child(odd):not(.highlighted-node, .highlighted-trev) {
   background-color: rgb(238, 238, 238);
 }
 
-.EventTable .primitive {
+.TrevTable .primitive {
   color: slateblue;
 }
 
-.EventTable .highlighted-node {
+.TrevTable .highlighted-node {
   background-color: orange;
 }
 
-.EventTable .highlighted-event {
+.TrevTable .highlighted-trev {
   background-color: yellow;
 }
 
-.EventTable tbody .node {
+.TrevTable tbody .node {
   cursor: default;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.EventTable tbody .node:hover {
+.TrevTable tbody .node:hover {
   border: 1px solid orange;
 }
 
-.EventTable tbody .value {
+.TrevTable tbody .value {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.EventTable .id {
+.TrevTable .id {
   width: 4ex;
 }
 
-.EventTable .node {
+.TrevTable .node {
   width: 25ex;
   max-width: 25ex;
 }
 
-.EventTable .value {
+.TrevTable .value {
   width: 25ex;
   max-width: 25ex;
 }
 
-.EventTable .function {
+.TrevTable .function {
   color: green;
   font-size: 80%;
 }
 
-.EventTable tr .console-log {
+.TrevTable tr .console-log {
   float: right;
   display: none;
   margin: 0;
@@ -69,6 +69,6 @@
   padding: 0 5px;
 }
 
-.EventTable tr:hover .console-log {
+.TrevTable tr:hover .console-log {
   display: inline;
 }

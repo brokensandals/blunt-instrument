@@ -5,9 +5,9 @@
   grid-template-columns: 50% 50%;
   grid-template-areas:
     "source-form source-form"
-    "event-query-form code-tabs"
-    "event-table code-tabs"
-    "event-table ast-tabs"
+    "trace-query-form code-tabs"
+    "trev-table code-tabs"
+    "trev-table ast-tabs"
     "blurb blurb"
 }
 
@@ -81,14 +81,14 @@
   display: none;
 }
 
-.EventQueryForm {
-  grid-area: event-query-form;
+.TraceQueryForm {
+  grid-area: trace-query-form;
   overflow: auto;
   font-size: small;
 }
 
-.EventTable {
-  grid-area: event-table;
+.TrevTable {
+  grid-area: trev-table;
   overflow: scroll;
   font-size: small;
 }

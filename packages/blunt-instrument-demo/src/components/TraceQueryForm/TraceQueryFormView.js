@@ -1,5 +1,5 @@
 import React from 'react';
-import './EventQueryForm.css';
+import './TraceQueryForm.css';
 import { getCodeSlice } from 'blunt-instrument-ast-utils';
 import update from 'immutability-helper';
 
@@ -53,9 +53,9 @@ function NodeFilter({
   );
 }
 
-export function EventQueryFormView({
+export function TraceQueryFormView({
   highlightedNodeId,
-  onEventQueryChange = (query) => {},
+  onTraceQueryChange = (query) => {},
   onHoveredNodeChange = (nodeId) => {},
   onNodeSelectedToggle = (nodeId) => {},
   querier,
@@ -80,7 +80,7 @@ export function EventQueryFormView({
 
   const nodeTypeFilters = [];
   for (const type of Object.keys(query.filters.excludeNodeTypes || {})) {
-    const handleChange = (event) => onEventQueryChange(
+    const handleChange = (event) => onTraceQueryChange(
       update(query, { filters: { excludeNodeTypes: { $toggle: [type] }}}));
     
       nodeTypeFilters.push(
@@ -96,7 +96,7 @@ export function EventQueryFormView({
   }
 
   return (
-    <form className="EventQueryForm">
+    <form className="TraceQueryForm">
       <div className="node-filters">
         {nodeFilters.length > 0 ? 'Only showing values for:' : ''}
         <ul>{nodeFilters}</ul>
@@ -109,4 +109,4 @@ export function EventQueryFormView({
   );
 }
 
-export default EventQueryFormView;
+export default TraceQueryFormView;

@@ -23,14 +23,14 @@ transcriberTemplates.simple = template(`
 const buildInstrumentationInit = template(`
   const %%instrumentationId%% = {
     ast: JSON.parse(%%astString%%),
-    events: []
+    trace: []
   };
 `);
 
 const buildTraceExprFnInit = template(`
   %%instrumentationId%%.traceExpr = (nodeId, value) => {
-    %%instrumentationId%%.events.push({
-      id: %%instrumentationId%%.events.length,
+    %%instrumentationId%%.trace.push({
+      id: %%instrumentationId%%.trace.length,
       nodeId,
       type: 'expr',
       value: %%instrumentationId%%.transcribeValue(value),
@@ -148,7 +148,7 @@ const instrumentVisitor = {
       // once for the AST node corresponding to 'x' and once for the node corresponding
       // to 'x++'. This seems correct (though tracing the node for 'x' at all may be
       // superfluous) since the original value is the actual value returned by the
-      // expression. However, it might be desirable to add a third trace event of
+      // expression. However, it might be desirable to add a third trace entry of
       // a different type to trace the fact that 'x' is being updated to a new value.
       const lval = path.node.argument;
       const tempId = path.scope.generateUidIdentifier('postfix');
