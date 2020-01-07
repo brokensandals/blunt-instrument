@@ -1,5 +1,4 @@
 import * as babel from '@babel/core';
-import * as types from '@babel/types';
 import { bluntInstrumentPlugin } from '.';
 import { examples } from 'blunt-instrument-test-resources';
 import { getNodeId, attachCodeSlicesToAST, ASTQuerier } from 'blunt-instrument-ast-utils';
