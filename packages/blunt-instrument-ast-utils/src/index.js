@@ -50,7 +50,7 @@ export function copyNodeId(from, to) {
  * @param {Node} to
  * @throws error if the two trees do not have the same number and types of nodes
  */
-export function copyNodeIds(from, to) {
+export function copyNodeIdsBetweenASTs(from, to) {
   const fromNodes = [];
   const toNodes = [];
   types.traverseFast(from, node => fromNodes.push(node));
@@ -74,7 +74,7 @@ export function copyNodeIds(from, to) {
  * @param {Node} ast - the parent which will be annotated along with its descendants
  * @param {string} prefix - a string to be prepended to all sequential identifiers generated
  */
-export function annotateWithNodeIds(ast, prefix) {
+export function addNodeIdsToAST(ast, prefix) {
   let nextId = 1;
   types.traverseFast(ast, (node) => {
     if (!getNodeId(node)) {
@@ -92,7 +92,7 @@ export function annotateWithNodeIds(ast, prefix) {
  * @param {Node} ast - the parent which will be annotated along with its descendants
  * @param {string} code - full source code corresponding to the AST
  */
-export function annotateWithCode(ast, code) {
+export function attachCodeToAST(ast, code) {
   types.traverseFast(ast, (node) => {
     if (Number.isInteger(node.start) && Number.isInteger(node.end)) {
       if (node.start < 0 || node.end > code.length) {

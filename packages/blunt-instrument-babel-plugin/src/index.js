@@ -1,6 +1,6 @@
 import template from '@babel/template';
 import * as types from '@babel/types';
-import { annotateWithNodeIds, copyNodeId, setNodeId } from 'blunt-instrument-ast-utils';
+import { addNodeIdsToAST, copyNodeId, setNodeId } from 'blunt-instrument-ast-utils';
 
 const transcriberTemplates = {};
 transcriberTemplates.none = template(`
@@ -200,7 +200,7 @@ const instrumentVisitor = {
 
 const rootVisitor = {
   Program(path, misc) {
-    annotateWithNodeIds(path.node, 'src-');
+    addNodeIdsToAST(path.node, 'src-');
     const state = addInstrumenterInit(path, misc.opts);
     path.traverse(instrumentVisitor, { state });
   }
