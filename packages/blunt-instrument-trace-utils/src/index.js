@@ -1,5 +1,21 @@
 import * as types from '@babel/types';
 
+function toFilterObject(filter) {
+  if (filter === null || filter === undefined) {
+    return {};
+  } else if (Array.isArray(filter)) {
+    const result = {};
+    for (const item of filter) {
+      result[item] = true;
+    }
+    return result;
+  } else if (typeof filter === 'object') {
+    return filter;
+  } else {
+    return {[filter]: true};
+  }
+}
+
 /**
  * Assists in querying for trace events ("trevs") in a trace produced by blunt-instrument.
  */
@@ -49,6 +65,14 @@ export class TraceQuerier {
    * type: string - the type of trev, currently only "expr"
    * value: * - for expr trevs, the result of the expression evaluation, as recorded by the configured transcriber
    * 
+   * All filters of type `object` support three different syntaxes. The following are equivalent:
+   * { filters: { onlyNodeIds: { node1: true, node2: true } } }
+   * { filters: { onlyNodeIds: ['node1', 'node2' ] } }
+   * If you only need to supply one value for the filter, this works too:
+   * { filters: { onlyNodeIds: 'node1' }}
+   * 
+   * When using the first syntax, any properties where the value is `false` are disregarded.
+   * 
    * @param {object} criteria
    * @param {object} criteria.filters
    * @param {object} criteria.filters.onlyNodeIds -
@@ -68,6 +92,8 @@ export class TraceQuerier {
       } = {}
     } = {}) {
     const results = [];
+    onlyNodeIds = toFilterObject(onlyNodeIds);
+    excludeNodeTypes = toFilterObject(excludeNodeTypes);
 
     const onlySpecificNodes = onlyNodeIds &&
       Object.values(onlyNodeIds).some(Boolean);

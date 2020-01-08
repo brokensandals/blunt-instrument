@@ -97,6 +97,16 @@ describe('TraceQuerier', () => {
           } } });
           expect(result.map(trev => trev.id)).toEqual([2, 3, 5]);
         });
+
+        it('supports array syntax', () => {
+          const result = traceQuerier.query({ filters: { onlyNodeIds: [trevs[1].nodeId, trevs[4].nodeId] } });
+          expect(result.map(trev => trev.id)).toEqual([2, 3, 5]);
+        });
+
+        it('supports string syntax', () => {
+          const result = traceQuerier.query({ filters: { onlyNodeIds: trevs[1].nodeId }});
+          expect(result.map(trev => trev.id)).toEqual([2, 3]);
+        });
       });
 
       describe('excludeNodeTypes', () => {
@@ -112,6 +122,16 @@ describe('TraceQuerier', () => {
             CallExpression: true,
           }}});
           expect(result2.map(trev => trev.id)).toEqual([1, 2, 3]);
+        });
+
+        it('supports array syntax', () => {
+          const result = traceQuerier.query({ filters: { excludeNodeTypes: ['BinaryExpression'] }});
+          expect(result.map(trev => trev.id)).toEqual([1, 4, 5]);
+        });
+
+        it('supports string syntax', () => {
+          const result = traceQuerier.query({ filters: { excludeNodeTypes: 'BinaryExpression' }});
+          expect(result.map(trev => trev.id)).toEqual([1, 4, 5]);
         });
       });
     });
