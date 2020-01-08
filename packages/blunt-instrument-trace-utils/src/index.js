@@ -10,7 +10,34 @@ export class TraceQuerier {
    */
   constructor(astQuerier, trace) {
     this.astQuerier = astQuerier;
-    this.trace = trace;
+
+    const trevs = [];
+    for (let i = 0; i < trace.length; i++) {
+      if (trace[i].id !== i + 1) {
+        throw new Error(`Non-sequential trev ID ${trace[i].id}`);
+      }
+      
+      const node = astQuerier.getNodeById(trace[i].nodeId);
+      if (!node) {
+        throw new Error(`Trev ID ${trace[i].id} has unknown node ID ${trace[i].nodeId}`);
+      }
+
+      trevs.push({ node, ...trace[i] });
+    }
+    this.trevs = trevs;
+  }
+
+  /**
+   * Look up a trev (trace event) by its ID.
+   * @param {number} id
+   * @return {object} the trev
+   */
+  getTrevById(id) {
+    if (id < 1 || id > this.trevs.length) {
+      return undefined;
+    }
+
+    return this.trevs[id - 1];
   }
 
   /**
@@ -46,14 +73,9 @@ export class TraceQuerier {
       Object.values(onlyNodeIds).some(Boolean);
 
     eachTrev:
-    for (const trev of this.trace) {
-      const node = this.astQuerier.getNodeById(trev.nodeId);
-      if (!node) {
-        throw new Error('Cannot find node for ID: ' + trev.nodeId);
-      }
-
+    for (const trev of this.trevs) {
       for (const type of Object.keys(excludeNodeTypes)) {
-        if (excludeNodeTypes[type] && types.is(type, node)) {
+        if (excludeNodeTypes[type] && types.is(type, trev.node)) {
           continue eachTrev;
         }
       }
@@ -64,12 +86,7 @@ export class TraceQuerier {
         }
       }
 
-      results.push({
-        id: trev.id,
-        node: node,
-        type: trev.type,
-        value: trev.value,
-      });
+      results.push(trev);
     }
 
     return results;

@@ -35,8 +35,7 @@ class AppContainer extends React.Component {
   }
 
   handleHoveredTrevChange(id) {
-    // TODO use an abstraction for looking up trevs by id?
-    this.handleHoveredNodeChange(id == null ? null : this.state.evalResult.traceQuerier.trace[id].nodeId);
+    this.handleHoveredNodeChange(id == null ? null : this.state.evalResult.traceQuerier.getTrevById(id).nodeId);
     this.setState({ highlightedTrevId: id });
   }
 

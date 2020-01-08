@@ -30,7 +30,7 @@ const buildInstrumentationInit = template(`
 const buildTraceExprFnInit = template(`
   %%instrumentationId%%.traceExpr = (nodeId, value) => {
     %%instrumentationId%%.trace.push({
-      id: %%instrumentationId%%.trace.length,
+      id: %%instrumentationId%%.trace.length + 1,
       nodeId,
       type: 'expr',
       value: %%instrumentationId%%.transcribeValue(value),
