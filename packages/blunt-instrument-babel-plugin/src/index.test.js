@@ -172,6 +172,16 @@ describe('special case syntax handling', () => {
     });
   });
 
+  test('`arguments` is bound correctly', () => {
+    const output = biEval(`
+      function foo() {
+        return arguments.length * (arguments[0] + arguments[1]);
+      }
+      output.result = foo(4, 5, 10, 12);
+    `);
+    expect(output.result).toEqual(36);
+  });
+
   test('assign to MemberExpression', () => {
     const output = biEval('const a = [null]; a[0] = 1; output.a0 = a[0];');
     expect(output.a0).toEqual(1);
@@ -191,6 +201,18 @@ describe('special case syntax handling', () => {
       expect(output.a).toEqual(2);
       expect(output.x).toEqual(2);
       expect(exprValue(output, '++x')).toEqual(2);
+    });
+
+    test('postifx operator rewrite binds `arguments` correctly', () => {
+      const output = biEval(`
+        function foo() {
+          output.original = arguments[0]++;
+          return arguments[0];
+        }
+        output.result = foo(3);
+      `);
+      expect(output.result).toEqual(4);
+      expect(output.original).toEqual(3);
     });
 
     test('postfix -- operator', () => {
