@@ -24,5 +24,7 @@ console.log(trevs.map(trev => trev.data));
 
 For more information on doing queries, see [blunt-instrument-trace-utils][trace-utils] and [blunt-instrument-ast-utils][ast-utils].
 
+Note: code is evaluated in strict mode.
+
 [trace-utils]: ../blunt-instrument-trace-utils/README.md
 [ast-utils]: ../blunt-instrument-ast-utils/README.md

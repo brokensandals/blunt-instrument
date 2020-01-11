@@ -42,12 +42,30 @@ When you run the instrumented code, it will create an **instrumentation object**
   trace: [
     // Everything recorded by the tracer during execution of the code.
     // Each element is a trace event aka "trev" object.
-    // There will be a trev of type "expr" for each time an expression was evaluated.
     {
       id: 1,
-      nodeId: '1', // the corresponding node in `ast` will contain a field `extra.biNodeId` that matches this
-      type: 'expr',
+      type: 'expr', // these trevs record the result of evaluating some expression
+      nodeId: 'src-5', // the corresponding node in `ast` will contain a field `extra.biNodeId` that matches this;
+                       // that is the Expression node corresponding to the expression that was evaluated
       data: 'foo', // the value/object the expression evaluated to
+    },
+    {
+      id: 2,
+      type: 'enter-fn', // these trevs record the beginning of a function's execution
+      nodeId: 'src-2', // the Function node that is being entered
+      data: { // the values of `this`, `arguments`, and all named parameters, at the beginning of the function's execution
+        this: { /* ... */ },
+        arguments: { 0: 'bar'},
+        myParam: 'bar'
+      },
+    },
+    {
+      id: 3,
+      type: 'exit-fn', // these trevs record the end of a function's execution
+                       // they can be triggered by a return statement or after the last statement in a function executes
+      nodeId: 'src-4', // the corresponding ReturnStatement node; or, if the end of the function was reached without a return
+                       // statement being executed, the corresponding Function node
+      data: 'foo', // the return value, or undefined
     },
     // ...
   ],
