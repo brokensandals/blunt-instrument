@@ -27,12 +27,12 @@ const buildInstrumentationInit = template(`
   };
 `);
 
-const buildTraceExprFnInit = template(`
-  %%instrumentationId%%.traceExpr = (nodeId, value) => {
+const buildRecordTrevInit = template(`
+  %%instrumentationId%%.recordTrev = (type, nodeId, value) => {
     %%instrumentationId%%.trace.push({
       id: %%instrumentationId%%.trace.length + 1,
       nodeId,
-      type: 'expr',
+      type,
       value: %%instrumentationId%%.transcribeValue(value),
     });
     return value;
@@ -77,7 +77,7 @@ function addInstrumenterInit(path,
   const instrumentationInit = buildInstrumentationInit({
     astString: types.stringLiteral(JSON.stringify(path.node)), // TODO insert object directly instead of via json
     ...ids })
-  const traceExprFnInit = buildTraceExprFnInit(ids);
+  const recordTrevInit = buildRecordTrevInit(ids);
   const transcribeValueFnInit = transcriberTemplates[valueTranscriber](ids);
 
   const outputDecls = [];
@@ -90,7 +90,7 @@ function addInstrumenterInit(path,
 
   path.node.body.unshift(
     instrumentationInit,
-    traceExprFnInit,
+    recordTrevInit,
     transcribeValueFnInit,
     ...outputDecls,
   );
@@ -99,12 +99,12 @@ function addInstrumenterInit(path,
 }
 
 const buildExpressionTrace = template(`
-  %%instrumentationId%%.traceExpr(%%nodeId%%, %%expression%%)
+  %%instrumentationId%%.recordTrev('expr', %%nodeId%%, %%expression%%)
 `);
 
 /**
  * Replaces an expression node with a traced equivalent.
- * For example, rewrites `x + 1` to `_instrumentation.traceExpr('NODEID', x + 1)`
+ * For example, rewrites `x + 1` to `_instrumentation.recordTrev('expr', 'NODEID', x + 1)`
  * @param {NodePath} path - path containing expression node 
  * @param {object} state - metadata returned from addInstrumenterInit
  */

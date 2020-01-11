@@ -10,11 +10,11 @@ var _instrumentation = {
   trace: []
 };
 
-_instrumentation.traceExpr = function (nodeId, value) {
+_instrumentation.recordTrev = function (type, nodeId, value) {
   _instrumentation.trace.push({
     id: _instrumentation.trace.length + 1,
     nodeId: nodeId,
-    type: 'expr',
+    type: type,
     value: _instrumentation.transcribeValue(value)
   });
 
@@ -34,10 +34,10 @@ _instrumentation.transcribeValue = function (value) {
 output.instrumentation = _instrumentation;
 
 function fac(n) {
-  return _instrumentation.traceExpr(\\"src-7\\", _instrumentation.traceExpr(\\"src-8\\", _instrumentation.traceExpr(\\"src-9\\", n) == _instrumentation.traceExpr(\\"src-10\\", 1)) ? _instrumentation.traceExpr(\\"src-11\\", 1) : _instrumentation.traceExpr(\\"src-12\\", _instrumentation.traceExpr(\\"src-13\\", n) * _instrumentation.traceExpr(\\"src-14\\", _instrumentation.traceExpr(\\"src-15\\", fac)(_instrumentation.traceExpr(\\"src-16\\", _instrumentation.traceExpr(\\"src-17\\", n) - _instrumentation.traceExpr(\\"src-18\\", 1))))));
+  return _instrumentation.recordTrev('expr', \\"src-7\\", _instrumentation.recordTrev('expr', \\"src-8\\", _instrumentation.recordTrev('expr', \\"src-9\\", n) == _instrumentation.recordTrev('expr', \\"src-10\\", 1)) ? _instrumentation.recordTrev('expr', \\"src-11\\", 1) : _instrumentation.recordTrev('expr', \\"src-12\\", _instrumentation.recordTrev('expr', \\"src-13\\", n) * _instrumentation.recordTrev('expr', \\"src-14\\", _instrumentation.recordTrev('expr', \\"src-15\\", fac)(_instrumentation.recordTrev('expr', \\"src-16\\", _instrumentation.recordTrev('expr', \\"src-17\\", n) - _instrumentation.recordTrev('expr', \\"src-18\\", 1))))));
 }
 
-var result = _instrumentation.traceExpr(\\"src-22\\", _instrumentation.traceExpr(\\"src-23\\", fac)(_instrumentation.traceExpr(\\"src-24\\", 3)));"
+var result = _instrumentation.recordTrev('expr', \\"src-22\\", _instrumentation.recordTrev('expr', \\"src-23\\", fac)(_instrumentation.recordTrev('expr', \\"src-24\\", 3)));"
 `;
 
 exports[`demo examples factorial 2`] = `
@@ -235,11 +235,11 @@ var _instrumentation = {
   trace: []
 };
 
-_instrumentation.traceExpr = function (nodeId, value) {
+_instrumentation.recordTrev = function (type, nodeId, value) {
   _instrumentation.trace.push({
     id: _instrumentation.trace.length + 1,
     nodeId: nodeId,
-    type: 'expr',
+    type: type,
     value: _instrumentation.transcribeValue(value)
   });
 
@@ -259,43 +259,43 @@ _instrumentation.transcribeValue = function (value) {
 output.instrumentation = _instrumentation;
 
 function insertionSort(array) {
-  var shifts = _instrumentation.traceExpr(\\"src-9\\", 0);
+  var shifts = _instrumentation.recordTrev('expr', \\"src-9\\", 0);
 
-  for (var i = _instrumentation.traceExpr(\\"src-14\\", 0); _instrumentation.traceExpr(\\"src-15\\", _instrumentation.traceExpr(\\"src-16\\", i) < _instrumentation.traceExpr(\\"src-17\\", _instrumentation.traceExpr(\\"src-18\\", array).length)); _instrumentation.traceExpr(\\"src-20\\", function () {
-    var _postfix = _instrumentation.traceExpr(\\"src-21\\", i);
+  for (var i = _instrumentation.recordTrev('expr', \\"src-14\\", 0); _instrumentation.recordTrev('expr', \\"src-15\\", _instrumentation.recordTrev('expr', \\"src-16\\", i) < _instrumentation.recordTrev('expr', \\"src-17\\", _instrumentation.recordTrev('expr', \\"src-18\\", array).length)); _instrumentation.recordTrev('expr', \\"src-20\\", function () {
+    var _postfix = _instrumentation.recordTrev('expr', \\"src-21\\", i);
 
     i += 1;
     return _postfix;
   }())) {
-    for (var j = _instrumentation.traceExpr(\\"src-27\\", _instrumentation.traceExpr(\\"src-28\\", i) - _instrumentation.traceExpr(\\"src-29\\", 1)); _instrumentation.traceExpr(\\"src-30\\", _instrumentation.traceExpr(\\"src-31\\", j) >= _instrumentation.traceExpr(\\"src-32\\", 0)); _instrumentation.traceExpr(\\"src-33\\", function () {
-      var _postfix2 = _instrumentation.traceExpr(\\"src-34\\", j);
+    for (var j = _instrumentation.recordTrev('expr', \\"src-27\\", _instrumentation.recordTrev('expr', \\"src-28\\", i) - _instrumentation.recordTrev('expr', \\"src-29\\", 1)); _instrumentation.recordTrev('expr', \\"src-30\\", _instrumentation.recordTrev('expr', \\"src-31\\", j) >= _instrumentation.recordTrev('expr', \\"src-32\\", 0)); _instrumentation.recordTrev('expr', \\"src-33\\", function () {
+      var _postfix2 = _instrumentation.recordTrev('expr', \\"src-34\\", j);
 
       j -= 1;
       return _postfix2;
     }())) {
-      if (_instrumentation.traceExpr(\\"src-37\\", _instrumentation.traceExpr(\\"src-38\\", _instrumentation.traceExpr(\\"src-39\\", array)[_instrumentation.traceExpr(\\"src-40\\", j)]) <= _instrumentation.traceExpr(\\"src-41\\", _instrumentation.traceExpr(\\"src-42\\", array)[_instrumentation.traceExpr(\\"src-43\\", _instrumentation.traceExpr(\\"src-44\\", j) + _instrumentation.traceExpr(\\"src-45\\", 1))]))) {
+      if (_instrumentation.recordTrev('expr', \\"src-37\\", _instrumentation.recordTrev('expr', \\"src-38\\", _instrumentation.recordTrev('expr', \\"src-39\\", array)[_instrumentation.recordTrev('expr', \\"src-40\\", j)]) <= _instrumentation.recordTrev('expr', \\"src-41\\", _instrumentation.recordTrev('expr', \\"src-42\\", array)[_instrumentation.recordTrev('expr', \\"src-43\\", _instrumentation.recordTrev('expr', \\"src-44\\", j) + _instrumentation.recordTrev('expr', \\"src-45\\", 1))]))) {
         break;
       }
 
-      _instrumentation.traceExpr(\\"src-49\\", function () {
-        var _postfix3 = _instrumentation.traceExpr(\\"src-50\\", shifts);
+      _instrumentation.recordTrev('expr', \\"src-49\\", function () {
+        var _postfix3 = _instrumentation.recordTrev('expr', \\"src-50\\", shifts);
 
         shifts += 1;
         return _postfix3;
       }());
 
-      var tmp = _instrumentation.traceExpr(\\"src-54\\", _instrumentation.traceExpr(\\"src-55\\", array)[_instrumentation.traceExpr(\\"src-56\\", _instrumentation.traceExpr(\\"src-57\\", j) + _instrumentation.traceExpr(\\"src-58\\", 1))]);
+      var tmp = _instrumentation.recordTrev('expr', \\"src-54\\", _instrumentation.recordTrev('expr', \\"src-55\\", array)[_instrumentation.recordTrev('expr', \\"src-56\\", _instrumentation.recordTrev('expr', \\"src-57\\", j) + _instrumentation.recordTrev('expr', \\"src-58\\", 1))]);
 
-      _instrumentation.traceExpr(\\"src-60\\", _instrumentation.traceExpr(\\"src-62\\", array)[_instrumentation.traceExpr(\\"src-63\\", _instrumentation.traceExpr(\\"src-64\\", j) + _instrumentation.traceExpr(\\"src-65\\", 1))] = _instrumentation.traceExpr(\\"src-66\\", _instrumentation.traceExpr(\\"src-67\\", array)[_instrumentation.traceExpr(\\"src-68\\", j)]));
+      _instrumentation.recordTrev('expr', \\"src-60\\", _instrumentation.recordTrev('expr', \\"src-62\\", array)[_instrumentation.recordTrev('expr', \\"src-63\\", _instrumentation.recordTrev('expr', \\"src-64\\", j) + _instrumentation.recordTrev('expr', \\"src-65\\", 1))] = _instrumentation.recordTrev('expr', \\"src-66\\", _instrumentation.recordTrev('expr', \\"src-67\\", array)[_instrumentation.recordTrev('expr', \\"src-68\\", j)]));
 
-      _instrumentation.traceExpr(\\"src-70\\", _instrumentation.traceExpr(\\"src-72\\", array)[_instrumentation.traceExpr(\\"src-73\\", j)] = _instrumentation.traceExpr(\\"src-74\\", tmp));
+      _instrumentation.recordTrev('expr', \\"src-70\\", _instrumentation.recordTrev('expr', \\"src-72\\", array)[_instrumentation.recordTrev('expr', \\"src-73\\", j)] = _instrumentation.recordTrev('expr', \\"src-74\\", tmp));
     }
   }
 
-  return _instrumentation.traceExpr(\\"src-76\\", shifts);
+  return _instrumentation.recordTrev('expr', \\"src-76\\", shifts);
 }
 
-var result = _instrumentation.traceExpr(\\"src-80\\", _instrumentation.traceExpr(\\"src-81\\", insertionSort)(_instrumentation.traceExpr(\\"src-82\\", [_instrumentation.traceExpr(\\"src-83\\", 3), _instrumentation.traceExpr(\\"src-84\\", 1), _instrumentation.traceExpr(\\"src-85\\", 2), _instrumentation.traceExpr(\\"src-86\\", 5), _instrumentation.traceExpr(\\"src-87\\", 4)])));"
+var result = _instrumentation.recordTrev('expr', \\"src-80\\", _instrumentation.recordTrev('expr', \\"src-81\\", insertionSort)(_instrumentation.recordTrev('expr', \\"src-82\\", [_instrumentation.recordTrev('expr', \\"src-83\\", 3), _instrumentation.recordTrev('expr', \\"src-84\\", 1), _instrumentation.recordTrev('expr', \\"src-85\\", 2), _instrumentation.recordTrev('expr', \\"src-86\\", 5), _instrumentation.recordTrev('expr', \\"src-87\\", 4)])));"
 `;
 
 exports[`demo examples insertionSort 2`] = `
