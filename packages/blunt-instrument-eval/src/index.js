@@ -34,7 +34,8 @@ may interfere with instrumentedEval, the code, or both.`);
 
   const babelResult = babel.transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
   const { code } = babelResult;
-  const wrapped = '(function(){var ' + assignTo + ';' + code + '; return ' + assignTo + ';})()';
+
+  const wrapped = '"use strict";(function(){var ' + assignTo + ';' + code + '; return ' + assignTo + ';})()';
   const evalResult = (0, eval)(wrapped);
   const { ast, trace } = evalResult;
 

@@ -35,8 +35,8 @@ function codeEval(code) {
  * @param {string} code
  * @returns {object}
  */
-function biEval(code) {
-  const { code: instrumented } = transform(code, { outputs: { assignTo: 'output.instrumentation' }});
+function biEval(code, pluginOpts = {}) {
+  const { code: instrumented } = transform(code, { outputs: { assignTo: 'output.instrumentation' }, ...pluginOpts});
   const wrapped = `
     (function() {
       let output = {};
@@ -154,20 +154,25 @@ describe('special case syntax handling', () => {
     test('this is bound correctly when invoking the result of a getter, and the getter is only called once', () => {
       // This test exists as a reminder that translating
       // `x.y` to `trace(x.y); x.y()` would not be acceptable.
+      // FIXME: currently this uses the `none` transcriber because the only
+      // other transcriber I've written invokes JSON.stringify, which in turn
+      // calls all the getters on objects. The instrumenter adds tracing for the
+      // value of `this` to all getters, leading to infinite recursion.
       const output = biEval(`
         const obj = {
           count: 0,
           get fn() {
             return function() {
-              this.count += 1;
+              const val = this.count + 1;
+              this.count = val;
             }
           },
         };
         obj.fn();
         output.count = obj.count;
-      `);
+      `, { valueTranscriber: 'none' });
       expect(output.count).toEqual(1);
-      expect(exprValue(output, 'this')).toEqual({ count: 0 });
+      expect(exprValue(output, 'this.count')).toEqual(0);
       expect(exprValues(output, 'obj.fn')).toHaveLength(0);
     });
   });

@@ -62,7 +62,7 @@ describe('copyNodeIdsBetweenASTs', () => {
   it('throws an error if the trees have different node types', () => {
     const ast1 = parseSync('x = y');
     const ast2 = parseSync('x = 4');
-    expect(() => copyNodeIdsBetweenASTs(ast1, ast2)).toThrowError('Source and destination tree nodes do not match');
+    expect(() => copyNodeIdsBetweenASTs(ast1, ast2)).toThrowError('Source node type Identifier does not match destination node type NumericLiteral');
   });
 
   it('copies node IDs', () => {

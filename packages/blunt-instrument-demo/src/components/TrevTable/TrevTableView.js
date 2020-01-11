@@ -68,6 +68,7 @@ function TrevTableView({
     entries.push(
       <tr key={trev.id} onMouseOver={handleMouseOver} className={className}>
         <td className="id">{trev.id}</td>
+        <td className="type">{trev.type}</td>
         <td className="node" onClick={handleCodeClick}>
           <code>{getCodeSlice(trev.node)}</code>
         </td>
@@ -87,6 +88,7 @@ function TrevTableView({
         <thead>
           <tr>
             <th className="id">id</th>
+            <th className="type">type</th>
             <th className="node">code</th>
             <th className="data">data</th>
           </tr>

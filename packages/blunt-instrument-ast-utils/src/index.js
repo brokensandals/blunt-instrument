@@ -62,7 +62,7 @@ export function copyNodeIdsBetweenASTs(from, to) {
 
   for (let i = 0; i < fromNodes.length; i++) {
     if (fromNodes[i].type !== toNodes[i].type) {
-      throw new Error('Source and destination tree nodes do not match');
+      throw new Error(`Source node type ${fromNodes[i].type} does not match destination node type ${toNodes[i].type}`);
     }
     copyNodeId(fromNodes[i], toNodes[i]);
   }

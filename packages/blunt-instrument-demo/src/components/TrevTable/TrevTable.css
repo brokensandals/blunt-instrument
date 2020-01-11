@@ -42,7 +42,7 @@
   text-overflow: ellipsis;
 }
 
-.TrevTable .id {
+.TrevTable .id, .type {
   width: 4ex;
 }
 
