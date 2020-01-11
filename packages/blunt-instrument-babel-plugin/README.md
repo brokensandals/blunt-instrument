@@ -47,7 +47,7 @@ When you run the instrumented code, it will create an **instrumentation object**
       id: 1,
       nodeId: '1', // the corresponding node in `ast` will contain a field `extra.biNodeId` that matches this
       type: 'expr',
-      value: 'foo', // the value/object the expression evaluated to
+      data: 'foo', // the value/object the expression evaluated to
     },
     // ...
   ],
@@ -104,7 +104,7 @@ array.push(3);
 ```
 
 The tracer will record separate trevs for when `array` is evaluated on lines 2, 3, and 4.
-But when run with `{valueTranscriber: 'none'}`, all of those trevs will have the same `value`, which will be `[1, 2, 3]` at the end of program execution.
+But when run with `{valueTranscriber: 'none'}`, all of those trevs will have the same `data`, which will be `[1, 2, 3]` at the end of program execution.
 By contrast, the `simple` transcriber would copy the array at each point, resulting in three separate values: `[]`, `[1]`, and `[1, 2]`.
 
 #### simple

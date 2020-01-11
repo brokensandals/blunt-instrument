@@ -62,7 +62,7 @@ function exprValues(output, target) {
   const nodes = output.astq.getNodesByCodeSlice(target);
   const trevs = nodes.flatMap(node => trevsForNode(output, node));
   const exprTrevs = trevs.filter((trev) => trev.type === 'expr');
-  return exprTrevs.map(trev => trev.value);
+  return exprTrevs.map(trev => trev.data);
 }
 
 function exprValue(output, target) {

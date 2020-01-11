@@ -19,7 +19,7 @@ const trevs = result.traceQuerier.query({ filters: { onlyNodeIds: getNodeId(recu
 // This will log the four values that factorial(n - 1) evaluates to during the
 // course of execution:
 // [1, 2, 6, 24]
-console.log(trevs.map(trev => trev.value));
+console.log(trevs.map(trev => trev.data));
 ```
 
 For more information on doing queries, see [blunt-instrument-trace-utils][trace-utils] and [blunt-instrument-ast-utils][ast-utils].

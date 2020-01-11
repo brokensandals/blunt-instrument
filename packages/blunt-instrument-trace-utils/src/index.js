@@ -63,7 +63,7 @@ export class TraceQuerier {
    * id: number - unique identifier for the trev
    * node: Node - babel AST node corresponding to the code being executed/evaluated
    * type: string - the type of trev, currently only "expr"
-   * value: * - for expr trevs, the result of the expression evaluation, as recorded by the configured transcriber
+   * data: * - for expr trevs, the result of the expression evaluation, as recorded by the configured transcriber
    * 
    * All filters of type `object` support three different syntaxes. The following are equivalent:
    * { filters: { onlyNodeIds: { node1: true, node2: true } } }

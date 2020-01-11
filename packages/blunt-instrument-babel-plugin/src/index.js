@@ -28,14 +28,14 @@ const buildInstrumentationInit = template(`
 `);
 
 const buildRecordTrevInit = template(`
-  %%instrumentationId%%.recordTrev = (type, nodeId, value) => {
+  %%instrumentationId%%.recordTrev = (type, nodeId, data) => {
     %%instrumentationId%%.trace.push({
       id: %%instrumentationId%%.trace.length + 1,
       nodeId,
       type,
-      value: %%instrumentationId%%.transcribeValue(value),
+      data: %%instrumentationId%%.transcribeValue(data),
     });
-    return value;
+    return data;
   };
 `);
 

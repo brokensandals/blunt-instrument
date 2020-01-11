@@ -36,7 +36,7 @@
   border: 1px solid orange;
 }
 
-.TrevTable tbody .value {
+.TrevTable tbody .data {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -51,7 +51,7 @@
   max-width: 25ex;
 }
 
-.TrevTable .value {
+.TrevTable .data {
   width: 25ex;
   max-width: 25ex;
 }

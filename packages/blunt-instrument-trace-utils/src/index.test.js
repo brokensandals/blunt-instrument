@@ -43,11 +43,11 @@ describe('TraceQuerier', () => {
 
     beforeEach(() => {
       trevs = [];
-      trevs.push({ id: 1, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('1')[0]), type: 'expr', value: 1 });
-      trevs.push({ id: 2, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]), type: 'expr', value: 4 });
-      trevs.push({ id: 3, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]), type: 'expr', value: 7 });
-      trevs.push({ id: 4, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[0]), type: 'expr', value: 4 });
-      trevs.push({ id: 5, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[1]), type: 'expr', value: 7 });
+      trevs.push({ id: 1, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('1')[0]), type: 'expr', data: 1 });
+      trevs.push({ id: 2, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]), type: 'expr', data: 4 });
+      trevs.push({ id: 3, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]), type: 'expr', data: 7 });
+      trevs.push({ id: 4, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[0]), type: 'expr', data: 4 });
+      trevs.push({ id: 5, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[1]), type: 'expr', data: 7 });
       traceQuerier = new TraceQuerier(astQuerier, trevs);
     });
 
@@ -66,7 +66,7 @@ describe('TraceQuerier', () => {
           nodeId: trevs[2].nodeId,
           node: astQuerier.getNodeById(trevs[2].nodeId),
           type: 'expr',
-          value: 7,
+          data: 7,
         });
       });
     });
@@ -80,7 +80,7 @@ describe('TraceQuerier', () => {
       it('returns correct details', () => {
         const result = traceQuerier.query();
         expect(result[2]).toEqual({
-          id: 3, nodeId: trevs[2].nodeId, node: astQuerier.getNodesByCodeSlice('num + by')[0], type: 'expr', value: 7 });
+          id: 3, nodeId: trevs[2].nodeId, node: astQuerier.getNodesByCodeSlice('num + by')[0], type: 'expr', data: 7 });
       });
 
       describe('onlyNodeIds', () => {
