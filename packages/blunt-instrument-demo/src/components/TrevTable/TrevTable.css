@@ -9,10 +9,6 @@
   vertical-align: top;
 }
 
-.TrevTable tbody tr:nth-child(odd):not(.highlighted-node, .highlighted-trev) {
-  background-color: rgb(238, 238, 238);
-}
-
 .TrevTable .primitive {
   color: slateblue;
 }
@@ -22,6 +18,10 @@
 }
 
 .TrevTable .highlighted-trev {
+  background-color: yellow;
+}
+
+.TrevTable .highlighted-trev-descendant .parent-id {
   background-color: yellow;
 }
 
@@ -42,7 +42,7 @@
   text-overflow: ellipsis;
 }
 
-.TrevTable .id, .type {
+.TrevTable .id, .parent-id, .type {
   width: 4ex;
 }
 

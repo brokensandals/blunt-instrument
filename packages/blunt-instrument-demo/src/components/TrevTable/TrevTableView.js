@@ -59,6 +59,7 @@ function TrevTableView({
 
     const className = [
       highlightedTrevId != null && trev.id === highlightedTrevId ? 'highlighted-trev' : null,
+      highlightedTrevId != null && trev.ancestorIds.includes(highlightedTrevId) ? 'highlighted-trev-descendant' : null,
       highlightedNodeId != null && getNodeId(trev.node) === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
@@ -67,6 +68,7 @@ function TrevTableView({
 
     entries.push(
       <tr key={trev.id} onMouseOver={handleMouseOver} className={className}>
+        <td className="parent-id">{trev.parentId}</td>
         <td className="id">{trev.id}</td>
         <td className="type">{trev.type}</td>
         <td className="node" onClick={handleCodeClick}>
@@ -87,6 +89,7 @@ function TrevTableView({
       <table onMouseLeave={clearHover}>
         <thead>
           <tr>
+            <th className="parent-id">parent</th>
             <th className="id">id</th>
             <th className="type">type</th>
             <th className="node">code</th>

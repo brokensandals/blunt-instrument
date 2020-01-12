@@ -32,13 +32,19 @@ export class TraceQuerier {
       if (trace[i].id !== i + 1) {
         throw new Error(`Non-sequential trev ID ${trace[i].id}`);
       }
+
+      const parentId = trace[i].parentId;
+      if (parentId && parentId >= trace[i].id) {
+        throw new Error(`Trev ${trace[i].id} is descended from a later parent ${parentId}`);
+      }
+      const ancestorIds = parentId ? [parentId].concat(trevs[parentId - 1].ancestorIds) : [];
       
       const node = astQuerier.getNodeById(trace[i].nodeId);
       if (!node) {
         throw new Error(`Trev ID ${trace[i].id} has unknown node ID ${trace[i].nodeId}`);
       }
 
-      trevs.push({ node, ...trace[i] });
+      trevs.push({ ancestorIds, node, ...trace[i] });
     }
     this.trevs = trevs;
   }
