@@ -19,17 +19,20 @@ function ASTObjectView({
     loc = null,
     start = null,
     end = null,
+    extra = null,
     ...rest
   } = object;
+
   const nodeId = getNodeId(object);
 
   const typeEl = type ? <span className="type">{type}</span> : null;
+  const nodeIdEl = nodeId ? <span className="nodeId">{nodeId}</span> : null;
   const locEl = loc ? <span className="loc">{locString(loc)}</span> : null; //TODO
 
   const entries = [];
 
   for (const key in rest) {
-    const val = object[key];
+    const val = rest[key];
 
     if ((Array.isArray(val) && val.length == 0) ||
         (typeof val === 'object' && (val == null || Object.keys(val).length == 0)) ||
@@ -84,7 +87,7 @@ function ASTObjectView({
 
   return (
     <div className={className} onMouseOver={handleMouseOver} onClick={handleClick}>
-      {typeEl} {locEl}
+      {typeEl} {nodeIdEl} {locEl}
       <dl>
         {entries.map(([_, key, val], index) =>
           [

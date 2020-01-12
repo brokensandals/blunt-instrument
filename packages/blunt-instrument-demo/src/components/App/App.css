@@ -77,10 +77,6 @@
   grid-area: ast-tabs;
 }
 
-.ASTNav .loc {
-  display: none;
-}
-
 .TraceQueryForm {
   grid-area: trace-query-form;
   overflow: auto;

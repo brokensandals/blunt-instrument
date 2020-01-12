@@ -51,8 +51,24 @@
   color: gray;
 }
 
-.ASTNav .loc {
+.ASTNav .nodeId {
   font-size: .7em;
-  color: brown;
+  color: gray;
 }
 
+.ASTNav .nodeId:before {
+  content: '#';
+}
+
+.ASTNav .loc {
+  font-size: .7em;
+  color: gray;
+}
+
+.ASTNav .loc:before {
+  content: '(';
+}
+
+.ASTNav .loc:after {
+  content: ')';
+}
