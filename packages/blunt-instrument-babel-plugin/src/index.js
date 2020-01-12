@@ -109,15 +109,15 @@ function addInstrumenterInit(path,
 }
 
 const buildEnterFnTrace = template(`
-  %%instrumentationId%%.recordTrev('enter-fn', %%nodeId%%, %%args%%, 1);
+  %%instrumentationId%%.recordTrev('fn-start', %%nodeId%%, %%args%%, 1);
 `);
 
 const buildReturnTrace = template(`
-  return %%instrumentationId%%.recordTrev('exit-fn', %%nodeId%%, %%retval%%, -1);
+  return %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%, %%retval%%, -1);
 `);
 
 const buildEndFnTrace = template(`
-  %%instrumentationId%%.recordTrev('exit-fn', %%nodeId%%, -1);
+  %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%, -1);
 `);
 
 function addFnTrace(path, { instrumentationId }) {

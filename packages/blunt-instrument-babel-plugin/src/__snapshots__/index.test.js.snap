@@ -45,13 +45,13 @@ _instrumentation.transcribeValue = function (value) {
 output.instrumentation = _instrumentation;
 
 function fac(n) {
-  _instrumentation.recordTrev('enter-fn', \\"src-2\\", {
+  _instrumentation.recordTrev('fn-start', \\"src-2\\", {
     n: n,
     \\"this\\": this,
     arguments: arguments
   }, 1);
 
-  return _instrumentation.recordTrev('exit-fn', \\"src-6\\", _instrumentation.recordTrev('expr', \\"src-7\\", _instrumentation.recordTrev('expr', \\"src-8\\", _instrumentation.recordTrev('expr', \\"src-9\\", n) == _instrumentation.recordTrev('expr', \\"src-10\\", 1)) ? _instrumentation.recordTrev('expr', \\"src-11\\", 1) : _instrumentation.recordTrev('expr', \\"src-12\\", _instrumentation.recordTrev('expr', \\"src-13\\", n) * _instrumentation.recordTrev('expr', \\"src-14\\", _instrumentation.recordTrev('expr', \\"src-15\\", fac)(_instrumentation.recordTrev('expr', \\"src-16\\", _instrumentation.recordTrev('expr', \\"src-17\\", n) - _instrumentation.recordTrev('expr', \\"src-18\\", 1)))))), -1);
+  return _instrumentation.recordTrev('fn-ret', \\"src-6\\", _instrumentation.recordTrev('expr', \\"src-7\\", _instrumentation.recordTrev('expr', \\"src-8\\", _instrumentation.recordTrev('expr', \\"src-9\\", n) == _instrumentation.recordTrev('expr', \\"src-10\\", 1)) ? _instrumentation.recordTrev('expr', \\"src-11\\", 1) : _instrumentation.recordTrev('expr', \\"src-12\\", _instrumentation.recordTrev('expr', \\"src-13\\", n) * _instrumentation.recordTrev('expr', \\"src-14\\", _instrumentation.recordTrev('expr', \\"src-15\\", fac)(_instrumentation.recordTrev('expr', \\"src-16\\", _instrumentation.recordTrev('expr', \\"src-17\\", n) - _instrumentation.recordTrev('expr', \\"src-18\\", 1)))))), -1);
 }
 
 var result = _instrumentation.recordTrev('expr', \\"src-22\\", _instrumentation.recordTrev('expr', \\"src-23\\", fac)(_instrumentation.recordTrev('expr', \\"src-24\\", 3)));"
@@ -83,7 +83,7 @@ Array [
     "id": 3,
     "nodeId": "src-2",
     "parentId": undefined,
-    "type": "enter-fn",
+    "type": "fn-start",
   },
   Object {
     "data": 3,
@@ -151,7 +151,7 @@ Array [
     "id": 12,
     "nodeId": "src-2",
     "parentId": 3,
-    "type": "enter-fn",
+    "type": "fn-start",
   },
   Object {
     "data": 2,
@@ -219,7 +219,7 @@ Array [
     "id": 21,
     "nodeId": "src-2",
     "parentId": 12,
-    "type": "enter-fn",
+    "type": "fn-start",
   },
   Object {
     "data": 1,
@@ -261,7 +261,7 @@ Array [
     "id": 27,
     "nodeId": "src-6",
     "parentId": 21,
-    "type": "exit-fn",
+    "type": "fn-ret",
   },
   Object {
     "data": 1,
@@ -289,7 +289,7 @@ Array [
     "id": 31,
     "nodeId": "src-6",
     "parentId": 12,
-    "type": "exit-fn",
+    "type": "fn-ret",
   },
   Object {
     "data": 2,
@@ -317,7 +317,7 @@ Array [
     "id": 35,
     "nodeId": "src-6",
     "parentId": 3,
-    "type": "exit-fn",
+    "type": "fn-ret",
   },
   Object {
     "data": 6,
@@ -374,7 +374,7 @@ _instrumentation.transcribeValue = function (value) {
 output.instrumentation = _instrumentation;
 
 function insertionSort(array) {
-  _instrumentation.recordTrev('enter-fn', \\"src-2\\", {
+  _instrumentation.recordTrev('fn-start', \\"src-2\\", {
     array: array,
     \\"this\\": this,
     arguments: arguments
@@ -413,7 +413,7 @@ function insertionSort(array) {
     }
   }
 
-  return _instrumentation.recordTrev('exit-fn', \\"src-75\\", _instrumentation.recordTrev('expr', \\"src-76\\", shifts), -1);
+  return _instrumentation.recordTrev('fn-ret', \\"src-75\\", _instrumentation.recordTrev('expr', \\"src-76\\", shifts), -1);
 }
 
 var result = _instrumentation.recordTrev('expr', \\"src-80\\", _instrumentation.recordTrev('expr', \\"src-81\\", insertionSort)(_instrumentation.recordTrev('expr', \\"src-82\\", [_instrumentation.recordTrev('expr', \\"src-83\\", 3), _instrumentation.recordTrev('expr', \\"src-84\\", 1), _instrumentation.recordTrev('expr', \\"src-85\\", 2), _instrumentation.recordTrev('expr', \\"src-86\\", 5), _instrumentation.recordTrev('expr', \\"src-87\\", 4)])));"
@@ -498,7 +498,7 @@ Array [
     "id": 8,
     "nodeId": "src-2",
     "parentId": undefined,
-    "type": "enter-fn",
+    "type": "fn-start",
   },
   Object {
     "data": 0,
@@ -2036,7 +2036,7 @@ Array [
     "id": 202,
     "nodeId": "src-75",
     "parentId": 8,
-    "type": "exit-fn",
+    "type": "fn-ret",
   },
   Object {
     "data": 3,

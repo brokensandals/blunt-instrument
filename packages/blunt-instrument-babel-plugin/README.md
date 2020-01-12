@@ -51,7 +51,7 @@ When you run the instrumented code, it will create an **instrumentation object**
     },
     {
       id: 2,
-      type: 'enter-fn', // these trevs record the beginning of a function's execution
+      type: 'fn-start', // these trevs record the beginning of a function's execution
       nodeId: 'src-2', // the Function node that is being entered
       data: { // the values of `this`, `arguments`, and all named parameters, at the beginning of the function's execution
         this: { /* ... */ },
@@ -62,10 +62,10 @@ When you run the instrumented code, it will create an **instrumentation object**
     {
       id: 3,
       parentId: 2, // when defined, this is the id of the trev representing the enclosing context.
-                   // this is analogous to the call stack: when a function is called, an enter-fn
+                   // this is analogous to the call stack: when a function is called, an fn-start
                    // trev is created, and all trevs created after that until the function returns
                    // will be descended from that trev
-      type: 'exit-fn', // these trevs record the end of a function's execution
+      type: 'fn-ret', // these trevs record the end of a function's execution
                        // they can be triggered by a return statement or after the last statement in a function executes
       nodeId: 'src-4', // the corresponding ReturnStatement node; or, if the end of the function was reached without a return
                        // statement being executed, the corresponding Function node
