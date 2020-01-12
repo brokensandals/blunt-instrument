@@ -30,6 +30,10 @@ function AppView({
     }
   }
 
+  const onChangeSelectedExample = event => {
+    onRun(examples[event.target.value] || '');
+  }
+
   const selectedNodeIds =
     Object.keys(traceQuery.filters.onlyNodeIds).filter(
       key => traceQuery.filters.onlyNodeIds[key]);
@@ -37,8 +41,14 @@ function AppView({
   const handleSourceDraftChange =
     (event) => onSourceDraftChange(event.target.value);
   
-  const exampleLinks = Object.keys(examples).map(key => 
-    <button key={key} onClick={runHandler(examples[key])}>{key}</button>);
+  let selectedExample = '';
+  const exampleOptions = [<option value=""></option>];
+  for (const key in examples) {
+    exampleOptions.push(<option value={key}>{key}</option>);
+    if (sourceDraft === examples[key]) {
+      selectedExample = key;
+    }
+  }
 
   return (
     <div className="App">
@@ -46,7 +56,9 @@ function AppView({
         <p className="instructions">
           Enter javascript code here, then click "Run" to see the trace.
           Or, choose an example:
-          {exampleLinks}
+          <select value={selectedExample} onChange={onChangeSelectedExample}>
+            {exampleOptions}
+          </select>
         </p>
         <textarea value={sourceDraft} onChange={handleSourceDraftChange} />
         {runError ? <p className="error">{runError.toString()}</p> : null}

@@ -4,19 +4,18 @@
   grid-template-rows: 20% 15% 15% calc(50% - 2em) 2em;
   grid-template-columns: 50% 50%;
   grid-template-areas:
-    "source-form source-form"
-    "trace-query-form code-tabs"
-    "trev-table code-tabs"
-    "trev-table ast-tabs"
+    "source-form trace-query-form"
+    "code-tabs trev-table"
+    "code-tabs trev-table"
+    "ast-tabs trev-table"
     "blurb blurb"
 }
 
 .source-form {
   grid-area: source-form;
   display: grid;
-  grid-template-rows: 1.5em 1fr 1.5em;
+  grid-template-rows: 3em 1fr 1.5em;
   grid-template-columns: 1fr 100px;
-  border-bottom: 3px solid gray;
 }
 
 .source-form p {
