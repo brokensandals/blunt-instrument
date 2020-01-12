@@ -108,7 +108,7 @@ function addInstrumenterInit(path,
   return ids;
 }
 
-const buildEnterFnTrace = template(`
+const buildFnStartTrace = template(`
   %%instrumentationId%%.recordTrev('fn-start', %%nodeId%%, %%args%%, 1);
 `);
 
@@ -116,7 +116,7 @@ const buildReturnTrace = template(`
   return %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%, %%retval%%, -1);
 `);
 
-const buildEndFnTrace = template(`
+const buildFnEndTrace = template(`
   %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%, -1);
 `);
 
@@ -157,7 +157,7 @@ function addFnTrace(path, { instrumentationId }) {
     properties.push(types.objectProperty(key, val, false, !['this', 'arguments'].includes(idName)));
   }
 
-  const trace = buildEnterFnTrace({
+  const trace = buildFnStartTrace({
     instrumentationId,
     nodeId: types.stringLiteral(getNodeId(node)),
     args: types.objectExpression(properties),
@@ -173,7 +173,7 @@ function addFnTrace(path, { instrumentationId }) {
   } else {
     node.body.body.unshift(trace);
     if (!types.isReturnStatement(node.body.body[node.body.body.length - 1])) {
-      node.body.body.push(buildEndFnTrace({
+      node.body.body.push(buildFnEndTrace({
         instrumentationId,
         nodeId: types.stringLiteral(getNodeId(node)),
       }));
