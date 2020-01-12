@@ -23,18 +23,28 @@ transcriberTemplates.simple = template(`
 const buildInstrumentationInit = template(`
   const %%instrumentationId%% = {
     ast: JSON.parse(%%astString%%),
-    trace: []
+    trace: [],
+    trevIdStack: [],
   };
 `);
 
 const buildRecordTrevInit = template(`
-  %%instrumentationId%%.recordTrev = (type, nodeId, data) => {
+  %%instrumentationId%%.recordTrev = (type, nodeId, data, contextChange = 0) => {
+    const id = %%instrumentationId%%.trace.length + 1;
     %%instrumentationId%%.trace.push({
-      id: %%instrumentationId%%.trace.length + 1,
+      id,
+      parentId: %%instrumentationId%%.trevIdStack[%%instrumentationId%%.trevIdStack.length - 1],
       nodeId,
       type,
       data: %%instrumentationId%%.transcribeValue(data),
     });
+
+    if (contextChange < 0) {
+      %%instrumentationId%%.trevIdStack.pop();
+    } else if (contextChange > 0) {
+      %%instrumentationId%%.trevIdStack.push(id);
+    }
+
     return data;
   };
 `);
@@ -99,15 +109,15 @@ function addInstrumenterInit(path,
 }
 
 const buildEnterFnTrace = template(`
-  %%instrumentationId%%.recordTrev('enter-fn', %%nodeId%%, %%args%%);
+  %%instrumentationId%%.recordTrev('enter-fn', %%nodeId%%, %%args%%, 1);
 `);
 
 const buildReturnTrace = template(`
-  return %%instrumentationId%%.recordTrev('exit-fn', %%nodeId%%, %%retval%%);
+  return %%instrumentationId%%.recordTrev('exit-fn', %%nodeId%%, %%retval%%, -1);
 `);
 
 const buildEndFnTrace = template(`
-  %%instrumentationId%%.recordTrev('exit-fn', %%nodeId%%);
+  %%instrumentationId%%.recordTrev('exit-fn', %%nodeId%%, -1);
 `);
 
 function addFnTrace(path, { instrumentationId }) {
