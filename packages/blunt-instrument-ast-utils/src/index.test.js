@@ -203,4 +203,17 @@ describe('ASTQuerier', () => {
       expect(astq.getNodesByCodeSlice('z()')).toEqual([]);
     });
   });
+
+  describe('filterNodes', () => {
+    it('returns matching nodes', () => {
+      const code = 'x = y() + 123; z = 4;';
+      const ast = parseSync(code);
+      addNodeIdsToAST(ast, 'test-');
+      attachCodeSlicesToAST(ast, code);
+      const astq = new ASTQuerier(ast);
+      const expected = [ast.program.body[0].expression.right.right, ast.program.body[1]];
+      const actual = astq.filterNodes(node => ['123', 'z = 4;'].includes(getCodeSlice(node)));
+      expect(actual).toEqual(expected);
+    });
+  });
 });

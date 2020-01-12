@@ -1,7 +1,7 @@
 import * as babel from '@babel/core';
 import { bluntInstrumentPlugin } from '.';
 import { examples } from 'blunt-instrument-test-resources';
-import { getNodeId, attachCodeSlicesToAST, ASTQuerier } from 'blunt-instrument-ast-utils';
+import { getNodeId, attachCodeSlicesToAST, ASTQuerier, getCodeSlice } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep';
 
 /**
@@ -58,17 +58,36 @@ function trevsForNode({ instrumentation: { trace } }, node) {
   return trace.filter((trev) => trev.nodeId === getNodeId(node));
 }
 
-function exprValues(output, target) {
+function codeTrevs(output, target, trevType = 'expr') {
   const nodes = output.astq.getNodesByCodeSlice(target);
   const trevs = nodes.flatMap(node => trevsForNode(output, node));
-  const exprTrevs = trevs.filter((trev) => trev.type === 'expr');
-  return exprTrevs.map(trev => trev.data);
+  return trevs.filter((trev) => trev.type === trevType);
 }
 
-function exprValue(output, target) {
-  const vals = exprValues(output, target);
-  expect(vals).toHaveLength(1);
-  return vals[0];
+function codeValues(output, target, trevType = 'expr') {
+  return codeTrevs(output, target, trevType).map(trev => trev.data);
+}
+
+function codeTrev(output, target, trevType = 'expr') {
+  const trevs = codeTrevs(output, target, trevType);
+  expect(trevs).toHaveLength(1);
+  return trevs[0];
+}
+
+function codeValue(output, target, trevType = 'expr') {
+  return codeTrev(output, target, trevType).data;
+}
+
+function namedCalls(output, target) {
+  const nodes = output.astq.filterNodes(node =>
+    babel.types.isFunctionDeclaration(node) && node.id.name === target);
+  expect(nodes).toHaveLength(1);
+  return trevsForNode(output, nodes[0])
+    .filter(trev => trev.type === 'fn-start');
+}
+
+function namedCallsData(output, target) {
+  return namedCalls(output, target).map(trev => trev.data);
 }
 
 describe('instrumentation object output', () => {
@@ -131,24 +150,47 @@ describe('general examples', () => {
       output.fac5 = fac(5);
     `);
     expect(output.fac5).toEqual(120);
-    expect(exprValues(output, 'fac(n - 1)')).toEqual([1, 2, 6, 24]);
-    expect(exprValues(output, 'n == 1')).toEqual([false, false, false, false, true]);
+    
+    const calls = namedCalls(output, 'fac');
+    expect(calls.map(trev => trev.data)).toEqual([5, 4, 3, 2, 1].map(n => ({ arguments: { 0: n }, n })));
+    const contextIds = calls.map(trev => trev.id);
+    for (let i = 1; i < 5; i++) {
+      expect(contextIds[i]).not.toEqual(contextIds[i - 1]);
+    }
+    expect(calls.map(trev => trev.parentId)).toEqual(
+      [undefined].concat(contextIds.slice(0, 4)));
+    
+    const rets = codeTrevs(output, 'return n == 1 ? 1 : n * fac(n - 1);', 'fn-ret');
+    expect(rets.map(trev => trev.data)).toEqual([1, 2, 6, 24, 120]);
+    expect(rets.map(trev => trev.parentId).reverse()).toEqual(contextIds);
+
+    const facNMinus1 = codeTrevs(output, 'fac(n - 1)');
+    expect(facNMinus1.map(trev => trev.parentId).reverse()).toEqual(contextIds.slice(0, 4));
+    expect(facNMinus1.map(trev => trev.data)).toEqual([1, 2, 6, 24]);
+
+    const nEq1 = codeTrevs(output, 'n == 1');
+    expect(nEq1.map(trev => trev.parentId)).toEqual(contextIds);
+    expect(nEq1.map(trev => trev.data)).toEqual([false, false, false, false, true]);
   });
 });
 
 describe('special case syntax handling', () => {
   describe('method invocations', () => {
-    test('this is bound correctly when invoking a method', () => {
+    test('this is bound and traced correctly when invoking a method', () => {
       const output = biEval(`
         const obj = { val: 'old' };
-        const fn = function() { this.val = 'new'; };
+        function fn() { this.val = 'new'; }
         obj.fn = fn;
         obj.fn();
         output.val = obj.val;
       `);
       expect(output.val).toEqual('new');
-      expect(exprValue(output, 'this')).toEqual({ val: 'old'}); // note, this would also include an fn property if the serializer were better
-      expect(exprValues(output, 'obj.fn')).toHaveLength(0);
+      expect(codeValue(output, 'this')).toEqual({ val: 'old'}); // note, this would also include an fn property if the serializer were better
+      expect(codeValues(output, 'obj.fn')).toHaveLength(0);
+      expect(namedCallsData(output, 'fn')).toEqual([{
+        "this": { val: 'old' },
+        arguments: {},
+      }]);
     });
 
     test('this is bound correctly when invoking the result of a getter, and the getter is only called once', () => {
@@ -172,12 +214,25 @@ describe('special case syntax handling', () => {
         output.count = obj.count;
       `, { valueTranscriber: 'none' });
       expect(output.count).toEqual(1);
-      expect(exprValue(output, 'this.count')).toEqual(0);
-      expect(exprValues(output, 'obj.fn')).toHaveLength(0);
+      expect(codeValue(output, 'this.count')).toEqual(0);
+      expect(codeValues(output, 'obj.fn')).toHaveLength(0);
     });
   });
 
-  test('`arguments` is bound correctly', () => {
+  test('`fn-ret` is still generated when there is no return statement', () => {
+    const output = biEval(`
+      function foo() {
+        output.result = 'hi';
+      }
+      foo();
+    `);
+    expect(output.result).toEqual('hi');
+    expect(codeTrevs(output, `function foo() {
+        output.result = 'hi';
+      }`, 'fn-ret')).toHaveLength(1);
+  });
+
+  test('`arguments` is bound and traced correctly', () => {
     const output = biEval(`
       function foo() {
         return arguments.length * (arguments[0] + arguments[1]);
@@ -185,12 +240,15 @@ describe('special case syntax handling', () => {
       output.result = foo(4, 5, 10, 12);
     `);
     expect(output.result).toEqual(36);
+    expect(namedCallsData(output, 'foo')).toEqual([{
+      arguments: { 0: 4, 1: 5, 2: 10, 3: 12 },
+    }]);
   });
 
   test('assign to MemberExpression', () => {
     const output = biEval('const a = [null]; a[0] = 1; output.a0 = a[0];');
     expect(output.a0).toEqual(1);
-    expect(exprValue(output, 'a[0] = 1')).toEqual(1);
+    expect(codeValue(output, 'a[0] = 1')).toEqual(1);
   });
 
   describe('UpdateExpression handling', () => {
@@ -198,14 +256,14 @@ describe('special case syntax handling', () => {
       const output = biEval('let x = 1; const a = x++; output.a = a; output.x = x;');
       expect(output.a).toEqual(1);
       expect(output.x).toEqual(2);
-      expect(exprValue(output, 'x++')).toEqual(1);
+      expect(codeValue(output, 'x++')).toEqual(1);
     });
     
     test('prefix ++ operator', () => {
       const output = biEval('let x = 1; const a = ++x; output.a = a; output.x = x;');
       expect(output.a).toEqual(2);
       expect(output.x).toEqual(2);
-      expect(exprValue(output, '++x')).toEqual(2);
+      expect(codeValue(output, '++x')).toEqual(2);
     });
 
     test('postifx operator rewrite binds `arguments` correctly', () => {
@@ -224,21 +282,21 @@ describe('special case syntax handling', () => {
       const output = biEval('let x = 2; const a = x--; output.a = a; output.x = x;');
       expect(output.a).toEqual(2);
       expect(output.x).toEqual(1);
-      expect(exprValue(output, 'x--')).toEqual(2);
+      expect(codeValue(output, 'x--')).toEqual(2);
     });
 
     test('prefix -- operator', () => {
       const output = biEval('let x = 2; const a = --x; output.a = a; output.x = x;');
       expect(output.a).toEqual(1);
       expect(output.x).toEqual(1);
-      expect(exprValue(output, '--x')).toEqual(1);
+      expect(codeValue(output, '--x')).toEqual(1);
     });
     
     test('+= operator', () => {
       const output = biEval('let x = 1; const a = x += 1; output.a = a; output.x = x;');
       expect(output.a).toEqual(2);
       expect(output.x).toEqual(2);
-      expect(exprValue(output, 'x += 1')).toEqual(2);
+      expect(codeValue(output, 'x += 1')).toEqual(2);
     });
   });
 });

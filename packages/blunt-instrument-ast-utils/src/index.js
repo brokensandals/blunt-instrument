@@ -180,9 +180,24 @@ export class ASTQuerier {
    * given string. This only works if `attachCodeSlicesToAST` was called
    * on the AST before creating the querier instance.
    * @param {string} codeSlice exact code snippet to search for
-   * @returns {[Node]} array of matching nodes, possibly empty
+   * @returns {Node[]} array of matching nodes, possibly empty
    */
   getNodesByCodeSlice(codeSlice) {
     return this.nodesByCodeSlice.get(codeSlice) || [];
+  }
+
+  /**
+   * Retrieve all nodes for which a given function returns true.
+   * @param {function} filterFn takes a node and returns true if it should be included in the output
+   * @returns {Node[]} all matching nodes
+   */
+  filterNodes(filterFn) {
+    const results = [];
+    types.traverseFast(this.ast, (node) => {
+      if (filterFn(node)) {
+        results.push(node);
+      }
+    });
+    return results;
   }
 }
