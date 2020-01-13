@@ -29,22 +29,14 @@ const buildInstrumentationInit = template(`
 `);
 
 const buildRecordTrevInit = template(`
-  %%instrumentationId%%.recordTrev = (type, nodeId, data, contextChange = 0) => {
-    const id = %%instrumentationId%%.trace.length + 1;
+  %%instrumentationId%%.recordTrev = (type, nodeId, data) => {
     %%instrumentationId%%.trace.push({
-      id,
+      id: %%instrumentationId%%.trace.length + 1,
       parentId: %%instrumentationId%%.trevIdStack[%%instrumentationId%%.trevIdStack.length - 1],
       nodeId,
       type,
       data: %%instrumentationId%%.transcribeValue(data),
     });
-
-    if (contextChange < 0) {
-      %%instrumentationId%%.trevIdStack.pop();
-    } else if (contextChange > 0) {
-      %%instrumentationId%%.trevIdStack.push(id);
-    }
-
     return data;
   };
 `);
@@ -108,16 +100,22 @@ function addInstrumenterInit(path,
   return ids;
 }
 
-const buildFnStartTrace = template(`
-  %%instrumentationId%%.recordTrev('fn-start', %%nodeId%%, %%args%%, 1);
-`);
+const buildFnTrace = template(`{
+  %%instrumentationId%%.recordTrev('fn-start', %%nodeId%%, %%args%%);
+  %%instrumentationId%%.trevIdStack.push(%%instrumentationId%%.trace[%%instrumentationId%%.trace.length - 1].id);
+  try {
+    %%body%%
+  } finally {
+    %%instrumentationId%%.trevIdStack.pop();
+  }
+}`);
 
 const buildReturnTrace = template(`
-  return %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%, %%retval%%, -1);
+  return %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%, %%retval%%);
 `);
 
 const buildFnEndTrace = template(`
-  %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%, -1);
+  %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%);
 `);
 
 function addFnTrace(path, { instrumentationId }) {
@@ -132,8 +130,6 @@ function addFnTrace(path, { instrumentationId }) {
   if (node.extra.biTracedFn) {
     return;
   }
-
-  const isArrow = types.isArrowFunctionExpression(node);
   
   const idNames = new Set(Object.keys(types.getBindingIdentifiers(node.params)));
   // We always want to trace the values of `this` and `arguments`. It's possible
@@ -157,29 +153,30 @@ function addFnTrace(path, { instrumentationId }) {
     properties.push(types.objectProperty(key, val, false, !['this', 'arguments'].includes(idName)));
   }
 
-  const trace = buildFnStartTrace({
+  let body = node.body;
+  if (types.isBlockStatement(body)) {
+    if (!types.isReturnStatement(body.body[body.body.length - 1])) {
+      body.body.push(buildFnEndTrace({
+        instrumentationId,
+        nodeId: types.stringLiteral(getNodeId(node)),
+      }));
+    }
+  } else if (types.isExpression(body)) {
+    body = buildReturnTrace({
+      instrumentationId,
+      nodeId: types.stringLiteral(getNodeId(node)),
+      retval: node.body,
+    });
+  }
+
+  const trace = buildFnTrace({
+    body,
     instrumentationId,
     nodeId: types.stringLiteral(getNodeId(node)),
     args: types.objectExpression(properties),
   });
 
-  if (types.isExpression(node.body)) {
-    const ret = buildReturnTrace({
-      instrumentationId,
-      nodeId: types.stringLiteral(getNodeId(node)),
-      retval: node.body,
-    });
-    node.body = types.blockStatement([trace, ret]);
-  } else {
-    node.body.body.unshift(trace);
-    if (!types.isReturnStatement(node.body.body[node.body.body.length - 1])) {
-      node.body.body.push(buildFnEndTrace({
-        instrumentationId,
-        nodeId: types.stringLiteral(getNodeId(node)),
-      }));
-    }
-  }
-
+  node.body = trace;
   node.extra.biTracedFn = true;
 }
 

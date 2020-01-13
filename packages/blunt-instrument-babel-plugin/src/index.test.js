@@ -90,6 +90,12 @@ function namedCallsData(output, target) {
   return namedCalls(output, target).map(trev => trev.data);
 }
 
+function namedCall(output, target) {
+  const trevs = namedCalls(output, target);
+  expect(trevs).toHaveLength(1);
+  return trevs[0];
+}
+
 describe('instrumentation object output', () => {
   describe('assignTo', () => {
     it('assigns to a specified variable', () => {
@@ -175,6 +181,43 @@ describe('general examples', () => {
 });
 
 describe('special case syntax handling', () => {
+  describe('errors', () => {
+    test('parentId is set correctly when recovering from an error', () => {
+      const output = biEval(`
+        function one() {
+          throw new Error('one failed');
+        }
+        function two() {
+          try {
+            one();
+          } catch (e) {
+            123;
+          }
+        }
+
+        two();
+        try {
+          one();
+        } catch (e) {
+          456;
+        }
+      `);
+
+      const errors = codeTrevs(output, "new Error('one failed')");
+      expect(errors).toHaveLength(2);
+      const oneStarts = namedCalls(output, 'one');
+      expect(oneStarts).toHaveLength(2);
+      const twoStart = namedCall(output, 'two');
+      const twoCatch = codeTrev(output, '123');
+      const rootCatch = codeTrev(output, '456');
+
+      expect(oneStarts.map(trev => trev.id)).toEqual(errors.map(trev => trev.parentId));
+      expect(oneStarts.map(trev => trev.parentId)).toEqual([twoStart.id, undefined]);
+      expect(twoCatch.parentId).toEqual(twoStart.id);
+      expect(rootCatch.parentId).toBeUndefined();
+    });
+  });
+
   describe('method invocations', () => {
     test('this is bound and traced correctly when invoking a method', () => {
       const output = biEval(`
