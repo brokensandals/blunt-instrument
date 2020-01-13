@@ -1,3 +1,7 @@
+.TraceQueryForm {
+  padding: 10px;
+}
+
 .TraceQueryForm .node {
   background-color: lightgray;
   padding: 3px 6px;
@@ -47,8 +51,15 @@
   display: inline;
 }
 
-.TraceQueryForm .node-type-filters ul {
-  list-style-type: none;
-  margin: 10px 5px;
-  padding: 0;
+.TraceQueryForm .node-type-filters {
+  display: flex;
+  align-items: center;
+}
+
+.TraceQueryForm .label {
+  padding-right: 5px;
+}
+
+.TraceQueryForm .node-type-filters-select {
+  flex-grow: 1;
 }

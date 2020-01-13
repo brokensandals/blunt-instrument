@@ -2,6 +2,7 @@ import React from 'react';
 import './TraceQueryForm.css';
 import { getCodeSlice } from 'blunt-instrument-ast-utils';
 import update from 'immutability-helper';
+import Select from 'react-select';
 
 function NodeFilter({
   highlighted,
@@ -67,21 +68,18 @@ export function TraceQueryFormView({
     }
   }
 
-  const nodeTypeFilters = [];
-  for (const type of Object.keys(query.filters.excludeNodeTypes || {})) {
-    const handleChange = (event) => onTraceQueryChange(
-      update(query, { filters: { excludeNodeTypes: { $toggle: [type] }}}));
-    
-      nodeTypeFilters.push(
-      <li key={type}>
-        <label>
-          <input type="checkbox"
-                checked={query.filters.excludeNodeTypes[type]}
-                onChange={handleChange} />
-          Hide values of {type} nodes
-        </label>
-      </li>
-    );
+  const excludeNodeTypeOptions = [];
+  for (const type of new Set(querier.query().map(trev => trev.extra.node.type))) {
+    excludeNodeTypeOptions.push({ value: type, label: type });
+  }
+
+  const excludeNodeTypeValue = query.filters.excludeNodeTypes
+    .map(type => ({
+      value: type, label: type
+    }));
+
+  const handleExcludeNodeTypesChange = (value) => {
+    onTraceQueryChange(update(query, { filters: { excludeNodeTypes: { $set: (value || []).map(option => option.value) } } }));
   }
 
   return (
@@ -92,7 +90,14 @@ export function TraceQueryFormView({
       </div>
 
       <div className="node-type-filters">
-        <ul>{nodeTypeFilters}</ul>
+        <label className="label" id="node-type-filters-label">Exclude node types:</label>
+        <Select className="node-type-filters-select"
+                isMulti
+                options={excludeNodeTypeOptions}
+                value={excludeNodeTypeValue}
+                onChange={handleExcludeNodeTypesChange}
+                placeholder="(none)"
+                aria-labelledby="node-type-filters-label" />
       </div>
     </form>
   );

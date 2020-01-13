@@ -10,10 +10,7 @@ class AppContainer extends React.Component {
     this.state = {
       traceQuery: {
         filters: {
-          excludeNodeTypes: {
-            Identifier: true,
-            Literal: true,
-          },
+          excludeNodeTypes: [],
           onlyNodeIds: {},
         }
       },
