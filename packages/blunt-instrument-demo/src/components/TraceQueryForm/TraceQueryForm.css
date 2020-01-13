@@ -2,53 +2,14 @@
   padding: 10px;
 }
 
-.TraceQueryForm .node {
-  background-color: lightgray;
-  padding: 3px 6px;
-  border-radius: 5px;
-  cursor: default;
-  margin-right: 5px;
-  max-width: 25ex;
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.TraceQueryForm .node.highlighted {
-  background-color: orange;
-}
-
-.TraceQueryForm .node .id::before {
-  content: '#'
-}
-
-.TraceQueryForm .node .id {
-  font-size: 50%;
-  margin-right: 2px;
-}
-
-.TraceQueryForm .node .summary {
-  padding-left: 2px;
-  border-left: 1px solid black;
-}
-
 .TraceQueryForm .node-filters {
-  display: block;
-  height: 1em;
-  white-space: nowrap;
-  margin: 5px 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
-.TraceQueryForm .node-filters ul {
-  list-style-type: none;
-  margin: 0 0 0 5px;
-  padding: 0;
-  display: inline;
-}
-
-.TraceQueryForm .node-filters li {
-  display: inline;
+.TraceQueryForm .node-filters-select {
+  flex-grow: 1;
 }
 
 .TraceQueryForm .node-type-filters {
@@ -58,6 +19,8 @@
 
 .TraceQueryForm .label {
   padding-right: 5px;
+  width: 20ex;
+  max-width: 20ex;
 }
 
 .TraceQueryForm .node-type-filters-select {

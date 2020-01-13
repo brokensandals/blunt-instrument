@@ -1,79 +1,50 @@
 import React from 'react';
 import './TraceQueryForm.css';
-import { getCodeSlice } from 'blunt-instrument-ast-utils';
+import { getNodeId, getCodeSlice } from 'blunt-instrument-ast-utils';
 import update from 'immutability-helper';
 import Select from 'react-select';
-
-function NodeFilter({
-  highlighted,
-  nodeId,
-  onHoveredNodeChange,
-  onNodeSelectedToggle,
-  querier,
-}) {
-  const node = querier.astQuerier.getNodeById(nodeId);
-  if (!node) {
-    console.log('No node for nodeId: ' + nodeId);
-  }
-
-  const summary = [<span className="id">{nodeId}</span>]
-  if (node) {
-    summary.push(<code className="summary">{getCodeSlice(node)}</code>);
-  }
-
-  const handleMouseLeave = () => onHoveredNodeChange(null);
-  const handleMouseOver = () => onHoveredNodeChange(nodeId);
-
-  const handleClick = (event) => {
-    onNodeSelectedToggle(nodeId);
-    event.preventDefault();
-  };
-
-  const className = [
-    'node',
-    highlighted ? 'highlighted' : null
-  ].join(' ');
-  return (
-    <span className={className}
-          onClick={handleClick}
-          onMouseLeave={handleMouseLeave}
-          onMouseOver={handleMouseOver}>
-      {summary}
-    </span>
-  );
-}
 
 export function TraceQueryFormView({
   highlightedNodeId,
   onTraceQueryChange = (query) => {},
   onHoveredNodeChange = (nodeId) => {},
-  onNodeSelectedToggle = (nodeId) => {},
   querier,
   query,
 }) {
-  const nodeFilters = [];
-  const onlyNodeIds = query.filters.onlyNodeIds ?
-    Object.keys(query.filters.onlyNodeIds)
-      .filter(k => query.filters.onlyNodeIds[k]) : [];
-  if (onlyNodeIds.length > 0) {
-    for (const nodeId of onlyNodeIds) {
-      nodeFilters.push(
-        <li key={nodeId}>
-          <NodeFilter highlighted={highlightedNodeId === nodeId}
-                      nodeId={nodeId}
-                      querier={querier}
-                      onHoveredNodeChange={onHoveredNodeChange}
-                      onNodeSelectedToggle={onNodeSelectedToggle} />
-        </li>);
+  function nodeOption(node) {
+    const value = getNodeId(node);
+    const codeSlice = getCodeSlice(node);
+    const codePreview = codeSlice.length > 20 ? codeSlice.slice(0, 20) + '...' : codeSlice;
+    const label = node.type + '#' + value + ': ' + codePreview;
+    return { value, label };
+  }
+  const includeNodesOptions = [];
+  for (const node of querier.astQuerier.filterNodes(Boolean)) {
+    console.log(node)
+    includeNodesOptions.push(nodeOption(node));
+  }
+
+  const includeNodesValue = [];
+  for (const nodeId in query.filters.onlyNodeIds) {
+    if (query.filters.onlyNodeIds[nodeId]) {
+      includeNodesValue.push(nodeOption(querier.astQuerier.getNodeById(nodeId)));
     }
   }
 
-  const excludeNodeTypeOptions = [];
-  for (const type of new Set(querier.query().map(trev => trev.extra.node.type))) {
-    excludeNodeTypeOptions.push({ value: type, label: type });
+  const handleIncludeNodesChange = (value) => {
+    const onlyNodeIds = {};
+    for (const selected of (value || [])) {
+      onlyNodeIds[selected.value] = true;
+    }
+    onTraceQueryChange(update(query, { filters: { onlyNodeIds: { $set: onlyNodeIds }}}))
   }
 
-  const excludeNodeTypeValue = query.filters.excludeNodeTypes
+  const excludeNodeTypesOptions = [];
+  for (const type of new Set(querier.query().map(trev => trev.extra.node.type))) {
+    excludeNodeTypesOptions.push({ value: type, label: type });
+  }
+
+  const excludeNodeTypesValue = query.filters.excludeNodeTypes
     .map(type => ({
       value: type, label: type
     }));
@@ -85,16 +56,22 @@ export function TraceQueryFormView({
   return (
     <form className="TraceQueryForm">
       <div className="node-filters">
-        {nodeFilters.length > 0 ? 'Only showing values for:' : ''}
-        <ul>{nodeFilters}</ul>
+        <label className="label" id="node-filters-label">Only include nodes:</label>
+        <Select className="node-filters-select"
+                isMulti
+                options={includeNodesOptions}
+                value={includeNodesValue}
+                onChange={handleIncludeNodesChange}
+                placeholder="(all)"
+                aria-labelledby="node-filters-select" />
       </div>
 
       <div className="node-type-filters">
         <label className="label" id="node-type-filters-label">Exclude node types:</label>
         <Select className="node-type-filters-select"
                 isMulti
-                options={excludeNodeTypeOptions}
-                value={excludeNodeTypeValue}
+                options={excludeNodeTypesOptions}
+                value={excludeNodeTypesValue}
                 onChange={handleExcludeNodeTypesChange}
                 placeholder="(none)"
                 aria-labelledby="node-type-filters-label" />

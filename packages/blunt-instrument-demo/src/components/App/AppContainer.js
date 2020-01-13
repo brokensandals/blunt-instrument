@@ -41,6 +41,12 @@ class AppContainer extends React.Component {
   }
 
   handleNodeSelectedToggle(nodeId) {
+    if (!this.state.traceQuery.filters.onlyNodeIds[nodeId] &&
+          !(this.state.evalResult.traceQuerier.astQuerier.getNodeById(nodeId))) {
+      // The user tried to select a node that's only present in the post-instrumentation AST.
+      // We won't allow this, since there can never be any trevs associated to those nodes.
+      return;
+    }
     this.handleTraceQueryChange(
       update(this.state.traceQuery, {
         filters: { onlyNodeIds:
