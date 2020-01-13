@@ -78,7 +78,6 @@
 
 .TraceQueryForm {
   grid-area: trace-query-form;
-  overflow: auto;
   font-size: small;
 }
 
