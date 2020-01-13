@@ -1,5 +1,44 @@
 import * as types from '@babel/types';
 
+/**
+ * A trace event. Currently supported types:
+ * 
+ * - expr: the result of evaluating an expression. The data is the result of the expression.
+ * - fn-start: recorded at the beginning of a function. The data is an object containing
+ *     all the named parameters of the function, plus "this" and "arguments".
+ * - fn-ret: recorded when returning from a function. The data is the return value.
+ * 
+ * @typedef {Object} Trev
+ * @property {number} [parentId] - id of the trev enclosing this one
+ * @property {number} id
+ * @property {("expr"|"fn-start"|"fn-ret")} type - indicates what sort of trace event this represents
+ * @property {string} nodeId - indicates the AST node the event is associated with
+ * @property {*} [data] - data associated; the meaning varies by trev type
+ */
+
+ /**
+  * @typedef {Trev} TrevExtended
+  * @property {Object} extra
+  * @property {Node} extra.node - the babel AST node representing the part of the original code
+  *   that led to this trev
+  * @property {number[]} extra.ancestorIds - the trev IDs of this trev's parent, and its parent, etc.
+  */
+
+/**
+ * Converts a query specifying a whitelist or blacklist into a standard format.
+ * Output format is an object where the keys represent the values to be whitelisted
+ * or blacklisted, and the value is "true" if the key should be included in the whitelist
+ * or blacklist. If the value is "false", the key should be ignored.
+ * 
+ * The input can already be in the output format, or can be an array or primitive.
+ * 
+ * Examples:
+ * 'a' -> {'a': true}
+ * ['a', 'b'] -> {'a': true, 'b': true}
+ * {'a': true, 'b': false} -> {'a': true, 'b': false}
+ * @param {*} filter 
+ * @returns {Object} the converted filter
+ */
 function toFilterObject(filter) {
   if (filter === null || filter === undefined) {
     return {};
@@ -22,7 +61,7 @@ function toFilterObject(filter) {
 export class TraceQuerier {
   /**
    * @param {ASTQuerier} astQuerier - an ASTQuerier for the AST of the original code that blunt-instrument instrumented
-   * @param {[object]} trace - the trace produced by blunt-instrument
+   * @param {Trev[]} trace - the trace produced by blunt-instrument
    */
   constructor(astQuerier, trace) {
     this.astQuerier = astQuerier;
@@ -44,7 +83,9 @@ export class TraceQuerier {
         throw new Error(`Trev ID ${trace[i].id} has unknown node ID ${trace[i].nodeId}`);
       }
 
-      trevs.push({ ancestorIds, node, ...trace[i] });
+      const extra = { ancestorIds, node, };
+
+      trevs.push({ extra, ...trace[i] });
     }
     this.trevs = trevs;
   }
@@ -52,7 +93,7 @@ export class TraceQuerier {
   /**
    * Look up a trev (trace event) by its ID.
    * @param {number} id
-   * @return {object} the trev
+   * @return {TrevExtended} the trev
    */
   getTrevById(id) {
     if (id < 1 || id > this.trevs.length) {
@@ -64,12 +105,6 @@ export class TraceQuerier {
 
   /**
    * Returns all trevs (trace events) matching the given criteria.
-   * 
-   * The returned trevs have the following structure:
-   * id: number - unique identifier for the trev
-   * node: Node - babel AST node corresponding to the code being executed/evaluated
-   * type: string - the type of trev, currently only "expr"
-   * data: * - for expr trevs, the result of the expression evaluation, as recorded by the configured transcriber
    * 
    * All filters of type `object` support three different syntaxes. The following are equivalent:
    * { filters: { onlyNodeIds: { node1: true, node2: true } } }
@@ -88,7 +123,7 @@ export class TraceQuerier {
    * @param {object} criteria.filters.excludeNodeTypes -
    *   keys are babel node types and values are booleans. Any trevs whose node type matches
    *   one of the keys with truthy values will be excluded from the results.
-   * @returns {[object]} matching trace events in the order they were recorded
+   * @returns {TrevExtended[]} matching trace events in the order they were recorded
    */
   query(
     {
@@ -107,7 +142,7 @@ export class TraceQuerier {
     eachTrev:
     for (const trev of this.trevs) {
       for (const type of Object.keys(excludeNodeTypes)) {
-        if (excludeNodeTypes[type] && types.is(type, trev.node)) {
+        if (excludeNodeTypes[type] && types.is(type, trev.extra.node)) {
           continue eachTrev;
         }
       }

@@ -64,9 +64,12 @@ describe('TraceQuerier', () => {
         expect(traceQuerier.getTrevById(3)).toEqual({
           id: 3,
           nodeId: trevs[2].nodeId,
-          node: astQuerier.getNodeById(trevs[2].nodeId),
           type: 'expr',
           data: 7,
+          extra: {
+            ancestorIds: [],
+            node: astQuerier.getNodesByCodeSlice('num + by')[0],
+          },
         });
       });
     });
@@ -80,7 +83,15 @@ describe('TraceQuerier', () => {
       it('returns correct details', () => {
         const result = traceQuerier.query();
         expect(result[2]).toEqual({
-          id: 3, nodeId: trevs[2].nodeId, node: astQuerier.getNodesByCodeSlice('num + by')[0], type: 'expr', data: 7 });
+          id: 3,
+          nodeId: trevs[2].nodeId,
+          type: 'expr',
+          data: 7,
+          extra: {
+            ancestorIds: [],
+            node: astQuerier.getNodesByCodeSlice('num + by')[0],
+          },
+        });
       });
 
       describe('onlyNodeIds', () => {

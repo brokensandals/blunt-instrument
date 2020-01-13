@@ -59,11 +59,11 @@ function TrevTableView({
 
     const className = [
       highlightedTrevId != null && trev.id === highlightedTrevId ? 'highlighted-trev' : null,
-      highlightedTrevId != null && trev.ancestorIds.includes(highlightedTrevId) ? 'highlighted-trev-descendant' : null,
-      highlightedNodeId != null && getNodeId(trev.node) === highlightedNodeId ? 'highlighted-node' : null,
+      highlightedTrevId != null && trev.extra.ancestorIds.includes(highlightedTrevId) ? 'highlighted-trev-descendant' : null,
+      highlightedNodeId != null && getNodeId(trev.extra.node) === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
-    const handleCodeClick = () => onNodeSelectedToggle(getNodeId(trev.node));
+    const handleCodeClick = () => onNodeSelectedToggle(getNodeId(trev.extra.node));
     const handleLogValueClick = () => console.log(trev.data);
 
     entries.push(
@@ -72,7 +72,7 @@ function TrevTableView({
         <td className="id">{trev.id}</td>
         <td className="type">{trev.type}</td>
         <td className="node" onClick={handleCodeClick}>
-          <code>{getCodeSlice(trev.node)}</code>
+          <code>{getCodeSlice(trev.extra.node)}</code>
         </td>
         <td className="value">
           <ValueDisplay value={trev.data} />
