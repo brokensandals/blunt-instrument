@@ -44,6 +44,7 @@
 
 .TrevTable .id, .parent-id, .type {
   width: 4ex;
+  white-space: nowrap;
 }
 
 .TrevTable .node {
