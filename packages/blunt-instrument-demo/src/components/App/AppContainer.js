@@ -4,20 +4,22 @@ import AppView from './AppView';
 import { examples } from 'blunt-instrument-test-resources';
 import { instrumentedEval } from 'blunt-instrument-eval';
 
+const defaultQueryState = {
+  traceQuery: {
+    filters: {
+      excludeNodeTypes: [],
+      onlyNodeIds: {},
+    }
+  },
+  highlightedTrevId: null,
+  highlightedNodeId: null,
+}
+
 class AppContainer extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      traceQuery: {
-        filters: {
-          excludeNodeTypes: [],
-          onlyNodeIds: {},
-        }
-      },
-      highlightedTrevId: null,
-      highlightedNodeId: null,
-    };
-    Object.assign(this.state, this.doRun(examples.factorial, this.state.traceQuery));
+    this.state = {...defaultQueryState};
+    Object.assign(this.state, this.doRun(examples.factorial));
 
     this.handleTraceQueryChange = this.handleTraceQueryChange.bind(this);
     this.handleHoveredTrevChange = this.handleHoveredTrevChange.bind(this);
@@ -54,7 +56,7 @@ class AppContainer extends React.Component {
       }));
   }
 
-  doRun(source, traceQuery) {
+  doRun(source) {
     let evalResult;
     try {
       evalResult = instrumentedEval(source, { saveInstrumented: true });
@@ -68,7 +70,8 @@ class AppContainer extends React.Component {
       evalResult,
       runError: null,
       sourceDraft: source,
-      ...this.doQuery(evalResult.traceQuerier, traceQuery),
+      ...defaultQueryState,
+      ...this.doQuery(evalResult.traceQuerier, defaultQueryState.traceQuery),
     };
   }
 
@@ -81,7 +84,7 @@ class AppContainer extends React.Component {
   }
 
   handleRun(source) {
-    this.setState(this.doRun(source, this.state.traceQuery));
+    this.setState(this.doRun(source));
   }
 
   handleSourceDraftChange(sourceDraft) {
