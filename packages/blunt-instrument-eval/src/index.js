@@ -48,7 +48,7 @@ may interfere with instrumentedEval, the code, or both.`);
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);
     copyNodeIdsBetweenASTs(babelResult.ast, parsed);
-    addNodeIdsToAST(parsed, 'instr-');
+    addNodeIdsToAST(parsed, 'i');
     attachCodeSlicesToAST(parsed, code);
     result.instrumentedASTQuerier = new ASTQuerier(parsed);
   }

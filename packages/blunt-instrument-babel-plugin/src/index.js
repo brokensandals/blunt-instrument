@@ -307,7 +307,7 @@ const instrumentVisitor = {
 
 const rootVisitor = {
   Program(path, misc) {
-    addNodeIdsToAST(path.node, 'src-');
+    addNodeIdsToAST(path.node, 's');
     const state = addInstrumenterInit(path, misc.opts);
     path.traverse(instrumentVisitor, { state });
   }
