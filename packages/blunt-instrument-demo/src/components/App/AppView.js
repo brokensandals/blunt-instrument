@@ -3,6 +3,7 @@ import './App.css';
 import AnnotatedCode from '../AnnotatedCode';
 import ASTNav from '../ASTNav';
 import TrevTable from '../TrevTable';
+import TrevJSON from '../TrevJSON';
 import TraceQueryForm from '../TraceQueryForm';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -120,11 +121,30 @@ function AppView({
                       onNodeSelectedToggle={onNodeSelectedToggle}
                       querier={evalResult.traceQuerier}
                       query={traceQuery} />
-      <TrevTable trevs={trevs}
-                 highlightedTrevId={highlightedTrevId}
-                 highlightedNodeId={highlightedNodeId}
-                 onHoveredTrevChange={onHoveredTrevChange}
-                 onNodeSelectedToggle={onNodeSelectedToggle} />
+      <div className="trev-tabs">
+        <Tabs>
+          <TabList>
+            <Tab>Trace Events</Tab>
+            <Tab>Trace Events JSON</Tab>
+          </TabList>
+
+          <TabPanel>
+            <TrevTable trevs={trevs}
+                      highlightedTrevId={highlightedTrevId}
+                      highlightedNodeId={highlightedNodeId}
+                      onHoveredTrevChange={onHoveredTrevChange}
+                      onNodeSelectedToggle={onNodeSelectedToggle} />
+          </TabPanel>
+
+          <TabPanel>
+            <TrevJSON trevs={trevs}
+                      highlightedTrevId={highlightedTrevId}
+                      highlightedNodeId={highlightedNodeId}
+                      onHoveredTrevChange={onHoveredTrevChange}
+                      onNodeSelectedToggle={onNodeSelectedToggle} />
+          </TabPanel>
+        </Tabs>
+      </div>
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>
