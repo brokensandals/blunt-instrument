@@ -17,8 +17,11 @@ function ASTObjectView({
   const {
     type = null,
     loc = null,
+    // eslint-disable-next-line
     start = null,
+    // eslint-disable-next-line
     end = null,
+    // eslint-disable-next-line
     extra = null,
     ...rest
   } = object;
@@ -34,8 +37,8 @@ function ASTObjectView({
   for (const key in rest) {
     const val = rest[key];
 
-    if ((Array.isArray(val) && val.length == 0) ||
-        (typeof val === 'object' && (val == null || Object.keys(val).length == 0)) ||
+    if ((Array.isArray(val) && val.length === 0) ||
+        (typeof val === 'object' && (val == null || Object.keys(val).length === 0)) ||
         typeof val === 'undefined') {
       // don't display it
     }
