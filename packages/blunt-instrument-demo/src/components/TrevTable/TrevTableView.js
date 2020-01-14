@@ -64,7 +64,6 @@ function TrevTableView({
     ].join(' ');
 
     const handleCodeClick = () => onNodeSelectedToggle(getNodeId(trev.extra.node));
-    const handleLogValueClick = () => console.log(trev.data);
 
     entries.push(
       <tr key={trev.id} onMouseOver={handleMouseOver} className={className}>
@@ -74,9 +73,8 @@ function TrevTableView({
         <td className="node" onClick={handleCodeClick}>
           <code>{getCodeSlice(trev.extra.node)}</code>
         </td>
-        <td className="value">
+        <td className="data">
           <ValueDisplay value={trev.data} />
-          <button className="console-log" onClick={handleLogValueClick}>log</button>
         </td>
       </tr>
     );
