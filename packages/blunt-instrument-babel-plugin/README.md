@@ -24,7 +24,6 @@ const opts = {
     assignTo: null,
     exportAs: null,
   },
-  valueTranscriber: 'simple',
 };
 
 const instrumentedCode = babel.transformSync(
@@ -53,6 +52,7 @@ When you run the instrumented code, it will create an **instrumentation object**
       id: 2,
       type: 'fn-start', // these trevs record the beginning of a function's execution
       nodeId: 'src-2', // the Function node that is being entered
+      // FIXME: the data field is now encoded using object-graph-as-json, as mentioned below, so it actually looks slightly different than this
       data: { // the values of `this`, `arguments`, and all named parameters, at the beginning of the function's execution
         this: { /* ... */ },
         arguments: { 0: 'bar'},
@@ -103,44 +103,10 @@ Alternatively, you can set `exportAs` to some name, and the plugin will generate
 export const nameYouSpecified = /* the instrumentation object */;
 ```
 
-### Transcribers
+### Data Encoding
 
 One difficulty in producing a full trace of a program is that every value (every number and string, every state of every array and object) needs to be copied or serialized in some way.
-Different copying mechanisms will have different limitations and performance costs.
-
-You can choose which mechanism to use by setting the `valueTranscriber` option.
-The currently supported options are `none` and `simple`.
-
-#### none
-
-This option causes all values to be put directly into the trace without any attempt to clone or serialize them.
-This will work fine for programs that only deal with immutable data types or never mutate data.
-
-For example, for this program:
-
-```javascript
-const array = [];
-array.push(1);
-array.push(2);
-array.push(3);
-```
-
-The tracer will record separate trevs for when `array` is evaluated on lines 2, 3, and 4.
-But when run with `{valueTranscriber: 'none'}`, all of those trevs will have the same `data`, which will be `[1, 2, 3]` at the end of program execution.
-By contrast, the `simple` transcriber would copy the array at each point, resulting in three separate values: `[]`, `[1]`, and `[1, 2]`.
-
-#### simple
-
-This option handles values as follows:
-
-- Objects and arrays (anything where `typeof value === 'object'`) are converted to JSON and back again before inserting into the trace.
-- All other values are inserted directly into the trace without any attempt to clone or serialize them.
-
-This ensures that if an object or array is mutated after the tracer records it, the mutation does not alter the recorded value.
-However, there are limitations:
-
-- Mutations on values of other mutable types, such as functions, can still alter the trace.
-- Cyclic references in objects or arrays will cause the tracer to throw an exception.
-- Values within objects and arrays are subject to the limitations of `JSON.stringify`; for example, `BigInt` values nested within objects/arrays will cause the tracer to throw an exception, and functions nested within objects/arrays will be omitted.
+Currently, the `data` field in every trev is produced using [object-graph-as-json][object-graph-as-json], which attempts to preserve as much information about the objects being copied as it can.
 
 [blunt-instrument-eval]: ../blunt-instrument-eval/README.md
+[object-graph-as-json]: https://github.com/brokensandals/object-graph-as-json

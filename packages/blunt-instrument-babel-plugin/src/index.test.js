@@ -3,6 +3,7 @@ import { bluntInstrumentPlugin } from '.';
 import { examples } from 'blunt-instrument-test-resources';
 import { getNodeId, attachCodeSlicesToAST, ASTQuerier, getCodeSlice } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep';
+import { UnsafeDecoder } from 'object-graph-as-json';
 
 /**
  * Runs blunt-instrument-babel-plugin on the given code and returns the instrumented code.
@@ -54,6 +55,12 @@ function biEval(code, pluginOpts = {}) {
   return { astq, code, instrumented, ...result };
 }
 
+const decoder = new UnsafeDecoder();
+decoder.onFailure = () => undefined;
+function decode(data) {
+  return decoder.decode(data);
+}
+
 function trevsForNode({ instrumentation: { trace } }, node) {
   return trace.filter((trev) => trev.nodeId === getNodeId(node));
 }
@@ -65,7 +72,7 @@ function codeTrevs(output, target, trevType = 'expr') {
 }
 
 function codeValues(output, target, trevType = 'expr') {
-  return codeTrevs(output, target, trevType).map(trev => trev.data);
+  return codeTrevs(output, target, trevType).map(trev => decode(trev.data));
 }
 
 function codeTrev(output, target, trevType = 'expr') {
@@ -75,7 +82,7 @@ function codeTrev(output, target, trevType = 'expr') {
 }
 
 function codeValue(output, target, trevType = 'expr') {
-  return codeTrev(output, target, trevType).data;
+  return decode(codeTrev(output, target, trevType).data);
 }
 
 function namedCalls(output, target) {
@@ -87,7 +94,7 @@ function namedCalls(output, target) {
 }
 
 function namedCallsData(output, target) {
-  return namedCalls(output, target).map(trev => trev.data);
+  return namedCalls(output, target).map(trev => decode(trev.data));
 }
 
 function namedCall(output, target) {
@@ -158,7 +165,7 @@ describe('general examples', () => {
     expect(output.fac5).toEqual(120);
     
     const calls = namedCalls(output, 'fac');
-    expect(calls.map(trev => trev.data)).toEqual([5, 4, 3, 2, 1].map(n => ({ arguments: { 0: n }, n })));
+    expect(calls.map(trev => decode(trev.data))).toEqual([5, 4, 3, 2, 1].map(n => ({ arguments: { 0: n }, n })));
     const contextIds = calls.map(trev => trev.id);
     for (let i = 1; i < 5; i++) {
       expect(contextIds[i]).not.toEqual(contextIds[i - 1]);
@@ -167,16 +174,16 @@ describe('general examples', () => {
       [undefined].concat(contextIds.slice(0, 4)));
     
     const rets = codeTrevs(output, 'return n == 1 ? 1 : n * fac(n - 1);', 'fn-ret');
-    expect(rets.map(trev => trev.data)).toEqual([1, 2, 6, 24, 120]);
+    expect(rets.map(trev => decode(trev.data))).toEqual([1, 2, 6, 24, 120]);
     expect(rets.map(trev => trev.parentId).reverse()).toEqual(contextIds);
 
     const facNMinus1 = codeTrevs(output, 'fac(n - 1)');
     expect(facNMinus1.map(trev => trev.parentId).reverse()).toEqual(contextIds.slice(0, 4));
-    expect(facNMinus1.map(trev => trev.data)).toEqual([1, 2, 6, 24]);
+    expect(facNMinus1.map(trev => decode(trev.data))).toEqual([1, 2, 6, 24]);
 
     const nEq1 = codeTrevs(output, 'n == 1');
     expect(nEq1.map(trev => trev.parentId)).toEqual(contextIds);
-    expect(nEq1.map(trev => trev.data)).toEqual([false, false, false, false, true]);
+    expect(nEq1.map(trev => decode(trev.data))).toEqual([false, false, false, false, true]);
   });
 });
 
@@ -228,12 +235,16 @@ describe('special case syntax handling', () => {
         output.val = obj.val;
       `);
       expect(output.val).toEqual('new');
-      expect(codeValue(output, 'this')).toEqual({ val: 'old'}); // note, this would also include an fn property if the serializer were better
+      const thisValue = codeValue(output, 'this');
+      expect(thisValue.val).toEqual('old');
+      expect(typeof thisValue.fn).toEqual('function');
       expect(codeValues(output, 'obj.fn')).toHaveLength(0);
-      expect(namedCallsData(output, 'fn')).toEqual([{
-        "this": { val: 'old' },
-        arguments: {},
-      }]);
+      const callData = namedCallsData(output, 'fn');
+      expect(callData).toHaveLength(1);
+      expect(callData[0]['this']).toBeDefined();
+      expect(callData[0]['this'].val).toEqual('old');
+      expect(typeof callData[0]['this'].fn).toEqual('function');
+      expect(callData[0]['arguments']).toEqual({});
     });
 
     test('this is bound correctly when invoking the result of a getter, and the getter is only called once', () => {

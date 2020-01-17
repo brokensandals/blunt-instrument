@@ -3,10 +3,302 @@
 exports[`demo examples factorial 1`] = `
 "\\"use strict\\";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\\"value\\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError(\\"Invalid attempt to destructure non-iterable instance\\"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === \\"[object Arguments]\\")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\\"return\\"] != null) _i[\\"return\\"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _typeof(obj) { if (typeof Symbol === \\"function\\" && typeof Symbol.iterator === \\"symbol\\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \\"function\\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \\"symbol\\" : typeof obj; }; } return _typeof(obj); }
 
 var _instrumentation = {
   ast: JSON.parse(\\"{\\\\\\"type\\\\\\":\\\\\\"Program\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"sourceType\\\\\\":\\\\\\"module\\\\\\",\\\\\\"interpreter\\\\\\":null,\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"FunctionDeclaration\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":9,\\\\\\"end\\\\\\":12,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s3\\\\\\"}},\\\\\\"generator\\\\\\":false,\\\\\\"async\\\\\\":false,\\\\\\"params\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":13,\\\\\\"end\\\\\\":14,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":14},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s4\\\\\\"}}],\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":16,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ReturnStatement\\\\\\",\\\\\\"start\\\\\\":20,\\\\\\"end\\\\\\":55,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":2},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":37}},\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"ConditionalExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":28,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":10},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s9\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"==\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":32,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s10\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s8\\\\\\"}},\\\\\\"consequent\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":36,\\\\\\"end\\\\\\":37,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":19}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s11\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"alternate\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":41,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":23},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s13\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"*\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":47,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":29},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s15\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":49,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":31},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s17\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"-\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":52,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s18\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s16\\\\\\"}}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s14\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s12\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s7\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s6\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s5\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s2\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":58,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":70,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"result\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"result\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s21\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":76,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":18},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s23\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":77,\\\\\\"end\\\\\\":78,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":19},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":20}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":3,\\\\\\"raw\\\\\\":\\\\\\"3\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s24\\\\\\"},\\\\\\"value\\\\\\":3}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s22\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s20\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s19\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s1\\\\\\"}}\\"),
+  encoder: function () {
+    var Encoder = function (t) {
+      var e = {};
+
+      function n(r) {
+        if (e[r]) return e[r].exports;
+        var o = e[r] = {
+          i: r,
+          l: !1,
+          exports: {}
+        };
+        return t[r].call(o.exports, o, o.exports, n), o.l = !0, o.exports;
+      }
+
+      return n.m = t, n.c = e, n.d = function (t, e, r) {
+        n.o(t, e) || Object.defineProperty(t, e, {
+          enumerable: !0,
+          get: r
+        });
+      }, n.r = function (t) {
+        \\"undefined\\" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {
+          value: \\"Module\\"
+        }), Object.defineProperty(t, \\"__esModule\\", {
+          value: !0
+        });
+      }, n.t = function (t, e) {
+        if (1 & e && (t = n(t)), 8 & e) return t;
+        if (4 & e && \\"object\\" == _typeof(t) && t && t.__esModule) return t;
+        var r = Object.create(null);
+        if (n.r(r), Object.defineProperty(r, \\"default\\", {
+          enumerable: !0,
+          value: t
+        }), 2 & e && \\"string\\" != typeof t) for (var o in t) {
+          n.d(r, o, function (e) {
+            return t[e];
+          }.bind(null, o));
+        }
+        return r;
+      }, n.n = function (t) {
+        var e = t && t.__esModule ? function () {
+          return t[\\"default\\"];
+        } : function () {
+          return t;
+        };
+        return n.d(e, \\"a\\", e), e;
+      }, n.o = function (t, e) {
+        return Object.prototype.hasOwnProperty.call(t, e);
+      }, n.p = \\"\\", n(n.s = 1);
+    }([function (t, e, n) {
+      \\"use strict\\";
+
+      n.d(e, \\"b\\", function () {
+        return o;
+      }), n.d(e, \\"a\\", function () {
+        return i;
+      });
+      var r = [[void 0, \\"undefined\\"], [NaN, \\"NaN\\"], [1 / 0, \\"Infinity\\"], [Symbol.asyncIterator, \\"Symbol.asyncIterator\\"], [Symbol.hasInstance, \\"Symbol.hasInstance\\"], [Symbol.isConcatSpreadable, \\"Symbol.isConcatSpreadable\\"], [Symbol.iterator, \\"Symbol.iterator\\"], [Symbol.match, \\"Symbol.match\\"], [Symbol.matchAll, \\"Symbol.matchAll\\"], [Symbol.replace, \\"Symbol.replace\\"], [Symbol.search, \\"Symbol.search\\"], [Symbol.species, \\"Symbol.species\\"], [Symbol.split, \\"Symbol.split\\"], [Symbol.toPrimitive, \\"Symbol.toPrimitive\\"], [Symbol.toStringTag, \\"Symbol.toStringTag\\"], [Symbol.unscopables, \\"Symbol.unscopables\\"], [Array, \\"Array\\"], [Array.prototype, \\"Array.prototype\\"], [Function, \\"Function\\"], [Function.prototype, \\"Function.prototype\\"], [Object, \\"Object\\"], [Object.prototype, \\"Object.prototype\\"]],
+          o = new Map(r),
+          i = new Map(r.map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            t = _ref2[0],
+            e = _ref2[1];
+
+        return [e, t];
+      }));
+    }, function (t, e, n) {
+      \\"use strict\\";
+
+      n.r(e), n.d(e, \\"default\\", function () {
+        return o;
+      });
+      var r = n(0);
+
+      var o =
+      /*#__PURE__*/
+      function () {
+        function o() {
+          _classCallCheck(this, o);
+
+          this.objectIds = new WeakMap(), this.symbolIds = new Map(), this.nextId = 1;
+        }
+
+        _createClass(o, [{
+          key: \\"internObject\\",
+          value: function internObject(t) {
+            var _this = this;
+
+            var e = this.objectIds.get(t);
+            return e || (e = function () {
+              var _postfix = _this.nextId;
+              _this.nextId += 1;
+              return _postfix;
+            }().toString(), this.objectIds.set(t, e)), e;
+          }
+        }, {
+          key: \\"internSymbol\\",
+          value: function internSymbol(t) {
+            var _this2 = this;
+
+            var e = this.symbolIds.get(t);
+            return e || (e = function () {
+              var _postfix2 = _this2.nextId;
+              _this2.nextId += 1;
+              return _postfix2;
+            }().toString(), this.symbolIds.set(t, e)), e;
+          }
+        }, {
+          key: \\"encode\\",
+          value: function encode(t) {
+            var _this3 = this;
+
+            var e = null;
+
+            var n = function n(t) {
+              if (t.writable && t.enumerable && t.configurable && !t.get && !t.set) return o(t.value);
+              {
+                var _e2 = {
+                  type: \\"property\\"
+                };
+                return t.get && (_e2.get = o(t.get)), t.set && (_e2.set = o(t.set)), t.get || t.set || (_e2.value = o(t.value)), t.writable && (_e2.writable = !0), t.enumerable && (_e2.enumerable = !0), t.configurable && (_e2.configurable = !0), _e2;
+              }
+            },
+                o = function o(t) {
+              if (null === t) return null;
+              var i = r.b.get(t);
+              if (i) return {
+                name: i,
+                type: \\"builtin\\"
+              };
+
+              var c = _typeof(t);
+
+              switch (c) {
+                case \\"undefined\\":
+                  return {
+                    name: \\"undefined\\",
+                    type: \\"builtin\\"
+                  };
+
+                case \\"boolean\\":
+                case \\"number\\":
+                  return t;
+
+                case \\"bigint\\":
+                  return {
+                    string: t.toString(),
+                    type: \\"bigint\\"
+                  };
+
+                case \\"string\\":
+                  return t;
+
+                case \\"symbol\\":
+                  {
+                    var _e3 = _this3.internSymbol(t);
+
+                    return {
+                      description: t.description,
+                      id: _e3,
+                      type: c
+                    };
+                  }
+
+                case \\"function\\":
+                case \\"object\\":
+                  {
+                    var _i2 = _this3.internObject(t);
+
+                    if (e || (e = new Set()), e.has(_i2)) return {
+                      id: _i2,
+                      type: \\"ref\\"
+                    };
+                    e.add(_i2);
+                    var _c = {
+                      id: _i2,
+                      type: \\"object\\"
+                    },
+                        l = Object.getPrototypeOf(t),
+                        s = Object.getOwnPropertyNames(t),
+                        a = Object.getOwnPropertySymbols(t);
+                    var u = Object.prototype,
+                        y = !1;
+
+                    if (\\"object\\" == _typeof(t) && l === Array.prototype) {
+                      var _e4 = Object.getOwnPropertyDescriptor(t, \\"length\\"),
+                          _n2 = s.indexOf(\\"length\\");
+
+                      _e4 && s[_n2 - 1] == _e4.value - 1 && _e4.value >= 0 && (_c.type = \\"array\\", u = Array.prototype, y = !0);
+                    } else \\"function\\" == typeof t && (u = Function.prototype, _c.type = \\"function\\", _c.source = Function.prototype.toString.apply(t));
+
+                    l !== u && (_c.prototype = o(l));
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                      for (var _iterator = s[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var _e5 = _step.value;
+                        if (y && \\"length\\" === _e5) continue;
+
+                        var _r = Object.getOwnPropertyDescriptor(t, _e5);
+
+                        _c[\\".\\".concat(_e5)] = n(_r);
+                      }
+                    } catch (err) {
+                      _didIteratorError = true;
+                      _iteratorError = err;
+                    } finally {
+                      try {
+                        if (!_iteratorNormalCompletion && _iterator[\\"return\\"] != null) {
+                          _iterator[\\"return\\"]();
+                        }
+                      } finally {
+                        if (_didIteratorError) {
+                          throw _iteratorError;
+                        }
+                      }
+                    }
+
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                      for (var _iterator2 = a[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var _e6 = _step2.value;
+
+                        var _o = void 0;
+
+                        var _i3 = r.b.get(_e6);
+
+                        if (_i3) _o = \\"@\\".concat(_i3);else {
+                          var _t = _this3.internSymbol(_e6);
+
+                          _o = void 0 === _e6.description ? \\"~\\".concat(_t) : \\"~\\".concat(_t, \\"|\\").concat(_e6.description);
+                        }
+
+                        var _l = Object.getOwnPropertyDescriptor(t, _e6);
+
+                        _c[_o] = n(_l);
+                      }
+                    } catch (err) {
+                      _didIteratorError2 = true;
+                      _iteratorError2 = err;
+                    } finally {
+                      try {
+                        if (!_iteratorNormalCompletion2 && _iterator2[\\"return\\"] != null) {
+                          _iterator2[\\"return\\"]();
+                        }
+                      } finally {
+                        if (_didIteratorError2) {
+                          throw _iteratorError2;
+                        }
+                      }
+                    }
+
+                    return _c;
+                  }
+
+                default:
+                  return {
+                    type: \\"unknown\\",
+                    \\"typeof\\": c
+                  };
+              }
+            };
+
+            return o(t);
+          }
+        }]);
+
+        return o;
+      }();
+    }]);
+
+    ;
+    return new Encoder[\\"default\\"]();
+  }(),
   trace: [],
   trevIdStack: []
 };
@@ -17,20 +309,10 @@ _instrumentation.recordTrev = function (type, nodeId, data) {
     parentId: _instrumentation.trevIdStack[_instrumentation.trevIdStack.length - 1],
     nodeId: nodeId,
     type: type,
-    data: _instrumentation.transcribeValue(data)
+    data: _instrumentation.encoder.encode(data)
   });
 
   return data;
-};
-
-_instrumentation.transcribeValue = function (value) {
-  switch (_typeof(value)) {
-    case 'object':
-      return JSON.parse(JSON.stringify(value));
-
-    default:
-      return value;
-  }
 };
 
 output.instrumentation = _instrumentation;
@@ -59,7 +341,54 @@ var result = _instrumentation.recordTrev('expr', \\"s22\\", _instrumentation.rec
 exports[`demo examples factorial 2`] = `
 Array [
   Object {
-    "data": [Function],
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  _instrumentation.recordTrev('fn-start', \\"s2\\", {
+    n: n,
+    \\"this\\": this,
+    arguments: arguments
+  });
+
+  _instrumentation.trevIdStack.push(_instrumentation.trace[_instrumentation.trace.length - 1].id);
+
+  try {
+    {
+      return _instrumentation.recordTrev('fn-ret', \\"s6\\", _instrumentation.recordTrev('expr', \\"s7\\", _instrumentation.recordTrev('expr', \\"s8\\", _instrumentation.recordTrev('expr', \\"s9\\", n) == _instrumentation.recordTrev('expr', \\"s10\\", 1)) ? _instrumentation.recordTrev('expr', \\"s11\\", 1) : _instrumentation.recordTrev('expr', \\"s12\\", _instrumentation.recordTrev('expr', \\"s13\\", n) * _instrumentation.recordTrev('expr', \\"s14\\", _instrumentation.recordTrev('expr', \\"s15\\", fac)(_instrumentation.recordTrev('expr', \\"s16\\", _instrumentation.recordTrev('expr', \\"s17\\", n) - _instrumentation.recordTrev('expr', \\"s18\\", 1)))))));
+    }
+  } finally {
+    _instrumentation.trevIdStack.pop();
+  }
+}",
+      "type": "function",
+    },
     "id": 1,
     "nodeId": "s23",
     "parentId": undefined,
@@ -74,10 +403,60 @@ Array [
   },
   Object {
     "data": Object {
-      "arguments": Object {
-        "0": 3,
+      ".arguments": Object {
+        ".0": 3,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "4",
+        "type": "object",
       },
-      "n": 3,
+      ".n": 3,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "3",
+      "type": "object",
     },
     "id": 3,
     "nodeId": "s2",
@@ -113,7 +492,54 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": [Function],
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  _instrumentation.recordTrev('fn-start', \\"s2\\", {
+    n: n,
+    \\"this\\": this,
+    arguments: arguments
+  });
+
+  _instrumentation.trevIdStack.push(_instrumentation.trace[_instrumentation.trace.length - 1].id);
+
+  try {
+    {
+      return _instrumentation.recordTrev('fn-ret', \\"s6\\", _instrumentation.recordTrev('expr', \\"s7\\", _instrumentation.recordTrev('expr', \\"s8\\", _instrumentation.recordTrev('expr', \\"s9\\", n) == _instrumentation.recordTrev('expr', \\"s10\\", 1)) ? _instrumentation.recordTrev('expr', \\"s11\\", 1) : _instrumentation.recordTrev('expr', \\"s12\\", _instrumentation.recordTrev('expr', \\"s13\\", n) * _instrumentation.recordTrev('expr', \\"s14\\", _instrumentation.recordTrev('expr', \\"s15\\", fac)(_instrumentation.recordTrev('expr', \\"s16\\", _instrumentation.recordTrev('expr', \\"s17\\", n) - _instrumentation.recordTrev('expr', \\"s18\\", 1)))))));
+    }
+  } finally {
+    _instrumentation.trevIdStack.pop();
+  }
+}",
+      "type": "function",
+    },
     "id": 8,
     "nodeId": "s15",
     "parentId": 3,
@@ -142,10 +568,60 @@ Array [
   },
   Object {
     "data": Object {
-      "arguments": Object {
-        "0": 2,
+      ".arguments": Object {
+        ".0": 2,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "8",
+        "type": "object",
       },
-      "n": 2,
+      ".n": 2,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "7",
+      "type": "object",
     },
     "id": 12,
     "nodeId": "s2",
@@ -181,7 +657,54 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": [Function],
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  _instrumentation.recordTrev('fn-start', \\"s2\\", {
+    n: n,
+    \\"this\\": this,
+    arguments: arguments
+  });
+
+  _instrumentation.trevIdStack.push(_instrumentation.trace[_instrumentation.trace.length - 1].id);
+
+  try {
+    {
+      return _instrumentation.recordTrev('fn-ret', \\"s6\\", _instrumentation.recordTrev('expr', \\"s7\\", _instrumentation.recordTrev('expr', \\"s8\\", _instrumentation.recordTrev('expr', \\"s9\\", n) == _instrumentation.recordTrev('expr', \\"s10\\", 1)) ? _instrumentation.recordTrev('expr', \\"s11\\", 1) : _instrumentation.recordTrev('expr', \\"s12\\", _instrumentation.recordTrev('expr', \\"s13\\", n) * _instrumentation.recordTrev('expr', \\"s14\\", _instrumentation.recordTrev('expr', \\"s15\\", fac)(_instrumentation.recordTrev('expr', \\"s16\\", _instrumentation.recordTrev('expr', \\"s17\\", n) - _instrumentation.recordTrev('expr', \\"s18\\", 1)))))));
+    }
+  } finally {
+    _instrumentation.trevIdStack.pop();
+  }
+}",
+      "type": "function",
+    },
     "id": 17,
     "nodeId": "s15",
     "parentId": 12,
@@ -210,10 +733,60 @@ Array [
   },
   Object {
     "data": Object {
-      "arguments": Object {
-        "0": 1,
+      ".arguments": Object {
+        ".0": 1,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "10",
+        "type": "object",
       },
-      "n": 1,
+      ".n": 1,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "9",
+      "type": "object",
     },
     "id": 21,
     "nodeId": "s2",
@@ -331,10 +904,304 @@ Array [
 exports[`demo examples insertionSort 1`] = `
 "\\"use strict\\";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\\"value\\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError(\\"Invalid attempt to destructure non-iterable instance\\"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === \\"[object Arguments]\\")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\\"return\\"] != null) _i[\\"return\\"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _typeof(obj) { if (typeof Symbol === \\"function\\" && typeof Symbol.iterator === \\"symbol\\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \\"function\\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \\"symbol\\" : typeof obj; }; } return _typeof(obj); }
 
 var _instrumentation = {
   ast: JSON.parse(\\"{\\\\\\"type\\\\\\":\\\\\\"Program\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":318,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":17}},\\\\\\"sourceType\\\\\\":\\\\\\"module\\\\\\",\\\\\\"interpreter\\\\\\":null,\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"FunctionDeclaration\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":272,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":13,\\\\\\"column\\\\\\":1}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":9,\\\\\\"end\\\\\\":22,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":22},\\\\\\"identifierName\\\\\\":\\\\\\"insertionSort\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"insertionSort\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s3\\\\\\"}},\\\\\\"generator\\\\\\":false,\\\\\\"async\\\\\\":false,\\\\\\"params\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":23,\\\\\\"end\\\\\\":28,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":23},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":28},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s4\\\\\\"}}],\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":30,\\\\\\"end\\\\\\":272,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":13,\\\\\\"column\\\\\\":1}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ForStatement\\\\\\",\\\\\\"start\\\\\\":34,\\\\\\"end\\\\\\":270,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":2},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":12,\\\\\\"column\\\\\\":3}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":39,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":7},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":43,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":43,\\\\\\"end\\\\\\":44,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s9\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":47,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":0,\\\\\\"raw\\\\\\":\\\\\\"0\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s10\\\\\\"},\\\\\\"value\\\\\\":0},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s8\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"let\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s7\\\\\\"}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":50,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":50,\\\\\\"end\\\\\\":51,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":19},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s12\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"<\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":54,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":54,\\\\\\"end\\\\\\":59,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":27},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s14\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":60,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34},\\\\\\"identifierName\\\\\\":\\\\\\"length\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"length\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s15\\\\\\"}},\\\\\\"computed\\\\\\":false,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s13\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s11\\\\\\"}},\\\\\\"update\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"UpdateExpression\\\\\\",\\\\\\"start\\\\\\":68,\\\\\\"end\\\\\\":71,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":39}},\\\\\\"operator\\\\\\":\\\\\\"++\\\\\\",\\\\\\"prefix\\\\\\":false,\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":68,\\\\\\"end\\\\\\":69,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":37},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s17\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s16\\\\\\"}},\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":270,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":41},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":12,\\\\\\"column\\\\\\":3}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ForStatement\\\\\\",\\\\\\"start\\\\\\":79,\\\\\\"end\\\\\\":266,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":4},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":11,\\\\\\"column\\\\\\":5}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":84,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":88,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":88,\\\\\\"end\\\\\\":89,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":14},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s22\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":92,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":92,\\\\\\"end\\\\\\":93,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":18},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s24\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"-\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":96,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s25\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s23\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s21\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"let\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s20\\\\\\"}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":99,\\\\\\"end\\\\\\":105,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":30}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":99,\\\\\\"end\\\\\\":100,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":25},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s27\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\">=\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":104,\\\\\\"end\\\\\\":105,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":29},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":30}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":0,\\\\\\"raw\\\\\\":\\\\\\"0\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s28\\\\\\"},\\\\\\"value\\\\\\":0},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s26\\\\\\"}},\\\\\\"update\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"UpdateExpression\\\\\\",\\\\\\"start\\\\\\":107,\\\\\\"end\\\\\\":110,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":35}},\\\\\\"operator\\\\\\":\\\\\\"--\\\\\\",\\\\\\"prefix\\\\\\":false,\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":107,\\\\\\"end\\\\\\":108,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":33},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s30\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s29\\\\\\"}},\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":112,\\\\\\"end\\\\\\":266,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":37},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":11,\\\\\\"column\\\\\\":5}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"IfStatement\\\\\\",\\\\\\"start\\\\\\":120,\\\\\\"end\\\\\\":174,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":6,\\\\\\"column\\\\\\":7}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":148,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":34}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":132,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":18}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":129,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s35\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":130,\\\\\\"end\\\\\\":131,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":17},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s36\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s34\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"<=\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":136,\\\\\\"end\\\\\\":148,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":34}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":136,\\\\\\"end\\\\\\":141,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":27},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s38\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":142,\\\\\\"end\\\\\\":147,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":33}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":142,\\\\\\"end\\\\\\":143,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":29},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s40\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":146,\\\\\\"end\\\\\\":147,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":33}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s41\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s39\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s37\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s33\\\\\\"}},\\\\\\"consequent\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":150,\\\\\\"end\\\\\\":174,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":6,\\\\\\"column\\\\\\":7}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"BreakStatement\\\\\\",\\\\\\"start\\\\\\":160,\\\\\\"end\\\\\\":166,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":5,\\\\\\"column\\\\\\":8},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":5,\\\\\\"column\\\\\\":14}},\\\\\\"label\\\\\\":null,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s43\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s42\\\\\\"}},\\\\\\"alternate\\\\\\":null,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s32\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":182,\\\\\\"end\\\\\\":207,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":31}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":188,\\\\\\"end\\\\\\":206,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":30}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":188,\\\\\\"end\\\\\\":191,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"tmp\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"tmp\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s46\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":194,\\\\\\"end\\\\\\":206,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":30}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":194,\\\\\\"end\\\\\\":199,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":23},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s48\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":200,\\\\\\"end\\\\\\":205,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":29}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":200,\\\\\\"end\\\\\\":201,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":25},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s50\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":204,\\\\\\"end\\\\\\":205,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":29}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s51\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s49\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s47\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s45\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s44\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":238,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":30}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"AssignmentExpression\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":237,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":29}},\\\\\\"operator\\\\\\":\\\\\\"=\\\\\\",\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":226,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":18}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":219,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":11},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s55\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":220,\\\\\\"end\\\\\\":225,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":17}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":220,\\\\\\"end\\\\\\":221,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s57\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":224,\\\\\\"end\\\\\\":225,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":17}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s58\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s56\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s54\\\\\\"}},\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":229,\\\\\\"end\\\\\\":237,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":29}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":229,\\\\\\"end\\\\\\":234,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":26},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s60\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":235,\\\\\\"end\\\\\\":236,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":27},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":28},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s61\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s59\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s53\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s52\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":260,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":21}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"AssignmentExpression\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":259,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":20}},\\\\\\"operator\\\\\\":\\\\\\"=\\\\\\",\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":253,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":14}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":250,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":11},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s65\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":251,\\\\\\"end\\\\\\":252,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s66\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s64\\\\\\"}},\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":256,\\\\\\"end\\\\\\":259,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":20},\\\\\\"identifierName\\\\\\":\\\\\\"tmp\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"tmp\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s67\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s63\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s62\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s31\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s19\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s18\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s6\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s5\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s2\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":274,\\\\\\"end\\\\\\":300,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":26}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":280,\\\\\\"end\\\\\\":299,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":25}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":280,\\\\\\"end\\\\\\":281,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":7},\\\\\\"identifierName\\\\\\":\\\\\\"a\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"a\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s70\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"ArrayExpression\\\\\\",\\\\\\"start\\\\\\":284,\\\\\\"end\\\\\\":299,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":25}},\\\\\\"elements\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":285,\\\\\\"end\\\\\\":286,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":12}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":3,\\\\\\"raw\\\\\\":\\\\\\"3\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s72\\\\\\"},\\\\\\"value\\\\\\":3},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":288,\\\\\\"end\\\\\\":289,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":15}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s73\\\\\\"},\\\\\\"value\\\\\\":1},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":291,\\\\\\"end\\\\\\":292,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":18}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":2,\\\\\\"raw\\\\\\":\\\\\\"2\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s74\\\\\\"},\\\\\\"value\\\\\\":2},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":294,\\\\\\"end\\\\\\":295,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":20},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":21}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":5,\\\\\\"raw\\\\\\":\\\\\\"5\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s75\\\\\\"},\\\\\\"value\\\\\\":5},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":297,\\\\\\"end\\\\\\":298,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":23},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":24}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":4,\\\\\\"raw\\\\\\":\\\\\\"4\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s76\\\\\\"},\\\\\\"value\\\\\\":4}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s71\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s69\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s68\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":318,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":17}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":317,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":16}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":314,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"insertionSort\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"insertionSort\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s79\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":315,\\\\\\"end\\\\\\":316,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"a\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"a\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s80\\\\\\"}}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s78\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s77\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s1\\\\\\"}}\\"),
+  encoder: function () {
+    var Encoder = function (t) {
+      var e = {};
+
+      function n(r) {
+        if (e[r]) return e[r].exports;
+        var o = e[r] = {
+          i: r,
+          l: !1,
+          exports: {}
+        };
+        return t[r].call(o.exports, o, o.exports, n), o.l = !0, o.exports;
+      }
+
+      return n.m = t, n.c = e, n.d = function (t, e, r) {
+        n.o(t, e) || Object.defineProperty(t, e, {
+          enumerable: !0,
+          get: r
+        });
+      }, n.r = function (t) {
+        \\"undefined\\" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {
+          value: \\"Module\\"
+        }), Object.defineProperty(t, \\"__esModule\\", {
+          value: !0
+        });
+      }, n.t = function (t, e) {
+        if (1 & e && (t = n(t)), 8 & e) return t;
+        if (4 & e && \\"object\\" == _typeof(t) && t && t.__esModule) return t;
+        var r = Object.create(null);
+        if (n.r(r), Object.defineProperty(r, \\"default\\", {
+          enumerable: !0,
+          value: t
+        }), 2 & e && \\"string\\" != typeof t) for (var o in t) {
+          n.d(r, o, function (e) {
+            return t[e];
+          }.bind(null, o));
+        }
+        return r;
+      }, n.n = function (t) {
+        var e = t && t.__esModule ? function () {
+          return t[\\"default\\"];
+        } : function () {
+          return t;
+        };
+        return n.d(e, \\"a\\", e), e;
+      }, n.o = function (t, e) {
+        return Object.prototype.hasOwnProperty.call(t, e);
+      }, n.p = \\"\\", n(n.s = 1);
+    }([function (t, e, n) {
+      \\"use strict\\";
+
+      n.d(e, \\"b\\", function () {
+        return o;
+      }), n.d(e, \\"a\\", function () {
+        return i;
+      });
+      var r = [[void 0, \\"undefined\\"], [NaN, \\"NaN\\"], [1 / 0, \\"Infinity\\"], [Symbol.asyncIterator, \\"Symbol.asyncIterator\\"], [Symbol.hasInstance, \\"Symbol.hasInstance\\"], [Symbol.isConcatSpreadable, \\"Symbol.isConcatSpreadable\\"], [Symbol.iterator, \\"Symbol.iterator\\"], [Symbol.match, \\"Symbol.match\\"], [Symbol.matchAll, \\"Symbol.matchAll\\"], [Symbol.replace, \\"Symbol.replace\\"], [Symbol.search, \\"Symbol.search\\"], [Symbol.species, \\"Symbol.species\\"], [Symbol.split, \\"Symbol.split\\"], [Symbol.toPrimitive, \\"Symbol.toPrimitive\\"], [Symbol.toStringTag, \\"Symbol.toStringTag\\"], [Symbol.unscopables, \\"Symbol.unscopables\\"], [Array, \\"Array\\"], [Array.prototype, \\"Array.prototype\\"], [Function, \\"Function\\"], [Function.prototype, \\"Function.prototype\\"], [Object, \\"Object\\"], [Object.prototype, \\"Object.prototype\\"]],
+          o = new Map(r),
+          i = new Map(r.map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            t = _ref2[0],
+            e = _ref2[1];
+
+        return [e, t];
+      }));
+    }, function (t, e, n) {
+      \\"use strict\\";
+
+      n.r(e), n.d(e, \\"default\\", function () {
+        return o;
+      });
+      var r = n(0);
+
+      var o =
+      /*#__PURE__*/
+      function () {
+        function o() {
+          _classCallCheck(this, o);
+
+          this.objectIds = new WeakMap(), this.symbolIds = new Map(), this.nextId = 1;
+        }
+
+        _createClass(o, [{
+          key: \\"internObject\\",
+          value: function internObject(t) {
+            var _this = this;
+
+            var e = this.objectIds.get(t);
+            return e || (e = function () {
+              var _postfix = _this.nextId;
+              _this.nextId += 1;
+              return _postfix;
+            }().toString(), this.objectIds.set(t, e)), e;
+          }
+        }, {
+          key: \\"internSymbol\\",
+          value: function internSymbol(t) {
+            var _this2 = this;
+
+            var e = this.symbolIds.get(t);
+            return e || (e = function () {
+              var _postfix2 = _this2.nextId;
+              _this2.nextId += 1;
+              return _postfix2;
+            }().toString(), this.symbolIds.set(t, e)), e;
+          }
+        }, {
+          key: \\"encode\\",
+          value: function encode(t) {
+            var _this3 = this;
+
+            var e = null;
+
+            var n = function n(t) {
+              if (t.writable && t.enumerable && t.configurable && !t.get && !t.set) return o(t.value);
+              {
+                var _e2 = {
+                  type: \\"property\\"
+                };
+                return t.get && (_e2.get = o(t.get)), t.set && (_e2.set = o(t.set)), t.get || t.set || (_e2.value = o(t.value)), t.writable && (_e2.writable = !0), t.enumerable && (_e2.enumerable = !0), t.configurable && (_e2.configurable = !0), _e2;
+              }
+            },
+                o = function o(t) {
+              if (null === t) return null;
+              var i = r.b.get(t);
+              if (i) return {
+                name: i,
+                type: \\"builtin\\"
+              };
+
+              var c = _typeof(t);
+
+              switch (c) {
+                case \\"undefined\\":
+                  return {
+                    name: \\"undefined\\",
+                    type: \\"builtin\\"
+                  };
+
+                case \\"boolean\\":
+                case \\"number\\":
+                  return t;
+
+                case \\"bigint\\":
+                  return {
+                    string: t.toString(),
+                    type: \\"bigint\\"
+                  };
+
+                case \\"string\\":
+                  return t;
+
+                case \\"symbol\\":
+                  {
+                    var _e3 = _this3.internSymbol(t);
+
+                    return {
+                      description: t.description,
+                      id: _e3,
+                      type: c
+                    };
+                  }
+
+                case \\"function\\":
+                case \\"object\\":
+                  {
+                    var _i2 = _this3.internObject(t);
+
+                    if (e || (e = new Set()), e.has(_i2)) return {
+                      id: _i2,
+                      type: \\"ref\\"
+                    };
+                    e.add(_i2);
+
+                    var _c = {
+                      id: _i2,
+                      type: \\"object\\"
+                    },
+                        l = Object.getPrototypeOf(t),
+                        s = Object.getOwnPropertyNames(t),
+                        _a = Object.getOwnPropertySymbols(t);
+
+                    var u = Object.prototype,
+                        y = !1;
+
+                    if (\\"object\\" == _typeof(t) && l === Array.prototype) {
+                      var _e4 = Object.getOwnPropertyDescriptor(t, \\"length\\"),
+                          _n2 = s.indexOf(\\"length\\");
+
+                      _e4 && s[_n2 - 1] == _e4.value - 1 && _e4.value >= 0 && (_c.type = \\"array\\", u = Array.prototype, y = !0);
+                    } else \\"function\\" == typeof t && (u = Function.prototype, _c.type = \\"function\\", _c.source = Function.prototype.toString.apply(t));
+
+                    l !== u && (_c.prototype = o(l));
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                      for (var _iterator = s[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var _e5 = _step.value;
+                        if (y && \\"length\\" === _e5) continue;
+
+                        var _r = Object.getOwnPropertyDescriptor(t, _e5);
+
+                        _c[\\".\\".concat(_e5)] = n(_r);
+                      }
+                    } catch (err) {
+                      _didIteratorError = true;
+                      _iteratorError = err;
+                    } finally {
+                      try {
+                        if (!_iteratorNormalCompletion && _iterator[\\"return\\"] != null) {
+                          _iterator[\\"return\\"]();
+                        }
+                      } finally {
+                        if (_didIteratorError) {
+                          throw _iteratorError;
+                        }
+                      }
+                    }
+
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                      for (var _iterator2 = _a[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var _e6 = _step2.value;
+
+                        var _o = void 0;
+
+                        var _i3 = r.b.get(_e6);
+
+                        if (_i3) _o = \\"@\\".concat(_i3);else {
+                          var _t = _this3.internSymbol(_e6);
+
+                          _o = void 0 === _e6.description ? \\"~\\".concat(_t) : \\"~\\".concat(_t, \\"|\\").concat(_e6.description);
+                        }
+
+                        var _l = Object.getOwnPropertyDescriptor(t, _e6);
+
+                        _c[_o] = n(_l);
+                      }
+                    } catch (err) {
+                      _didIteratorError2 = true;
+                      _iteratorError2 = err;
+                    } finally {
+                      try {
+                        if (!_iteratorNormalCompletion2 && _iterator2[\\"return\\"] != null) {
+                          _iterator2[\\"return\\"]();
+                        }
+                      } finally {
+                        if (_didIteratorError2) {
+                          throw _iteratorError2;
+                        }
+                      }
+                    }
+
+                    return _c;
+                  }
+
+                default:
+                  return {
+                    type: \\"unknown\\",
+                    \\"typeof\\": c
+                  };
+              }
+            };
+
+            return o(t);
+          }
+        }]);
+
+        return o;
+      }();
+    }]);
+
+    ;
+    return new Encoder[\\"default\\"]();
+  }(),
   trace: [],
   trevIdStack: []
 };
@@ -345,20 +1212,10 @@ _instrumentation.recordTrev = function (type, nodeId, data) {
     parentId: _instrumentation.trevIdStack[_instrumentation.trevIdStack.length - 1],
     nodeId: nodeId,
     type: type,
-    data: _instrumentation.transcribeValue(data)
+    data: _instrumentation.encoder.encode(data)
   });
 
   return data;
-};
-
-_instrumentation.transcribeValue = function (value) {
-  switch (_typeof(value)) {
-    case 'object':
-      return JSON.parse(JSON.stringify(value));
-
-    default:
-      return value;
-  }
 };
 
 output.instrumentation = _instrumentation;
@@ -374,17 +1231,17 @@ function insertionSort(array) {
 
   try {
     {
-      for (var i = _instrumentation.recordTrev('expr', \\"s10\\", 0); _instrumentation.recordTrev('expr', \\"s11\\", _instrumentation.recordTrev('expr', \\"s12\\", i) < _instrumentation.recordTrev('expr', \\"s13\\", _instrumentation.recordTrev('expr', \\"s14\\", array).length)); _instrumentation.recordTrev('expr', \\"s16\\", function () {
-        var _postfix = _instrumentation.recordTrev('expr', \\"s17\\", i);
+      for (var _i4 = _instrumentation.recordTrev('expr', \\"s10\\", 0); _instrumentation.recordTrev('expr', \\"s11\\", _instrumentation.recordTrev('expr', \\"s12\\", _i4) < _instrumentation.recordTrev('expr', \\"s13\\", _instrumentation.recordTrev('expr', \\"s14\\", array).length)); _instrumentation.recordTrev('expr', \\"s16\\", function () {
+        var _postfix3 = _instrumentation.recordTrev('expr', \\"s17\\", _i4);
 
-        i += 1;
-        return _postfix;
+        _i4 += 1;
+        return _postfix3;
       }())) {
-        for (var j = _instrumentation.recordTrev('expr', \\"s23\\", _instrumentation.recordTrev('expr', \\"s24\\", i) - _instrumentation.recordTrev('expr', \\"s25\\", 1)); _instrumentation.recordTrev('expr', \\"s26\\", _instrumentation.recordTrev('expr', \\"s27\\", j) >= _instrumentation.recordTrev('expr', \\"s28\\", 0)); _instrumentation.recordTrev('expr', \\"s29\\", function () {
-          var _postfix2 = _instrumentation.recordTrev('expr', \\"s30\\", j);
+        for (var j = _instrumentation.recordTrev('expr', \\"s23\\", _instrumentation.recordTrev('expr', \\"s24\\", _i4) - _instrumentation.recordTrev('expr', \\"s25\\", 1)); _instrumentation.recordTrev('expr', \\"s26\\", _instrumentation.recordTrev('expr', \\"s27\\", j) >= _instrumentation.recordTrev('expr', \\"s28\\", 0)); _instrumentation.recordTrev('expr', \\"s29\\", function () {
+          var _postfix4 = _instrumentation.recordTrev('expr', \\"s30\\", j);
 
           j -= 1;
-          return _postfix2;
+          return _postfix4;
         }())) {
           if (_instrumentation.recordTrev('expr', \\"s33\\", _instrumentation.recordTrev('expr', \\"s34\\", _instrumentation.recordTrev('expr', \\"s35\\", array)[_instrumentation.recordTrev('expr', \\"s36\\", j)]) <= _instrumentation.recordTrev('expr', \\"s37\\", _instrumentation.recordTrev('expr', \\"s38\\", array)[_instrumentation.recordTrev('expr', \\"s39\\", _instrumentation.recordTrev('expr', \\"s40\\", j) + _instrumentation.recordTrev('expr', \\"s41\\", 1))]))) {
             break;
@@ -448,33 +1305,108 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 6,
     "nodeId": "s71",
     "parentId": undefined,
     "type": "expr",
   },
   Object {
-    "data": [Function],
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "insertionSort",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "2",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "3",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "2",
+      "source": "function insertionSort(array) {
+  _instrumentation.recordTrev('fn-start', \\"s2\\", {
+    array: array,
+    \\"this\\": this,
+    arguments: arguments
+  });
+
+  _instrumentation.trevIdStack.push(_instrumentation.trace[_instrumentation.trace.length - 1].id);
+
+  try {
+    {
+      for (var _i4 = _instrumentation.recordTrev('expr', \\"s10\\", 0); _instrumentation.recordTrev('expr', \\"s11\\", _instrumentation.recordTrev('expr', \\"s12\\", _i4) < _instrumentation.recordTrev('expr', \\"s13\\", _instrumentation.recordTrev('expr', \\"s14\\", array).length)); _instrumentation.recordTrev('expr', \\"s16\\", function () {
+        var _postfix3 = _instrumentation.recordTrev('expr', \\"s17\\", _i4);
+
+        _i4 += 1;
+        return _postfix3;
+      }())) {
+        for (var j = _instrumentation.recordTrev('expr', \\"s23\\", _instrumentation.recordTrev('expr', \\"s24\\", _i4) - _instrumentation.recordTrev('expr', \\"s25\\", 1)); _instrumentation.recordTrev('expr', \\"s26\\", _instrumentation.recordTrev('expr', \\"s27\\", j) >= _instrumentation.recordTrev('expr', \\"s28\\", 0)); _instrumentation.recordTrev('expr', \\"s29\\", function () {
+          var _postfix4 = _instrumentation.recordTrev('expr', \\"s30\\", j);
+
+          j -= 1;
+          return _postfix4;
+        }())) {
+          if (_instrumentation.recordTrev('expr', \\"s33\\", _instrumentation.recordTrev('expr', \\"s34\\", _instrumentation.recordTrev('expr', \\"s35\\", array)[_instrumentation.recordTrev('expr', \\"s36\\", j)]) <= _instrumentation.recordTrev('expr', \\"s37\\", _instrumentation.recordTrev('expr', \\"s38\\", array)[_instrumentation.recordTrev('expr', \\"s39\\", _instrumentation.recordTrev('expr', \\"s40\\", j) + _instrumentation.recordTrev('expr', \\"s41\\", 1))]))) {
+            break;
+          }
+
+          var tmp = _instrumentation.recordTrev('expr', \\"s47\\", _instrumentation.recordTrev('expr', \\"s48\\", array)[_instrumentation.recordTrev('expr', \\"s49\\", _instrumentation.recordTrev('expr', \\"s50\\", j) + _instrumentation.recordTrev('expr', \\"s51\\", 1))]);
+
+          _instrumentation.recordTrev('expr', \\"s53\\", _instrumentation.recordTrev('expr', \\"s55\\", array)[_instrumentation.recordTrev('expr', \\"s56\\", _instrumentation.recordTrev('expr', \\"s57\\", j) + _instrumentation.recordTrev('expr', \\"s58\\", 1))] = _instrumentation.recordTrev('expr', \\"s59\\", _instrumentation.recordTrev('expr', \\"s60\\", array)[_instrumentation.recordTrev('expr', \\"s61\\", j)]));
+
+          _instrumentation.recordTrev('expr', \\"s63\\", _instrumentation.recordTrev('expr', \\"s65\\", array)[_instrumentation.recordTrev('expr', \\"s66\\", j)] = _instrumentation.recordTrev('expr', \\"s67\\", tmp));
+        }
+      }
+
+      _instrumentation.recordTrev('fn-ret', \\"s2\\");
+    }
+  } finally {
+    _instrumentation.trevIdStack.pop();
+  }
+}",
+      "type": "function",
+    },
     "id": 7,
     "nodeId": "s79",
     "parentId": undefined,
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 8,
     "nodeId": "s80",
     "parentId": undefined,
@@ -482,22 +1414,71 @@ Array [
   },
   Object {
     "data": Object {
-      "arguments": Object {
-        "0": Array [
-          3,
-          1,
-          2,
-          5,
-          4,
-        ],
+      ".arguments": Object {
+        ".0": Object {
+          "id": "1",
+          "type": "ref",
+        },
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "6",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "6",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "7",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "5",
+        "type": "object",
       },
-      "array": Array [
-        3,
-        1,
-        2,
-        5,
-        4,
-      ],
+      ".array": Object {
+        ".0": 3,
+        ".1": 1,
+        ".2": 2,
+        ".3": 5,
+        ".4": 4,
+        "id": "1",
+        "type": "array",
+      },
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "4",
+      "type": "object",
     },
     "id": 9,
     "nodeId": "s2",
@@ -519,13 +1500,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 12,
     "nodeId": "s14",
     "parentId": 9,
@@ -609,13 +1592,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 24,
     "nodeId": "s14",
     "parentId": 9,
@@ -678,13 +1663,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 33,
     "nodeId": "s35",
     "parentId": 9,
@@ -705,13 +1692,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 36,
     "nodeId": "s38",
     "parentId": 9,
@@ -753,13 +1742,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 42,
     "nodeId": "s48",
     "parentId": 9,
@@ -794,13 +1785,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 47,
     "nodeId": "s55",
     "parentId": 9,
@@ -828,13 +1821,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      1,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 1,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 51,
     "nodeId": "s60",
     "parentId": 9,
@@ -862,13 +1857,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      3,
-      3,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 3,
+      ".1": 3,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 55,
     "nodeId": "s65",
     "parentId": 9,
@@ -952,13 +1949,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      3,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 3,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 67,
     "nodeId": "s14",
     "parentId": 9,
@@ -1021,13 +2020,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      3,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 3,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 76,
     "nodeId": "s35",
     "parentId": 9,
@@ -1048,13 +2049,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      3,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 3,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 79,
     "nodeId": "s38",
     "parentId": 9,
@@ -1096,13 +2099,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      3,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 3,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 85,
     "nodeId": "s48",
     "parentId": 9,
@@ -1137,13 +2142,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      3,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 3,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 90,
     "nodeId": "s55",
     "parentId": 9,
@@ -1171,13 +2178,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      3,
-      2,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 3,
+      ".2": 2,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 94,
     "nodeId": "s60",
     "parentId": 9,
@@ -1205,13 +2214,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      3,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 3,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 98,
     "nodeId": "s65",
     "parentId": 9,
@@ -1274,13 +2285,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 107,
     "nodeId": "s35",
     "parentId": 9,
@@ -1301,13 +2314,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 110,
     "nodeId": "s38",
     "parentId": 9,
@@ -1370,13 +2385,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 119,
     "nodeId": "s14",
     "parentId": 9,
@@ -1439,13 +2456,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 128,
     "nodeId": "s35",
     "parentId": 9,
@@ -1466,13 +2485,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 131,
     "nodeId": "s38",
     "parentId": 9,
@@ -1535,13 +2556,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 140,
     "nodeId": "s14",
     "parentId": 9,
@@ -1604,13 +2627,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 149,
     "nodeId": "s35",
     "parentId": 9,
@@ -1631,13 +2656,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 152,
     "nodeId": "s38",
     "parentId": 9,
@@ -1679,13 +2706,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 158,
     "nodeId": "s48",
     "parentId": 9,
@@ -1720,13 +2749,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 163,
     "nodeId": "s55",
     "parentId": 9,
@@ -1754,13 +2785,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      4,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 4,
+      "id": "1",
+      "type": "array",
+    },
     "id": 167,
     "nodeId": "s60",
     "parentId": 9,
@@ -1788,13 +2821,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      5,
-      5,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 5,
+      ".4": 5,
+      "id": "1",
+      "type": "array",
+    },
     "id": 171,
     "nodeId": "s65",
     "parentId": 9,
@@ -1857,13 +2892,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      4,
-      5,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 4,
+      ".4": 5,
+      "id": "1",
+      "type": "array",
+    },
     "id": 180,
     "nodeId": "s35",
     "parentId": 9,
@@ -1884,13 +2921,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      4,
-      5,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 4,
+      ".4": 5,
+      "id": "1",
+      "type": "array",
+    },
     "id": 183,
     "nodeId": "s38",
     "parentId": 9,
@@ -1953,13 +2992,15 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": Array [
-      1,
-      2,
-      3,
-      4,
-      5,
-    ],
+    "data": Object {
+      ".0": 1,
+      ".1": 2,
+      ".2": 3,
+      ".3": 4,
+      ".4": 5,
+      "id": "1",
+      "type": "array",
+    },
     "id": 192,
     "nodeId": "s14",
     "parentId": 9,
@@ -1980,14 +3021,20 @@ Array [
     "type": "expr",
   },
   Object {
-    "data": undefined,
+    "data": Object {
+      "name": "undefined",
+      "type": "builtin",
+    },
     "id": 195,
     "nodeId": "s2",
     "parentId": 9,
     "type": "fn-ret",
   },
   Object {
-    "data": undefined,
+    "data": Object {
+      "name": "undefined",
+      "type": "builtin",
+    },
     "id": 196,
     "nodeId": "s78",
     "parentId": undefined,

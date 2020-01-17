@@ -1,28 +1,12 @@
 import template from '@babel/template';
 import * as types from '@babel/types';
 import { addNodeIdsToAST, copyNodeId, getNodeId, setNodeId } from 'blunt-instrument-ast-utils';
-
-const transcriberTemplates = {};
-transcriberTemplates.none = template(`
-  %%instrumentationId%%.transcribeValue = (value) => {
-    return value;
-  };
-`);
-
-transcriberTemplates.simple = template(`
-  %%instrumentationId%%.transcribeValue = (value) => {
-    switch (typeof value) {
-      case 'object':
-        return JSON.parse(JSON.stringify(value));
-      default:
-        return value;
-    }
-  };
-`);
+import ogajCode from 'object-graph-as-json/target/cjs/embed';
 
 const buildInstrumentationInit = template(`
   const %%instrumentationId%% = {
     ast: JSON.parse(%%astString%%),
+    encoder: (function(){${ogajCode.Encoder};return new Encoder.default();})(),
     trace: [],
     trevIdStack: [],
   };
@@ -35,7 +19,7 @@ const buildRecordTrevInit = template(`
       parentId: %%instrumentationId%%.trevIdStack[%%instrumentationId%%.trevIdStack.length - 1],
       nodeId,
       type,
-      data: %%instrumentationId%%.transcribeValue(data),
+      data: %%instrumentationId%%.encoder.encode(data),
     });
     return data;
   };
@@ -60,7 +44,6 @@ const buildReturnOutput = template(`
  * @param {object} opts.outputs
  * @param {string} opts.outputs.assignTo - if provided, code like `${assignTo} = _instrumentation;` will be generated
  * @param {string} opts.outputs.exportAs - if provided, code like `export const ${exportAs} = _instrumentation;` will be generated
- * @param {string} opts.valueTranscriber - which value copying mechanism to use, currently may be 'none' or 'simple'
  * @return {object} an object containing identifiers generated during init that will need to be used by instrumentation code
  */
 function addInstrumenterInit(path,
@@ -69,7 +52,6 @@ function addInstrumenterInit(path,
         assignTo = null,
         exportAs = null,
       } = {},
-      valueTranscriber = 'simple'
     }) {
   
   const ids = {
@@ -80,7 +62,6 @@ function addInstrumenterInit(path,
     astString: types.stringLiteral(JSON.stringify(path.node)), // TODO insert object directly instead of via json
     ...ids })
   const recordTrevInit = buildRecordTrevInit(ids);
-  const transcribeValueFnInit = transcriberTemplates[valueTranscriber](ids);
 
   const outputDecls = [];
   if (assignTo) {
@@ -93,7 +74,6 @@ function addInstrumenterInit(path,
   path.node.body.unshift(
     instrumentationInit,
     recordTrevInit,
-    transcribeValueFnInit,
     ...outputDecls,
   );
 
