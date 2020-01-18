@@ -1,7 +1,11 @@
-import { addNodeIdsToAST, ASTQuerier, attachCodeSlicesToAST, getNodeId } from 'blunt-instrument-ast-utils';
-import { parseSync } from '@babel/core';
-
-import { TraceQuerier } from './';
+import {
+  addNodeIdsToAST,
+  ASTQuerier,
+  attachCodeSlicesToAST,
+  getNodeId,
+} from 'blunt-instrument-ast-utils';
+import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
+import { TraceQuerier } from '.';
 
 describe('TraceQuerier', () => {
   let astQuerier;
@@ -43,11 +47,36 @@ describe('TraceQuerier', () => {
 
     beforeEach(() => {
       trevs = [];
-      trevs.push({ id: 1, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('1')[0]), type: 'expr', data: 1 });
-      trevs.push({ id: 2, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]), type: 'expr', data: 4 });
-      trevs.push({ id: 3, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]), type: 'expr', data: 7 });
-      trevs.push({ id: 4, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[0]), type: 'expr', data: 4 });
-      trevs.push({ id: 5, nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[1]), type: 'expr', data: 7 });
+      trevs.push({
+        id: 1,
+        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('1')[0]),
+        type: 'expr',
+        data: 1,
+      });
+      trevs.push({
+        id: 2,
+        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]),
+        type: 'expr',
+        data: 4,
+      });
+      trevs.push({
+        id: 3,
+        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]),
+        type: 'expr',
+        data: 7,
+      });
+      trevs.push({
+        id: 4,
+        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[0]),
+        type: 'expr',
+        data: 4,
+      });
+      trevs.push({
+        id: 5,
+        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[1]),
+        type: 'expr',
+        data: 7,
+      });
       traceQuerier = new TraceQuerier(astQuerier, trevs);
     });
 
@@ -77,7 +106,7 @@ describe('TraceQuerier', () => {
     describe('query', () => {
       it('returns all trevs', () => {
         const result = traceQuerier.query();
-        expect(result.map(trev => trev.id)).toEqual([1, 2, 3, 4, 5]);
+        expect(result.map((trev) => trev.id)).toEqual([1, 2, 3, 4, 5]);
       });
 
       it('returns correct details', () => {
@@ -96,53 +125,71 @@ describe('TraceQuerier', () => {
 
       describe('onlyNodeIds', () => {
         it('does not filter nodes if none are truthy', () => {
-          const result = traceQuerier.query({ filters: { onlyNodeIds: { [trevs[1].nodeId]: false } } });
-          expect(result.map(trev => trev.id)).toEqual([1, 2, 3, 4, 5]);
+          const result = traceQuerier.query({
+            filters: { onlyNodeIds: { [trevs[1].nodeId]: false } },
+          });
+          expect(result.map((trev) => trev.id)).toEqual([1, 2, 3, 4, 5]);
         });
 
         it('filters to truthy nodes', () => {
-          const result = traceQuerier.query({ filters: { onlyNodeIds: {
-            [trevs[1].nodeId]: true,
-            [trevs[3].nodeId]: false,
-            [trevs[4].nodeId]: true,
-          } } });
-          expect(result.map(trev => trev.id)).toEqual([2, 3, 5]);
+          const result = traceQuerier.query({
+            filters: {
+              onlyNodeIds: {
+                [trevs[1].nodeId]: true,
+                [trevs[3].nodeId]: false,
+                [trevs[4].nodeId]: true,
+              },
+            },
+          });
+          expect(result.map((trev) => trev.id)).toEqual([2, 3, 5]);
         });
 
         it('supports array syntax', () => {
-          const result = traceQuerier.query({ filters: { onlyNodeIds: [trevs[1].nodeId, trevs[4].nodeId] } });
-          expect(result.map(trev => trev.id)).toEqual([2, 3, 5]);
+          const result = traceQuerier.query({
+            filters: { onlyNodeIds: [trevs[1].nodeId, trevs[4].nodeId] },
+          });
+          expect(result.map((trev) => trev.id)).toEqual([2, 3, 5]);
         });
 
         it('supports string syntax', () => {
-          const result = traceQuerier.query({ filters: { onlyNodeIds: trevs[1].nodeId }});
-          expect(result.map(trev => trev.id)).toEqual([2, 3]);
+          const result = traceQuerier.query({ filters: { onlyNodeIds: trevs[1].nodeId } });
+          expect(result.map((trev) => trev.id)).toEqual([2, 3]);
         });
       });
 
       describe('excludeNodeTypes', () => {
         it('excludes truthy node types', () => {
-          const result1 = traceQuerier.query({ filters: { excludeNodeTypes: {
-            BinaryExpression: true,
-            CallExpression: false,
-          } } });
-          expect(result1.map(trev => trev.id)).toEqual([1, 4, 5]);
+          const result1 = traceQuerier.query({
+            filters: {
+              excludeNodeTypes: {
+                BinaryExpression: true,
+                CallExpression: false,
+              },
+            },
+          });
+          expect(result1.map((trev) => trev.id)).toEqual([1, 4, 5]);
 
-          const result2 = traceQuerier.query({ filters: { excludeNodeTypes: {
-            BinaryExpression: false,
-            CallExpression: true,
-          }}});
-          expect(result2.map(trev => trev.id)).toEqual([1, 2, 3]);
+          const result2 = traceQuerier.query({
+            filters: {
+              excludeNodeTypes: {
+                BinaryExpression: false,
+                CallExpression: true,
+              },
+            },
+          });
+          expect(result2.map((trev) => trev.id)).toEqual([1, 2, 3]);
         });
 
         it('supports array syntax', () => {
-          const result = traceQuerier.query({ filters: { excludeNodeTypes: ['BinaryExpression'] }});
-          expect(result.map(trev => trev.id)).toEqual([1, 4, 5]);
+          const result = traceQuerier.query({
+            filters: { excludeNodeTypes: ['BinaryExpression'] },
+          });
+          expect(result.map((trev) => trev.id)).toEqual([1, 4, 5]);
         });
 
         it('supports string syntax', () => {
-          const result = traceQuerier.query({ filters: { excludeNodeTypes: 'BinaryExpression' }});
-          expect(result.map(trev => trev.id)).toEqual([1, 4, 5]);
+          const result = traceQuerier.query({ filters: { excludeNodeTypes: 'BinaryExpression' } });
+          expect(result.map((trev) => trev.id)).toEqual([1, 4, 5]);
         });
       });
     });
