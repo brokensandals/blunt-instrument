@@ -1,5 +1,5 @@
 import * as babel from '@babel/core';
-import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin';
+import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
 import { attachCodeSlicesToAST, ASTQuerier, copyNodeIdsBetweenASTs, addNodeIdsToAST } from 'blunt-instrument-ast-utils';
 import { TraceQuerier } from 'blunt-instrument-trace-utils';
 

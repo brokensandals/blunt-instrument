@@ -1,5 +1,5 @@
 import * as babel from '@babel/core';
-import { bluntInstrumentPlugin } from '.';
+import bluntInstrumentPlugin from '.';
 import { examples } from 'blunt-instrument-test-resources';
 import { getNodeId, attachCodeSlicesToAST, ASTQuerier, getCodeSlice } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep';
