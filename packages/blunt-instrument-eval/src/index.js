@@ -1,17 +1,22 @@
 import * as babel from '@babel/core';
 import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
-import { attachCodeSlicesToAST, ASTQuerier, copyNodeIdsBetweenASTs, addNodeIdsToAST } from 'blunt-instrument-ast-utils';
+import {
+  attachCodeSlicesToAST,
+  ASTQuerier,
+  copyNodeIdsBetweenASTs,
+  addNodeIdsToAST,
+} from 'blunt-instrument-ast-utils';
 import { TraceQuerier } from 'blunt-instrument-trace-utils';
 
 /**
  * This method ties together various pieces of blunt-instrument to provide a
  * convenient way of instrumenting a piece of javascript code, evaluating it,
  * and returning the trace in a consumable format.
- * 
+ *
  * The input is javascript source code as a string, and the output is an object
  * containing by default one field, `traceQuerier`. This is an instance of TraceQuerier
  * with the results of the trace.
- * 
+ *
  * @param {string} source - javascript code to be instrumented & evaluated
  * @param {object} opts
  * @param {boolean} opts.saveInstrumented - if true, the AST of the instrumented
@@ -19,15 +24,16 @@ import { TraceQuerier } from 'blunt-instrument-trace-utils';
  *   in the `instrumentedASTQuerier` field of the return value
  * @returns {object}
  */
-export function instrumentedEval(source, { saveInstrumented = false } = {}) {
+export default function (source, { saveInstrumented = false } = {}) {
   const assignTo = '_bluntInstrumentEvalRet';
 
   if (source.includes(assignTo)) {
+    // eslint-disable-next-line no-console
     console.warn(`Code includes "${assignTo}", which is defined by instrumentedEval. This
 may interfere with instrumentedEval, the code, or both.`);
   }
 
-  const babelOpts = { plugins: [[bluntInstrumentPlugin, { outputs: { assignTo }}]] };
+  const babelOpts = { plugins: [[bluntInstrumentPlugin, { outputs: { assignTo } }]] };
   if (saveInstrumented) {
     babelOpts.ast = true;
   }
@@ -35,8 +41,8 @@ may interfere with instrumentedEval, the code, or both.`);
   const babelResult = babel.transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
   const { code } = babelResult;
 
-  const wrapped = '"use strict";(function(){var ' + assignTo + ';' + code + '; return ' + assignTo + ';})()';
-  const evalResult = (0, eval)(wrapped);
+  const wrapped = `"use strict";(function(){var ${assignTo};${code};return ${assignTo};})()`;
+  const evalResult = (0, eval)(wrapped); // eslint-disable-line no-eval
   const { ast, trace } = evalResult;
 
   const result = {};

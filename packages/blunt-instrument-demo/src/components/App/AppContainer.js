@@ -2,7 +2,7 @@ import React from 'react';
 import update from 'immutability-helper';
 import AppView from './AppView';
 import { examples } from 'blunt-instrument-test-resources';
-import { instrumentedEval } from 'blunt-instrument-eval';
+import instrumentedEval from 'blunt-instrument-eval';
 
 const defaultQueryState = {
   traceQuery: {

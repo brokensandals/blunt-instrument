@@ -11,7 +11,7 @@ When the output code is executed, it will produce a log of all the expressions t
 
 ```javascript
 import * as babel from '@babel/core';
-import { bluntInstrumentPlugin } from 'blunt-instrument-babel-plugin';
+import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
 
 const originalCode = `
   function fac(n) {

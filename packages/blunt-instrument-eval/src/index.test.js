@@ -1,5 +1,5 @@
 import { getNodeId } from 'blunt-instrument-ast-utils';
-import { instrumentedEval } from './';
+import instrumentedEval from './';
 
 const example = `
   let num = 1;

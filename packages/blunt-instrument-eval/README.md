@@ -4,7 +4,7 @@ This package ties together various parts of blunt-instrument to provide an easy 
 
 ```javascript
 import { getNodeId } from 'blunt-instrument-ast';
-import { instrumentedEval } from 'blunt-instrument-eval';
+import instrumentedEval from 'blunt-instrument-eval';
 
 const code = `
   function factorial(n) {
