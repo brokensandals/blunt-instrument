@@ -1,5 +1,5 @@
 import * as babel from '@babel/core';
-import { examples } from 'blunt-instrument-test-resources';
+import examples from 'blunt-instrument-test-resources';
 import {
   getNodeId,
   attachCodeSlicesToAST,

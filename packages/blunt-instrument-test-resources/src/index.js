@@ -1,4 +1,4 @@
-export const examples = {};
+const examples = {};
 
 examples.factorial = `function fac(n) {
   return n == 1 ? 1 : n * fac(n - 1);
@@ -20,4 +20,6 @@ examples.insertionSort = `function insertionSort(array) {
 }
 
 const a = [3, 1, 2, 5, 4];
-insertionSort(a);`
+insertionSort(a);`;
+
+export default examples;

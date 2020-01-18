@@ -6,7 +6,7 @@ import TrevTable from '../TrevTable';
 import TraceQueryForm from '../TraceQueryForm';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { examples } from 'blunt-instrument-test-resources';
+import examples from 'blunt-instrument-test-resources';
 
 function AppView({
   evalResult,
