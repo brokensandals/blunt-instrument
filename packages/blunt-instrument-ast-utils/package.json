@@ -3,15 +3,8 @@
   "version": "0.0.0",
   "description": "Utilities for dealing with babel ASTs for use with blunt-instrument..",
   "main": "src/index.js",
-  "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.7",
-    "jest": "^24.9.0"
-  },
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
+  "dependencies": {
+    "@babel/types": "^7.7.5"
   },
   "repository": {
     "type": "git",

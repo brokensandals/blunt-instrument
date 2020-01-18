@@ -8,16 +8,10 @@
     "object-graph-as-json": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.7",
-    "blunt-instrument-test-resources": "^0.0.0",
-    "jest": "^24.9.0"
+    "blunt-instrument-test-resources": "^0.0.0"
   },
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:updateSnapshot": "jest --updateSnapshot"
+  "peerDependencies": {
+    "@babel/core": "^7.7.5"
   },
   "repository": {
     "type": "git",

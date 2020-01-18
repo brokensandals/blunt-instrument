@@ -9,15 +9,6 @@
     "blunt-instrument-babel-plugin": "^0.0.0",
     "blunt-instrument-trace-utils": "^0.0.0"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/preset-env": "^7.7.7",
-    "jest": "^24.9.0"
-  },
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brokensandals/blunt-instrument.git"
