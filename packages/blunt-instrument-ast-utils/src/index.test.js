@@ -1,6 +1,14 @@
-
-import { getNodeId, setNodeId, copyNodeId, addNodeIdsToAST, getCodeSlice, attachCodeSlicesToAST, copyNodeIdsBetweenASTs, ASTQuerier } from './index';
-import { parseSync } from '@babel/core';
+import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
+import {
+  getNodeId,
+  setNodeId,
+  copyNodeId,
+  addNodeIdsToAST,
+  getCodeSlice,
+  attachCodeSlicesToAST,
+  copyNodeIdsBetweenASTs,
+  ASTQuerier,
+} from './index';
 
 describe('getNodeId', () => {
   it('returns null when "extra" field is missing', () => {
@@ -9,12 +17,12 @@ describe('getNodeId', () => {
   });
 
   it('returns null when "biNodeId" field is missing', () => {
-    const node = { extra: { foo: 'bar' }};
+    const node = { extra: { foo: 'bar' } };
     expect(getNodeId(node)).toBeNull();
   });
 
   it('returns extra.biNodeId field', () => {
-    const node = { extra: { biNodeId: 'test-1' }};
+    const node = { extra: { biNodeId: 'test-1' } };
     expect(getNodeId(node)).toEqual('test-1');
   });
 });
@@ -27,7 +35,7 @@ describe('setNodeId', () => {
   });
 
   it('uses an existing "extra" field', () => {
-    const node = { extra: { foo: 'bar'} };
+    const node = { extra: { foo: 'bar' } };
     setNodeId(node, 'test-1');
     expect(node.extra.biNodeId).toEqual('test-1');
     expect(node.extra.foo).toEqual('bar');
@@ -107,12 +115,12 @@ describe('getCodeSlice', () => {
   });
 
   it('returns null when `extra.codeSlice` is missing', () => {
-    const node = { extra: { foo: 'bar' }};
+    const node = { extra: { foo: 'bar' } };
     expect(getCodeSlice(node)).toBeNull();
   });
 
   it('returns the code slice', () => {
-    const node = { extra: { codeSlice: 'foo' }};
+    const node = { extra: { codeSlice: 'foo' } };
     expect(getCodeSlice(node)).toEqual('foo');
   });
 });
@@ -190,7 +198,10 @@ describe('ASTQuerier', () => {
       addNodeIdsToAST(ast, 'test-');
       attachCodeSlicesToAST(ast, code);
       const astq = new ASTQuerier(ast);
-      const expected = [ast.program.body[0].expression.right.left, ast.program.body[1].expression.right.left];
+      const expected = [
+        ast.program.body[0].expression.right.left,
+        ast.program.body[1].expression.right.left,
+      ];
       expect(astq.getNodesByCodeSlice('y()')).toEqual(expected);
     });
 
@@ -212,7 +223,7 @@ describe('ASTQuerier', () => {
       attachCodeSlicesToAST(ast, code);
       const astq = new ASTQuerier(ast);
       const expected = [ast.program.body[0].expression.right.right, ast.program.body[1]];
-      const actual = astq.filterNodes(node => ['123', 'z = 4;'].includes(getCodeSlice(node)));
+      const actual = astq.filterNodes((node) => ['123', 'z = 4;'].includes(getCodeSlice(node)));
       expect(actual).toEqual(expected);
     });
   });
