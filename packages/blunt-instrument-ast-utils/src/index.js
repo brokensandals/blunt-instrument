@@ -28,16 +28,16 @@ export function setNodeId(node, id) {
   // TODO: I really have no idea whether this sort of thing is
   // what 'extra' is for
   if (!node.extra) {
-    node.extra = {};
+    node.extra = {}; // eslint-disable-line no-param-reassign
   }
 
-  node.extra.biNodeId = id;
+  node.extra.biNodeId = id; // eslint-disable-line no-param-reassign
 }
 
 /**
  * Copy the node ID from one AST node to another.
- * @param {Node} from 
- * @param {Node} to 
+ * @param {Node} from
+ * @param {Node} to
  */
 export function copyNodeId(from, to) {
   setNodeId(to, getNodeId(from));
@@ -46,21 +46,21 @@ export function copyNodeId(from, to) {
 /**
  * Copies all node IDs from one AST to another. This should be called with
  * two ASTs that have exactly the same shape.
- * @param {Node} from 
+ * @param {Node} from
  * @param {Node} to
  * @throws error if the two trees do not have the same number and types of nodes
  */
 export function copyNodeIdsBetweenASTs(from, to) {
   const fromNodes = [];
   const toNodes = [];
-  types.traverseFast(from, node => fromNodes.push(node));
-  types.traverseFast(to, node => toNodes.push(node));
+  types.traverseFast(from, (node) => fromNodes.push(node));
+  types.traverseFast(to, (node) => toNodes.push(node));
 
   if (fromNodes.length !== toNodes.length) {
     throw new Error(`Source tree has ${fromNodes.length} nodes but destination tree has ${toNodes.length}`);
   }
 
-  for (let i = 0; i < fromNodes.length; i++) {
+  for (let i = 0; i < fromNodes.length; i += 1) {
     if (fromNodes[i].type !== toNodes[i].type) {
       throw new Error(`Source node type ${fromNodes[i].type} does not match destination node type ${toNodes[i].type}`);
     }
@@ -88,7 +88,7 @@ export function addNodeIdsToAST(ast, prefix) {
 /**
  * Retrieve the source code slice from a node, if it has been set.
  * Use `attachCodeSlicesToAST` to set the code slices.
- * @param {Node} node 
+ * @param {Node} node
  * @return {string} the code slice or null
  */
 export function getCodeSlice(node) {
@@ -118,9 +118,10 @@ export function attachCodeSlicesToAST(ast, code) {
       }
 
       if (!node.extra) {
-        node.extra = {};
+        node.extra = {}; // eslint-disable-line no-param-reassign
       }
 
+      // eslint-disable-next-line no-param-reassign
       node.extra.codeSlice = code.slice(node.start, node.end);
     }
   });
@@ -150,7 +151,7 @@ export class ASTQuerier {
       }
 
       nodesById.set(node.extra.biNodeId, node);
-      
+
       const codeSlice = getCodeSlice(node);
       if (codeSlice) {
         let nodes = nodesByCodeSlice.get(codeSlice);
@@ -168,7 +169,7 @@ export class ASTQuerier {
 
   /**
    * Look up an AST node by its node ID.
-   * @param {string} id 
+   * @param {string} id
    * @return {Node} the node or undefined
    */
   getNodeById(id) {
