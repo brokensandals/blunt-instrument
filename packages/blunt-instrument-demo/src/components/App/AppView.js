@@ -7,6 +7,7 @@ import TraceQueryForm from '../TraceQueryForm';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import examples from 'blunt-instrument-test-resources';
+import ReactJson from 'react-json-view';
 
 function AppView({
   evalResult,
@@ -93,8 +94,10 @@ function AppView({
       <div className="ast-tabs">
         <Tabs>
           <TabList>
-            <Tab>Original AST</Tab>
-            <Tab>Instrumented AST</Tab>
+            <Tab>AST</Tab>
+            <Tab>AST JSON</Tab>
+            <Tab>Instrumented</Tab>
+            <Tab>Instrumented (JSON)</Tab>
           </TabList>
 
           <TabPanel>
@@ -104,13 +107,25 @@ function AppView({
                     onNodeSelectedToggle={onNodeSelectedToggle}
                     selectedNodeIds={selectedNodeIds} />
           </TabPanel>
-            
+
+          <TabPanel>
+            <ReactJson src={evalResult.traceQuerier.astQuerier.ast} />
+          </TabPanel>
+
           <TabPanel>
             <ASTNav astQuerier={evalResult.instrumentedASTQuerier}
                       highlightedNodeId={highlightedNodeId}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
                       selectedNodeIds={selectedNodeIds} />
+          </TabPanel>
+
+          <TabPanel>
+            <pre className="instrumented-ast-json">
+              <code>
+                {JSON.stringify(evalResult.instrumentedASTQuerier.ast, null, 2)}
+              </code>
+            </pre>
           </TabPanel>
         </Tabs>
       </div>

@@ -76,6 +76,10 @@
   grid-area: ast-tabs;
 }
 
+.instrumented-ast-json {
+  font-size: small;
+}
+
 .TraceQueryForm {
   grid-area: trace-query-form;
   font-size: small;
