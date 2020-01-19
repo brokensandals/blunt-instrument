@@ -16,6 +16,7 @@
     "lerna": "^3.19.0"
   },
   "scripts": {
+    "coverage": "jest --coverage",
     "lint": "eslint packages/*/src",
     "start": "lerna run start --stream --scope blunt-instrument-demo",
     "test": "jest",
