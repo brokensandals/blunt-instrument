@@ -90,6 +90,9 @@ const buildFnTrace = template(`{
   %%instrumentationId%%.trevIdStack.push(%%instrumentationId%%.trace[%%instrumentationId%%.trace.length - 1].id);
   try {
     %%body%%
+  } catch (e) {
+    %%instrumentationId%%.recordTrev('fn-throw', %%nodeId%%, e);
+    throw e;
   } finally {
     %%instrumentationId%%.trevIdStack.pop();
   }

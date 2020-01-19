@@ -100,21 +100,21 @@ function codeValue(output, target, trevType = 'expr') {
   return decode(codeTrev(output, target, trevType).data);
 }
 
-function namedCalls(output, target) {
+function namedCalls(output, target, trevType = 'fn-start') {
   const nodes = output.astq.filterNodes(
     (node) => babel.types.isFunctionDeclaration(node) && node.id.name === target,
   );
   expect(nodes).toHaveLength(1);
   return trevsForNode(output, nodes[0])
-    .filter((trev) => trev.type === 'fn-start');
+    .filter((trev) => trev.type === trevType);
 }
 
-function namedCallsData(output, target) {
-  return namedCalls(output, target).map((trev) => decode(trev.data));
+function namedCallsData(output, target, trevType = 'fn-start') {
+  return namedCalls(output, target, trevType).map((trev) => decode(trev.data));
 }
 
-function namedCall(output, target) {
-  const trevs = namedCalls(output, target);
+function namedCall(output, target, trevType = 'fn-start') {
+  const trevs = namedCalls(output, target, trevType);
   expect(trevs).toHaveLength(1);
   return trevs[0];
 }
@@ -241,6 +241,27 @@ describe('special case syntax handling', () => {
       expect(oneStarts.map((trev) => trev.parentId)).toEqual([twoStart.id, undefined]);
       expect(twoCatch.parentId).toEqual(twoStart.id);
       expect(rootCatch.parentId).toBeUndefined();
+    });
+
+    test('fn-throw is recorded for errors not caught in the function body', () => {
+      const output = biEval(`
+        function inner() {
+          throw new Error('whoopsie');
+        }
+        function outer() {
+          inner();
+        }
+        try {
+          outer();
+        } catch (e) {
+          output.error = e;
+        }
+      `);
+
+      expect(output.error.message).toEqual('whoopsie');
+      const throw1 = namedCall(output, 'inner', 'fn-throw').data;
+      expect(throw1['.message'].value).toEqual('whoopsie');
+      expect(namedCall(output, 'outer', 'fn-throw').data).toEqual(throw1);
     });
   });
 

@@ -329,6 +329,10 @@ function fac(n) {
     {
       return _instrumentation.recordTrev('fn-ret', \\"s6\\", _instrumentation.recordTrev('expr', \\"s7\\", _instrumentation.recordTrev('expr', \\"s8\\", _instrumentation.recordTrev('expr', \\"s9\\", n) == _instrumentation.recordTrev('expr', \\"s10\\", 1)) ? _instrumentation.recordTrev('expr', \\"s11\\", 1) : _instrumentation.recordTrev('expr', \\"s12\\", _instrumentation.recordTrev('expr', \\"s13\\", n) * _instrumentation.recordTrev('expr', \\"s14\\", _instrumentation.recordTrev('expr', \\"s15\\", fac)(_instrumentation.recordTrev('expr', \\"s16\\", _instrumentation.recordTrev('expr', \\"s17\\", n) - _instrumentation.recordTrev('expr', \\"s18\\", 1)))))));
     }
+  } catch (e) {
+    _instrumentation.recordTrev('fn-throw', \\"s2\\", e);
+
+    throw e;
   } finally {
     _instrumentation.trevIdStack.pop();
   }
@@ -382,6 +386,10 @@ Array [
     {
       return _instrumentation.recordTrev('fn-ret', \\"s6\\", _instrumentation.recordTrev('expr', \\"s7\\", _instrumentation.recordTrev('expr', \\"s8\\", _instrumentation.recordTrev('expr', \\"s9\\", n) == _instrumentation.recordTrev('expr', \\"s10\\", 1)) ? _instrumentation.recordTrev('expr', \\"s11\\", 1) : _instrumentation.recordTrev('expr', \\"s12\\", _instrumentation.recordTrev('expr', \\"s13\\", n) * _instrumentation.recordTrev('expr', \\"s14\\", _instrumentation.recordTrev('expr', \\"s15\\", fac)(_instrumentation.recordTrev('expr', \\"s16\\", _instrumentation.recordTrev('expr', \\"s17\\", n) - _instrumentation.recordTrev('expr', \\"s18\\", 1)))))));
     }
+  } catch (e) {
+    _instrumentation.recordTrev('fn-throw', \\"s2\\", e);
+
+    throw e;
   } finally {
     _instrumentation.trevIdStack.pop();
   }
@@ -533,6 +541,10 @@ Array [
     {
       return _instrumentation.recordTrev('fn-ret', \\"s6\\", _instrumentation.recordTrev('expr', \\"s7\\", _instrumentation.recordTrev('expr', \\"s8\\", _instrumentation.recordTrev('expr', \\"s9\\", n) == _instrumentation.recordTrev('expr', \\"s10\\", 1)) ? _instrumentation.recordTrev('expr', \\"s11\\", 1) : _instrumentation.recordTrev('expr', \\"s12\\", _instrumentation.recordTrev('expr', \\"s13\\", n) * _instrumentation.recordTrev('expr', \\"s14\\", _instrumentation.recordTrev('expr', \\"s15\\", fac)(_instrumentation.recordTrev('expr', \\"s16\\", _instrumentation.recordTrev('expr', \\"s17\\", n) - _instrumentation.recordTrev('expr', \\"s18\\", 1)))))));
     }
+  } catch (e) {
+    _instrumentation.recordTrev('fn-throw', \\"s2\\", e);
+
+    throw e;
   } finally {
     _instrumentation.trevIdStack.pop();
   }
@@ -698,6 +710,10 @@ Array [
     {
       return _instrumentation.recordTrev('fn-ret', \\"s6\\", _instrumentation.recordTrev('expr', \\"s7\\", _instrumentation.recordTrev('expr', \\"s8\\", _instrumentation.recordTrev('expr', \\"s9\\", n) == _instrumentation.recordTrev('expr', \\"s10\\", 1)) ? _instrumentation.recordTrev('expr', \\"s11\\", 1) : _instrumentation.recordTrev('expr', \\"s12\\", _instrumentation.recordTrev('expr', \\"s13\\", n) * _instrumentation.recordTrev('expr', \\"s14\\", _instrumentation.recordTrev('expr', \\"s15\\", fac)(_instrumentation.recordTrev('expr', \\"s16\\", _instrumentation.recordTrev('expr', \\"s17\\", n) - _instrumentation.recordTrev('expr', \\"s18\\", 1)))))));
     }
+  } catch (e) {
+    _instrumentation.recordTrev('fn-throw', \\"s2\\", e);
+
+    throw e;
   } finally {
     _instrumentation.trevIdStack.pop();
   }
@@ -1255,6 +1271,10 @@ function insertionSort(array) {
 
       _instrumentation.recordTrev('fn-ret', \\"s2\\");
     }
+  } catch (e) {
+    _instrumentation.recordTrev('fn-throw', \\"s2\\", e);
+
+    throw e;
   } finally {
     _instrumentation.trevIdStack.pop();
   }
@@ -1384,6 +1404,10 @@ Array [
 
       _instrumentation.recordTrev('fn-ret', \\"s2\\");
     }
+  } catch (e) {
+    _instrumentation.recordTrev('fn-throw', \\"s2\\", e);
+
+    throw e;
   } finally {
     _instrumentation.trevIdStack.pop();
   }
