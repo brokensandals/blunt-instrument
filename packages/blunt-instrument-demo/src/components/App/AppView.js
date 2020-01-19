@@ -51,6 +51,15 @@ function AppView({
     }
   }
 
+  let status;
+  if (runError) {
+    status = <p className="error">{runError.toString()}</p>;
+  } else if (evalResult.error) {
+    status = <p>Completed with error: {evalResult.error.toString()}</p>;
+  } else {
+    status = <p>Completed successfully.</p>;
+  }
+
   return (
     <div className="App">
       <form className="source-form">
@@ -62,7 +71,7 @@ function AppView({
           </select>
         </p>
         <textarea value={sourceDraft} onChange={handleSourceDraftChange} />
-        {runError ? <p className="error">{runError.toString()}</p> : null}
+        {status}
         <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
       </form>
 

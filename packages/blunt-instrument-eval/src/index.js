@@ -14,8 +14,14 @@ import { TraceQuerier } from 'blunt-instrument-trace-utils';
  * and returning the trace in a consumable format.
  *
  * The input is javascript source code as a string, and the output is an object
- * containing by default one field, `traceQuerier`. This is an instance of TraceQuerier
+ * containing by at least one field, `traceQuerier`. This is an instance of TraceQuerier
  * with the results of the trace.
+ *
+ * If the code throws an error, it will be caught and stored in the `error` field of the
+ * return value.
+ *
+ * Invalid input code or an error in initializing the tracer may cause this function
+ * to throw errors.
  *
  * @param {string} source - javascript code to be instrumented & evaluated
  * @param {object} opts
@@ -41,11 +47,28 @@ may interfere with instrumentedEval, the code, or both.`);
   const babelResult = babel.transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
   const { code } = babelResult;
 
-  const wrapped = `"use strict";(function(){var ${assignTo};${code};return ${assignTo};})()`;
+  const wrapped = `
+    "use strict";
+    (function(){
+      var ${assignTo};
+      try {
+        ${code};
+      } catch (e) {
+        return { error: e, instrumentation: ${assignTo} };
+      }
+      return { instrumentation: ${assignTo} };
+    })()`;
   const evalResult = (0, eval)(wrapped); // eslint-disable-line no-eval
-  const { ast, trace } = evalResult;
+  const { error, instrumentation: { ast, trace } = {} } = evalResult;
+  if (!ast || !trace) {
+    if (error) {
+      throw error;
+    } else {
+      throw new Error('Unknown error prior to instrumentation init.');
+    }
+  }
 
-  const result = {};
+  const result = { error };
 
   attachCodeSlicesToAST(ast, source);
   const astQuerier = new ASTQuerier(ast);

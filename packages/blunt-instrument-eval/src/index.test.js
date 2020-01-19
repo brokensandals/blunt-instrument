@@ -19,8 +19,8 @@ describe('instrumentedEval', () => {
       filters: { onlyNodeIds: { [getNodeId(sumNode)]: true } },
     });
     expect(trevs.map((trev) => trev.data)).toEqual([4, 7]);
-
     expect(result.instrumentedASTQuerier).toBeUndefined();
+    expect(result.error).toBeUndefined();
   });
 
   it('builds an ASTQuerier for the instrumented code if requested', () => {
@@ -28,6 +28,13 @@ describe('instrumentedEval', () => {
     expect(result.traceQuerier).toBeDefined();
     expect(result.instrumentedASTQuerier).toBeDefined();
     expect(result.instrumentedASTQuerier.getNodesByCodeSlice('trace: []')).toHaveLength(1);
+  });
+
+  it('catches and returns errors when evaluating the code', () => {
+    const result = instrumentedEval('throw new Error("boo");');
+    expect(result.traceQuerier).toBeDefined();
+    expect(result.error).toBeDefined();
+    expect(result.error.message).toEqual('boo');
   });
 });
 
