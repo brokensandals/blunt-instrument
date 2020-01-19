@@ -5,9 +5,9 @@
   grid-template-columns: 50% 50%;
   grid-template-areas:
     "source-form trace-query-form"
-    "code-tabs trev-table"
-    "code-tabs trev-table"
-    "ast-tabs trev-table"
+    "code-tabs trev-tabs"
+    "code-tabs trev-tabs"
+    "ast-tabs trev-tabs"
     "blurb blurb"
 }
 
@@ -85,9 +85,11 @@
   font-size: small;
 }
 
+.trev-tabs {
+  grid-area: trev-tabs;
+}
+
 .TrevTable {
-  grid-area: trev-table;
-  overflow: scroll;
   font-size: small;
 }
 

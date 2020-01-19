@@ -135,11 +135,28 @@ function AppView({
                       onNodeSelectedToggle={onNodeSelectedToggle}
                       querier={evalResult.traceQuerier}
                       query={traceQuery} />
-      <TrevTable trevs={trevs}
-                 highlightedTrevId={highlightedTrevId}
-                 highlightedNodeId={highlightedNodeId}
-                 onHoveredTrevChange={onHoveredTrevChange}
-                 onNodeSelectedToggle={onNodeSelectedToggle} />
+
+      <div className="trev-tabs">
+        <Tabs>
+          <TabList>
+            <Tab>Trevs</Tab>
+            <Tab>Trevs (JSON)</Tab>
+          </TabList>
+          
+          <TabPanel>
+            <TrevTable trevs={trevs}
+                      highlightedTrevId={highlightedTrevId}
+                      highlightedNodeId={highlightedNodeId}
+                      onHoveredTrevChange={onHoveredTrevChange}
+                      onNodeSelectedToggle={onNodeSelectedToggle} />
+          </TabPanel>
+
+          <TabPanel>
+            <ReactJson src={trevs.map(({ extra, ...rest }) => rest)} />
+          </TabPanel>
+        </Tabs>
+      </div>
+
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>
