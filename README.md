@@ -8,7 +8,7 @@
 
 Requires [node](https://nodejs.org) and [npm](https://www.npmjs.com).
 
-Clone this repo and run `npm install` to install dependencies.
+Clone this repo and run `npm install` to install dependencies, then run `npx lerna bootstrap` to link the packages together.
 
 Run `npm test` or `npm test:watch` to run the unit tests.
 
