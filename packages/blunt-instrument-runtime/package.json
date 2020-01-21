@@ -1,0 +1,19 @@
+{
+  "name": "blunt-instrument-runtime",
+  "version": "0.0.0",
+  "description": "Runtime dependency for code instrumented by blunt-instrument.",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brokensandals/blunt-instrument.git"
+  },
+  "author": "Jacob Williams <jacobaw@gmail.com> (https://brokensandals.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brokensandals/blunt-instrument/issues"
+  },
+  "homepage": "https://github.com/brokensandals/blunt-instrument#readme",
+  "dependencies": {
+    "object-graph-as-json": "^1.0.0"
+  }
+}
