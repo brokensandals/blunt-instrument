@@ -1,13 +1,11 @@
 .App {
   height: 100vh;
   display: grid;
-  grid-template-rows: 20% 15% 15% calc(50% - 2em) 2em;
+  grid-template-rows: 20% calc(80% - 2em) 2em;
   grid-template-columns: 50% 50%;
   grid-template-areas:
     "source-form trace-query-form"
     "code-tabs trev-tabs"
-    "code-tabs trev-tabs"
-    "ast-tabs trev-tabs"
     "blurb blurb"
 }
 
@@ -69,14 +67,6 @@
 }
 
 .AnnotatedCode {
-  font-size: small;
-}
-
-.ast-tabs {
-  grid-area: ast-tabs;
-}
-
-.instrumented-ast-json {
   font-size: small;
 }
 

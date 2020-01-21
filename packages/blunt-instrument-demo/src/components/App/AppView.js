@@ -78,7 +78,9 @@ function AppView({
       <div className="code-tabs">
         <Tabs>
           <TabList>
-            <Tab>Original Code</Tab>
+            <Tab>Code</Tab>
+            <Tab>AST</Tab>
+            <Tab>AST JSON</Tab>
             <Tab>Instrumented Code</Tab>
           </TabList>
 
@@ -89,25 +91,6 @@ function AppView({
                            onNodeSelectedToggle={onNodeSelectedToggle}
                            selectedNodeIds={selectedNodeIds} />
           </TabPanel>
-          
-          <TabPanel>
-            <AnnotatedCode astQuerier={evalResult.instrumentedASTQuerier}
-                           highlightedNodeId={highlightedNodeId}
-                           onHoveredNodeChange={onHoveredNodeChange}
-                           onNodeSelectedToggle={onNodeSelectedToggle}
-                           selectedNodeIds={selectedNodeIds} />
-          </TabPanel>
-        </Tabs>
-      </div>
-
-      <div className="ast-tabs">
-        <Tabs>
-          <TabList>
-            <Tab>AST</Tab>
-            <Tab>AST JSON</Tab>
-            <Tab>Instrumented</Tab>
-            <Tab>Instrumented (JSON)</Tab>
-          </TabList>
 
           <TabPanel>
             <ASTNav astQuerier={evalResult.traceQuerier.astQuerier}
@@ -120,24 +103,17 @@ function AppView({
           <TabPanel>
             <ReactJson src={evalResult.traceQuerier.astQuerier.ast} />
           </TabPanel>
-
+          
           <TabPanel>
-            <ASTNav astQuerier={evalResult.instrumentedASTQuerier}
-                      highlightedNodeId={highlightedNodeId}
-                      onHoveredNodeChange={onHoveredNodeChange}
-                      onNodeSelectedToggle={onNodeSelectedToggle}
-                      selectedNodeIds={selectedNodeIds} />
-          </TabPanel>
-
-          <TabPanel>
-            <pre className="instrumented-ast-json">
-              <code>
-                {JSON.stringify(evalResult.instrumentedASTQuerier.ast, null, 2)}
-              </code>
-            </pre>
+            <AnnotatedCode astQuerier={evalResult.instrumentedASTQuerier}
+                           highlightedNodeId={highlightedNodeId}
+                           onHoveredNodeChange={onHoveredNodeChange}
+                           onNodeSelectedToggle={onNodeSelectedToggle}
+                           selectedNodeIds={selectedNodeIds} />
           </TabPanel>
         </Tabs>
       </div>
+
       <TraceQueryForm highlightedNodeId={highlightedNodeId}
                       onTraceQueryChange={onTraceQueryChange}
                       onHoveredNodeChange={onHoveredNodeChange}
