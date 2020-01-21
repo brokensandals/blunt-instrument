@@ -59,7 +59,7 @@
 }
 
 .react-tabs__tab-panel {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .react-tabs__tab {
