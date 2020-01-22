@@ -15,7 +15,7 @@ import { TraceQuerier } from 'blunt-instrument-trace-utils';
  * and returning the trace in a consumable format.
  *
  * The input is javascript source code as a string, and the output is an object
- * containing by at least one field, `traceQuerier`. This is an instance of TraceQuerier
+ * containing at least one field, `traceQuerier`. This is an instance of TraceQuerier
  * with the results of the trace.
  *
  * If the code throws an error, it will be caught and stored in the `error` field of the
