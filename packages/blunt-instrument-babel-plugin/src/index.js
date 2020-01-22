@@ -6,107 +6,80 @@ import {
   getNodeId,
   setNodeId,
 } from 'blunt-instrument-ast-utils';
-import ogajCode from 'object-graph-as-json/target/cjs/embed';
 
-const buildInstrumentationInit = template(`
-  const %%instrumentationId%% = {
-    ast: JSON.parse(%%astString%%),
-    encoder: (function(){${ogajCode.Encoder};return new Encoder.default();})(),
-    trace: [],
-    trevIdStack: [],
-  };
+const buildImportTracer = template(`
+  import { defaultTracer as %%tracerId%% } from 'blunt-instrument-runtime';
 `);
 
-const buildRecordTrevInit = template(`
-  %%instrumentationId%%.recordTrev = (type, nodeId, data) => {
-    %%instrumentationId%%.trace.push({
-      id: %%instrumentationId%%.trace.length + 1,
-      parentId: %%instrumentationId%%.trevIdStack[%%instrumentationId%%.trevIdStack.length - 1],
-      nodeId,
-      type,
-      data: %%instrumentationId%%.encoder.encode(data),
-    });
-    return data;
-  };
-`);
-
-const buildAssignOutput = template(`
-  %%assignTo%% = %%instrumentationId%%;
-`);
-
-const buildExportOutput = template(`
-  export const %%exportAs%% = %%instrumentationId%%;
+const buildRegisterAST = template(`
+  %%tracerId%%.asts[%%astKey%%] = JSON.parse(%%astString%%);
 `);
 
 /**
  * Adds initialization code for blunt-instrument to the given AST.
  * @param {NodePath} path - path containing the root node of the AST
  * @param {object} opts
- * @param {object} opts.outputs
- * @param {string} opts.outputs.assignTo - if provided, code like
- *   `${assignTo} = _instrumentation;` will be generated
- * @param {string} opts.outputs.exportAs - if provided, code like
- *   `export const ${exportAs} = _instrumentation;` will be generated
+ * @param {object} opts.runtime
+ * @param {("import"|"var")} opts.runtime.mechanism - indicates how the tracer should be retrieved
+ * @param {string} opts.runtime.tracerVar - when mechanism="var", the name of the variable
+ *   that contains the Tracer instance
+ * @param {object} opts.ast
+ * @param {string} opts.ast.key - a key to identify this AST and distinguish it from
+ *   any others that will be used with the same Tracer instance
+ * @param {Boolean} opts.ast.selfRegister - whether to generate code that stores the AST
+ *   into the Tracer at the beginning of execution
  * @return {object} an object containing identifiers generated during init that will need to be
  *   used by instrumentation code
  */
 function addInstrumenterInit(path,
   {
-    outputs: {
-      assignTo = null,
-      exportAs = null,
+    runtime: {
+      mechanism = 'import',
+      tracerVar,
+    } = {},
+    ast: {
+      key: astKey = 'src',
+      selfRegister = true,
     } = {},
   }) {
   const ids = {
-    instrumentationId: path.scope.generateUidIdentifier('instrumentation'),
+    tracerId: tracerVar ? types.identifier(tracerVar)
+      : path.scope.generateUidIdentifier('tracer'),
   };
 
-  const instrumentationInit = buildInstrumentationInit({
+  if (selfRegister) {
     // TODO insert object directly instead of via json
-    astString: types.stringLiteral(JSON.stringify(path.node)),
-    ...ids,
-  });
-  const recordTrevInit = buildRecordTrevInit(ids);
-
-  const outputDecls = [];
-  if (assignTo) {
-    outputDecls.push(buildAssignOutput({ assignTo, ...ids }));
-  }
-  if (exportAs) {
-    outputDecls.push(buildExportOutput({ exportAs, ...ids }));
+    const astString = types.stringLiteral(JSON.stringify(path.node));
+    path.node.body.unshift(buildRegisterAST({
+      tracerId: ids.tracerId,
+      astKey: types.stringLiteral(astKey),
+      astString,
+    }));
   }
 
-  path.node.body.unshift(
-    instrumentationInit,
-    recordTrevInit,
-    ...outputDecls,
-  );
+  if (mechanism === 'import') {
+    path.node.body.unshift(buildImportTracer(ids));
+  }
 
   return ids;
 }
 
 const buildFnTrace = template(`{
-  %%instrumentationId%%.recordTrev('fn-start', %%nodeId%%, %%args%%);
-  %%instrumentationId%%.trevIdStack.push(%%instrumentationId%%.trace[%%instrumentationId%%.trace.length - 1].id);
+  %%tracerId%%.record('fn-start', %%nodeId%%, %%args%%, 1);
   try {
     %%body%%
   } catch (e) {
-    %%instrumentationId%%.recordTrev('fn-throw', %%nodeId%%, e);
+    %%tracerId%%.record('fn-throw', %%nodeId%%, e, -1);
     throw e;
-  } finally {
-    %%instrumentationId%%.trevIdStack.pop();
   }
+  %%tracerId%%.record('fn-ret', %%nodeId%%, undefined, -1);
 }`);
 
 const buildReturnTrace = template(`
-  return %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%, %%retval%%);
+  return %%tracerId%%.record('fn-ret', %%nodeId%%, %%retval%%, -1);
 `);
 
-const buildFnEndTrace = template(`
-  %%instrumentationId%%.recordTrev('fn-ret', %%nodeId%%);
-`);
-
-function addFnTrace(path, { instrumentationId }) {
+function addFnTrace(path, { tracerId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
@@ -142,16 +115,9 @@ function addFnTrace(path, { instrumentationId }) {
   });
 
   let { body } = node;
-  if (types.isBlockStatement(body)) {
-    if (!types.isReturnStatement(body.body[body.body.length - 1])) {
-      body.body.push(buildFnEndTrace({
-        instrumentationId,
-        nodeId: types.stringLiteral(getNodeId(node)),
-      }));
-    }
-  } else if (types.isExpression(body)) {
+  if (types.isExpression(body)) {
     body = buildReturnTrace({
-      instrumentationId,
+      tracerId,
       nodeId: types.stringLiteral(getNodeId(node)),
       retval: node.body,
     });
@@ -159,7 +125,7 @@ function addFnTrace(path, { instrumentationId }) {
 
   const trace = buildFnTrace({
     body,
-    instrumentationId,
+    tracerId,
     nodeId: types.stringLiteral(getNodeId(node)),
     args: types.objectExpression(properties),
   });
@@ -168,7 +134,7 @@ function addFnTrace(path, { instrumentationId }) {
   node.extra.biTracedFn = true;
 }
 
-function addReturnTrace(path, { instrumentationId }) {
+function addReturnTrace(path, { tracerId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
@@ -177,7 +143,7 @@ function addReturnTrace(path, { instrumentationId }) {
   }
 
   const trace = buildReturnTrace({
-    instrumentationId,
+    tracerId,
     nodeId: types.stringLiteral(getNodeId(node)),
     retval: node.argument,
   });
@@ -185,16 +151,16 @@ function addReturnTrace(path, { instrumentationId }) {
 }
 
 const buildExpressionTrace = template(`
-  %%instrumentationId%%.recordTrev('expr', %%nodeId%%, %%expression%%)
+  %%tracerId%%.record('expr', %%nodeId%%, %%expression%%)
 `);
 
 /**
  * Replaces an expression node with a traced equivalent.
- * For example, rewrites `x + 1` to `_instrumentation.recordTrev('expr', 'NODEID', x + 1)`
+ * For example, rewrites `x + 1` to `tracer.record('expr', 'NODEID', x + 1)`
  * @param {NodePath} path - path containing expression node
  * @param {object} state - metadata returned from addInstrumenterInit
  */
-function addExpressionTrace(path, { instrumentationId }) {
+function addExpressionTrace(path, { tracerId }) {
   const { node } = path;
 
   // Don't trace the retrieval of a method from an object.
@@ -228,7 +194,7 @@ function addExpressionTrace(path, { instrumentationId }) {
   }
 
   const trace = buildExpressionTrace({
-    instrumentationId,
+    tracerId,
     nodeId: types.stringLiteral(getNodeId(node)),
     expression: node,
   });

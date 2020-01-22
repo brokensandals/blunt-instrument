@@ -6,6 +6,7 @@ import {
   copyNodeIdsBetweenASTs,
   addNodeIdsToAST,
 } from 'blunt-instrument-ast-utils';
+import { Tracer } from 'blunt-instrument-runtime';
 import { TraceQuerier } from 'blunt-instrument-trace-utils';
 
 /**
@@ -31,15 +32,20 @@ import { TraceQuerier } from 'blunt-instrument-trace-utils';
  * @returns {object}
  */
 export default function (source, { saveInstrumented = false } = {}) {
-  const assignTo = '_bluntInstrumentEvalRet';
+  const tracerVar = '_bie_tracer';
 
-  if (source.includes(assignTo)) {
+  if (source.includes(tracerVar)) {
     // eslint-disable-next-line no-console
-    console.warn(`Code includes "${assignTo}", which is defined by instrumentedEval. This
+    console.warn(`Code includes "${tracerVar}", which is defined by instrumentedEval. This
 may interfere with instrumentedEval, the code, or both.`);
   }
 
-  const babelOpts = { plugins: [[bluntInstrumentPlugin, { outputs: { assignTo } }]] };
+  const babelOpts = {
+    plugins: [
+      [bluntInstrumentPlugin, { runtime: { mechanism: 'var', tracerVar } }],
+    ],
+  };
+
   if (saveInstrumented) {
     babelOpts.ast = true;
   }
@@ -47,19 +53,17 @@ may interfere with instrumentedEval, the code, or both.`);
   const babelResult = babel.transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
   const { code } = babelResult;
 
-  const wrapped = `
-    "use strict";
-    (function(){
-      var ${assignTo};
-      try {
-        ${code};
-      } catch (e) {
-        return { error: e, instrumentation: ${assignTo} };
-      }
-      return { instrumentation: ${assignTo} };
-    })()`;
-  const evalResult = (0, eval)(wrapped); // eslint-disable-line no-eval
-  const { error, instrumentation: { ast, trace } = {} } = evalResult;
+  let error;
+  const fn = new Function(tracerVar, code); // eslint-disable-line no-new-func
+  const tracer = new Tracer();
+  try {
+    fn(tracer);
+  } catch (e) {
+    error = e;
+  }
+
+  const ast = tracer.asts.src;
+  const trace = tracer.trevs;
   if (!ast || !trace) {
     if (error) {
       throw error;

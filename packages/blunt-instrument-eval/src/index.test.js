@@ -27,7 +27,7 @@ describe('instrumentedEval', () => {
     const result = instrumentedEval(example, { saveInstrumented: true });
     expect(result.traceQuerier).toBeDefined();
     expect(result.instrumentedASTQuerier).toBeDefined();
-    expect(result.instrumentedASTQuerier.getNodesByCodeSlice('trace: []')).toHaveLength(1);
+    expect(result.instrumentedASTQuerier.getNodesByCodeSlice('_bie_tracer').length > 0).toBeTruthy();
   });
 
   it('catches and returns errors when evaluating the code', () => {
