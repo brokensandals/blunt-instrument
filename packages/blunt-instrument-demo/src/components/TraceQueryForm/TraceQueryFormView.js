@@ -20,7 +20,6 @@ export function TraceQueryFormView({
   }
   const includeNodesOptions = [];
   for (const node of querier.astQuerier.filterNodes(Boolean)) {
-    console.log(node)
     includeNodesOptions.push(nodeOption(node));
   }
 
