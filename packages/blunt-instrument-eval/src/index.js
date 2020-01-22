@@ -54,7 +54,7 @@ may interfere with instrumentedEval, the code, or both.`);
   const { code } = babelResult;
 
   let error;
-  const fn = new Function(tracerVar, code); // eslint-disable-line no-new-func
+  const fn = new Function(tracerVar, `"use strict";${code}`); // eslint-disable-line no-new-func
   const tracer = new Tracer();
   try {
     fn(tracer);
