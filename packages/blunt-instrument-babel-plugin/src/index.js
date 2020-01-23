@@ -7,18 +7,13 @@ import {
   setNodeId,
 } from 'blunt-instrument-ast-utils';
 
-// I expected that this could be merely:
-// `import { defaultTracer as %%tracerId%% } from 'blunt-instrument-runtime';`
-// ...but then plugin-transform-modules-commonjs will not actually define
-// the variable specified by tracerId. Unsure if that's a bug in the plugin
-// or how I'm using it.
 const buildImportTracer = template(`
-  import { defaultTracer as %%tempId%% } from 'blunt-instrument-runtime';
-  const %%tracerId%% = %%tempId%%;
+  import { defaultTrace as %%tempId%% } from 'blunt-instrument-runtime';
+  const %%tracerId%% = %%tempId%%.tracerFor();
 `);
 
 const buildRegisterAST = template(`
-  %%tracerId%%.asts[%%astKey%%] = JSON.parse(%%astString%%);
+  %%tracerId%%.ast = JSON.parse(%%astString%%);
 `);
 
 const buildFnTrace = template(`{
@@ -247,7 +242,6 @@ export default function (api, opts) {
       const astString = types.stringLiteral(JSON.stringify(path.node));
       path.node.body.unshift(buildRegisterAST({
         tracerId: ids.tracerId,
-        astKey: types.stringLiteral(key),
         astString,
       }));
     }

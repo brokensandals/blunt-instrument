@@ -6,7 +6,7 @@ import {
   copyNodeIdsBetweenASTs,
   addNodeIdsToAST,
 } from 'blunt-instrument-ast-utils';
-import { Tracer } from 'blunt-instrument-runtime';
+import { Trace } from 'blunt-instrument-runtime';
 import { TraceQuerier } from 'blunt-instrument-trace-utils';
 
 /**
@@ -55,16 +55,17 @@ may interfere with instrumentedEval, the code, or both.`);
 
   let error;
   const fn = new Function(tracerVar, `"use strict";${code}`); // eslint-disable-line no-new-func
-  const tracer = new Tracer();
+  const trace = new Trace();
+  const tracer = trace.tracerFor('eval');
   try {
     fn(tracer);
   } catch (e) {
     error = e;
   }
 
-  const ast = tracer.asts.src;
-  const trace = tracer.trevs;
-  if (!ast || !trace) {
+  const { ast } = tracer;
+  const { trevs } = trace;
+  if (!ast || !trevs) {
     if (error) {
       throw error;
     } else {
@@ -76,7 +77,7 @@ may interfere with instrumentedEval, the code, or both.`);
 
   attachCodeSlicesToAST(ast, source);
   const astQuerier = new ASTQuerier(ast);
-  result.traceQuerier = new TraceQuerier(astQuerier, trace);
+  result.traceQuerier = new TraceQuerier(astQuerier, trevs);
 
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);

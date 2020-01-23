@@ -2,32 +2,56 @@ import { Encoder } from 'object-graph-as-json';
 
 export const defaultEncoder = new Encoder();
 
-export class Tracer {
+export class Trace {
   constructor({ encoder = defaultEncoder } = {}) {
-    this.asts = {};
     this.encoder = encoder;
+    this.tracers = {};
     this.trevs = [];
     this.trevIdStack = [];
   }
 
-  record(type, nodeId, data, stackDirection = 0) {
-    const id = this.trevs.length + 1;
-    const parentId = this.trevIdStack[this.trevIdStack.length - 1];
-    if (stackDirection > 0) {
-      this.trevIdStack.push(id);
-    } else if (stackDirection < 0) {
-      this.trevIdStack.pop();
+  tracerFor(astKey = undefined) {
+    const trace = this;
+
+    if (trace.tracers[astKey]) {
+      return trace.tracers[astKey];
     }
 
-    this.trevs.push({
-      id,
-      parentId,
-      nodeId,
-      type,
-      data: this.encoder.encode(data),
-    });
-    return data;
+    if (!astKey) {
+      let i;
+      for (i = 1; trace.tracers[i]; i += 1);
+      astKey = i.toString(); // eslint-disable-line no-param-reassign
+    }
+
+    const tracer = {
+      astKey,
+
+      record(type, nodeId, rawData, stackDirection = 0) {
+        const id = trace.trevs.length + 1;
+        const parentId = trace.trevIdStack[trace.trevIdStack.length - 1];
+        if (stackDirection > 0) {
+          trace.trevIdStack.push(id);
+        } else if (stackDirection < 0) {
+          trace.trevIdStack.pop();
+        }
+        const data = trace.encoder.encode(rawData);
+
+        trace.trevs.push({
+          parentId,
+          id,
+          type,
+          astKey,
+          nodeId,
+          data,
+        });
+
+        return rawData;
+      },
+    };
+
+    trace.tracers[astKey] = tracer;
+    return tracer;
   }
 }
 
-export const defaultTracer = new Tracer();
+export const defaultTrace = new Trace();

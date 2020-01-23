@@ -7,7 +7,7 @@ import {
 } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep'; // eslint-disable-line import/no-extraneous-dependencies
 import { Encoder, UnsafeDecoder } from 'object-graph-as-json';
-import { Tracer, defaultTracer } from 'blunt-instrument-runtime';
+import { Trace, defaultTrace } from 'blunt-instrument-runtime';
 import bluntInstrumentPlugin from '.';
 
 /**
@@ -43,11 +43,12 @@ function biEval(code, pluginOpts = {}) {
     ...pluginOpts,
   });
 
-  const tracer = new Tracer({ encoder: new Encoder() });
+  const trace = new Trace({ encoder: new Encoder() });
+  const tracer = trace.tracerFor('test');
   const fn = new Function('tracer', 'output', `"use strict";${instrumented}`); // eslint-disable-line no-new-func
   const output = {};
   fn(tracer, output);
-  const astClone = cloneDeep(tracer.asts.src);
+  const astClone = cloneDeep(tracer.ast);
   attachCodeSlicesToAST(astClone, code);
   const astq = new ASTQuerier(astClone);
 
@@ -55,6 +56,7 @@ function biEval(code, pluginOpts = {}) {
     astq,
     code,
     instrumented,
+    trace,
     tracer,
     ...output,
   };
@@ -66,8 +68,8 @@ function decode(data) {
   return decoder.decode(data);
 }
 
-function trevsForNode({ tracer }, node) {
-  return tracer.trevs.filter((trev) => trev.nodeId === getNodeId(node));
+function trevsForNode({ trace }, node) {
+  return trace.trevs.filter((trev) => trev.nodeId === getNodeId(node));
 }
 
 function codeTrevs(output, target, trevType = 'expr') {
@@ -147,7 +149,7 @@ describe('general examples', () => {
 });
 
 describe('configuration', () => {
-  test('using defaultTracer', () => {
+  test('using defaultTrace', () => {
     const opts = {
       runtime: {
       },
@@ -155,9 +157,12 @@ describe('configuration', () => {
     const { code } = transform('const foo = "bar"', opts, {}, true);
     // use `eval()` instead of `new Function()` so that `require` is defined
     eval(code); // eslint-disable-line no-eval
-    expect(defaultTracer.trevs).toEqual([{
+    const astKeys = Object.keys(defaultTrace.tracers);
+    expect(astKeys).toHaveLength(1);
+    expect(defaultTrace.trevs).toEqual([{
       id: 1,
       type: 'expr',
+      astKey: astKeys[0],
       nodeId: 'src-5',
       data: 'bar',
     }]);
