@@ -7,7 +7,7 @@ import {
 } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep'; // eslint-disable-line import/no-extraneous-dependencies
 import { Encoder, UnsafeDecoder } from 'object-graph-as-json';
-import { Tracer } from 'blunt-instrument-runtime';
+import { Tracer, defaultTracer } from 'blunt-instrument-runtime';
 import bluntInstrumentPlugin from '.';
 
 /**
@@ -17,11 +17,12 @@ import bluntInstrumentPlugin from '.';
  * @param {object} babelOpts - options for babel
  * @returns {string}
  */
-function transform(code, pluginOpts = {}, babelOpts = {}) {
-  return babel.transformSync(code, {
-    plugins: [[bluntInstrumentPlugin, pluginOpts]],
-    ...babelOpts,
-  });
+function transform(code, pluginOpts = {}, babelOpts = { configFile: false }, modules = false) {
+  const plugins = [[bluntInstrumentPlugin, pluginOpts]];
+  if (modules) {
+    plugins.push('@babel/plugin-transform-modules-commonjs');
+  }
+  return babel.transformSync(code, { plugins, ...babelOpts });
 }
 
 /**
@@ -43,7 +44,7 @@ function biEval(code, pluginOpts = {}) {
   });
 
   const tracer = new Tracer({ encoder: new Encoder() });
-  const fn = new Function('tracer', 'output', instrumented); // eslint-disable-line no-new-func
+  const fn = new Function('tracer', 'output', `"use strict";${instrumented}`); // eslint-disable-line no-new-func
   const output = {};
   fn(tracer, output);
   const astClone = cloneDeep(tracer.asts.src);
@@ -142,6 +143,24 @@ describe('general examples', () => {
     const nEq1 = codeTrevs(output, 'n == 1');
     expect(nEq1.map((trev) => trev.parentId)).toEqual(contextIds);
     expect(nEq1.map((trev) => decode(trev.data))).toEqual([false, false, false, false, true]);
+  });
+});
+
+describe('configuration', () => {
+  test('using defaultTracer', () => {
+    const opts = {
+      runtime: {
+      },
+    };
+    const { code } = transform('const foo = "bar"', opts, {}, true);
+    // use `eval()` instead of `new Function()` so that `require` is defined
+    eval(code); // eslint-disable-line no-eval
+    expect(defaultTracer.trevs).toEqual([{
+      id: 1,
+      type: 'expr',
+      nodeId: 'src-5',
+      data: 'bar',
+    }]);
   });
 });
 

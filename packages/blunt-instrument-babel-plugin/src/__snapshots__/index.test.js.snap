@@ -1,30 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`demo examples factorial 1`] = `
-"\\"use strict\\";
-
-tracer.asts[\\"src\\"] = JSON.parse(\\"{\\\\\\"type\\\\\\":\\\\\\"Program\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"sourceType\\\\\\":\\\\\\"module\\\\\\",\\\\\\"interpreter\\\\\\":null,\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"FunctionDeclaration\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":9,\\\\\\"end\\\\\\":12,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s3\\\\\\"}},\\\\\\"generator\\\\\\":false,\\\\\\"async\\\\\\":false,\\\\\\"params\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":13,\\\\\\"end\\\\\\":14,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":14},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s4\\\\\\"}}],\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":16,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ReturnStatement\\\\\\",\\\\\\"start\\\\\\":20,\\\\\\"end\\\\\\":55,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":2},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":37}},\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"ConditionalExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":28,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":10},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s9\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"==\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":32,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s10\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s8\\\\\\"}},\\\\\\"consequent\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":36,\\\\\\"end\\\\\\":37,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":19}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s11\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"alternate\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":41,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":23},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s13\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"*\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":47,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":29},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s15\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":49,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":31},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s17\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"-\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":52,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s18\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s16\\\\\\"}}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s14\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s12\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s7\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s6\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s5\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s2\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":58,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":70,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"result\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"result\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s21\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":76,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":18},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s23\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":77,\\\\\\"end\\\\\\":78,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":19},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":20}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":3,\\\\\\"raw\\\\\\":\\\\\\"3\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s24\\\\\\"},\\\\\\"value\\\\\\":3}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s22\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s20\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s19\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s1\\\\\\"}}\\");
+"tracer.asts[\\"src\\"] = JSON.parse(\\"{\\\\\\"type\\\\\\":\\\\\\"Program\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"sourceType\\\\\\":\\\\\\"module\\\\\\",\\\\\\"interpreter\\\\\\":null,\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"FunctionDeclaration\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":9,\\\\\\"end\\\\\\":12,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-3\\\\\\"}},\\\\\\"generator\\\\\\":false,\\\\\\"async\\\\\\":false,\\\\\\"params\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":13,\\\\\\"end\\\\\\":14,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":14},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-4\\\\\\"}}],\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":16,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ReturnStatement\\\\\\",\\\\\\"start\\\\\\":20,\\\\\\"end\\\\\\":55,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":2},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":37}},\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"ConditionalExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":28,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":10},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-9\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"==\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":32,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-10\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-8\\\\\\"}},\\\\\\"consequent\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":36,\\\\\\"end\\\\\\":37,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":19}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-11\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"alternate\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":41,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":23},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-13\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"*\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":47,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":29},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-15\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":49,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":31},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-17\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"-\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":52,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-18\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-16\\\\\\"}}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-14\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-12\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-7\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-6\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-5\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-2\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":58,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":70,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"result\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"result\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-21\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":76,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":18},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-23\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":77,\\\\\\"end\\\\\\":78,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":19},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":20}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":3,\\\\\\"raw\\\\\\":\\\\\\"3\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-24\\\\\\"},\\\\\\"value\\\\\\":3}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-22\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-20\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-19\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-1\\\\\\"}}\\");
 
 function fac(n) {
-  tracer.record('fn-start', \\"s2\\", {
-    n: n,
-    \\"this\\": this,
+  tracer.record('fn-start', \\"src-2\\", {
+    n,
+    this: this,
     arguments: arguments
   }, 1);
 
   try {
     {
-      return tracer.record('fn-ret', \\"s6\\", tracer.record('expr', \\"s7\\", tracer.record('expr', \\"s8\\", tracer.record('expr', \\"s9\\", n) == tracer.record('expr', \\"s10\\", 1)) ? tracer.record('expr', \\"s11\\", 1) : tracer.record('expr', \\"s12\\", tracer.record('expr', \\"s13\\", n) * tracer.record('expr', \\"s14\\", tracer.record('expr', \\"s15\\", fac)(tracer.record('expr', \\"s16\\", tracer.record('expr', \\"s17\\", n) - tracer.record('expr', \\"s18\\", 1)))))), -1);
+      return tracer.record('fn-ret', \\"src-6\\", tracer.record('expr', \\"src-7\\", tracer.record('expr', \\"src-8\\", tracer.record('expr', \\"src-9\\", n) == tracer.record('expr', \\"src-10\\", 1)) ? tracer.record('expr', \\"src-11\\", 1) : tracer.record('expr', \\"src-12\\", tracer.record('expr', \\"src-13\\", n) * tracer.record('expr', \\"src-14\\", tracer.record('expr', \\"src-15\\", fac)(tracer.record('expr', \\"src-16\\", tracer.record('expr', \\"src-17\\", n) - tracer.record('expr', \\"src-18\\", 1)))))), -1);
     }
   } catch (e) {
-    tracer.record('fn-throw', \\"s2\\", e, -1);
+    tracer.record('fn-throw', \\"src-2\\", e, -1);
     throw e;
   }
 
-  tracer.record('fn-ret', \\"s2\\", undefined, -1);
+  tracer.record('fn-ret', \\"src-2\\", undefined, -1);
 }
 
-var result = tracer.record('expr', \\"s22\\", tracer.record('expr', \\"s23\\", fac)(tracer.record('expr', \\"s24\\", 3)));"
+const result = tracer.record('expr', \\"src-22\\", tracer.record('expr', \\"src-23\\", fac)(tracer.record('expr', \\"src-24\\", 3)));"
 `;
 
 exports[`demo examples factorial 2`] = `
@@ -60,34 +58,34 @@ Array [
       },
       "id": "1",
       "source": "function fac(n) {
-  tracer.record('fn-start', \\"s2\\", {
-    n: n,
-    \\"this\\": this,
+  tracer.record('fn-start', \\"src-2\\", {
+    n,
+    this: this,
     arguments: arguments
   }, 1);
 
   try {
     {
-      return tracer.record('fn-ret', \\"s6\\", tracer.record('expr', \\"s7\\", tracer.record('expr', \\"s8\\", tracer.record('expr', \\"s9\\", n) == tracer.record('expr', \\"s10\\", 1)) ? tracer.record('expr', \\"s11\\", 1) : tracer.record('expr', \\"s12\\", tracer.record('expr', \\"s13\\", n) * tracer.record('expr', \\"s14\\", tracer.record('expr', \\"s15\\", fac)(tracer.record('expr', \\"s16\\", tracer.record('expr', \\"s17\\", n) - tracer.record('expr', \\"s18\\", 1)))))), -1);
+      return tracer.record('fn-ret', \\"src-6\\", tracer.record('expr', \\"src-7\\", tracer.record('expr', \\"src-8\\", tracer.record('expr', \\"src-9\\", n) == tracer.record('expr', \\"src-10\\", 1)) ? tracer.record('expr', \\"src-11\\", 1) : tracer.record('expr', \\"src-12\\", tracer.record('expr', \\"src-13\\", n) * tracer.record('expr', \\"src-14\\", tracer.record('expr', \\"src-15\\", fac)(tracer.record('expr', \\"src-16\\", tracer.record('expr', \\"src-17\\", n) - tracer.record('expr', \\"src-18\\", 1)))))), -1);
     }
   } catch (e) {
-    tracer.record('fn-throw', \\"s2\\", e, -1);
+    tracer.record('fn-throw', \\"src-2\\", e, -1);
     throw e;
   }
 
-  tracer.record('fn-ret', \\"s2\\", undefined, -1);
+  tracer.record('fn-ret', \\"src-2\\", undefined, -1);
 }",
       "type": "function",
     },
     "id": 1,
-    "nodeId": "s23",
+    "nodeId": "src-23",
     "parentId": undefined,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 2,
-    "nodeId": "s24",
+    "nodeId": "src-24",
     "parentId": undefined,
     "type": "expr",
   },
@@ -149,35 +147,35 @@ Array [
       "type": "object",
     },
     "id": 3,
-    "nodeId": "s2",
+    "nodeId": "src-2",
     "parentId": undefined,
     "type": "fn-start",
   },
   Object {
     "data": 3,
     "id": 4,
-    "nodeId": "s9",
+    "nodeId": "src-9",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 5,
-    "nodeId": "s10",
+    "nodeId": "src-10",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": false,
     "id": 6,
-    "nodeId": "s8",
+    "nodeId": "src-8",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 7,
-    "nodeId": "s13",
+    "nodeId": "src-13",
     "parentId": 3,
     "type": "expr",
   },
@@ -212,48 +210,48 @@ Array [
       },
       "id": "1",
       "source": "function fac(n) {
-  tracer.record('fn-start', \\"s2\\", {
-    n: n,
-    \\"this\\": this,
+  tracer.record('fn-start', \\"src-2\\", {
+    n,
+    this: this,
     arguments: arguments
   }, 1);
 
   try {
     {
-      return tracer.record('fn-ret', \\"s6\\", tracer.record('expr', \\"s7\\", tracer.record('expr', \\"s8\\", tracer.record('expr', \\"s9\\", n) == tracer.record('expr', \\"s10\\", 1)) ? tracer.record('expr', \\"s11\\", 1) : tracer.record('expr', \\"s12\\", tracer.record('expr', \\"s13\\", n) * tracer.record('expr', \\"s14\\", tracer.record('expr', \\"s15\\", fac)(tracer.record('expr', \\"s16\\", tracer.record('expr', \\"s17\\", n) - tracer.record('expr', \\"s18\\", 1)))))), -1);
+      return tracer.record('fn-ret', \\"src-6\\", tracer.record('expr', \\"src-7\\", tracer.record('expr', \\"src-8\\", tracer.record('expr', \\"src-9\\", n) == tracer.record('expr', \\"src-10\\", 1)) ? tracer.record('expr', \\"src-11\\", 1) : tracer.record('expr', \\"src-12\\", tracer.record('expr', \\"src-13\\", n) * tracer.record('expr', \\"src-14\\", tracer.record('expr', \\"src-15\\", fac)(tracer.record('expr', \\"src-16\\", tracer.record('expr', \\"src-17\\", n) - tracer.record('expr', \\"src-18\\", 1)))))), -1);
     }
   } catch (e) {
-    tracer.record('fn-throw', \\"s2\\", e, -1);
+    tracer.record('fn-throw', \\"src-2\\", e, -1);
     throw e;
   }
 
-  tracer.record('fn-ret', \\"s2\\", undefined, -1);
+  tracer.record('fn-ret', \\"src-2\\", undefined, -1);
 }",
       "type": "function",
     },
     "id": 8,
-    "nodeId": "s15",
+    "nodeId": "src-15",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 9,
-    "nodeId": "s17",
+    "nodeId": "src-17",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 10,
-    "nodeId": "s18",
+    "nodeId": "src-18",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 11,
-    "nodeId": "s16",
+    "nodeId": "src-16",
     "parentId": 3,
     "type": "expr",
   },
@@ -315,35 +313,35 @@ Array [
       "type": "object",
     },
     "id": 12,
-    "nodeId": "s2",
+    "nodeId": "src-2",
     "parentId": 3,
     "type": "fn-start",
   },
   Object {
     "data": 2,
     "id": 13,
-    "nodeId": "s9",
+    "nodeId": "src-9",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 14,
-    "nodeId": "s10",
+    "nodeId": "src-10",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": false,
     "id": 15,
-    "nodeId": "s8",
+    "nodeId": "src-8",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 16,
-    "nodeId": "s13",
+    "nodeId": "src-13",
     "parentId": 12,
     "type": "expr",
   },
@@ -378,48 +376,48 @@ Array [
       },
       "id": "1",
       "source": "function fac(n) {
-  tracer.record('fn-start', \\"s2\\", {
-    n: n,
-    \\"this\\": this,
+  tracer.record('fn-start', \\"src-2\\", {
+    n,
+    this: this,
     arguments: arguments
   }, 1);
 
   try {
     {
-      return tracer.record('fn-ret', \\"s6\\", tracer.record('expr', \\"s7\\", tracer.record('expr', \\"s8\\", tracer.record('expr', \\"s9\\", n) == tracer.record('expr', \\"s10\\", 1)) ? tracer.record('expr', \\"s11\\", 1) : tracer.record('expr', \\"s12\\", tracer.record('expr', \\"s13\\", n) * tracer.record('expr', \\"s14\\", tracer.record('expr', \\"s15\\", fac)(tracer.record('expr', \\"s16\\", tracer.record('expr', \\"s17\\", n) - tracer.record('expr', \\"s18\\", 1)))))), -1);
+      return tracer.record('fn-ret', \\"src-6\\", tracer.record('expr', \\"src-7\\", tracer.record('expr', \\"src-8\\", tracer.record('expr', \\"src-9\\", n) == tracer.record('expr', \\"src-10\\", 1)) ? tracer.record('expr', \\"src-11\\", 1) : tracer.record('expr', \\"src-12\\", tracer.record('expr', \\"src-13\\", n) * tracer.record('expr', \\"src-14\\", tracer.record('expr', \\"src-15\\", fac)(tracer.record('expr', \\"src-16\\", tracer.record('expr', \\"src-17\\", n) - tracer.record('expr', \\"src-18\\", 1)))))), -1);
     }
   } catch (e) {
-    tracer.record('fn-throw', \\"s2\\", e, -1);
+    tracer.record('fn-throw', \\"src-2\\", e, -1);
     throw e;
   }
 
-  tracer.record('fn-ret', \\"s2\\", undefined, -1);
+  tracer.record('fn-ret', \\"src-2\\", undefined, -1);
 }",
       "type": "function",
     },
     "id": 17,
-    "nodeId": "s15",
+    "nodeId": "src-15",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 18,
-    "nodeId": "s17",
+    "nodeId": "src-17",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 19,
-    "nodeId": "s18",
+    "nodeId": "src-18",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 20,
-    "nodeId": "s16",
+    "nodeId": "src-16",
     "parentId": 12,
     "type": "expr",
   },
@@ -481,112 +479,112 @@ Array [
       "type": "object",
     },
     "id": 21,
-    "nodeId": "s2",
+    "nodeId": "src-2",
     "parentId": 12,
     "type": "fn-start",
   },
   Object {
     "data": 1,
     "id": 22,
-    "nodeId": "s9",
+    "nodeId": "src-9",
     "parentId": 21,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 23,
-    "nodeId": "s10",
+    "nodeId": "src-10",
     "parentId": 21,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 24,
-    "nodeId": "s8",
+    "nodeId": "src-8",
     "parentId": 21,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 25,
-    "nodeId": "s11",
+    "nodeId": "src-11",
     "parentId": 21,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 26,
-    "nodeId": "s7",
+    "nodeId": "src-7",
     "parentId": 21,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 27,
-    "nodeId": "s6",
+    "nodeId": "src-6",
     "parentId": 21,
     "type": "fn-ret",
   },
   Object {
     "data": 1,
     "id": 28,
-    "nodeId": "s14",
+    "nodeId": "src-14",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 29,
-    "nodeId": "s12",
+    "nodeId": "src-12",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 30,
-    "nodeId": "s7",
+    "nodeId": "src-7",
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 31,
-    "nodeId": "s6",
+    "nodeId": "src-6",
     "parentId": 12,
     "type": "fn-ret",
   },
   Object {
     "data": 2,
     "id": 32,
-    "nodeId": "s14",
+    "nodeId": "src-14",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": 6,
     "id": 33,
-    "nodeId": "s12",
+    "nodeId": "src-12",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": 6,
     "id": 34,
-    "nodeId": "s7",
+    "nodeId": "src-7",
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "data": 6,
     "id": 35,
-    "nodeId": "s6",
+    "nodeId": "src-6",
     "parentId": 3,
     "type": "fn-ret",
   },
   Object {
     "data": 6,
     "id": 36,
-    "nodeId": "s22",
+    "nodeId": "src-22",
     "parentId": undefined,
     "type": "expr",
   },
@@ -594,51 +592,49 @@ Array [
 `;
 
 exports[`demo examples insertionSort 1`] = `
-"\\"use strict\\";
-
-tracer.asts[\\"src\\"] = JSON.parse(\\"{\\\\\\"type\\\\\\":\\\\\\"Program\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":318,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":17}},\\\\\\"sourceType\\\\\\":\\\\\\"module\\\\\\",\\\\\\"interpreter\\\\\\":null,\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"FunctionDeclaration\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":272,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":13,\\\\\\"column\\\\\\":1}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":9,\\\\\\"end\\\\\\":22,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":22},\\\\\\"identifierName\\\\\\":\\\\\\"insertionSort\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"insertionSort\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s3\\\\\\"}},\\\\\\"generator\\\\\\":false,\\\\\\"async\\\\\\":false,\\\\\\"params\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":23,\\\\\\"end\\\\\\":28,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":23},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":28},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s4\\\\\\"}}],\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":30,\\\\\\"end\\\\\\":272,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":13,\\\\\\"column\\\\\\":1}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ForStatement\\\\\\",\\\\\\"start\\\\\\":34,\\\\\\"end\\\\\\":270,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":2},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":12,\\\\\\"column\\\\\\":3}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":39,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":7},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":43,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":43,\\\\\\"end\\\\\\":44,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s9\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":47,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":0,\\\\\\"raw\\\\\\":\\\\\\"0\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s10\\\\\\"},\\\\\\"value\\\\\\":0},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s8\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"let\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s7\\\\\\"}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":50,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":50,\\\\\\"end\\\\\\":51,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":19},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s12\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"<\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":54,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":54,\\\\\\"end\\\\\\":59,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":27},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s14\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":60,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34},\\\\\\"identifierName\\\\\\":\\\\\\"length\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"length\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s15\\\\\\"}},\\\\\\"computed\\\\\\":false,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s13\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s11\\\\\\"}},\\\\\\"update\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"UpdateExpression\\\\\\",\\\\\\"start\\\\\\":68,\\\\\\"end\\\\\\":71,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":39}},\\\\\\"operator\\\\\\":\\\\\\"++\\\\\\",\\\\\\"prefix\\\\\\":false,\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":68,\\\\\\"end\\\\\\":69,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":37},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s17\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s16\\\\\\"}},\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":270,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":41},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":12,\\\\\\"column\\\\\\":3}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ForStatement\\\\\\",\\\\\\"start\\\\\\":79,\\\\\\"end\\\\\\":266,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":4},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":11,\\\\\\"column\\\\\\":5}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":84,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":88,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":88,\\\\\\"end\\\\\\":89,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":14},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s22\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":92,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":92,\\\\\\"end\\\\\\":93,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":18},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s24\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"-\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":96,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s25\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s23\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s21\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"let\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s20\\\\\\"}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":99,\\\\\\"end\\\\\\":105,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":30}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":99,\\\\\\"end\\\\\\":100,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":25},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s27\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\">=\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":104,\\\\\\"end\\\\\\":105,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":29},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":30}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":0,\\\\\\"raw\\\\\\":\\\\\\"0\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s28\\\\\\"},\\\\\\"value\\\\\\":0},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s26\\\\\\"}},\\\\\\"update\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"UpdateExpression\\\\\\",\\\\\\"start\\\\\\":107,\\\\\\"end\\\\\\":110,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":35}},\\\\\\"operator\\\\\\":\\\\\\"--\\\\\\",\\\\\\"prefix\\\\\\":false,\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":107,\\\\\\"end\\\\\\":108,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":33},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s30\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s29\\\\\\"}},\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":112,\\\\\\"end\\\\\\":266,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":37},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":11,\\\\\\"column\\\\\\":5}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"IfStatement\\\\\\",\\\\\\"start\\\\\\":120,\\\\\\"end\\\\\\":174,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":6,\\\\\\"column\\\\\\":7}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":148,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":34}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":132,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":18}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":129,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s35\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":130,\\\\\\"end\\\\\\":131,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":17},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s36\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s34\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"<=\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":136,\\\\\\"end\\\\\\":148,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":34}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":136,\\\\\\"end\\\\\\":141,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":27},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s38\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":142,\\\\\\"end\\\\\\":147,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":33}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":142,\\\\\\"end\\\\\\":143,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":29},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s40\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":146,\\\\\\"end\\\\\\":147,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":33}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s41\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s39\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s37\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s33\\\\\\"}},\\\\\\"consequent\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":150,\\\\\\"end\\\\\\":174,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":6,\\\\\\"column\\\\\\":7}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"BreakStatement\\\\\\",\\\\\\"start\\\\\\":160,\\\\\\"end\\\\\\":166,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":5,\\\\\\"column\\\\\\":8},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":5,\\\\\\"column\\\\\\":14}},\\\\\\"label\\\\\\":null,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s43\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s42\\\\\\"}},\\\\\\"alternate\\\\\\":null,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s32\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":182,\\\\\\"end\\\\\\":207,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":31}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":188,\\\\\\"end\\\\\\":206,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":30}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":188,\\\\\\"end\\\\\\":191,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"tmp\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"tmp\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s46\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":194,\\\\\\"end\\\\\\":206,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":30}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":194,\\\\\\"end\\\\\\":199,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":23},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s48\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":200,\\\\\\"end\\\\\\":205,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":29}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":200,\\\\\\"end\\\\\\":201,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":25},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s50\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":204,\\\\\\"end\\\\\\":205,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":29}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s51\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s49\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s47\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s45\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s44\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":238,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":30}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"AssignmentExpression\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":237,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":29}},\\\\\\"operator\\\\\\":\\\\\\"=\\\\\\",\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":226,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":18}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":219,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":11},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s55\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":220,\\\\\\"end\\\\\\":225,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":17}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":220,\\\\\\"end\\\\\\":221,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s57\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":224,\\\\\\"end\\\\\\":225,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":17}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s58\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s56\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s54\\\\\\"}},\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":229,\\\\\\"end\\\\\\":237,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":29}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":229,\\\\\\"end\\\\\\":234,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":26},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s60\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":235,\\\\\\"end\\\\\\":236,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":27},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":28},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s61\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s59\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s53\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s52\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":260,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":21}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"AssignmentExpression\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":259,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":20}},\\\\\\"operator\\\\\\":\\\\\\"=\\\\\\",\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":253,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":14}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":250,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":11},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s65\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":251,\\\\\\"end\\\\\\":252,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s66\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s64\\\\\\"}},\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":256,\\\\\\"end\\\\\\":259,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":20},\\\\\\"identifierName\\\\\\":\\\\\\"tmp\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"tmp\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s67\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s63\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s62\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s31\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s19\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s18\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s6\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s5\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s2\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":274,\\\\\\"end\\\\\\":300,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":26}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":280,\\\\\\"end\\\\\\":299,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":25}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":280,\\\\\\"end\\\\\\":281,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":7},\\\\\\"identifierName\\\\\\":\\\\\\"a\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"a\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s70\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"ArrayExpression\\\\\\",\\\\\\"start\\\\\\":284,\\\\\\"end\\\\\\":299,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":25}},\\\\\\"elements\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":285,\\\\\\"end\\\\\\":286,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":12}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":3,\\\\\\"raw\\\\\\":\\\\\\"3\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s72\\\\\\"},\\\\\\"value\\\\\\":3},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":288,\\\\\\"end\\\\\\":289,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":15}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s73\\\\\\"},\\\\\\"value\\\\\\":1},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":291,\\\\\\"end\\\\\\":292,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":18}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":2,\\\\\\"raw\\\\\\":\\\\\\"2\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s74\\\\\\"},\\\\\\"value\\\\\\":2},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":294,\\\\\\"end\\\\\\":295,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":20},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":21}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":5,\\\\\\"raw\\\\\\":\\\\\\"5\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s75\\\\\\"},\\\\\\"value\\\\\\":5},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":297,\\\\\\"end\\\\\\":298,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":23},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":24}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":4,\\\\\\"raw\\\\\\":\\\\\\"4\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"s76\\\\\\"},\\\\\\"value\\\\\\":4}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s71\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s69\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s68\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":318,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":17}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":317,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":16}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":314,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"insertionSort\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"insertionSort\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s79\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":315,\\\\\\"end\\\\\\":316,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"a\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"a\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s80\\\\\\"}}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s78\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s77\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"s1\\\\\\"}}\\");
+"tracer.asts[\\"src\\"] = JSON.parse(\\"{\\\\\\"type\\\\\\":\\\\\\"Program\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":318,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":17}},\\\\\\"sourceType\\\\\\":\\\\\\"module\\\\\\",\\\\\\"interpreter\\\\\\":null,\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"FunctionDeclaration\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":272,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":13,\\\\\\"column\\\\\\":1}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":9,\\\\\\"end\\\\\\":22,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":22},\\\\\\"identifierName\\\\\\":\\\\\\"insertionSort\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"insertionSort\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-3\\\\\\"}},\\\\\\"generator\\\\\\":false,\\\\\\"async\\\\\\":false,\\\\\\"params\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":23,\\\\\\"end\\\\\\":28,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":23},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":28},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-4\\\\\\"}}],\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":30,\\\\\\"end\\\\\\":272,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":13,\\\\\\"column\\\\\\":1}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ForStatement\\\\\\",\\\\\\"start\\\\\\":34,\\\\\\"end\\\\\\":270,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":2},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":12,\\\\\\"column\\\\\\":3}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":39,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":7},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":43,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":43,\\\\\\"end\\\\\\":44,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-9\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":47,\\\\\\"end\\\\\\":48,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":16}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":0,\\\\\\"raw\\\\\\":\\\\\\"0\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-10\\\\\\"},\\\\\\"value\\\\\\":0},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-8\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"let\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-7\\\\\\"}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":50,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":50,\\\\\\"end\\\\\\":51,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":19},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-12\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"<\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":54,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":54,\\\\\\"end\\\\\\":59,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":27},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-14\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":60,\\\\\\"end\\\\\\":66,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34},\\\\\\"identifierName\\\\\\":\\\\\\"length\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"length\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-15\\\\\\"}},\\\\\\"computed\\\\\\":false,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-13\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-11\\\\\\"}},\\\\\\"update\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"UpdateExpression\\\\\\",\\\\\\"start\\\\\\":68,\\\\\\"end\\\\\\":71,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":39}},\\\\\\"operator\\\\\\":\\\\\\"++\\\\\\",\\\\\\"prefix\\\\\\":false,\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":68,\\\\\\"end\\\\\\":69,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":37},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-17\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-16\\\\\\"}},\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":270,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":41},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":12,\\\\\\"column\\\\\\":3}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ForStatement\\\\\\",\\\\\\"start\\\\\\":79,\\\\\\"end\\\\\\":266,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":4},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":11,\\\\\\"column\\\\\\":5}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":84,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":88,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":88,\\\\\\"end\\\\\\":89,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":14},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-22\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":92,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":92,\\\\\\"end\\\\\\":93,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":18},\\\\\\"identifierName\\\\\\":\\\\\\"i\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"i\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-24\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"-\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":96,\\\\\\"end\\\\\\":97,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":22}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-25\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-23\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-21\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"let\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-20\\\\\\"}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":99,\\\\\\"end\\\\\\":105,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":30}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":99,\\\\\\"end\\\\\\":100,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":25},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-27\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\">=\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":104,\\\\\\"end\\\\\\":105,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":29},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":30}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":0,\\\\\\"raw\\\\\\":\\\\\\"0\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-28\\\\\\"},\\\\\\"value\\\\\\":0},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-26\\\\\\"}},\\\\\\"update\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"UpdateExpression\\\\\\",\\\\\\"start\\\\\\":107,\\\\\\"end\\\\\\":110,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":35}},\\\\\\"operator\\\\\\":\\\\\\"--\\\\\\",\\\\\\"prefix\\\\\\":false,\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":107,\\\\\\"end\\\\\\":108,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":33},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-30\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-29\\\\\\"}},\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":112,\\\\\\"end\\\\\\":266,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":37},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":11,\\\\\\"column\\\\\\":5}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"IfStatement\\\\\\",\\\\\\"start\\\\\\":120,\\\\\\"end\\\\\\":174,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":6,\\\\\\"column\\\\\\":7}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":148,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":34}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":132,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":18}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":124,\\\\\\"end\\\\\\":129,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-35\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":130,\\\\\\"end\\\\\\":131,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":17},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-36\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-34\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"<=\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":136,\\\\\\"end\\\\\\":148,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":34}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":136,\\\\\\"end\\\\\\":141,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":27},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-38\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":142,\\\\\\"end\\\\\\":147,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":33}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":142,\\\\\\"end\\\\\\":143,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":29},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-40\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":146,\\\\\\"end\\\\\\":147,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":32},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":33}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-41\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-39\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-37\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-33\\\\\\"}},\\\\\\"consequent\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":150,\\\\\\"end\\\\\\":174,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":36},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":6,\\\\\\"column\\\\\\":7}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"BreakStatement\\\\\\",\\\\\\"start\\\\\\":160,\\\\\\"end\\\\\\":166,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":5,\\\\\\"column\\\\\\":8},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":5,\\\\\\"column\\\\\\":14}},\\\\\\"label\\\\\\":null,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-43\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-42\\\\\\"}},\\\\\\"alternate\\\\\\":null,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-32\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":182,\\\\\\"end\\\\\\":207,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":31}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":188,\\\\\\"end\\\\\\":206,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":30}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":188,\\\\\\"end\\\\\\":191,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"tmp\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"tmp\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-46\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":194,\\\\\\"end\\\\\\":206,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":30}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":194,\\\\\\"end\\\\\\":199,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":23},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-48\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":200,\\\\\\"end\\\\\\":205,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":29}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":200,\\\\\\"end\\\\\\":201,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":24},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":25},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-50\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":204,\\\\\\"end\\\\\\":205,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":28},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":8,\\\\\\"column\\\\\\":29}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-51\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-49\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-47\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-45\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-44\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":238,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":30}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"AssignmentExpression\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":237,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":29}},\\\\\\"operator\\\\\\":\\\\\\"=\\\\\\",\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":226,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":18}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":214,\\\\\\"end\\\\\\":219,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":11},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-55\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":220,\\\\\\"end\\\\\\":225,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":17}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":220,\\\\\\"end\\\\\\":221,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-57\\\\\\"}},\\\\\\"operator\\\\\\":\\\\\\"+\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":224,\\\\\\"end\\\\\\":225,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":17}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-58\\\\\\"},\\\\\\"value\\\\\\":1},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-56\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-54\\\\\\"}},\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":229,\\\\\\"end\\\\\\":237,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":29}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":229,\\\\\\"end\\\\\\":234,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":21},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":26},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-60\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":235,\\\\\\"end\\\\\\":236,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":27},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":9,\\\\\\"column\\\\\\":28},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-61\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-59\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-53\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-52\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":260,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":21}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"AssignmentExpression\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":259,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":20}},\\\\\\"operator\\\\\\":\\\\\\"=\\\\\\",\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"MemberExpression\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":253,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":14}},\\\\\\"object\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":245,\\\\\\"end\\\\\\":250,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":11},\\\\\\"identifierName\\\\\\":\\\\\\"array\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"array\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-65\\\\\\"}},\\\\\\"property\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":251,\\\\\\"end\\\\\\":252,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":12},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"j\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"j\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-66\\\\\\"}},\\\\\\"computed\\\\\\":true,\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-64\\\\\\"}},\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":256,\\\\\\"end\\\\\\":259,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":10,\\\\\\"column\\\\\\":20},\\\\\\"identifierName\\\\\\":\\\\\\"tmp\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"tmp\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-67\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-63\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-62\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-31\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-19\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-18\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-6\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-5\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-2\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":274,\\\\\\"end\\\\\\":300,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":26}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":280,\\\\\\"end\\\\\\":299,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":25}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":280,\\\\\\"end\\\\\\":281,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":7},\\\\\\"identifierName\\\\\\":\\\\\\"a\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"a\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-70\\\\\\"}},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"ArrayExpression\\\\\\",\\\\\\"start\\\\\\":284,\\\\\\"end\\\\\\":299,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":10},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":25}},\\\\\\"elements\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":285,\\\\\\"end\\\\\\":286,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":11},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":12}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":3,\\\\\\"raw\\\\\\":\\\\\\"3\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-72\\\\\\"},\\\\\\"value\\\\\\":3},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":288,\\\\\\"end\\\\\\":289,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":15}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-73\\\\\\"},\\\\\\"value\\\\\\":1},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":291,\\\\\\"end\\\\\\":292,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":17},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":18}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":2,\\\\\\"raw\\\\\\":\\\\\\"2\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-74\\\\\\"},\\\\\\"value\\\\\\":2},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":294,\\\\\\"end\\\\\\":295,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":20},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":21}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":5,\\\\\\"raw\\\\\\":\\\\\\"5\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-75\\\\\\"},\\\\\\"value\\\\\\":5},{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":297,\\\\\\"end\\\\\\":298,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":23},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":15,\\\\\\"column\\\\\\":24}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":4,\\\\\\"raw\\\\\\":\\\\\\"4\\\\\\",\\\\\\"biNodeId\\\\\\":\\\\\\"src-76\\\\\\"},\\\\\\"value\\\\\\":4}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-71\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-69\\\\\\"}}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-68\\\\\\"}},{\\\\\\"type\\\\\\":\\\\\\"ExpressionStatement\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":318,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":17}},\\\\\\"expression\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":317,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":16}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":301,\\\\\\"end\\\\\\":314,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":13},\\\\\\"identifierName\\\\\\":\\\\\\"insertionSort\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"insertionSort\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-79\\\\\\"}},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":315,\\\\\\"end\\\\\\":316,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":16,\\\\\\"column\\\\\\":15},\\\\\\"identifierName\\\\\\":\\\\\\"a\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"a\\\\\\",\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-80\\\\\\"}}],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-78\\\\\\"}},\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-77\\\\\\"}}],\\\\\\"directives\\\\\\":[],\\\\\\"extra\\\\\\":{\\\\\\"biNodeId\\\\\\":\\\\\\"src-1\\\\\\"}}\\");
 
 function insertionSort(array) {
-  tracer.record('fn-start', \\"s2\\", {
-    array: array,
-    \\"this\\": this,
+  tracer.record('fn-start', \\"src-2\\", {
+    array,
+    this: this,
     arguments: arguments
   }, 1);
 
   try {
     {
-      for (var i = tracer.record('expr', \\"s10\\", 0); tracer.record('expr', \\"s11\\", tracer.record('expr', \\"s12\\", i) < tracer.record('expr', \\"s13\\", tracer.record('expr', \\"s14\\", array).length)); tracer.record('expr', \\"s16\\", function () {
-        var _postfix = tracer.record('expr', \\"s17\\", i);
+      for (let i = tracer.record('expr', \\"src-10\\", 0); tracer.record('expr', \\"src-11\\", tracer.record('expr', \\"src-12\\", i) < tracer.record('expr', \\"src-13\\", tracer.record('expr', \\"src-14\\", array).length)); tracer.record('expr', \\"src-16\\", (() => {
+        const _postfix = tracer.record('expr', \\"src-17\\", i);
 
         i += 1;
         return _postfix;
-      }())) {
-        for (var j = tracer.record('expr', \\"s23\\", tracer.record('expr', \\"s24\\", i) - tracer.record('expr', \\"s25\\", 1)); tracer.record('expr', \\"s26\\", tracer.record('expr', \\"s27\\", j) >= tracer.record('expr', \\"s28\\", 0)); tracer.record('expr', \\"s29\\", function () {
-          var _postfix2 = tracer.record('expr', \\"s30\\", j);
+      })())) {
+        for (let j = tracer.record('expr', \\"src-23\\", tracer.record('expr', \\"src-24\\", i) - tracer.record('expr', \\"src-25\\", 1)); tracer.record('expr', \\"src-26\\", tracer.record('expr', \\"src-27\\", j) >= tracer.record('expr', \\"src-28\\", 0)); tracer.record('expr', \\"src-29\\", (() => {
+          const _postfix2 = tracer.record('expr', \\"src-30\\", j);
 
           j -= 1;
           return _postfix2;
-        }())) {
-          if (tracer.record('expr', \\"s33\\", tracer.record('expr', \\"s34\\", tracer.record('expr', \\"s35\\", array)[tracer.record('expr', \\"s36\\", j)]) <= tracer.record('expr', \\"s37\\", tracer.record('expr', \\"s38\\", array)[tracer.record('expr', \\"s39\\", tracer.record('expr', \\"s40\\", j) + tracer.record('expr', \\"s41\\", 1))]))) {
+        })())) {
+          if (tracer.record('expr', \\"src-33\\", tracer.record('expr', \\"src-34\\", tracer.record('expr', \\"src-35\\", array)[tracer.record('expr', \\"src-36\\", j)]) <= tracer.record('expr', \\"src-37\\", tracer.record('expr', \\"src-38\\", array)[tracer.record('expr', \\"src-39\\", tracer.record('expr', \\"src-40\\", j) + tracer.record('expr', \\"src-41\\", 1))]))) {
             break;
           }
 
-          var tmp = tracer.record('expr', \\"s47\\", tracer.record('expr', \\"s48\\", array)[tracer.record('expr', \\"s49\\", tracer.record('expr', \\"s50\\", j) + tracer.record('expr', \\"s51\\", 1))]);
-          tracer.record('expr', \\"s53\\", tracer.record('expr', \\"s55\\", array)[tracer.record('expr', \\"s56\\", tracer.record('expr', \\"s57\\", j) + tracer.record('expr', \\"s58\\", 1))] = tracer.record('expr', \\"s59\\", tracer.record('expr', \\"s60\\", array)[tracer.record('expr', \\"s61\\", j)]));
-          tracer.record('expr', \\"s63\\", tracer.record('expr', \\"s65\\", array)[tracer.record('expr', \\"s66\\", j)] = tracer.record('expr', \\"s67\\", tmp));
+          const tmp = tracer.record('expr', \\"src-47\\", tracer.record('expr', \\"src-48\\", array)[tracer.record('expr', \\"src-49\\", tracer.record('expr', \\"src-50\\", j) + tracer.record('expr', \\"src-51\\", 1))]);
+          tracer.record('expr', \\"src-53\\", tracer.record('expr', \\"src-55\\", array)[tracer.record('expr', \\"src-56\\", tracer.record('expr', \\"src-57\\", j) + tracer.record('expr', \\"src-58\\", 1))] = tracer.record('expr', \\"src-59\\", tracer.record('expr', \\"src-60\\", array)[tracer.record('expr', \\"src-61\\", j)]));
+          tracer.record('expr', \\"src-63\\", tracer.record('expr', \\"src-65\\", array)[tracer.record('expr', \\"src-66\\", j)] = tracer.record('expr', \\"src-67\\", tmp));
         }
       }
     }
   } catch (e) {
-    tracer.record('fn-throw', \\"s2\\", e, -1);
+    tracer.record('fn-throw', \\"src-2\\", e, -1);
     throw e;
   }
 
-  tracer.record('fn-ret', \\"s2\\", undefined, -1);
+  tracer.record('fn-ret', \\"src-2\\", undefined, -1);
 }
 
-var a = tracer.record('expr', \\"s71\\", [tracer.record('expr', \\"s72\\", 3), tracer.record('expr', \\"s73\\", 1), tracer.record('expr', \\"s74\\", 2), tracer.record('expr', \\"s75\\", 5), tracer.record('expr', \\"s76\\", 4)]);
-tracer.record('expr', \\"s78\\", tracer.record('expr', \\"s79\\", insertionSort)(tracer.record('expr', \\"s80\\", a)));"
+const a = tracer.record('expr', \\"src-71\\", [tracer.record('expr', \\"src-72\\", 3), tracer.record('expr', \\"src-73\\", 1), tracer.record('expr', \\"src-74\\", 2), tracer.record('expr', \\"src-75\\", 5), tracer.record('expr', \\"src-76\\", 4)]);
+tracer.record('expr', \\"src-78\\", tracer.record('expr', \\"src-79\\", insertionSort)(tracer.record('expr', \\"src-80\\", a)));"
 `;
 
 exports[`demo examples insertionSort 2`] = `
@@ -646,35 +642,35 @@ Array [
   Object {
     "data": 3,
     "id": 1,
-    "nodeId": "s72",
+    "nodeId": "src-72",
     "parentId": undefined,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 2,
-    "nodeId": "s73",
+    "nodeId": "src-73",
     "parentId": undefined,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 3,
-    "nodeId": "s74",
+    "nodeId": "src-74",
     "parentId": undefined,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 4,
-    "nodeId": "s75",
+    "nodeId": "src-75",
     "parentId": undefined,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 5,
-    "nodeId": "s76",
+    "nodeId": "src-76",
     "parentId": undefined,
     "type": "expr",
   },
@@ -689,7 +685,7 @@ Array [
       "type": "array",
     },
     "id": 6,
-    "nodeId": "s71",
+    "nodeId": "src-71",
     "parentId": undefined,
     "type": "expr",
   },
@@ -724,47 +720,47 @@ Array [
       },
       "id": "2",
       "source": "function insertionSort(array) {
-  tracer.record('fn-start', \\"s2\\", {
-    array: array,
-    \\"this\\": this,
+  tracer.record('fn-start', \\"src-2\\", {
+    array,
+    this: this,
     arguments: arguments
   }, 1);
 
   try {
     {
-      for (var i = tracer.record('expr', \\"s10\\", 0); tracer.record('expr', \\"s11\\", tracer.record('expr', \\"s12\\", i) < tracer.record('expr', \\"s13\\", tracer.record('expr', \\"s14\\", array).length)); tracer.record('expr', \\"s16\\", function () {
-        var _postfix = tracer.record('expr', \\"s17\\", i);
+      for (let i = tracer.record('expr', \\"src-10\\", 0); tracer.record('expr', \\"src-11\\", tracer.record('expr', \\"src-12\\", i) < tracer.record('expr', \\"src-13\\", tracer.record('expr', \\"src-14\\", array).length)); tracer.record('expr', \\"src-16\\", (() => {
+        const _postfix = tracer.record('expr', \\"src-17\\", i);
 
         i += 1;
         return _postfix;
-      }())) {
-        for (var j = tracer.record('expr', \\"s23\\", tracer.record('expr', \\"s24\\", i) - tracer.record('expr', \\"s25\\", 1)); tracer.record('expr', \\"s26\\", tracer.record('expr', \\"s27\\", j) >= tracer.record('expr', \\"s28\\", 0)); tracer.record('expr', \\"s29\\", function () {
-          var _postfix2 = tracer.record('expr', \\"s30\\", j);
+      })())) {
+        for (let j = tracer.record('expr', \\"src-23\\", tracer.record('expr', \\"src-24\\", i) - tracer.record('expr', \\"src-25\\", 1)); tracer.record('expr', \\"src-26\\", tracer.record('expr', \\"src-27\\", j) >= tracer.record('expr', \\"src-28\\", 0)); tracer.record('expr', \\"src-29\\", (() => {
+          const _postfix2 = tracer.record('expr', \\"src-30\\", j);
 
           j -= 1;
           return _postfix2;
-        }())) {
-          if (tracer.record('expr', \\"s33\\", tracer.record('expr', \\"s34\\", tracer.record('expr', \\"s35\\", array)[tracer.record('expr', \\"s36\\", j)]) <= tracer.record('expr', \\"s37\\", tracer.record('expr', \\"s38\\", array)[tracer.record('expr', \\"s39\\", tracer.record('expr', \\"s40\\", j) + tracer.record('expr', \\"s41\\", 1))]))) {
+        })())) {
+          if (tracer.record('expr', \\"src-33\\", tracer.record('expr', \\"src-34\\", tracer.record('expr', \\"src-35\\", array)[tracer.record('expr', \\"src-36\\", j)]) <= tracer.record('expr', \\"src-37\\", tracer.record('expr', \\"src-38\\", array)[tracer.record('expr', \\"src-39\\", tracer.record('expr', \\"src-40\\", j) + tracer.record('expr', \\"src-41\\", 1))]))) {
             break;
           }
 
-          var tmp = tracer.record('expr', \\"s47\\", tracer.record('expr', \\"s48\\", array)[tracer.record('expr', \\"s49\\", tracer.record('expr', \\"s50\\", j) + tracer.record('expr', \\"s51\\", 1))]);
-          tracer.record('expr', \\"s53\\", tracer.record('expr', \\"s55\\", array)[tracer.record('expr', \\"s56\\", tracer.record('expr', \\"s57\\", j) + tracer.record('expr', \\"s58\\", 1))] = tracer.record('expr', \\"s59\\", tracer.record('expr', \\"s60\\", array)[tracer.record('expr', \\"s61\\", j)]));
-          tracer.record('expr', \\"s63\\", tracer.record('expr', \\"s65\\", array)[tracer.record('expr', \\"s66\\", j)] = tracer.record('expr', \\"s67\\", tmp));
+          const tmp = tracer.record('expr', \\"src-47\\", tracer.record('expr', \\"src-48\\", array)[tracer.record('expr', \\"src-49\\", tracer.record('expr', \\"src-50\\", j) + tracer.record('expr', \\"src-51\\", 1))]);
+          tracer.record('expr', \\"src-53\\", tracer.record('expr', \\"src-55\\", array)[tracer.record('expr', \\"src-56\\", tracer.record('expr', \\"src-57\\", j) + tracer.record('expr', \\"src-58\\", 1))] = tracer.record('expr', \\"src-59\\", tracer.record('expr', \\"src-60\\", array)[tracer.record('expr', \\"src-61\\", j)]));
+          tracer.record('expr', \\"src-63\\", tracer.record('expr', \\"src-65\\", array)[tracer.record('expr', \\"src-66\\", j)] = tracer.record('expr', \\"src-67\\", tmp));
         }
       }
     }
   } catch (e) {
-    tracer.record('fn-throw', \\"s2\\", e, -1);
+    tracer.record('fn-throw', \\"src-2\\", e, -1);
     throw e;
   }
 
-  tracer.record('fn-ret', \\"s2\\", undefined, -1);
+  tracer.record('fn-ret', \\"src-2\\", undefined, -1);
 }",
       "type": "function",
     },
     "id": 7,
-    "nodeId": "s79",
+    "nodeId": "src-79",
     "parentId": undefined,
     "type": "expr",
   },
@@ -779,7 +775,7 @@ Array [
       "type": "array",
     },
     "id": 8,
-    "nodeId": "s80",
+    "nodeId": "src-80",
     "parentId": undefined,
     "type": "expr",
   },
@@ -852,21 +848,21 @@ Array [
       "type": "object",
     },
     "id": 9,
-    "nodeId": "s2",
+    "nodeId": "src-2",
     "parentId": undefined,
     "type": "fn-start",
   },
   Object {
     "data": 0,
     "id": 10,
-    "nodeId": "s10",
+    "nodeId": "src-10",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 11,
-    "nodeId": "s12",
+    "nodeId": "src-12",
     "parentId": 9,
     "type": "expr",
   },
@@ -881,84 +877,84 @@ Array [
       "type": "array",
     },
     "id": 12,
-    "nodeId": "s14",
+    "nodeId": "src-14",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 13,
-    "nodeId": "s13",
+    "nodeId": "src-13",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 14,
-    "nodeId": "s11",
+    "nodeId": "src-11",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 15,
-    "nodeId": "s24",
+    "nodeId": "src-24",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 16,
-    "nodeId": "s25",
+    "nodeId": "src-25",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": -1,
     "id": 17,
-    "nodeId": "s23",
+    "nodeId": "src-23",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": -1,
     "id": 18,
-    "nodeId": "s27",
+    "nodeId": "src-27",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 19,
-    "nodeId": "s28",
+    "nodeId": "src-28",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": false,
     "id": 20,
-    "nodeId": "s26",
+    "nodeId": "src-26",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 21,
-    "nodeId": "s17",
+    "nodeId": "src-17",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 22,
-    "nodeId": "s16",
+    "nodeId": "src-16",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 23,
-    "nodeId": "s12",
+    "nodeId": "src-12",
     "parentId": 9,
     "type": "expr",
   },
@@ -973,63 +969,63 @@ Array [
       "type": "array",
     },
     "id": 24,
-    "nodeId": "s14",
+    "nodeId": "src-14",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 25,
-    "nodeId": "s13",
+    "nodeId": "src-13",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 26,
-    "nodeId": "s11",
+    "nodeId": "src-11",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 27,
-    "nodeId": "s24",
+    "nodeId": "src-24",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 28,
-    "nodeId": "s25",
+    "nodeId": "src-25",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 29,
-    "nodeId": "s23",
+    "nodeId": "src-23",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 30,
-    "nodeId": "s27",
+    "nodeId": "src-27",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 31,
-    "nodeId": "s28",
+    "nodeId": "src-28",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 32,
-    "nodeId": "s26",
+    "nodeId": "src-26",
     "parentId": 9,
     "type": "expr",
   },
@@ -1044,21 +1040,21 @@ Array [
       "type": "array",
     },
     "id": 33,
-    "nodeId": "s35",
+    "nodeId": "src-35",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 34,
-    "nodeId": "s36",
+    "nodeId": "src-36",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 35,
-    "nodeId": "s34",
+    "nodeId": "src-34",
     "parentId": 9,
     "type": "expr",
   },
@@ -1073,42 +1069,42 @@ Array [
       "type": "array",
     },
     "id": 36,
-    "nodeId": "s38",
+    "nodeId": "src-38",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 37,
-    "nodeId": "s40",
+    "nodeId": "src-40",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 38,
-    "nodeId": "s41",
+    "nodeId": "src-41",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 39,
-    "nodeId": "s39",
+    "nodeId": "src-39",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 40,
-    "nodeId": "s37",
+    "nodeId": "src-37",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": false,
     "id": 41,
-    "nodeId": "s33",
+    "nodeId": "src-33",
     "parentId": 9,
     "type": "expr",
   },
@@ -1123,35 +1119,35 @@ Array [
       "type": "array",
     },
     "id": 42,
-    "nodeId": "s48",
+    "nodeId": "src-48",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 43,
-    "nodeId": "s50",
+    "nodeId": "src-50",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 44,
-    "nodeId": "s51",
+    "nodeId": "src-51",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 45,
-    "nodeId": "s49",
+    "nodeId": "src-49",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 46,
-    "nodeId": "s47",
+    "nodeId": "src-47",
     "parentId": 9,
     "type": "expr",
   },
@@ -1166,28 +1162,28 @@ Array [
       "type": "array",
     },
     "id": 47,
-    "nodeId": "s55",
+    "nodeId": "src-55",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 48,
-    "nodeId": "s57",
+    "nodeId": "src-57",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 49,
-    "nodeId": "s58",
+    "nodeId": "src-58",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 50,
-    "nodeId": "s56",
+    "nodeId": "src-56",
     "parentId": 9,
     "type": "expr",
   },
@@ -1202,28 +1198,28 @@ Array [
       "type": "array",
     },
     "id": 51,
-    "nodeId": "s60",
+    "nodeId": "src-60",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 52,
-    "nodeId": "s61",
+    "nodeId": "src-61",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 53,
-    "nodeId": "s59",
+    "nodeId": "src-59",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 54,
-    "nodeId": "s53",
+    "nodeId": "src-53",
     "parentId": 9,
     "type": "expr",
   },
@@ -1238,84 +1234,84 @@ Array [
       "type": "array",
     },
     "id": 55,
-    "nodeId": "s65",
+    "nodeId": "src-65",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 56,
-    "nodeId": "s66",
+    "nodeId": "src-66",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 57,
-    "nodeId": "s67",
+    "nodeId": "src-67",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 58,
-    "nodeId": "s63",
+    "nodeId": "src-63",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 59,
-    "nodeId": "s30",
+    "nodeId": "src-30",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 60,
-    "nodeId": "s29",
+    "nodeId": "src-29",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": -1,
     "id": 61,
-    "nodeId": "s27",
+    "nodeId": "src-27",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 62,
-    "nodeId": "s28",
+    "nodeId": "src-28",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": false,
     "id": 63,
-    "nodeId": "s26",
+    "nodeId": "src-26",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 64,
-    "nodeId": "s17",
+    "nodeId": "src-17",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 65,
-    "nodeId": "s16",
+    "nodeId": "src-16",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 66,
-    "nodeId": "s12",
+    "nodeId": "src-12",
     "parentId": 9,
     "type": "expr",
   },
@@ -1330,63 +1326,63 @@ Array [
       "type": "array",
     },
     "id": 67,
-    "nodeId": "s14",
+    "nodeId": "src-14",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 68,
-    "nodeId": "s13",
+    "nodeId": "src-13",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 69,
-    "nodeId": "s11",
+    "nodeId": "src-11",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 70,
-    "nodeId": "s24",
+    "nodeId": "src-24",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 71,
-    "nodeId": "s25",
+    "nodeId": "src-25",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 72,
-    "nodeId": "s23",
+    "nodeId": "src-23",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 73,
-    "nodeId": "s27",
+    "nodeId": "src-27",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 74,
-    "nodeId": "s28",
+    "nodeId": "src-28",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 75,
-    "nodeId": "s26",
+    "nodeId": "src-26",
     "parentId": 9,
     "type": "expr",
   },
@@ -1401,21 +1397,21 @@ Array [
       "type": "array",
     },
     "id": 76,
-    "nodeId": "s35",
+    "nodeId": "src-35",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 77,
-    "nodeId": "s36",
+    "nodeId": "src-36",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 78,
-    "nodeId": "s34",
+    "nodeId": "src-34",
     "parentId": 9,
     "type": "expr",
   },
@@ -1430,42 +1426,42 @@ Array [
       "type": "array",
     },
     "id": 79,
-    "nodeId": "s38",
+    "nodeId": "src-38",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 80,
-    "nodeId": "s40",
+    "nodeId": "src-40",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 81,
-    "nodeId": "s41",
+    "nodeId": "src-41",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 82,
-    "nodeId": "s39",
+    "nodeId": "src-39",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 83,
-    "nodeId": "s37",
+    "nodeId": "src-37",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": false,
     "id": 84,
-    "nodeId": "s33",
+    "nodeId": "src-33",
     "parentId": 9,
     "type": "expr",
   },
@@ -1480,35 +1476,35 @@ Array [
       "type": "array",
     },
     "id": 85,
-    "nodeId": "s48",
+    "nodeId": "src-48",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 86,
-    "nodeId": "s50",
+    "nodeId": "src-50",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 87,
-    "nodeId": "s51",
+    "nodeId": "src-51",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 88,
-    "nodeId": "s49",
+    "nodeId": "src-49",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 89,
-    "nodeId": "s47",
+    "nodeId": "src-47",
     "parentId": 9,
     "type": "expr",
   },
@@ -1523,28 +1519,28 @@ Array [
       "type": "array",
     },
     "id": 90,
-    "nodeId": "s55",
+    "nodeId": "src-55",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 91,
-    "nodeId": "s57",
+    "nodeId": "src-57",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 92,
-    "nodeId": "s58",
+    "nodeId": "src-58",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 93,
-    "nodeId": "s56",
+    "nodeId": "src-56",
     "parentId": 9,
     "type": "expr",
   },
@@ -1559,28 +1555,28 @@ Array [
       "type": "array",
     },
     "id": 94,
-    "nodeId": "s60",
+    "nodeId": "src-60",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 95,
-    "nodeId": "s61",
+    "nodeId": "src-61",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 96,
-    "nodeId": "s59",
+    "nodeId": "src-59",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 97,
-    "nodeId": "s53",
+    "nodeId": "src-53",
     "parentId": 9,
     "type": "expr",
   },
@@ -1595,63 +1591,63 @@ Array [
       "type": "array",
     },
     "id": 98,
-    "nodeId": "s65",
+    "nodeId": "src-65",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 99,
-    "nodeId": "s66",
+    "nodeId": "src-66",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 100,
-    "nodeId": "s67",
+    "nodeId": "src-67",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 101,
-    "nodeId": "s63",
+    "nodeId": "src-63",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 102,
-    "nodeId": "s30",
+    "nodeId": "src-30",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 103,
-    "nodeId": "s29",
+    "nodeId": "src-29",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 104,
-    "nodeId": "s27",
+    "nodeId": "src-27",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 105,
-    "nodeId": "s28",
+    "nodeId": "src-28",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 106,
-    "nodeId": "s26",
+    "nodeId": "src-26",
     "parentId": 9,
     "type": "expr",
   },
@@ -1666,21 +1662,21 @@ Array [
       "type": "array",
     },
     "id": 107,
-    "nodeId": "s35",
+    "nodeId": "src-35",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 108,
-    "nodeId": "s36",
+    "nodeId": "src-36",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 109,
-    "nodeId": "s34",
+    "nodeId": "src-34",
     "parentId": 9,
     "type": "expr",
   },
@@ -1695,63 +1691,63 @@ Array [
       "type": "array",
     },
     "id": 110,
-    "nodeId": "s38",
+    "nodeId": "src-38",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 111,
-    "nodeId": "s40",
+    "nodeId": "src-40",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 112,
-    "nodeId": "s41",
+    "nodeId": "src-41",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 113,
-    "nodeId": "s39",
+    "nodeId": "src-39",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 114,
-    "nodeId": "s37",
+    "nodeId": "src-37",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 115,
-    "nodeId": "s33",
+    "nodeId": "src-33",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 116,
-    "nodeId": "s17",
+    "nodeId": "src-17",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 117,
-    "nodeId": "s16",
+    "nodeId": "src-16",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 118,
-    "nodeId": "s12",
+    "nodeId": "src-12",
     "parentId": 9,
     "type": "expr",
   },
@@ -1766,63 +1762,63 @@ Array [
       "type": "array",
     },
     "id": 119,
-    "nodeId": "s14",
+    "nodeId": "src-14",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 120,
-    "nodeId": "s13",
+    "nodeId": "src-13",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 121,
-    "nodeId": "s11",
+    "nodeId": "src-11",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 122,
-    "nodeId": "s24",
+    "nodeId": "src-24",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 123,
-    "nodeId": "s25",
+    "nodeId": "src-25",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 124,
-    "nodeId": "s23",
+    "nodeId": "src-23",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 125,
-    "nodeId": "s27",
+    "nodeId": "src-27",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 126,
-    "nodeId": "s28",
+    "nodeId": "src-28",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 127,
-    "nodeId": "s26",
+    "nodeId": "src-26",
     "parentId": 9,
     "type": "expr",
   },
@@ -1837,21 +1833,21 @@ Array [
       "type": "array",
     },
     "id": 128,
-    "nodeId": "s35",
+    "nodeId": "src-35",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 129,
-    "nodeId": "s36",
+    "nodeId": "src-36",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 130,
-    "nodeId": "s34",
+    "nodeId": "src-34",
     "parentId": 9,
     "type": "expr",
   },
@@ -1866,63 +1862,63 @@ Array [
       "type": "array",
     },
     "id": 131,
-    "nodeId": "s38",
+    "nodeId": "src-38",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 132,
-    "nodeId": "s40",
+    "nodeId": "src-40",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 133,
-    "nodeId": "s41",
+    "nodeId": "src-41",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 134,
-    "nodeId": "s39",
+    "nodeId": "src-39",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 135,
-    "nodeId": "s37",
+    "nodeId": "src-37",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 136,
-    "nodeId": "s33",
+    "nodeId": "src-33",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 137,
-    "nodeId": "s17",
+    "nodeId": "src-17",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 138,
-    "nodeId": "s16",
+    "nodeId": "src-16",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 139,
-    "nodeId": "s12",
+    "nodeId": "src-12",
     "parentId": 9,
     "type": "expr",
   },
@@ -1937,63 +1933,63 @@ Array [
       "type": "array",
     },
     "id": 140,
-    "nodeId": "s14",
+    "nodeId": "src-14",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 141,
-    "nodeId": "s13",
+    "nodeId": "src-13",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 142,
-    "nodeId": "s11",
+    "nodeId": "src-11",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 143,
-    "nodeId": "s24",
+    "nodeId": "src-24",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 144,
-    "nodeId": "s25",
+    "nodeId": "src-25",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 145,
-    "nodeId": "s23",
+    "nodeId": "src-23",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 146,
-    "nodeId": "s27",
+    "nodeId": "src-27",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 147,
-    "nodeId": "s28",
+    "nodeId": "src-28",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 148,
-    "nodeId": "s26",
+    "nodeId": "src-26",
     "parentId": 9,
     "type": "expr",
   },
@@ -2008,21 +2004,21 @@ Array [
       "type": "array",
     },
     "id": 149,
-    "nodeId": "s35",
+    "nodeId": "src-35",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 150,
-    "nodeId": "s36",
+    "nodeId": "src-36",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 151,
-    "nodeId": "s34",
+    "nodeId": "src-34",
     "parentId": 9,
     "type": "expr",
   },
@@ -2037,42 +2033,42 @@ Array [
       "type": "array",
     },
     "id": 152,
-    "nodeId": "s38",
+    "nodeId": "src-38",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 153,
-    "nodeId": "s40",
+    "nodeId": "src-40",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 154,
-    "nodeId": "s41",
+    "nodeId": "src-41",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 155,
-    "nodeId": "s39",
+    "nodeId": "src-39",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 156,
-    "nodeId": "s37",
+    "nodeId": "src-37",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": false,
     "id": 157,
-    "nodeId": "s33",
+    "nodeId": "src-33",
     "parentId": 9,
     "type": "expr",
   },
@@ -2087,35 +2083,35 @@ Array [
       "type": "array",
     },
     "id": 158,
-    "nodeId": "s48",
+    "nodeId": "src-48",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 159,
-    "nodeId": "s50",
+    "nodeId": "src-50",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 160,
-    "nodeId": "s51",
+    "nodeId": "src-51",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 161,
-    "nodeId": "s49",
+    "nodeId": "src-49",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 162,
-    "nodeId": "s47",
+    "nodeId": "src-47",
     "parentId": 9,
     "type": "expr",
   },
@@ -2130,28 +2126,28 @@ Array [
       "type": "array",
     },
     "id": 163,
-    "nodeId": "s55",
+    "nodeId": "src-55",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 164,
-    "nodeId": "s57",
+    "nodeId": "src-57",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 165,
-    "nodeId": "s58",
+    "nodeId": "src-58",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 166,
-    "nodeId": "s56",
+    "nodeId": "src-56",
     "parentId": 9,
     "type": "expr",
   },
@@ -2166,28 +2162,28 @@ Array [
       "type": "array",
     },
     "id": 167,
-    "nodeId": "s60",
+    "nodeId": "src-60",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 168,
-    "nodeId": "s61",
+    "nodeId": "src-61",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 169,
-    "nodeId": "s59",
+    "nodeId": "src-59",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 170,
-    "nodeId": "s53",
+    "nodeId": "src-53",
     "parentId": 9,
     "type": "expr",
   },
@@ -2202,63 +2198,63 @@ Array [
       "type": "array",
     },
     "id": 171,
-    "nodeId": "s65",
+    "nodeId": "src-65",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 172,
-    "nodeId": "s66",
+    "nodeId": "src-66",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 173,
-    "nodeId": "s67",
+    "nodeId": "src-67",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 174,
-    "nodeId": "s63",
+    "nodeId": "src-63",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 175,
-    "nodeId": "s30",
+    "nodeId": "src-30",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 176,
-    "nodeId": "s29",
+    "nodeId": "src-29",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 177,
-    "nodeId": "s27",
+    "nodeId": "src-27",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 0,
     "id": 178,
-    "nodeId": "s28",
+    "nodeId": "src-28",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 179,
-    "nodeId": "s26",
+    "nodeId": "src-26",
     "parentId": 9,
     "type": "expr",
   },
@@ -2273,21 +2269,21 @@ Array [
       "type": "array",
     },
     "id": 180,
-    "nodeId": "s35",
+    "nodeId": "src-35",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 181,
-    "nodeId": "s36",
+    "nodeId": "src-36",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 182,
-    "nodeId": "s34",
+    "nodeId": "src-34",
     "parentId": 9,
     "type": "expr",
   },
@@ -2302,63 +2298,63 @@ Array [
       "type": "array",
     },
     "id": 183,
-    "nodeId": "s38",
+    "nodeId": "src-38",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 2,
     "id": 184,
-    "nodeId": "s40",
+    "nodeId": "src-40",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 1,
     "id": 185,
-    "nodeId": "s41",
+    "nodeId": "src-41",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 3,
     "id": 186,
-    "nodeId": "s39",
+    "nodeId": "src-39",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 187,
-    "nodeId": "s37",
+    "nodeId": "src-37",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": true,
     "id": 188,
-    "nodeId": "s33",
+    "nodeId": "src-33",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 189,
-    "nodeId": "s17",
+    "nodeId": "src-17",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 4,
     "id": 190,
-    "nodeId": "s16",
+    "nodeId": "src-16",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 191,
-    "nodeId": "s12",
+    "nodeId": "src-12",
     "parentId": 9,
     "type": "expr",
   },
@@ -2373,21 +2369,21 @@ Array [
       "type": "array",
     },
     "id": 192,
-    "nodeId": "s14",
+    "nodeId": "src-14",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": 5,
     "id": 193,
-    "nodeId": "s13",
+    "nodeId": "src-13",
     "parentId": 9,
     "type": "expr",
   },
   Object {
     "data": false,
     "id": 194,
-    "nodeId": "s11",
+    "nodeId": "src-11",
     "parentId": 9,
     "type": "expr",
   },
@@ -2397,7 +2393,7 @@ Array [
       "type": "builtin",
     },
     "id": 195,
-    "nodeId": "s2",
+    "nodeId": "src-2",
     "parentId": 9,
     "type": "fn-ret",
   },
@@ -2407,7 +2403,7 @@ Array [
       "type": "builtin",
     },
     "id": 196,
-    "nodeId": "s78",
+    "nodeId": "src-78",
     "parentId": undefined,
     "type": "expr",
   },

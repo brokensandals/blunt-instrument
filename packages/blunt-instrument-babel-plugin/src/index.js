@@ -7,62 +7,19 @@ import {
   setNodeId,
 } from 'blunt-instrument-ast-utils';
 
+// I expected that this could be merely:
+// `import { defaultTracer as %%tracerId%% } from 'blunt-instrument-runtime';`
+// ...but then plugin-transform-modules-commonjs will not actually define
+// the variable specified by tracerId. Unsure if that's a bug in the plugin
+// or how I'm using it.
 const buildImportTracer = template(`
-  import { defaultTracer as %%tracerId%% } from 'blunt-instrument-runtime';
+  import { defaultTracer as %%tempId%% } from 'blunt-instrument-runtime';
+  const %%tracerId%% = %%tempId%%;
 `);
 
 const buildRegisterAST = template(`
   %%tracerId%%.asts[%%astKey%%] = JSON.parse(%%astString%%);
 `);
-
-/**
- * Adds initialization code for blunt-instrument to the given AST.
- * @param {NodePath} path - path containing the root node of the AST
- * @param {object} opts
- * @param {object} opts.runtime
- * @param {("import"|"var")} opts.runtime.mechanism - indicates how the tracer should be retrieved
- * @param {string} opts.runtime.tracerVar - when mechanism="var", the name of the variable
- *   that contains the Tracer instance
- * @param {object} opts.ast
- * @param {string} opts.ast.key - a key to identify this AST and distinguish it from
- *   any others that will be used with the same Tracer instance
- * @param {Boolean} opts.ast.selfRegister - whether to generate code that stores the AST
- *   into the Tracer at the beginning of execution
- * @return {object} an object containing identifiers generated during init that will need to be
- *   used by instrumentation code
- */
-function addInstrumenterInit(path,
-  {
-    runtime: {
-      mechanism = 'import',
-      tracerVar,
-    } = {},
-    ast: {
-      key: astKey = 'src',
-      selfRegister = true,
-    } = {},
-  }) {
-  const ids = {
-    tracerId: tracerVar ? types.identifier(tracerVar)
-      : path.scope.generateUidIdentifier('tracer'),
-  };
-
-  if (selfRegister) {
-    // TODO insert object directly instead of via json
-    const astString = types.stringLiteral(JSON.stringify(path.node));
-    path.node.body.unshift(buildRegisterAST({
-      tracerId: ids.tracerId,
-      astKey: types.stringLiteral(astKey),
-      astString,
-    }));
-  }
-
-  if (mechanism === 'import') {
-    path.node.body.unshift(buildImportTracer(ids));
-  }
-
-  return ids;
-}
 
 const buildFnTrace = template(`{
   %%tracerId%%.record('fn-start', %%nodeId%%, %%args%%, 1);
@@ -260,14 +217,6 @@ const instrumentVisitor = {
   },
 };
 
-const rootVisitor = {
-  Program(path, misc) {
-    addNodeIdsToAST(path.node, 's');
-    const state = addInstrumenterInit(path, misc.opts);
-    path.traverse(instrumentVisitor, { state });
-  },
-};
-
 /**
  * Babel plugin that instruments source code for automatic tracing.
  *
@@ -275,8 +224,51 @@ const rootVisitor = {
  *
  * @param {*} babel
  */
-export default function () {
+export default function (api, opts) {
+  const {
+    runtime: {
+      mechanism = 'import',
+      tracerVar,
+    } = {},
+    ast: {
+      key = 'src',
+      selfRegister = true,
+    } = {},
+  } = opts;
+
+  function addInstrumenterInit(path) {
+    const ids = {
+      tracerId: tracerVar ? types.identifier(tracerVar)
+        : path.scope.generateUidIdentifier('tracer'),
+    };
+
+    if (selfRegister) {
+      // TODO insert object directly instead of via json
+      const astString = types.stringLiteral(JSON.stringify(path.node));
+      path.node.body.unshift(buildRegisterAST({
+        tracerId: ids.tracerId,
+        astKey: types.stringLiteral(key),
+        astString,
+      }));
+    }
+
+    if (mechanism === 'import') {
+      path.node.body.unshift(...buildImportTracer({
+        tempId: path.scope.generateUidIdentifier('temp'),
+        ...ids,
+      }));
+    }
+
+    return ids;
+  }
+
   return {
-    visitor: rootVisitor,
+    visitor: {
+      Program(path) {
+        addNodeIdsToAST(path.node, `${key}-`);
+        const state = addInstrumenterInit(path);
+        path.traverse(instrumentVisitor, { state });
+      },
+    },
   };
 }
