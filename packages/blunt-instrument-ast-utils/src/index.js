@@ -43,20 +43,6 @@ export function addNodeIdsToAST(ast, prefix) {
 }
 
 /**
- * Retrieve the source code slice from a node, if it has been set.
- * Use `attachCodeSlicesToAST` to set the code slices.
- * @param {Node} node
- * @return {string} the code slice or null
- */
-export function getCodeSlice(node) {
-  if (typeof node.codeSlice !== 'string') {
-    return null;
-  }
-
-  return node.codeSlice;
-}
-
-/**
  * Attach a field `codeSlice` to each node in an AST, containing the snippet of source
  * code to which the node corresponds. Requires the node to have integer `start` and
  * `end` fields indicating the section of code to which it corresponds.
@@ -101,7 +87,7 @@ export class ASTQuerier {
 
       nodesById.set(node.biId, node);
 
-      const codeSlice = getCodeSlice(node);
+      const { codeSlice } = node;
       if (codeSlice) {
         let nodes = nodesByCodeSlice.get(codeSlice);
         if (!nodes) {

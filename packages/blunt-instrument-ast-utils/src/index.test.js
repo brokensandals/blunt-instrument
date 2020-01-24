@@ -1,7 +1,6 @@
 import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
 import {
   addNodeIdsToAST,
-  getCodeSlice,
   attachCodeSlicesToAST,
   copyNodeIdsBetweenASTs,
   ASTQuerier,
@@ -52,23 +51,6 @@ describe('addNodeIdsToAST', () => {
     expect(ast.program.body[0].declarations[0].biId).toEqual('instr-3');
     expect(ast.program.body[0].declarations[0].id.biId).toEqual('instr-4');
     expect(ast.program.body[0].declarations[0].init.biId).toEqual('instr-5');
-  });
-});
-
-describe('getCodeSlice', () => {
-  it('returns null when `extra` is null', () => {
-    const node = {};
-    expect(getCodeSlice(node)).toBeNull();
-  });
-
-  it('returns null when `codeSlice` is missing', () => {
-    const node = { extra: { foo: 'bar' } };
-    expect(getCodeSlice(node)).toBeNull();
-  });
-
-  it('returns the code slice', () => {
-    const node = { codeSlice: 'foo' };
-    expect(getCodeSlice(node)).toEqual('foo');
   });
 });
 
@@ -170,7 +152,7 @@ describe('ASTQuerier', () => {
       attachCodeSlicesToAST(ast, code);
       const astq = new ASTQuerier(ast);
       const expected = [ast.program.body[0].expression.right.right, ast.program.body[1]];
-      const actual = astq.filterNodes((node) => ['123', 'z = 4;'].includes(getCodeSlice(node)));
+      const actual = astq.filterNodes((node) => ['123', 'z = 4;'].includes(node.codeSlice));
       expect(actual).toEqual(expected);
     });
   });

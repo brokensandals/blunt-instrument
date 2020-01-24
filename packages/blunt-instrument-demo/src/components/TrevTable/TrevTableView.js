@@ -1,6 +1,5 @@
 import React from 'react';
 import './TrevTable.css';
-import { getCodeSlice } from 'blunt-instrument-ast-utils';
 
 function ValueDisplay({ value }) {
   switch (value) {
@@ -71,7 +70,7 @@ function TrevTableView({
         <td className="id">{trev.id}</td>
         <td className="type">{trev.type}</td>
         <td className="node" onClick={handleCodeClick}>
-          <code>{getCodeSlice(trev.extra.node)}</code>
+          <code>{trev.extra.node.codeSlice}</code>
         </td>
         <td className="data">
           <ValueDisplay value={trev.data} />

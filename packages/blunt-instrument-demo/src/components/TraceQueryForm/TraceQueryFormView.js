@@ -1,6 +1,5 @@
 import React from 'react';
 import './TraceQueryForm.css';
-import { getCodeSlice } from 'blunt-instrument-ast-utils';
 import update from 'immutability-helper';
 import Select from 'react-select';
 
@@ -13,7 +12,7 @@ export function TraceQueryFormView({
 }) {
   function nodeOption(node) {
     const value = node.biId;
-    const codeSlice = getCodeSlice(node);
+    const codeSlice = node.codeSlice;
     const codePreview = codeSlice.length > 20 ? codeSlice.slice(0, 20) + '...' : codeSlice;
     const label = node.type + '#' + value + ': ' + codePreview;
     return { value, label };

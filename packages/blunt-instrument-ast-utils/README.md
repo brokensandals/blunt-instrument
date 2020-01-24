@@ -20,7 +20,7 @@ blunt-instrument-babel-plugin calls this for you.
 
 It can be useful to have the code snippet corresponding to an AST node attached directly to the node itself.
 Given the root node and the full original source code, `attachCodeSliceToAST(ast, code)` attaches code slices to all nodes in the tree.
-The `getCodeSlice(node)` function can then be used to retrieve the slice.
+Each node for which a code slice could be found will contain a string property named `codeSlice`.
 
 ## ASTQuerier
 
