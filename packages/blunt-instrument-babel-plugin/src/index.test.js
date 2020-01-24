@@ -182,6 +182,7 @@ describe('configuration', () => {
       },
     };
     const { code } = transform('const foo = "meh"', opts, {}, true);
+    expect(code).toContain('ast');
     // use `eval()` instead of `new Function()` so that `require` is defined
     eval(code); // eslint-disable-line no-eval
     const tracer = defaultTrace.tracerFor('test');
