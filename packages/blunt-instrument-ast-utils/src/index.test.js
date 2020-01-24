@@ -107,13 +107,13 @@ describe('getCodeSlice', () => {
     expect(getCodeSlice(node)).toBeNull();
   });
 
-  it('returns null when `extra.codeSlice` is missing', () => {
+  it('returns null when `codeSlice` is missing', () => {
     const node = { extra: { foo: 'bar' } };
     expect(getCodeSlice(node)).toBeNull();
   });
 
   it('returns the code slice', () => {
-    const node = { extra: { codeSlice: 'foo' } };
+    const node = { codeSlice: 'foo' };
     expect(getCodeSlice(node)).toEqual('foo');
   });
 });
@@ -123,12 +123,12 @@ describe('attachCodeSlicesToAST', () => {
     const code = 'let x = 4';
     const ast = parseSync(code);
     attachCodeSlicesToAST(ast, code);
-    expect(ast.extra.codeSlice).toEqual(code);
-    expect(ast.program.extra.codeSlice).toEqual(code);
-    expect(ast.program.body[0].extra.codeSlice).toEqual(code);
-    expect(ast.program.body[0].declarations[0].extra.codeSlice).toEqual('x = 4');
-    expect(ast.program.body[0].declarations[0].id.extra.codeSlice).toEqual('x');
-    expect(ast.program.body[0].declarations[0].init.extra.codeSlice).toEqual('4');
+    expect(ast.codeSlice).toEqual(code);
+    expect(ast.program.codeSlice).toEqual(code);
+    expect(ast.program.body[0].codeSlice).toEqual(code);
+    expect(ast.program.body[0].declarations[0].codeSlice).toEqual('x = 4');
+    expect(ast.program.body[0].declarations[0].id.codeSlice).toEqual('x');
+    expect(ast.program.body[0].declarations[0].init.codeSlice).toEqual('4');
   });
 
   it('skips nodes missing start or end', () => {
@@ -137,12 +137,12 @@ describe('attachCodeSlicesToAST', () => {
     delete ast.program.start;
     delete ast.program.body[0].declarations[0].id.end;
     attachCodeSlicesToAST(ast, code);
-    expect(ast.extra.codeSlice).toEqual(code);
-    expect(ast.program.extra).toBeUndefined();
-    expect(ast.program.body[0].extra.codeSlice).toEqual(code);
-    expect(ast.program.body[0].declarations[0].extra.codeSlice).toEqual('x = 4');
-    expect(ast.program.body[0].declarations[0].id.extra).toBeUndefined();
-    expect(ast.program.body[0].declarations[0].init.extra.codeSlice).toEqual('4');
+    expect(ast.codeSlice).toEqual(code);
+    expect(ast.program.codeSlice).toBeUndefined();
+    expect(ast.program.body[0].codeSlice).toEqual(code);
+    expect(ast.program.body[0].declarations[0].codeSlice).toEqual('x = 4');
+    expect(ast.program.body[0].declarations[0].id.codeSlice).toBeUndefined();
+    expect(ast.program.body[0].declarations[0].init.codeSlice).toEqual('4');
   });
 
   it('throws an error when start is negative', () => {

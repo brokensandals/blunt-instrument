@@ -82,19 +82,15 @@ export function addNodeIdsToAST(ast, prefix) {
  * @return {string} the code slice or null
  */
 export function getCodeSlice(node) {
-  if (!node.extra) {
+  if (typeof node.codeSlice !== 'string') {
     return null;
   }
 
-  if (typeof node.extra.codeSlice !== 'string') {
-    return null;
-  }
-
-  return node.extra.codeSlice;
+  return node.codeSlice;
 }
 
 /**
- * Attach a field `extra.codeSlice` to each node in an AST, containing the snippet of source
+ * Attach a field `codeSlice` to each node in an AST, containing the snippet of source
  * code to which the node corresponds. Requires the node to have integer `start` and
  * `end` fields indicating the section of code to which it corresponds.
  * @param {Node} ast - the parent which will be annotated along with its descendants
@@ -107,12 +103,8 @@ export function attachCodeSlicesToAST(ast, code) {
         throw new Error(`Node start [${node.start}] or end [${node.end}] is out of range`);
       }
 
-      if (!node.extra) {
-        node.extra = {}; // eslint-disable-line no-param-reassign
-      }
-
       // eslint-disable-next-line no-param-reassign
-      node.extra.codeSlice = code.slice(node.start, node.end);
+      node.codeSlice = code.slice(node.start, node.end);
     }
   });
 }
