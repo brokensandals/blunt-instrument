@@ -37,7 +37,7 @@ function AppView({
 
   const selectedNodeIds =
     Object.keys(traceQuery.filters.onlyNodeIds).filter(
-      key => traceQuery.filters.onlyNodeIds[key]);
+      key => traceQuery.filters.onlyNodeIds[key]).map(Number);
 
   const handleSourceDraftChange =
     (event) => onSourceDraftChange(event.target.value);
