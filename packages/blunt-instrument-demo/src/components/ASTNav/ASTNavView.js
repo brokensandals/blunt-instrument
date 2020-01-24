@@ -14,18 +14,17 @@ function ASTObjectView({
   selectedNodeIds,
 }) {
   const {
-    type = null,
-    loc = null,
-    // eslint-disable-next-line
-    start = null,
-    // eslint-disable-next-line
-    end = null,
-    // eslint-disable-next-line
-    extra = null,
+    biId: nodeId,
+    type,
+    loc,
+    // eslint-disable-next-line no-unused-vars
+    start,
+    // eslint-disable-next-line no-unused-vars
+    end,
+    // eslint-disable-next-line no-unused-vars
+    codeSlice,
     ...rest
   } = object;
-
-  const nodeId = object.biId;
 
   const typeEl = type ? <span className="type">{type}</span> : null;
   const nodeIdEl = nodeId ? <span className="nodeId">{nodeId}</span> : null;
