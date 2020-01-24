@@ -3,7 +3,6 @@
 This package ties together various parts of blunt-instrument to provide an easy way to take javascript code stored in a string, instrument it, evaluate it, and get the trace in a consumable format.
 
 ```javascript
-import { getNodeId } from 'blunt-instrument-ast';
 import instrumentedEval from 'blunt-instrument-eval';
 
 const code = `
@@ -14,7 +13,7 @@ const code = `
 
 const result = instrumentedEval(code);
 const recursiveCallNode = result.traceQuerier.astQuerier.getNodesByCodeSlice('factorial(n - 1)')[0];
-const trevs = result.traceQuerier.query({ filters: { onlyNodeIds: getNodeId(recursiveCallNode) }});
+const trevs = result.traceQuerier.query({ filters: { onlyNodeIds: recursiveCallNode.biId }});
 
 // This will log the four values that factorial(n - 1) evaluates to during the
 // course of execution:

@@ -1,39 +1,6 @@
 import * as types from '@babel/types';
 
 /**
- * Retrieves the blunt-instrument node ID from a babel node, if one has been set.
- * @param {Node} node
- * @return {string} the node ID, or null if there is none
- */
-export function getNodeId(node) {
-  if (typeof node.biId !== 'string') {
-    return null;
-  }
-
-  return node.biId;
-}
-
-/**
- * Sets the blunt-instrument node ID on a babel node,
- * which is used for correlating traced events to AST nodes.
- * Currently this is stored in node.biId
- * @param {Node} node
- * @param {string} id
- */
-export function setNodeId(node, id) {
-  node.biId = id; // eslint-disable-line no-param-reassign
-}
-
-/**
- * Copy the node ID from one AST node to another.
- * @param {Node} from
- * @param {Node} to
- */
-export function copyNodeId(from, to) {
-  setNodeId(to, getNodeId(from));
-}
-
-/**
  * Copies all node IDs from one AST to another. This should be called with
  * two ASTs that have exactly the same shape.
  * @param {Node} from

@@ -1,6 +1,6 @@
 import React from 'react';
 import './TrevTable.css';
-import { getCodeSlice, getNodeId } from 'blunt-instrument-ast-utils';
+import { getCodeSlice } from 'blunt-instrument-ast-utils';
 
 function ValueDisplay({ value }) {
   switch (value) {
@@ -60,10 +60,10 @@ function TrevTableView({
     const className = [
       highlightedTrevId != null && trev.id === highlightedTrevId ? 'highlighted-trev' : null,
       highlightedTrevId != null && trev.extra.ancestorIds.includes(highlightedTrevId) ? 'highlighted-trev-descendant' : null,
-      highlightedNodeId != null && getNodeId(trev.extra.node) === highlightedNodeId ? 'highlighted-node' : null,
+      highlightedNodeId != null && trev.nodeId === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
-    const handleCodeClick = () => onNodeSelectedToggle(getNodeId(trev.extra.node));
+    const handleCodeClick = () => onNodeSelectedToggle(trev.nodeId);
 
     entries.push(
       <tr key={trev.id} onMouseOver={handleMouseOver} className={className}>

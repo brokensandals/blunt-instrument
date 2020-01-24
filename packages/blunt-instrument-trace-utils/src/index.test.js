@@ -2,7 +2,6 @@ import {
   addNodeIdsToAST,
   ASTQuerier,
   attachCodeSlicesToAST,
-  getNodeId,
 } from 'blunt-instrument-ast-utils';
 import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
 import { TraceQuerier } from '.';
@@ -49,31 +48,31 @@ describe('TraceQuerier', () => {
       trevs = [];
       trevs.push({
         id: 1,
-        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('1')[0]),
+        nodeId: astQuerier.getNodesByCodeSlice('1')[0].biId,
         type: 'expr',
         data: 1,
       });
       trevs.push({
         id: 2,
-        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]),
+        nodeId: astQuerier.getNodesByCodeSlice('num + by')[0].biId,
         type: 'expr',
         data: 4,
       });
       trevs.push({
         id: 3,
-        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('num + by')[0]),
+        nodeId: astQuerier.getNodesByCodeSlice('num + by')[0].biId,
         type: 'expr',
         data: 7,
       });
       trevs.push({
         id: 4,
-        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[0]),
+        nodeId: astQuerier.getNodesByCodeSlice('increaseNum(3)')[0].biId,
         type: 'expr',
         data: 4,
       });
       trevs.push({
         id: 5,
-        nodeId: getNodeId(astQuerier.getNodesByCodeSlice('increaseNum(3)')[1]),
+        nodeId: astQuerier.getNodesByCodeSlice('increaseNum(3)')[1].biId,
         type: 'expr',
         data: 7,
       });

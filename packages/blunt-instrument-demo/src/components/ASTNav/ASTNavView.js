@@ -1,6 +1,5 @@
 import React from 'react';
 import './ASTNav.css';
-import { getNodeId } from 'blunt-instrument-ast-utils';
 
 function locString({ start, end }) {
   return '' + start.line + ':' + start.column + '-' +
@@ -26,7 +25,7 @@ function ASTObjectView({
     ...rest
   } = object;
 
-  const nodeId = getNodeId(object);
+  const nodeId = object.biId;
 
   const typeEl = type ? <span className="type">{type}</span> : null;
   const nodeIdEl = nodeId ? <span className="nodeId">{nodeId}</span> : null;

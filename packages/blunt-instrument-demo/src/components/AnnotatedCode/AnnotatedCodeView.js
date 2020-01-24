@@ -1,6 +1,6 @@
 import React from 'react';
 import './AnnotatedCode.css';
-import { getCodeSlice, getNodeId } from 'blunt-instrument-ast-utils';
+import { getCodeSlice } from 'blunt-instrument-ast-utils';
 
 // TODO babel probably provides a better way to do this
 function findNodes(object) {
@@ -43,7 +43,7 @@ function CodeForNode({
     }
     
     elements.push(
-      <CodeForNode key={getNodeId(child)}
+      <CodeForNode key={child.biId}
                      highlightedNodeId={highlightedNodeId}
                      node={child}
                      selectedNodeIds={selectedNodeIds}

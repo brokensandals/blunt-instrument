@@ -9,13 +9,12 @@ See the JSDoc in [src/index.js](src/index.js) for detailed information.
 ## Node IDs
 
 Every node in the AST needs a unique identifier so that the tracer can indicate which node a result corresponds to.
-
-To read a node's ID, use `getNodeId(node)`.
+This should be stored in the `biId` field.
 
 To assign sequential node IDs to all nodes in a tree that don't have them, use `addIdsToAST`.
 blunt-instrument-babel-plugin calls this for you.
 
-`setNodeId`, `copyNodeId`, and `copyNodeIdsBetweenASTs` are available for less common situations.
+`copyNodeIdsBetweenASTs` is available for less common situations.
 
 ## Code slices
 

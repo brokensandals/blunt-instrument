@@ -1,7 +1,6 @@
 import * as babel from '@babel/core';
 import examples from 'blunt-instrument-test-resources';
 import {
-  getNodeId,
   attachCodeSlicesToAST,
   ASTQuerier,
 } from 'blunt-instrument-ast-utils';
@@ -69,7 +68,7 @@ function decode(data) {
 }
 
 function trevsForNode({ trace }, node) {
-  return trace.trevs.filter((trev) => trev.nodeId === getNodeId(node));
+  return trace.trevs.filter((trev) => trev.nodeId === node.biId);
 }
 
 function codeTrevs(output, target, trevType = 'expr') {

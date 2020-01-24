@@ -2,9 +2,6 @@ import template from '@babel/template';
 import * as types from '@babel/types';
 import {
   addNodeIdsToAST,
-  copyNodeId,
-  getNodeId,
-  setNodeId,
 } from 'blunt-instrument-ast-utils';
 
 const buildImportTracer = template(`
@@ -35,7 +32,7 @@ function addFnTrace(path, { tracerId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
-  if (!getNodeId(node)) {
+  if (!node.biId) {
     return;
   }
 
@@ -70,7 +67,7 @@ function addFnTrace(path, { tracerId }) {
   if (types.isExpression(body)) {
     body = buildReturnTrace({
       tracerId,
-      nodeId: types.stringLiteral(getNodeId(node)),
+      nodeId: types.stringLiteral(node.biId),
       retval: node.body,
     });
   }
@@ -78,7 +75,7 @@ function addFnTrace(path, { tracerId }) {
   const trace = buildFnTrace({
     body,
     tracerId,
-    nodeId: types.stringLiteral(getNodeId(node)),
+    nodeId: types.stringLiteral(node.biId),
     args: types.objectExpression(properties),
   });
 
@@ -90,13 +87,13 @@ function addReturnTrace(path, { tracerId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
-  if (!getNodeId(node)) {
+  if (!node.biId) {
     return;
   }
 
   const trace = buildReturnTrace({
     tracerId,
-    nodeId: types.stringLiteral(getNodeId(node)),
+    nodeId: types.stringLiteral(node.biId),
     retval: node.argument,
   });
   path.replaceWith(trace);
@@ -131,7 +128,7 @@ function addExpressionTrace(path, { tracerId }) {
   }
 
   // Don't trace nodes without a node ID - those are nodes we added
-  if (!getNodeId(node)) {
+  if (!node.biId) {
     return;
   }
 
@@ -147,7 +144,7 @@ function addExpressionTrace(path, { tracerId }) {
 
   const trace = buildExpressionTrace({
     tracerId,
-    nodeId: types.stringLiteral(getNodeId(node)),
+    nodeId: types.stringLiteral(node.biId),
     expression: node,
   });
   node.biTracedExpr = true;
@@ -176,7 +173,7 @@ const instrumentVisitor = {
       const replacement = types.assignmentExpression(
         op, path.node.argument, types.numericLiteral(1),
       );
-      copyNodeId(path.node, replacement);
+      replacement.biId = path.node.biId;
       path.replaceWith(replacement);
     } else {
       // Change x++ to (() => { const _postfix = x; x += 1; return _postfix})()
@@ -189,11 +186,12 @@ const instrumentVisitor = {
       const lval = path.node.argument;
       const tempId = path.scope.generateUidIdentifier('postfix');
       const replacement = postfixRewriteTemplates[path.node.operator]({ tempId, lval });
-      const nodeId = getNodeId(path.node);
+      const nodeId = path.node.biId;
       path.replaceWith(replacement);
       // replaceWith appears to drop additional properties, so we must set biId
       // afterward, not before
-      setNodeId(path.node, nodeId);
+      // TODO if that's true, why does setting it before work above
+      path.node.biId = nodeId; // eslint-disable-line no-param-reassign
     }
   },
 
