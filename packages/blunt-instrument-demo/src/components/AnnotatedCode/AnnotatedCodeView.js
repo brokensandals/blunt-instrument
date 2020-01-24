@@ -58,12 +58,12 @@ function CodeForNode({
     elements.push(code.slice(cur, end));
   }
 
-  const handleMouseOver = onHoveredNodeChange ? (event) => {
+  const handleMouseOver = nodeId && onHoveredNodeChange ? (event) => {
     onHoveredNodeChange(nodeId);
     event.stopPropagation();
   } : null;
 
-  const handleClick = onNodeSelectedToggle ? (event) => {
+  const handleClick = nodeId && onNodeSelectedToggle ? (event) => {
     onNodeSelectedToggle(nodeId);
     event.stopPropagation();
   } : null;
