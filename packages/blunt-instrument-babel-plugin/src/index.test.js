@@ -195,6 +195,26 @@ describe('configuration', () => {
       data: 'meh',
     }]);
   });
+
+  test('with selfRegister disabled', () => {
+    const opts = {
+      runtime: {
+        mechanism: 'var',
+        tracerVar: 'tracer',
+      },
+      ast: {
+        selfRegister: false,
+      },
+    };
+    const { code } = transform('const foo = "meh"', opts, {});
+    const trace = new Trace();
+    const tracer = trace.tracerFor('test');
+    expect(code).not.toContain('ast');
+    const fn = new Function('tracer', `"use strict";${code}`); // eslint-disable-line no-new-func
+    fn(tracer);
+    expect(tracer.ast).toBeUndefined();
+    expect(trace.trevs).toHaveLength(1);
+  });
 });
 
 describe('special case syntax handling', () => {

@@ -25,11 +25,12 @@ const opts = {
     tracerVar: undefined, // For mechanism='var', make this a string
   },
   ast: {
-    key: 'src', // If you are going to instrument code from multiple files and generate a
-                // combined trace, make sure each one has a unique key
+    key: undefined, // If you are going to instrument code from multiple files and generate a
+                    // combined trace, give each one a unique key. If not specified, sequential
+                    // integers are used.
     selfRegister: true, // Causes the AST of the original code to be embedded in the generated
-                        // code. When the code runs, it will store the AST on the Tracer's
-                        // `asts` field, under the key specified in the `key` option.
+                        // code. When the code runs, it will store the AST on the tracer's
+                        // `ast` field.
   },
 };
 
@@ -40,15 +41,16 @@ const instrumentedCode = babel.transformSync(
 
 ### Injecting the Tracer and retrieving the trace
 
-The instrumented code will record data using an instance of the Tracer class from [blunt-instrument-runtime][blunt-instrument-runtime].
+The instrumented code will record data to an instance of the Trace class from [blunt-instrument-runtime][blunt-instrument-runtime].
 After executing the instrumented code, you can retrieve the trace from that instance.
 
-By default, the instrumented code attempts to use a global tracer by importing `defaultTracer` from [blunt-instrument-runtime][blunt-instrument-runtime].
+By default, the instrumented code attempts to use a global trace by importing `defaultTrace` from [blunt-instrument-runtime][blunt-instrument-runtime].
+It then calls `defaultTrace.tracerFor(opts.ast.key)` to retrieve a tracer scoped to the AST's key.
 
-Alternatively, you can indicate that the Tracer instance should be found in a specific variable, by setting `runtime.mechanism` to `'var'` and specifying the variable name in `runtime.tracerVar`:
+Alternatively, you can indicate that the tracer instance should be found in a specific variable, by setting `runtime.mechanism` to `'var'` and specifying the variable name in `runtime.tracerVar`:
 
 ```javascript
-import { Tracer } from 'blunt-instrument-runtime';
+import { Trace } from 'blunt-instrument-runtime';
 
 const opts = {
   runtime: {
@@ -59,11 +61,12 @@ const opts = {
 const instrumentedCode = babel.transformSync(
   originalCode, { plugins: [[bluntInstrumentPlugin, opts]]});
 
-const tracer = new Tracer();
+const trace = new Trace();
+const tracer = trace.tracerFor('myCode');
 const fn = new Function('tracer', instrumentedCode);
 fn(tracer);
 
-// tracer.trevs now contains a log of your code's execution
+// trace.trevs now contains a log of your code's execution
 ```
 
 [blunt-instrument-eval]: ../blunt-instrument-eval/README.md
