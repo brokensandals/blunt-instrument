@@ -54,7 +54,7 @@ export function copyNodeIdsBetweenASTs(from, to) {
     if (fromNodes[i].type !== toNodes[i].type) {
       throw new Error(`Source node type ${fromNodes[i].type} does not match destination node type ${toNodes[i].type}`);
     }
-    copyNodeId(fromNodes[i], toNodes[i]);
+    toNodes[i].biId = fromNodes[i].biId;
   }
 }
 
@@ -67,10 +67,10 @@ export function copyNodeIdsBetweenASTs(from, to) {
 export function addNodeIdsToAST(ast, prefix) {
   let nextId = 1;
   types.traverseFast(ast, (node) => {
-    if (!getNodeId(node)) {
+    if (!node.biId) {
       const nodeId = prefix + nextId;
       nextId += 1;
-      setNodeId(node, nodeId);
+      node.biId = nodeId; // eslint-disable-line no-param-reassign
     }
   });
 }
@@ -128,11 +128,11 @@ export class ASTQuerier {
       if (!node.type) {
         return;
       }
-      if (!getNodeId(node)) {
+      if (!node.biId) {
         throw new Error(`Node is missing node ID: ${JSON.stringify(node)}`);
       }
 
-      nodesById.set(getNodeId(node), node);
+      nodesById.set(node.biId, node);
 
       const codeSlice = getCodeSlice(node);
       if (codeSlice) {

@@ -1,57 +1,11 @@
 import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
 import {
-  getNodeId,
-  setNodeId,
-  copyNodeId,
   addNodeIdsToAST,
   getCodeSlice,
   attachCodeSlicesToAST,
   copyNodeIdsBetweenASTs,
   ASTQuerier,
 } from './index';
-
-describe('getNodeId', () => {
-  it('returns null when "extra" field is missing', () => {
-    const node = {};
-    expect(getNodeId(node)).toBeNull();
-  });
-
-  it('returns null when "biId" field is missing', () => {
-    const node = { extra: { foo: 'bar' } };
-    expect(getNodeId(node)).toBeNull();
-  });
-
-  it('returns extra.biId field', () => {
-    const node = { biId: 'test-1' };
-    expect(getNodeId(node)).toEqual('test-1');
-  });
-});
-
-describe('setNodeId', () => {
-  it('sets the biId field', () => {
-    const node = { extra: { foo: 'bar' } };
-    setNodeId(node, 'test-1');
-    expect(node.biId).toEqual('test-1');
-  });
-});
-
-describe('copyNodeId', () => {
-  it('overwrites with null when source node has no node ID', () => {
-    const from = {};
-    const to = {};
-    setNodeId(to, 'test-1');
-    copyNodeId(from, to);
-    expect(getNodeId(to)).toBeNull();
-  });
-
-  it('copies the source node ID', () => {
-    const from = {};
-    const to = {};
-    setNodeId(from, 'test-1');
-    copyNodeId(from, to);
-    expect(getNodeId(to)).toEqual('test-1');
-  });
-});
 
 describe('copyNodeIdsBetweenASTs', () => {
   it('throws an error if the trees are different sizes', () => {
@@ -71,7 +25,7 @@ describe('copyNodeIdsBetweenASTs', () => {
     addNodeIdsToAST(ast1, 'test-');
     const ast2 = parseSync('x = y');
     copyNodeIdsBetweenASTs(ast1, ast2);
-    expect(getNodeId(ast2)).toEqual('test-1');
+    expect(ast2.biId).toEqual('test-1');
     expect(ast1).toEqual(ast2);
   });
 });
@@ -80,24 +34,24 @@ describe('addNodeIdsToAST', () => {
   it('assigns an identifier to each node', () => {
     const ast = parseSync('let x = 4');
     addNodeIdsToAST(ast, 'src-');
-    expect(getNodeId(ast)).toEqual('src-1');
-    expect(getNodeId(ast.program)).toEqual('src-2');
-    expect(getNodeId(ast.program.body[0])).toEqual('src-3');
-    expect(getNodeId(ast.program.body[0].declarations[0])).toEqual('src-4');
-    expect(getNodeId(ast.program.body[0].declarations[0].id)).toEqual('src-5');
-    expect(getNodeId(ast.program.body[0].declarations[0].init)).toEqual('src-6');
+    expect(ast.biId).toEqual('src-1');
+    expect(ast.program.biId).toEqual('src-2');
+    expect(ast.program.body[0].biId).toEqual('src-3');
+    expect(ast.program.body[0].declarations[0].biId).toEqual('src-4');
+    expect(ast.program.body[0].declarations[0].id.biId).toEqual('src-5');
+    expect(ast.program.body[0].declarations[0].init.biId).toEqual('src-6');
   });
 
   it('does not overwrite existing identifiers', () => {
     const ast = parseSync('let x = 4');
-    setNodeId(ast.program.body[0], 'src-1');
+    ast.program.body[0].biId = 'src-1';
     addNodeIdsToAST(ast, 'instr-');
-    expect(getNodeId(ast)).toEqual('instr-1');
-    expect(getNodeId(ast.program)).toEqual('instr-2');
-    expect(getNodeId(ast.program.body[0])).toEqual('src-1');
-    expect(getNodeId(ast.program.body[0].declarations[0])).toEqual('instr-3');
-    expect(getNodeId(ast.program.body[0].declarations[0].id)).toEqual('instr-4');
-    expect(getNodeId(ast.program.body[0].declarations[0].init)).toEqual('instr-5');
+    expect(ast.biId).toEqual('instr-1');
+    expect(ast.program.biId).toEqual('instr-2');
+    expect(ast.program.body[0].biId).toEqual('src-1');
+    expect(ast.program.body[0].declarations[0].biId).toEqual('instr-3');
+    expect(ast.program.body[0].declarations[0].id.biId).toEqual('instr-4');
+    expect(ast.program.body[0].declarations[0].init.biId).toEqual('instr-5');
   });
 });
 
