@@ -31,6 +31,8 @@ const opts = {
     selfRegister: true, // Causes the AST of the original code to be embedded in the generated
                         // code. When the code runs, it will store the AST on the tracer's
                         // `ast` field.
+    callback: (ast) => {}, // If provided, this function will be called with the AST of the
+                           // original code after the biId property has been added to each node.
   },
 };
 

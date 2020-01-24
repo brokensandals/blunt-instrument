@@ -39,9 +39,22 @@ export default function (source, { saveInstrumented = false } = {}) {
 may interfere with instrumentedEval, the code, or both.`);
   }
 
+  const trace = new Trace();
+  const tracer = trace.tracerFor('eval');
+
   const babelOpts = {
     plugins: [
-      [bluntInstrumentPlugin, { runtime: { mechanism: 'var', tracerVar } }],
+      [bluntInstrumentPlugin,
+        {
+          runtime: {
+            mechanism: 'var',
+            tracerVar,
+          },
+          ast: {
+            callback: (a) => { tracer.ast = JSON.parse(JSON.stringify(a)); },
+            selfRegister: false,
+          },
+        }],
     ],
   };
 
@@ -54,8 +67,6 @@ may interfere with instrumentedEval, the code, or both.`);
 
   let error;
   const fn = new Function(tracerVar, `"use strict";${code}`); // eslint-disable-line no-new-func
-  const trace = new Trace();
-  const tracer = trace.tracerFor('eval');
   try {
     fn(tracer);
   } catch (e) {

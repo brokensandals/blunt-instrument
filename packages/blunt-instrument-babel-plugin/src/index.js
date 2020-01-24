@@ -224,6 +224,7 @@ export default function (api, opts) {
       tracerVar,
     } = {},
     ast: {
+      callback = (ast) => {}, // eslint-disable-line no-unused-vars
       key = undefined,
       selfRegister = true,
     } = {},
@@ -259,6 +260,7 @@ export default function (api, opts) {
     visitor: {
       Program(path) {
         addNodeIdsToAST(path.node);
+        callback(path.node);
         const state = addInstrumenterInit(path);
         path.traverse(instrumentVisitor, { state });
       },

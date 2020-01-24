@@ -216,6 +216,23 @@ describe('configuration', () => {
     expect(tracer.ast).toBeUndefined();
     expect(trace.trevs).toHaveLength(1);
   });
+
+  test('with AST callback', () => {
+    let ast;
+    const opts = {
+      runtime: {
+        mechanism: 'var',
+        tracerVar: 'tracer',
+      },
+      ast: {
+        callback: (a) => { ast = JSON.parse(JSON.stringify(a)); },
+        selfRegister: false,
+      },
+    };
+    transform('const foo = "meh"', opts, {});
+    expect(ast).not.toBeNull();
+    expect(ast.biId).toEqual(1);
+  });
 });
 
 describe('special case syntax handling', () => {
