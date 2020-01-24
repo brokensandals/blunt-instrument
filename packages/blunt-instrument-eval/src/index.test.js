@@ -22,11 +22,11 @@ describe('instrumentedEval', () => {
     expect(result.error).toBeUndefined();
   });
 
-  it('builds an ASTQuerier for the instrumented code if requested', () => {
+  it('returns the instrumented AST if requested', () => {
     const result = instrumentedEval(example, { saveInstrumented: true });
     expect(result.traceQuerier).toBeDefined();
-    expect(result.instrumentedASTQuerier).toBeDefined();
-    expect(result.instrumentedASTQuerier.getNodesByCodeSlice('_bie_tracer').length > 0).toBeTruthy();
+    expect(result.instrumentedAST).toBeDefined();
+    expect(result.instrumentedAST.codeSlice).toContain('_bie_tracer');
   });
 
   it('catches and returns errors when evaluating the code', () => {

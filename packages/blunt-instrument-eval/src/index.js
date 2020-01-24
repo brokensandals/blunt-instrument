@@ -4,7 +4,6 @@ import {
   attachCodeSlicesToAST,
   ASTQuerier,
   copyNodeIdsBetweenASTs,
-  addNodeIdsToAST,
 } from 'blunt-instrument-ast-utils';
 import { Trace } from 'blunt-instrument-runtime';
 import { TraceQuerier } from 'blunt-instrument-trace-utils';
@@ -28,7 +27,7 @@ import { TraceQuerier } from 'blunt-instrument-trace-utils';
  * @param {object} opts
  * @param {boolean} opts.saveInstrumented - if true, the AST of the instrumented
  *   code (in addition to the AST of the orginal code) will be saved and returned
- *   in the `instrumentedASTQuerier` field of the return value
+ *   in the `instrumentedAST` field of the return value
  * @returns {object}
  */
 export default function (source, { saveInstrumented = false } = {}) {
@@ -82,9 +81,8 @@ may interfere with instrumentedEval, the code, or both.`);
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);
     copyNodeIdsBetweenASTs(babelResult.ast, parsed);
-    addNodeIdsToAST(parsed, 'i');
     attachCodeSlicesToAST(parsed, code);
-    result.instrumentedASTQuerier = new ASTQuerier(parsed);
+    result.instrumentedAST = parsed;
   }
 
   return result;

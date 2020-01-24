@@ -69,8 +69,8 @@ function CodeForNode({
   } : null;
 
   const className = [
-    nodeId === highlightedNodeId ? 'highlighted' : '',
-    selectedNodeIds.includes(nodeId) ? 'selected' : '',
+    nodeId && nodeId === highlightedNodeId ? 'highlighted' : '',
+    nodeId && selectedNodeIds.includes(nodeId) ? 'selected' : '',
   ].join(' ')
 
   return <span className={className}

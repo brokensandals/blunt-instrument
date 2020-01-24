@@ -105,7 +105,7 @@ function AppView({
           </TabPanel>
           
           <TabPanel>
-            <AnnotatedCode ast={evalResult.instrumentedASTQuerier.ast}
+            <AnnotatedCode ast={evalResult.instrumentedAST}
                            highlightedNodeId={highlightedNodeId}
                            onHoveredNodeChange={onHoveredNodeChange}
                            onNodeSelectedToggle={onNodeSelectedToggle}
