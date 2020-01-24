@@ -16,29 +16,22 @@ describe('getNodeId', () => {
     expect(getNodeId(node)).toBeNull();
   });
 
-  it('returns null when "biNodeId" field is missing', () => {
+  it('returns null when "biId" field is missing', () => {
     const node = { extra: { foo: 'bar' } };
     expect(getNodeId(node)).toBeNull();
   });
 
-  it('returns extra.biNodeId field', () => {
-    const node = { extra: { biNodeId: 'test-1' } };
+  it('returns extra.biId field', () => {
+    const node = { biId: 'test-1' };
     expect(getNodeId(node)).toEqual('test-1');
   });
 });
 
 describe('setNodeId', () => {
-  it('creates the "extra" field when missing', () => {
-    const node = {};
-    setNodeId(node, 'test-1');
-    expect(node.extra.biNodeId).toEqual('test-1');
-  });
-
-  it('uses an existing "extra" field', () => {
+  it('sets the biId field', () => {
     const node = { extra: { foo: 'bar' } };
     setNodeId(node, 'test-1');
-    expect(node.extra.biNodeId).toEqual('test-1');
-    expect(node.extra.foo).toEqual('bar');
+    expect(node.biId).toEqual('test-1');
   });
 });
 

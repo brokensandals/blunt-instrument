@@ -9,7 +9,7 @@
   {
     id: 1,
     type: 'expr', // these trevs record the result of evaluating some expression
-    nodeId: 'src-5', // the corresponding node in `ast` will contain a field `extra.biNodeId` that matches this;
+    nodeId: 'src-5', // the corresponding node in `ast` will contain a field `biId` that matches this;
                       // that is the Expression node corresponding to the expression that was evaluated
     data: 'foo', // the value/object the expression evaluated to
   },

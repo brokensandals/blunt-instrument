@@ -6,32 +6,22 @@ import * as types from '@babel/types';
  * @return {string} the node ID, or null if there is none
  */
 export function getNodeId(node) {
-  if (!node.extra) {
+  if (typeof node.biId !== 'string') {
     return null;
   }
 
-  if (typeof node.extra.biNodeId !== 'string') {
-    return null;
-  }
-
-  return node.extra.biNodeId;
+  return node.biId;
 }
 
 /**
  * Sets the blunt-instrument node ID on a babel node,
  * which is used for correlating traced events to AST nodes.
- * Currently this is stored in node.extra.biNodeId
+ * Currently this is stored in node.biId
  * @param {Node} node
  * @param {string} id
  */
 export function setNodeId(node, id) {
-  // TODO: I really have no idea whether this sort of thing is
-  // what 'extra' is for
-  if (!node.extra) {
-    node.extra = {}; // eslint-disable-line no-param-reassign
-  }
-
-  node.extra.biNodeId = id; // eslint-disable-line no-param-reassign
+  node.biId = id; // eslint-disable-line no-param-reassign
 }
 
 /**
@@ -129,7 +119,7 @@ export function attachCodeSlicesToAST(ast, code) {
 
 /**
  * Wraps a babel AST to enable more convenient or efficient lookups.
- * Every node should have a field `extra.biNodeId` to uniquely identify it.
+ * Every node should have a field `biId` to uniquely identify it.
  * If you want to do lookups by source code, you should call `attachCodeSlicesToAST`
  * on the AST before creating the querier.
  */
@@ -150,7 +140,7 @@ export class ASTQuerier {
         throw new Error(`Node is missing node ID: ${JSON.stringify(node)}`);
       }
 
-      nodesById.set(node.extra.biNodeId, node);
+      nodesById.set(getNodeId(node), node);
 
       const codeSlice = getCodeSlice(node);
       if (codeSlice) {

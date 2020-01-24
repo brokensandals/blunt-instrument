@@ -35,12 +35,12 @@ function addFnTrace(path, { tracerId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
-  if (!(node.extra && getNodeId(node))) {
+  if (!getNodeId(node)) {
     return;
   }
 
   // If biTracedFn is true, we've already added tracing to this node
-  if (node.extra.biTracedFn) {
+  if (node.biTracedFn) {
     return;
   }
 
@@ -83,14 +83,14 @@ function addFnTrace(path, { tracerId }) {
   });
 
   node.body = trace;
-  node.extra.biTracedFn = true;
+  node.biTracedFn = true;
 }
 
 function addReturnTrace(path, { tracerId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
-  if (!(node.extra && getNodeId(node))) {
+  if (!getNodeId(node)) {
     return;
   }
 
@@ -131,12 +131,12 @@ function addExpressionTrace(path, { tracerId }) {
   }
 
   // Don't trace nodes without a node ID - those are nodes we added
-  if (!(node.extra && getNodeId(node))) {
+  if (!getNodeId(node)) {
     return;
   }
 
   // If biTracedExpr is true, we've already added tracing for this node
-  if (node.extra.biTracedExpr) {
+  if (node.biTracedExpr) {
     return;
   }
 
@@ -150,7 +150,7 @@ function addExpressionTrace(path, { tracerId }) {
     nodeId: types.stringLiteral(getNodeId(node)),
     expression: node,
   });
-  node.extra.biTracedExpr = true;
+  node.biTracedExpr = true;
   path.replaceWith(trace);
 }
 
@@ -191,7 +191,7 @@ const instrumentVisitor = {
       const replacement = postfixRewriteTemplates[path.node.operator]({ tempId, lval });
       const nodeId = getNodeId(path.node);
       path.replaceWith(replacement);
-      // replaceWith appears to drop the 'extra' property, so we must set biNodeId
+      // replaceWith appears to drop additional properties, so we must set biId
       // afterward, not before
       setNodeId(path.node, nodeId);
     }

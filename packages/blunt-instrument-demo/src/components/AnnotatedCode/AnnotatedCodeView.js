@@ -31,7 +31,7 @@ function CodeForNode({
   onNodeSelectedToggle,
   selectedNodeIds,
 }) {
-  const { extra: { biNodeId: nodeId }, start, end } = node;
+  const { biId: nodeId, start, end } = node;
   let cur = start;
   const elements = [];
 
