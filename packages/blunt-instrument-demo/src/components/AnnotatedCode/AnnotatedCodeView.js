@@ -81,7 +81,7 @@ function CodeForNode({
 }
 
 function AnnotatedCodeView({
-  astQuerier,
+  ast,
   highlightedNodeId,
   onHoveredNodeChange = null,
   onNodeSelectedToggle = null,
@@ -92,9 +92,9 @@ function AnnotatedCodeView({
     <pre className="AnnotatedCode" onMouseLeave={clearHover}>
       <code>
         <CodeForNode highlightedNodeId={highlightedNodeId}
-                       node={astQuerier.ast}
+                       node={ast}
                        selectedNodeIds={selectedNodeIds}
-                       code={astQuerier.ast.codeSlice}
+                       code={ast.codeSlice}
                        onHoveredNodeChange={onHoveredNodeChange}
                        onNodeSelectedToggle={onNodeSelectedToggle} />
       </code>
