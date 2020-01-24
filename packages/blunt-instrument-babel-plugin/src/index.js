@@ -67,7 +67,7 @@ function addFnTrace(path, { tracerId }) {
   if (types.isExpression(body)) {
     body = buildReturnTrace({
       tracerId,
-      nodeId: types.stringLiteral(node.biId),
+      nodeId: types.numericLiteral(node.biId),
       retval: node.body,
     });
   }
@@ -75,7 +75,7 @@ function addFnTrace(path, { tracerId }) {
   const trace = buildFnTrace({
     body,
     tracerId,
-    nodeId: types.stringLiteral(node.biId),
+    nodeId: types.numericLiteral(node.biId),
     args: types.objectExpression(properties),
   });
 
@@ -93,7 +93,7 @@ function addReturnTrace(path, { tracerId }) {
 
   const trace = buildReturnTrace({
     tracerId,
-    nodeId: types.stringLiteral(node.biId),
+    nodeId: types.numericLiteral(node.biId),
     retval: node.argument,
   });
   path.replaceWith(trace);
@@ -144,7 +144,7 @@ function addExpressionTrace(path, { tracerId }) {
 
   const trace = buildExpressionTrace({
     tracerId,
-    nodeId: types.stringLiteral(node.biId),
+    nodeId: types.numericLiteral(node.biId),
     expression: node,
   });
   node.biTracedExpr = true;
@@ -257,7 +257,7 @@ export default function (api, opts) {
   return {
     visitor: {
       Program(path) {
-        addNodeIdsToAST(path.node, `${key}-`);
+        addNodeIdsToAST(path.node);
         const state = addInstrumenterInit(path);
         path.traverse(instrumentVisitor, { state });
       },

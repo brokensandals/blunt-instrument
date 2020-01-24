@@ -25,7 +25,7 @@ export function TraceQueryFormView({
   const includeNodesValue = [];
   for (const nodeId in query.filters.onlyNodeIds) {
     if (query.filters.onlyNodeIds[nodeId]) {
-      includeNodesValue.push(nodeOption(querier.astQuerier.getNodeById(nodeId)));
+      includeNodesValue.push(nodeOption(querier.astQuerier.getNodeById(Number(nodeId))));
     }
   }
 

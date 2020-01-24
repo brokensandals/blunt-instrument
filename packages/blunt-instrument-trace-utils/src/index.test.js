@@ -20,7 +20,7 @@ describe('TraceQuerier', () => {
       increaseNum(3);
     `;
     const ast = parseSync(code);
-    addNodeIdsToAST(ast, 'test-');
+    addNodeIdsToAST(ast);
     attachCodeSlicesToAST(ast, code);
     astQuerier = new ASTQuerier(ast);
   });
@@ -32,11 +32,11 @@ describe('TraceQuerier', () => {
   describe('constructor', () => {
     it('requires sequential trev IDs', () => {
       expect(() => new TraceQuerier(astQuerier,
-        [{ id: 1, nodeId: 'test-1' }, { id: 3, nodeId: 'test-1' }])).toThrowError('Non-sequential trev ID 3');
+        [{ id: 1, nodeId: 1 }, { id: 3, nodeId: 1 }])).toThrowError('Non-sequential trev ID 3');
     });
 
     it('requires valid node IDs', () => {
-      expect(() => new TraceQuerier(astQuerier, [{ id: 1, nodeId: 'foo' }])).toThrowError('Trev ID 1 has unknown node ID foo');
+      expect(() => new TraceQuerier(astQuerier, [{ id: 1, nodeId: 100 }])).toThrowError('Trev ID 1 has unknown node ID 100');
     });
   });
 

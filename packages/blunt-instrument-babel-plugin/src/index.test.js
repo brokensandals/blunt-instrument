@@ -162,7 +162,7 @@ describe('configuration', () => {
       id: 1,
       type: 'expr',
       astKey: astKeys[0],
-      nodeId: 'src-5',
+      nodeId: 5,
       data: 'bar',
     }]);
   });

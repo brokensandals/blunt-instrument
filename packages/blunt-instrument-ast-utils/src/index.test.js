@@ -21,10 +21,10 @@ describe('copyNodeIdsBetweenASTs', () => {
 
   it('copies node IDs', () => {
     const ast1 = parseSync('x = y');
-    addNodeIdsToAST(ast1, 'test-');
+    addNodeIdsToAST(ast1);
     const ast2 = parseSync('x = y');
     copyNodeIdsBetweenASTs(ast1, ast2);
-    expect(ast2.biId).toEqual('test-1');
+    expect(ast2.biId).toEqual(1);
     expect(ast1).toEqual(ast2);
   });
 });
@@ -32,25 +32,13 @@ describe('copyNodeIdsBetweenASTs', () => {
 describe('addNodeIdsToAST', () => {
   it('assigns an identifier to each node', () => {
     const ast = parseSync('let x = 4');
-    addNodeIdsToAST(ast, 'src-');
-    expect(ast.biId).toEqual('src-1');
-    expect(ast.program.biId).toEqual('src-2');
-    expect(ast.program.body[0].biId).toEqual('src-3');
-    expect(ast.program.body[0].declarations[0].biId).toEqual('src-4');
-    expect(ast.program.body[0].declarations[0].id.biId).toEqual('src-5');
-    expect(ast.program.body[0].declarations[0].init.biId).toEqual('src-6');
-  });
-
-  it('does not overwrite existing identifiers', () => {
-    const ast = parseSync('let x = 4');
-    ast.program.body[0].biId = 'src-1';
-    addNodeIdsToAST(ast, 'instr-');
-    expect(ast.biId).toEqual('instr-1');
-    expect(ast.program.biId).toEqual('instr-2');
-    expect(ast.program.body[0].biId).toEqual('src-1');
-    expect(ast.program.body[0].declarations[0].biId).toEqual('instr-3');
-    expect(ast.program.body[0].declarations[0].id.biId).toEqual('instr-4');
-    expect(ast.program.body[0].declarations[0].init.biId).toEqual('instr-5');
+    addNodeIdsToAST(ast);
+    expect(ast.biId).toEqual(1);
+    expect(ast.program.biId).toEqual(2);
+    expect(ast.program.body[0].biId).toEqual(3);
+    expect(ast.program.body[0].declarations[0].biId).toEqual(4);
+    expect(ast.program.body[0].declarations[0].id.biId).toEqual(5);
+    expect(ast.program.body[0].declarations[0].init.biId).toEqual(6);
   });
 });
 
@@ -107,16 +95,16 @@ describe('ASTQuerier', () => {
   describe('getNodeById', () => {
     it('finds the requested node', () => {
       const ast = parseSync('x = 1');
-      addNodeIdsToAST(ast, 'test-');
+      addNodeIdsToAST(ast);
       const astq = new ASTQuerier(ast);
-      expect(astq.getNodeById('test-5').name).toEqual('x');
+      expect(astq.getNodeById(5).name).toEqual('x');
     });
 
     it('returns undefined for unknown node ID', () => {
       const ast = parseSync('x = 1');
-      addNodeIdsToAST(ast, 'test-');
+      addNodeIdsToAST(ast);
       const astq = new ASTQuerier(ast);
-      expect(astq.getNodeById('test-100')).toBeUndefined();
+      expect(astq.getNodeById(100)).toBeUndefined();
     });
   });
 
@@ -124,7 +112,7 @@ describe('ASTQuerier', () => {
     it('finds all matching nodes', () => {
       const code = 'x = y() + 1; z = y() + 3';
       const ast = parseSync(code);
-      addNodeIdsToAST(ast, 'test-');
+      addNodeIdsToAST(ast);
       attachCodeSlicesToAST(ast, code);
       const astq = new ASTQuerier(ast);
       const expected = [
@@ -137,7 +125,7 @@ describe('ASTQuerier', () => {
     it('returns empty array if no matching nodes', () => {
       const code = 'x = y() + 1; z = y() + 3';
       const ast = parseSync(code);
-      addNodeIdsToAST(ast, 'test-');
+      addNodeIdsToAST(ast);
       attachCodeSlicesToAST(ast, code);
       const astq = new ASTQuerier(ast);
       expect(astq.getNodesByCodeSlice('z()')).toEqual([]);
@@ -148,7 +136,7 @@ describe('ASTQuerier', () => {
     it('returns matching nodes', () => {
       const code = 'x = y() + 123; z = 4;';
       const ast = parseSync(code);
-      addNodeIdsToAST(ast, 'test-');
+      addNodeIdsToAST(ast);
       attachCodeSlicesToAST(ast, code);
       const astq = new ASTQuerier(ast);
       const expected = [ast.program.body[0].expression.right.right, ast.program.body[1]];

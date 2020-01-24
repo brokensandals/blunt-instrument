@@ -27,18 +27,13 @@ export function copyNodeIdsBetweenASTs(from, to) {
 
 /**
  * Traverse an AST and attach sequential identifiers to each node.
- * Nodes which already have an ID will not be altered.
  * @param {Node} ast - the parent which will be annotated along with its descendants
- * @param {string} prefix - a string to be prepended to all sequential identifiers generated
  */
-export function addNodeIdsToAST(ast, prefix) {
+export function addNodeIdsToAST(ast) {
   let nextId = 1;
   types.traverseFast(ast, (node) => {
-    if (!node.biId) {
-      const nodeId = prefix + nextId;
-      nextId += 1;
-      node.biId = nodeId; // eslint-disable-line no-param-reassign
-    }
+    node.biId = nextId; // eslint-disable-line no-param-reassign
+    nextId += 1;
   });
 }
 
