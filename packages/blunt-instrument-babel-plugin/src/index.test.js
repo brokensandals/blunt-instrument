@@ -148,6 +148,12 @@ describe('general examples', () => {
 });
 
 describe('configuration', () => {
+  beforeEach(() => {
+    // TODO this is hacky
+    defaultTrace.trevs = [];
+    defaultTrace.tracers = {};
+  });
+
   test('using defaultTrace', () => {
     const opts = {
       runtime: {
@@ -164,6 +170,29 @@ describe('configuration', () => {
       astKey: astKeys[0],
       nodeId: 5,
       data: 'bar',
+    }]);
+  });
+
+  test('using defaultTrace with specified ast key', () => {
+    const opts = {
+      runtime: {
+      },
+      ast: {
+        key: 'test',
+      },
+    };
+    const { code } = transform('const foo = "meh"', opts, {}, true);
+    // use `eval()` instead of `new Function()` so that `require` is defined
+    eval(code); // eslint-disable-line no-eval
+    const tracer = defaultTrace.tracerFor('test');
+    expect(tracer).not.toBeNull();
+    expect(tracer.ast).not.toBeNull();
+    expect(defaultTrace.trevs).toEqual([{
+      id: 1,
+      type: 'expr',
+      astKey: 'test',
+      nodeId: 5,
+      data: 'meh',
     }]);
   });
 });
