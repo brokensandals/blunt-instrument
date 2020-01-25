@@ -71,5 +71,47 @@ fn(tracer);
 // trace.trevs now contains a log of your code's execution
 ```
 
+## Trace format
+
+```javascript
+[
+  // Everything recorded by the tracer during execution of the code.
+  // Each element is a trace event aka "trev" object.
+  {
+    id: 1,
+    type: 'expr', // these trevs record the result of evaluating some expression
+    nodeId: 'src-5', // the corresponding node in `ast` will contain a field `biId` that matches this;
+                      // that is the Expression node corresponding to the expression that was evaluated
+    data: 'foo', // the value/object the expression evaluated to
+  },
+  {
+    id: 2,
+    type: 'fn-start', // these trevs record the beginning of a function's execution
+    nodeId: 'src-2', // the Function node that is being entered
+    // FIXME: the data field is now encoded using object-graph-as-json, as mentioned below, so it actually looks slightly different than this
+    data: { // the values of `this`, `arguments`, and all named parameters, at the beginning of the function's execution
+      this: { /* ... */ },
+      arguments: { 0: 'bar'},
+      myParam: 'bar'
+    },
+  },
+  {
+    id: 3,
+    parentId: 2, // when defined, this is the id of the trev representing the enclosing context.
+                  // this is analogous to the call stack: when a function is called, an fn-start
+                  // trev is created, and all trevs created after that until the function returns
+                  // will be descended from that trev
+    type: 'fn-ret', // these trevs record the end of a function's execution
+                      // they can be triggered by a return statement or after the last statement in a function executes
+    nodeId: 'src-4', // the corresponding ReturnStatement node; or, if the end of the function was reached without a return
+                      // statement being executed, the corresponding Function node
+    data: 'foo', // the return value, or undefined
+  },
+  // ...
+]
+```
+
+See the [blunt-instrument-runtime README][blunt-instrument-runtime] regarding the `data` field.
+
 [blunt-instrument-eval]: ../blunt-instrument-eval/README.md
 [blunt-instrument-runtime]: ../blunt-instrument-runtime/README.md
