@@ -14,7 +14,7 @@ export function TraceQueryFormView({
     const value = node.biId;
     const codeSlice = node.codeSlice;
     const codePreview = codeSlice.length > 20 ? codeSlice.slice(0, 20) + '...' : codeSlice;
-    const label = node.type + '#' + value + ': ' + codePreview;
+    const label = `[${value}] ${node.type}: ${codePreview}`;
     return { value, label };
   }
   const includeNodesOptions = [];

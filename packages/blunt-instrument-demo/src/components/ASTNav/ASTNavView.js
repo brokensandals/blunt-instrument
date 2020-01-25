@@ -88,7 +88,7 @@ function ASTObjectView({
 
   return (
     <div className={className} onMouseOver={handleMouseOver} onClick={handleClick}>
-      {typeEl} {nodeIdEl} {locEl}
+      {nodeIdEl} {typeEl} {locEl}
       <dl>
         {entries.map(([_, key, val], index) =>
           [
