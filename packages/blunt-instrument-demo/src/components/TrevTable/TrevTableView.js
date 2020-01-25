@@ -1,7 +1,7 @@
 import React from 'react';
 import './TrevTable.css';
 
-function ValuePreview({ value }) {
+function ValuePreview({ value, trevType }) {
   const output = [];
 
   function recurse(current, classes = '', top = false) {
@@ -70,8 +70,45 @@ function ValuePreview({ value }) {
             }
             return;
           case 'object':
-            output.push('TODO');
-            return;
+            {
+              output.push(<span className="preview-object-start">{'{'}</span>);
+              let more = false;
+              const keys = Object.keys(current);
+              let count = 0;
+              for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                if (key === 'type' || key === 'id') {
+                  continue;
+                }
+                if (top && (key === '.arguments' || key === '.this')) {
+                  more = true;
+                  continue;
+                }
+                if (key === 'prototype') {
+                  more = true;
+                  continue;
+                }
+                if (count > 4 || !key.startsWith('.')) {
+                  more = true;
+                  break;
+                }
+                if (count > 0) {
+                  output.push(<span className="preview-object-comma">,</span>);
+                }
+                count++;
+                output.push(<span className="preview-object-key">{key.slice(1)}</span>);
+                output.push(<span className="preview-object-colon">:</span>);
+                recurse(current[key]);
+              }
+              if (more) {
+                if (count > 0) {
+                  output.push(<span className="preview-object-comma">,</span>);
+                }
+                output.push(<span className="preview-object-more">...</span>);
+              }
+              output.push(<span className="preview-object-end">{'}'}</span>);
+              return;
+            }
           case 'symbol':
             if (current.description) {
               output.push(<span className={`preview-symbol ${classes}`}>~{current.description}</span>);
@@ -125,7 +162,7 @@ function TrevTableView({
           <code>{trev.extra.node.codeSlice}</code>
         </td>
         <td className="data">
-          <ValuePreview value={trev.data} />
+          <ValuePreview value={trev.data} trevType={trev.type} />
         </td>
       </tr>
     );

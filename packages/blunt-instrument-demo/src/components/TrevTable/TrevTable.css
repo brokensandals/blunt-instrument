@@ -83,9 +83,25 @@
   font-style: italic;
 }
 
-.TrevTable .preview-array-comma {
+.TrevTable .preview-array-start,
+.TrevTable .preview-object-start,
+.TrevTable .preview-object-colon {
+  padding-right: .3ex;
+}
+
+.TrevTable .preview-array-end,
+.TrevTable .preview-object-end {
+  padding-left: .3ex;
+}
+
+.TrevTable .preview-array-comma,
+.TrevTable .preview-object-comma {
   padding-left: .3ex;
   padding-right: .3ex;
+}
+
+.TrevTable .preview-object-key {
+  color: gray;
 }
 
 .TrevTable .preview-array-fixed-element {
