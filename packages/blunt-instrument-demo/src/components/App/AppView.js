@@ -145,7 +145,9 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={trevs.map(({ extra, ...rest }) => rest)} name={false} />
+            <ReactJson src={trevs.map(({ extra, ...rest }) => rest)}
+                       name={false}
+                       displayDataTypes={false} />
           </TabPanel>
         </Tabs>
       </div>
@@ -158,7 +160,9 @@ function AppView({
              onRequestClose={onCloseModalData}
              contentLabel="Data Inspector"
              shouldCloseOnOverlayClick={true}>
-        <ReactJson src={modalData} name={false} />
+        <ReactJson src={modalData}
+                   name={false}
+                   displayDataTypes={false} />
       </Modal>
     </div>
   );
