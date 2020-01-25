@@ -2,73 +2,96 @@ import React from 'react';
 import './TrevTable.css';
 
 function ValuePreview({ value }) {
-  if (value === undefined) {
-    return null;
-  } else if (value === null) {
-    return <span className="preview-null">null</span>;
+  const output = [];
+
+  function recurse(current, classes = '', top = false) {
+    if (current === undefined) {
+      return;
+    } else if (current === null) {
+      output.push(<span className={`preview-null ${classes}`}>null</span>);
+      return;
+    }
+  
+    switch (typeof current) {
+      case 'number':
+        output.push(<span className={`preview-number ${classes}`}>{current}</span>);
+        return;
+      case 'boolean':
+        output.push(<span className={`preview-boolean ${classes}`}>{current.toString()}</span>);
+        return;
+      case 'string':
+        output.push(<span className={`preview-string ${classes}`}>{JSON.stringify(current)}</span>);
+        return;
+      case 'object':
+        switch (current.type) {
+          case 'array':
+            {
+              const keys = Object.keys(current);
+              output.push(<span className="preview-array-start">[</span>);
+              let count = 0;
+              let fixedWidth = top;
+              for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                if (key === 'type' || key === 'id') {
+                  continue;
+                }
+                if (count > 0) {
+                  output.push(<span className="preview-array-comma">,</span>);
+                }
+                if (count > 4 || key !== `.${count}`) {
+                  output.push(<span className="preview-array-more">...</span>);
+                  break;
+                }
+                fixedWidth = fixedWidth
+                              && (current[key] === null
+                                  || typeof current[key] === 'boolean'
+                                  || typeof current[key] === 'number');
+                count++;
+                recurse(current[key], fixedWidth ? 'preview-array-fixed-element' : '');
+              }
+              output.push(<span className="preview-array-end">]</span>);
+              return;
+            }
+          case 'bigint':
+            output.push(<span className={`preview-bigint ${classes}`}>{current.string}</span>);
+            return;
+          case 'builtin':
+            output.push(<span className={`preview-builtin ${classes}`}>{current.name}</span>);
+            return;
+          case 'function':
+            if (current['.name'] && current['.name'].value) {
+              output.push(<span className={`preview-function ${classes}`}>{current['.name'].value}</span>);
+            } else {
+              let truncated = current.source.slice(0, 20);
+              if (truncated.length < current.source.length) {
+                truncated += '...';
+              }
+              output.push(<span className={`preview-function ${classes}`}>{truncated}</span>);
+            }
+            return;
+          case 'object':
+            output.push('TODO');
+            return;
+          case 'symbol':
+            if (current.description) {
+              output.push(<span className={`preview-symbol ${classes}`}>~{current.description}</span>);
+            } else {
+              output.push(<span className={`preview-symbol ${classes}`}>~{current.id}</span>);
+            }
+            return;
+          default:
+            output.push(JSON.stringify(value));
+            return;
+        }
+      default:
+        output.push('???');
+        return;
+    }
   }
 
-  switch (typeof value) {
-    case 'number':
-      return <span className="preview-number">{value}</span>;
-    case 'boolean':
-      return <span className="preview-boolean">{value.toString()}</span>;
-    case 'string':
-      return <span className="preview-string">{JSON.stringify(value)}</span>;
-    case 'object':
-      switch (value.type) {
-        case 'array':
-          {
-            const keys = Object.keys(value);
-            const results = [];
-            results.push(<span className="preview-array-start">[</span>);
-            let count = 0;
-            for (let i = 0; i < keys.length; i++) {
-              const key = keys[i];
-              if (key === 'type' || key === 'id') {
-                continue;
-              }
-              if (count > 0) {
-                results.push(<span className="preview-array-comma">,</span>);
-              }
-              if (count > 5 || key !== `.${count}`) {
-                results.push(<span className="preview-array-more">...</span>);
-                break;
-              }
-              count++;
-              results.push(<span className="preview-array-element"><ValuePreview value={value[key]} /></span>)
-            }
-            results.push(<span className="preview-array-end">]</span>);
-            return <span className="preview-array">{results}</span>;
-          }
-        case 'bigint':
-          return <span className="preview-bigint">{value.string}</span>;
-        case 'builtin':
-          return <span className="preview-builtin">{value.name}</span>;
-        case 'function':
-          if (value['.name'] && value['.name'].value) {
-            return <span className="preview-function">{value['.name'].value}</span>;
-          } else {
-            let truncated = value.source.slice(0, 20);
-            if (truncated.length < value.source.length) {
-              truncated += '...';
-            }
-            return <span className="preview-function">{truncated}</span>;
-          }
-        case 'object':
-          return 'TODO';
-        case 'symbol':
-          if (value.description) {
-            return <span className="preview-symbol">~{value.description}</span>;
-          } else {
-            return <span className="preview-symbol">~{value.id}</span>;
-          }
-        default:
-          return JSON.stringify(value);
-      }
-    default:
-      return '???';
-  }
+  recurse(value, '', true);
+
+  return output;
 }
 
 function TrevTableView({
