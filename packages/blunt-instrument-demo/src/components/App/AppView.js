@@ -70,7 +70,10 @@ function AppView({
             {exampleOptions}
           </select>
         </p>
-        <textarea value={sourceDraft} onChange={handleSourceDraftChange} />
+        <textarea value={sourceDraft} onChange={handleSourceDraftChange}
+                  autoComplete="false"
+                  autoCorrect="false"
+                  spellCheck="false" />
         {status}
         <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
       </form>
