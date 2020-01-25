@@ -1,44 +1,73 @@
 import React from 'react';
 import './TrevTable.css';
 
-function ValueDisplay({ value }) {
-  switch (value) {
-    case null:
-    case true:
-    case false:
-    case undefined:
-      return <span className="primitive">{'' + value}</span>
-    
-    default:
-      switch (typeof value) {
-        case 'function':
-          return <code className="function">{value.toString()}</code>;
-        case 'object':
-          if (Array.isArray(value)) {
-            const items = [];
-            for (let i = 0; i < value.length; i++) {
-              items.push(<ValueDisplay key={i} value={value[i]} />);
-              items.push(', ');
-            }
-            return ['[', items, ']'];
-          }
+function ValuePreview({ value }) {
+  if (value === undefined) {
+    return null;
+  } else if (value === null) {
+    return <span className="preview-null">null</span>;
+  }
 
-          const items = [];
-          for (const key in value) {
-            items.push(key, ': ');
-            items.push(<ValueDisplay key={key} value={value[key]} />);
-            items.push(', ');
+  switch (typeof value) {
+    case 'number':
+      return <span className="preview-number">{value}</span>;
+    case 'boolean':
+      return <span className="preview-boolean">{value.toString()}</span>;
+    case 'string':
+      return <span className="preview-string">{JSON.stringify(value)}</span>;
+    case 'object':
+      switch (value.type) {
+        case 'array':
+          {
+            const keys = Object.keys(value);
+            const results = [];
+            results.push(<span className="preview-array-start">[</span>);
+            let count = 0;
+            for (let i = 0; i < keys.length; i++) {
+              const key = keys[i];
+              if (key === 'type' || key === 'id') {
+                continue;
+              }
+              if (count > 0) {
+                results.push(<span className="preview-array-comma">,</span>);
+              }
+              if (count > 5 || key !== `.${count}`) {
+                results.push(<span className="preview-array-more">...</span>);
+                break;
+              }
+              count++;
+              results.push(<span className="preview-array-element"><ValuePreview value={value[key]} /></span>)
+            }
+            results.push(<span className="preview-array-end">]</span>);
+            return <span className="preview-array">{results}</span>;
           }
-          return ['{', items, '}'];
-        case 'number':
         case 'bigint':
-        case 'string':
-          return <span className="primitive">{JSON.stringify(value)}</span>;
+          return <span className="preview-bigint">{value.string}</span>;
+        case 'builtin':
+          return <span className="preview-builtin">{value.name}</span>;
+        case 'function':
+          if (value['.name'] && value['.name'].value) {
+            return <span className="preview-function">{value['.name'].value}</span>;
+          } else {
+            let truncated = value.source.slice(0, 20);
+            if (truncated.length < value.source.length) {
+              truncated += '...';
+            }
+            return <span className="preview-function">{truncated}</span>;
+          }
+        case 'object':
+          return 'TODO';
         case 'symbol':
-          return <span className="primitive">{value.toString()}</span>;
+          if (value.description) {
+            return <span className="preview-symbol">~{value.description}</span>;
+          } else {
+            return <span className="preview-symbol">~{value.id}</span>;
+          }
         default:
-          return typeof value;
+          return JSON.stringify(value);
       }
+    default:
+      return '???';
   }
 }
 
@@ -73,7 +102,7 @@ function TrevTableView({
           <code>{trev.extra.node.codeSlice}</code>
         </td>
         <td className="data">
-          <ValueDisplay value={trev.data} />
+          <ValuePreview value={trev.data} />
         </td>
       </tr>
     );

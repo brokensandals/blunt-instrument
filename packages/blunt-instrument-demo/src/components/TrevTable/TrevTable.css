@@ -9,10 +9,6 @@
   vertical-align: top;
 }
 
-.TrevTable .primitive {
-  color: slateblue;
-}
-
 .TrevTable .highlighted-node {
   background-color: orange;
 }
@@ -57,7 +53,64 @@
   max-width: 25ex;
 }
 
-.TrevTable .function {
-  color: green;
-  font-size: 80%;
+.TrevTable .preview-null, .preview-builtin {
+  color: black;
+}
+
+.TrevTable .preview-number, .preview-bigint {
+  color: rgb(38, 139, 210);
+}
+
+.TrevTable .preview-bigint::after {
+  content: 'n';
+}
+
+.TrevTable .preview-boolean {
+  color: rgb(42, 161, 152);
+}
+
+.TrevTable .preview-function {
+  color: slateblue;
+  font-style: italic;
+}
+
+.TrevTable .preview-string {
+  color: rgb(203, 75, 22);
+}
+
+.TrevTable .preview-symbol {
+  color: rgb(194, 60, 134);
+  font-style: italic;
+}
+
+.TrevTable .preview-array-element .preview-number,
+.TrevTable .preview-array-element .preview-null,
+.TrevTable .preview-array-element .preview-bigint,
+.TrevTable .preview-array-element .preview-builtin,
+.TrevTable .preview-array-element .preview-boolean,
+.TrevTable .preview-array-element .preview-function,
+.TrevTable .preview-array-element .preview-string,
+.TrevTable .preview-array-element .preview-symbol {
+  display: inline-block;
+  width: 5ex;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.TrevTable .preview-array,
+.TrevTable .preview-array-element,
+.TrevTable .preview-array-start,
+.TrevTable .preview-array-end,
+.TrevTable .preview-array-comma {
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.TrevTable .preview-array-comma {
+  padding-left: .3ex;
+  padding-right: .3ex;
 }
