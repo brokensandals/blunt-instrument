@@ -27,6 +27,8 @@ class AppContainer extends React.Component {
     this.handleNodeSelectedToggle = this.handleNodeSelectedToggle.bind(this);
     this.handleRun = this.handleRun.bind(this);
     this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
+    this.handleOpenModalData = this.handleOpenModalData.bind(this);
+    this.handleCloseModalData = this.handleCloseModalData.bind(this);
   }
 
   handleTraceQueryChange(traceQuery) {
@@ -54,6 +56,14 @@ class AppContainer extends React.Component {
         filters: { onlyNodeIds:
           { $toggle: [nodeId] }}
       }));
+  }
+
+  handleOpenModalData(modalData) {
+    this.setState({ ...this.state, modalData });
+  }
+
+  handleCloseModalData() {
+    this.setState({ ...this.state, modalData: undefined });
   }
 
   doRun(source) {
@@ -105,6 +115,9 @@ class AppContainer extends React.Component {
                onNodeSelectedToggle={this.handleNodeSelectedToggle}
                onRun={this.handleRun}
                onSourceDraftChange={this.handleSourceDraftChange}
+               onOpenModalData={this.handleOpenModalData}
+               onCloseModalData={this.handleCloseModalData}
+               modalData={this.state.modalData}
                runError={this.state.runError} />
     )
   }

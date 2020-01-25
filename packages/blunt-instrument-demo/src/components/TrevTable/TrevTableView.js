@@ -80,7 +80,7 @@ function ValuePreview({ value, trevType }) {
                 if (key === 'type' || key === 'id') {
                   continue;
                 }
-                if (top && (key === '.arguments' || key === '.this')) {
+                if (top && (key === '.arguments' || key === '.this') && trevType === 'fn-start') {
                   more = true;
                   continue;
                 }
@@ -137,6 +137,7 @@ function TrevTableView({
   highlightedNodeId,
   onHoveredTrevChange = (trevId) => {},
   onNodeSelectedToggle = (nodeId) => {},
+  onOpenModalData = (modalData) => {},
 }) {
   const entries = [];
 
@@ -161,7 +162,7 @@ function TrevTableView({
         <td className="node" onClick={handleCodeClick}>
           <code>{trev.extra.node.codeSlice}</code>
         </td>
-        <td className="data">
+        <td className="data" onClick={() => onOpenModalData({data: trev.data})}>
           <ValuePreview value={trev.data} trevType={trev.type} />
         </td>
       </tr>

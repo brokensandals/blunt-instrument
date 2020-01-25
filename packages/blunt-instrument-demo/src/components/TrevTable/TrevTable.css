@@ -36,6 +36,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.TrevTable tbody .data:hover {
+  border: 1px solid black;
 }
 
 .TrevTable .id, .parent-id, .type {

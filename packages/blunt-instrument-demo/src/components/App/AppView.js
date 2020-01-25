@@ -8,6 +8,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import examples from 'blunt-instrument-test-resources';
 import ReactJson from 'react-json-view';
+import Modal from 'react-modal';
 
 function AppView({
   evalResult,
@@ -21,6 +22,9 @@ function AppView({
   onNodeSelectedToggle,
   onRun,
   onSourceDraftChange,
+  onOpenModalData,
+  onCloseModalData,
+  modalData,
   runError,
   sourceDraft,
 }) {
@@ -104,7 +108,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={evalResult.traceQuerier.astQuerier.ast} />
+            <ReactJson src={evalResult.traceQuerier.astQuerier.ast} name={false} />
           </TabPanel>
           
           <TabPanel>
@@ -136,11 +140,12 @@ function AppView({
                       highlightedTrevId={highlightedTrevId}
                       highlightedNodeId={highlightedNodeId}
                       onHoveredTrevChange={onHoveredTrevChange}
-                      onNodeSelectedToggle={onNodeSelectedToggle} />
+                      onNodeSelectedToggle={onNodeSelectedToggle}
+                      onOpenModalData={onOpenModalData} />
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={trevs.map(({ extra, ...rest }) => rest)} />
+            <ReactJson src={trevs.map(({ extra, ...rest }) => rest)} name={false} />
           </TabPanel>
         </Tabs>
       </div>
@@ -148,6 +153,13 @@ function AppView({
       <div className="blurb">
         created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>
+
+      <Modal isOpen={modalData !== undefined}
+             onRequestClose={onCloseModalData}
+             contentLabel="Data Inspector"
+             shouldCloseOnOverlayClick={true}>
+        <ReactJson src={modalData} name={false} />
+      </Modal>
     </div>
   );
 }
