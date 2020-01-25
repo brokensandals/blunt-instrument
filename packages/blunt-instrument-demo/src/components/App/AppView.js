@@ -124,8 +124,8 @@ function AppView({
       <div className="trev-tabs">
         <Tabs>
           <TabList>
-            <Tab>Trevs</Tab>
-            <Tab>Trevs (JSON)</Tab>
+            <Tab>Trace Events</Tab>
+            <Tab>Trevs JSON</Tab>
           </TabList>
           
           <TabPanel>
