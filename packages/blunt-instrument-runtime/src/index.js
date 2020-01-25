@@ -26,14 +26,17 @@ export class Trace {
     const tracer = {
       astKey,
 
-      record(type, nodeId, rawData, stackDirection = 0) {
+      pushContext(id) {
+        trace.trevIdStack.push(id);
+      },
+
+      popContext() {
+        trace.trevIdStack.pop();
+      },
+
+      logTrev(type, nodeId, rawData, more = {}) {
         const id = trace.trevs.length + 1;
         const parentId = trace.trevIdStack[trace.trevIdStack.length - 1];
-        if (stackDirection > 0) {
-          trace.trevIdStack.push(id);
-        } else if (stackDirection < 0) {
-          trace.trevIdStack.pop();
-        }
         const data = trace.encoder.encode(rawData);
 
         trace.trevs.push({
@@ -43,8 +46,44 @@ export class Trace {
           astKey,
           nodeId,
           data,
+          ...more,
         });
 
+        return id;
+      },
+
+      logExpr(nodeId, rawData) {
+        this.logTrev('expr', nodeId, rawData);
+        return rawData;
+      },
+
+      logFnStart(nodeId, rawData) {
+        const id = this.logTrev('fn-start', nodeId, rawData);
+        this.pushContext(id);
+        return id;
+      },
+
+      logFnRet(nodeId, rawData) {
+        this.logTrev('fn-ret', nodeId, rawData);
+        this.popContext();
+        return rawData;
+      },
+
+      logFnThrow(nodeId, rawData) {
+        this.logTrev('fn-throw', nodeId, rawData);
+        this.popContext();
+        return rawData;
+      },
+
+      logFnPause(nodeId, rawData) {
+        this.logTrev('fn-pause', nodeId, rawData);
+        this.popContext();
+        return rawData;
+      },
+
+      logFnResume(nodeId, rawData, fnStartId) {
+        const id = this.logTrev('fn-resume', nodeId, rawData, { fnStartId });
+        this.pushContext(id);
         return rawData;
       },
     };

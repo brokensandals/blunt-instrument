@@ -14,21 +14,21 @@ const buildRegisterAST = template(`
 `);
 
 const buildFnTrace = template(`{
-  %%tracerId%%.record('fn-start', %%nodeId%%, %%args%%, 1);
+  const %%fnStartIdId%% = %%tracerId%%.logFnStart(%%nodeId%%, %%args%%);
   try {
     %%body%%
   } catch (e) {
-    %%tracerId%%.record('fn-throw', %%nodeId%%, e, -1);
+    %%tracerId%%.logFnThrow(%%nodeId%%, e);
     throw e;
   }
-  %%tracerId%%.record('fn-ret', %%nodeId%%, undefined, -1);
+  %%tracerId%%.logFnRet(%%nodeId%%, undefined);
 }`);
 
 const buildReturnTrace = template(`
-  return %%tracerId%%.record('fn-ret', %%nodeId%%, %%retval%%, -1);
+  return %%tracerId%%.logFnRet(%%nodeId%%, %%retval%%);
 `);
 
-function addFnTrace(path, { tracerId }) {
+function addFnTrace(path, { tracerId, fnStartIdId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
@@ -75,6 +75,7 @@ function addFnTrace(path, { tracerId }) {
   const trace = buildFnTrace({
     body,
     tracerId,
+    fnStartIdId,
     nodeId: types.numericLiteral(node.biId),
     args: types.objectExpression(properties),
   });
@@ -100,12 +101,12 @@ function addReturnTrace(path, { tracerId }) {
 }
 
 const buildExpressionTrace = template(`
-  %%tracerId%%.record('expr', %%nodeId%%, %%expression%%)
+  %%tracerId%%.logExpr(%%nodeId%%, %%expression%%)
 `);
 
 /**
  * Replaces an expression node with a traced equivalent.
- * For example, rewrites `x + 1` to `tracer.record('expr', 'NODEID', x + 1)`
+ * For example, rewrites `x + 1` to `tracer.logExpr('NODEID', x + 1)`
  * @param {NodePath} path - path containing expression node
  * @param {object} state - metadata returned from addInstrumenterInit
  */
@@ -149,6 +150,48 @@ function addExpressionTrace(path, { tracerId }) {
   });
   node.biTracedExpr = true;
   path.replaceWith(trace);
+}
+
+const buildPauseTrace = template.expression(`
+  %%tracerId%%.logFnPause(%%nodeId%%, %%argument%%)
+`);
+
+const buildResumeTrace = template.expression(`
+  %%tracerId%%.logFnResume(%%nodeId%%, %%expression%%, %%fnStartIdId%%)
+`);
+
+/**
+ * Replaces a yield expression with a traced equivalent.
+ * @param {NodePath} path - path containing yield expression node
+ * @param {object} state - metadata returned from addInstrumenterInit
+ */
+function addYieldTrace(path, { tracerId, fnStartIdId }) {
+  const { node } = path;
+
+  // Don't trace nodes without a node ID - those are nodes we added
+  if (!node.biId) {
+    return;
+  }
+
+  // if biTracedYield is true, we've already added tracing for this node
+  if (node.biTracedYield) {
+    return;
+  }
+
+  const pauseTrace = buildPauseTrace({
+    tracerId,
+    nodeId: types.numericLiteral(node.biId),
+    argument: node.argument,
+  });
+  node.argument = pauseTrace;
+  const resumeTrace = buildResumeTrace({
+    tracerId,
+    fnStartIdId,
+    nodeId: types.numericLiteral(node.biId),
+    expression: node,
+  });
+  node.biTracedYield = true;
+  path.replaceWith(resumeTrace);
 }
 
 const basePostfixRewrite = `
@@ -197,6 +240,9 @@ const instrumentVisitor = {
 
   Expression: {
     exit(path) {
+      if (types.isYieldExpression(path.node)) {
+        return;
+      }
       addExpressionTrace(path, this.state);
     },
   },
@@ -207,6 +253,10 @@ const instrumentVisitor = {
 
   ReturnStatement(path) {
     addReturnTrace(path, this.state);
+  },
+
+  YieldExpression(path) {
+    addYieldTrace(path, this.state);
   },
 };
 
@@ -234,6 +284,7 @@ export default function (api, opts) {
     const ids = {
       tracerId: tracerVar ? types.identifier(tracerVar)
         : path.scope.generateUidIdentifier('tracer'),
+      fnStartIdId: path.scope.generateUidIdentifier('fnStartId'),
     };
 
     if (selfRegister) {
@@ -249,7 +300,7 @@ export default function (api, opts) {
       path.node.body.unshift(...buildImportTracer({
         tempId: path.scope.generateUidIdentifier('temp'),
         astKey: key ? types.stringLiteral(key) : 'undefined',
-        ...ids,
+        tracerId: ids.tracerId,
       }));
     }
 

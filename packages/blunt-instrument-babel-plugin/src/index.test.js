@@ -294,6 +294,135 @@ describe('special case syntax handling', () => {
     });
   });
 
+  describe('generators', () => {
+    test('yields values and manages stack correctly', () => {
+      const output = biEval(`
+        function* threePowers(n) {
+          const n2 = n * n;
+          yield n2;
+          const n3 = n2 * n;
+          yield n3;
+          const n4 = n3 * n;
+          return n4;
+        }
+
+        function foo() {
+          const iter = threePowers(2);
+          output.yielded = [];
+          let result = iter.next();
+          while (!result.done) {
+            output.yielded.push(result.value);
+            result = iter.next();
+          }
+          output.returned = result.value;
+        }
+
+        foo();
+      `);
+      const call1 = namedCall(output, 'foo');
+      const call2 = namedCall(output, 'threePowers');
+      expect(call2.parentId).toEqual(call1.id);
+      const expr1 = codeTrev(output, 'n * n');
+      expect(expr1.parentId).toEqual(call2.id);
+      const pause1 = codeTrev(output, 'yield n2', 'fn-pause');
+      expect(pause1.parentId).toEqual(call2.id);
+      expect(pause1.data).toEqual(4);
+      const resume1 = codeTrev(output, 'yield n2', 'fn-resume');
+      expect(resume1.parentId).toEqual(call1.id);
+      expect(resume1.fnStartId).toEqual(call2.id);
+      const expr2 = codeTrev(output, 'n2 * n');
+      expect(expr2.parentId).toEqual(resume1.id);
+      const pause2 = codeTrev(output, 'yield n3', 'fn-pause');
+      expect(pause2.parentId).toEqual(resume1.id);
+      expect(pause2.data).toEqual(8);
+      const resume2 = codeTrev(output, 'yield n3', 'fn-resume');
+      expect(resume2.parentId).toEqual(call1.id);
+      expect(resume2.fnStartId).toEqual(call2.id);
+      const expr3 = codeTrev(output, 'n3 * n');
+      expect(expr3.parentId).toEqual(resume2.id);
+      const ret1 = codeTrev(output, 'return n4;', 'fn-ret');
+      expect(ret1.parentId).toEqual(resume2.id);
+      expect(ret1.data).toEqual(16);
+      expect(output.yielded).toEqual([4, 8]);
+      expect(output.returned).toEqual(16);
+      // We don't generate an expr trev in addition to the fn-resume trev,
+      // since that would take extra work and would duplicate the same data.
+      expect(codeTrevs(output, 'yield n2', 'expr')).toHaveLength(0);
+    });
+
+    test('yield*', () => {
+      const output = biEval(`
+        function* two() {
+          yield 1;
+          yield 2;
+          yield 3;
+        }
+        
+        function* one() {
+          yield* two();
+          yield 4;
+        }
+
+        output.yielded = [];
+        for (const value of one()) {
+          output.yielded.push(value);
+        }
+      `);
+
+      const call1 = namedCall(output, 'one');
+      const call2 = namedCall(output, 'two');
+      expect(call1.parentId).toBeUndefined();
+      expect(call2.parentId).toBeUndefined();
+      const pause1 = codeTrev(output, 'yield* two()', 'fn-pause');
+      expect(pause1.parentId).toEqual(call1.id);
+      expect(pause1.data.prototype.prototype['.next']).not.toBeNull();
+      const pause2 = codeTrev(output, 'yield 1', 'fn-pause');
+      expect(pause2.parentId).toEqual(call2.id);
+      expect(pause2.data).toEqual(1);
+      const resume1 = codeTrev(output, 'yield 1', 'fn-resume');
+      expect(resume1.parentId).toBeUndefined();
+      expect(resume1.fnStartId).toEqual(call2.id);
+      const pause3 = codeTrev(output, 'yield 2', 'fn-pause');
+      expect(pause3.parentId).toEqual(resume1.id);
+      expect(pause3.data).toEqual(2);
+      const resume2 = codeTrev(output, 'yield 2', 'fn-resume');
+      expect(resume2.parentId).toBeUndefined();
+      expect(resume2.fnStartId).toEqual(call2.id);
+      const pause4 = codeTrev(output, 'yield 3', 'fn-pause');
+      expect(pause4.parentId).toEqual(resume2.id);
+      expect(pause4.data).toEqual(3);
+      const resume3 = codeTrev(output, 'yield 3', 'fn-resume');
+      expect(resume3.parentId).toBeUndefined();
+      expect(resume3.fnStartId).toEqual(call2.id);
+      const ret1 = namedCall(output, 'two', 'fn-ret');
+      expect(ret1.parentId).toEqual(resume3.id);
+      const resume4 = codeTrev(output, 'yield* two()', 'fn-resume');
+      expect(resume4.parentId).toBeUndefined();
+      expect(resume4.fnStartId).toEqual(call1.id);
+      const pause5 = codeTrev(output, 'yield 4', 'fn-pause');
+      expect(pause5.parentId).toEqual(resume4.id);
+      expect(pause5.data).toEqual(4);
+      expect(output.yielded).toEqual([1, 2, 3, 4]);
+    });
+
+    test('next with argument', () => {
+      const output = biEval(`
+        function* foo() {
+          const a = yield 1;
+          yield a * 5;
+        }
+
+        const iter = foo();
+        output.first = iter.next().value;
+        output.second = iter.next(output.first * 2).value;
+      `);
+      const resume1 = codeTrev(output, 'yield 1', 'fn-resume');
+      expect(resume1.data).toEqual(2);
+      expect(output.first).toEqual(1);
+      expect(output.second).toEqual(10);
+    });
+  });
+
   describe('method invocations', () => {
     test('this is bound and traced correctly when invoking a method', () => {
       const output = biEval(`

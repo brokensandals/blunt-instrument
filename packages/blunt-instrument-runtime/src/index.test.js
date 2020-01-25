@@ -45,11 +45,11 @@ describe('Trace', () => {
       tracer = trace.tracerFor(astKey);
     });
 
-    describe('record', () => {
+    describe('logTrev', () => {
       test('simple events', () => {
-        tracer.record('expr', 1, 'foo');
-        tracer.record('expr', 2, 'bar');
-        tracer.record('expr', 3, 'baz');
+        tracer.logTrev('expr', 1, 'foo');
+        tracer.logTrev('expr', 2, 'bar');
+        tracer.logTrev('expr', 3, 'baz');
         expect(trace.trevs).toEqual([
           {
             id: 1,
@@ -76,7 +76,7 @@ describe('Trace', () => {
       });
 
       test('encoding', () => {
-        tracer.record('expr', 1, { foo: 'bar' });
+        tracer.logTrev('expr', 1, { foo: 'bar' });
         expect(trace.trevs).toEqual([{
           id: 1,
           type: 'expr',
@@ -89,72 +89,25 @@ describe('Trace', () => {
           },
         }]);
       });
+    });
 
-      test('stack', () => {
-        tracer.record('enter-fn', 1, 'a', 1);
-        tracer.record('expr', 2, 'b');
-        tracer.record('enter-fn', 3, 'c', 1);
-        tracer.record('expr', 4, 'd', 0);
-        tracer.record('fn-ret', 5, 'e', -1);
-        tracer.record('fn-ret', 6, 'f', -1);
-        tracer.record('expr', 7, 'g');
-        expect(trace.trevs).toEqual([
-          {
-            id: 1,
-            type: 'enter-fn',
-            astKey,
-            nodeId: 1,
-            data: 'a',
-          },
-          {
-            parentId: 1,
-            id: 2,
-            type: 'expr',
-            astKey,
-            nodeId: 2,
-            data: 'b',
-          },
-          {
-            parentId: 1,
-            id: 3,
-            type: 'enter-fn',
-            astKey,
-            nodeId: 3,
-            data: 'c',
-          },
-          {
-            parentId: 3,
-            id: 4,
-            type: 'expr',
-            astKey,
-            nodeId: 4,
-            data: 'd',
-          },
-          {
-            parentId: 3,
-            id: 5,
-            type: 'fn-ret',
-            astKey,
-            nodeId: 5,
-            data: 'e',
-          },
-          {
-            parentId: 1,
-            id: 6,
-            type: 'fn-ret',
-            astKey,
-            nodeId: 6,
-            data: 'f',
-          },
-          {
-            id: 7,
-            type: 'expr',
-            astKey,
-            nodeId: 7,
-            data: 'g',
-          },
-        ]);
-      });
+    test('stack operations', () => {
+      tracer.logFnStart(10, 'a');
+      tracer.logFnStart(20, 'b');
+      tracer.logFnPause(30, 'c');
+      tracer.logExpr(40, 'd');
+      tracer.logFnResume(50, 'e', 2);
+      tracer.logFnRet(60, 'f');
+      tracer.logFnThrow(70, 'g');
+      tracer.logExpr(80, 'h');
+      expect(trace.trevs).toHaveLength(8);
+      expect(trace.trevs.map((t) => t.id)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+      expect(trace.trevs.map((t) => t.parentId)).toEqual([undefined, 1, 2, 1, 1, 5, 1, undefined]);
+      expect(trace.trevs.map((t) => t.data)).toEqual(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']);
+      expect(trace.trevs.map((t) => t.fnStartId)).toEqual(
+        [undefined, undefined, undefined, undefined, 2, undefined, undefined, undefined]
+      );
+      expect(trace.trevs.map((t) => t.nodeId)).toEqual([10, 20, 30, 40, 50, 60, 70, 80]);
     });
   });
 });
