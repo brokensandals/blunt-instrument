@@ -105,7 +105,7 @@ describe('Trace', () => {
       expect(trace.trevs.map((t) => t.parentId)).toEqual([undefined, 1, 2, 1, 1, 5, 1, undefined]);
       expect(trace.trevs.map((t) => t.data)).toEqual(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']);
       expect(trace.trevs.map((t) => t.fnStartId)).toEqual(
-        [undefined, undefined, undefined, undefined, 2, undefined, undefined, undefined]
+        [undefined, undefined, undefined, undefined, 2, undefined, undefined, undefined],
       );
       expect(trace.trevs.map((t) => t.nodeId)).toEqual([10, 20, 30, 40, 50, 60, 70, 80]);
     });
