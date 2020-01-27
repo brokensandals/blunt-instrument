@@ -2,6 +2,7 @@ import { Encoder } from 'object-graph-as-json';
 
 export default class InMemoryTrace {
   constructor({ encoder = new Encoder() } = {}) {
+    this.asts = {};
     this.encoder = encoder;
     this.tracers = {};
     this.trevs = [];
@@ -48,6 +49,10 @@ export default class InMemoryTrace {
         });
 
         return id;
+      },
+
+      registerAST(ast) {
+        trace.asts[astKey] = ast;
       },
 
       logExpr(nodeId, rawData) {

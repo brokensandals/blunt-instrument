@@ -10,7 +10,7 @@ const buildImportTracer = template(`
 `);
 
 const buildRegisterAST = template(`
-  %%tracerId%%.ast = JSON.parse(%%astString%%);
+  %%tracerId%%.registerAST(JSON.parse(%%astString%%));
 `);
 
 const buildFnTrace = template(`{

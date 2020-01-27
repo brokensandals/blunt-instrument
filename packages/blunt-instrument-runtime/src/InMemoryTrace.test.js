@@ -82,6 +82,12 @@ describe('InMemoryTrace', () => {
       });
     });
 
+    test('registerAST', () => {
+      const ast = { fake: true };
+      tracer.registerAST(ast);
+      expect(trace.asts[astKey]).toBe(ast);
+    });
+
     test('stack operations', () => {
       tracer.logFnStart(10, 'a');
       tracer.logFnStart(20, 'b');

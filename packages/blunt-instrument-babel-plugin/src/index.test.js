@@ -47,7 +47,7 @@ function biEval(code, pluginOpts = {}) {
   const fn = new Function('tracer', 'output', `"use strict";${instrumented}`); // eslint-disable-line no-new-func
   const output = {};
   fn(tracer, output);
-  const astClone = cloneDeep(tracer.ast);
+  const astClone = cloneDeep(trace.asts.test);
   attachCodeSlicesToAST(astClone, code);
   const astq = new ASTQuerier(astClone);
 
@@ -182,12 +182,10 @@ describe('configuration', () => {
       },
     };
     const { code } = transform('const foo = "meh"', opts, {}, true);
-    expect(code).toContain('ast');
+    expect(code).toContain('registerAST');
     // use `eval()` instead of `new Function()` so that `require` is defined
     eval(code); // eslint-disable-line no-eval
-    const tracer = defaultTrace.tracerFor('test');
-    expect(tracer).not.toBeNull();
-    expect(tracer.ast).not.toBeNull();
+    expect(defaultTrace.asts.test).not.toBeNull();
     expect(defaultTrace.trevs).toEqual([{
       id: 1,
       type: 'expr',

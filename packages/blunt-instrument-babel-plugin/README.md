@@ -29,8 +29,7 @@ const opts = {
                     // combined trace, give each one a unique key. If not specified, sequential
                     // integers are used.
     selfRegister: true, // Causes the AST of the original code to be embedded in the generated
-                        // code. When the code runs, it will store the AST on the tracer's
-                        // `ast` field.
+                        // code. After the code runs, it can be retrieved from trace.asts[key]
     callback: (ast) => {}, // If provided, this function will be called with the AST of the
                            // original code after the biId property has been added to each node.
   },
