@@ -5,7 +5,7 @@ import {
   ASTQuerier,
   copyNodeIdsBetweenASTs,
 } from 'blunt-instrument-ast-utils';
-import { Trace } from 'blunt-instrument-runtime';
+import { InMemoryTrace } from 'blunt-instrument-runtime';
 import { TraceQuerier } from 'blunt-instrument-trace-utils';
 
 /**
@@ -39,7 +39,7 @@ export default function (source, { saveInstrumented = false } = {}) {
 may interfere with instrumentedEval, the code, or both.`);
   }
 
-  const trace = new Trace();
+  const trace = new InMemoryTrace();
   const tracer = trace.tracerFor('eval');
 
   const babelOpts = {

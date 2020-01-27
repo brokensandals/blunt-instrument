@@ -6,7 +6,7 @@ import {
 } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep'; // eslint-disable-line import/no-extraneous-dependencies
 import { Encoder, UnsafeDecoder } from 'object-graph-as-json';
-import { Trace, defaultTrace } from 'blunt-instrument-runtime';
+import { InMemoryTrace, defaultTrace } from 'blunt-instrument-runtime';
 import bluntInstrumentPlugin from '.';
 
 /**
@@ -42,7 +42,7 @@ function biEval(code, pluginOpts = {}) {
     ...pluginOpts,
   });
 
-  const trace = new Trace({ encoder: new Encoder() });
+  const trace = new InMemoryTrace({ encoder: new Encoder() });
   const tracer = trace.tracerFor('test');
   const fn = new Function('tracer', 'output', `"use strict";${instrumented}`); // eslint-disable-line no-new-func
   const output = {};
@@ -208,7 +208,7 @@ describe('configuration', () => {
       },
     };
     const { code } = transform('const foo = "meh"', opts, {});
-    const trace = new Trace();
+    const trace = new InMemoryTrace();
     const tracer = trace.tracerFor('test');
     expect(code).not.toContain('ast');
     const fn = new Function('tracer', `"use strict";${code}`); // eslint-disable-line no-new-func

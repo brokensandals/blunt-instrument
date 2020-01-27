@@ -52,7 +52,7 @@ It then calls `defaultTrace.tracerFor(opts.ast.key)` to retrieve a tracer scoped
 Alternatively, you can indicate that the tracer instance should be found in a specific variable, by setting `runtime.mechanism` to `'var'` and specifying the variable name in `runtime.tracerVar`:
 
 ```javascript
-import { Trace } from 'blunt-instrument-runtime';
+import { InMemoryTrace } from 'blunt-instrument-runtime';
 
 const opts = {
   runtime: {
@@ -63,7 +63,7 @@ const opts = {
 const instrumentedCode = babel.transformSync(
   originalCode, { plugins: [[bluntInstrumentPlugin, opts]]});
 
-const trace = new Trace();
+const trace = new InMemoryTrace();
 const tracer = trace.tracerFor('myCode');
 const fn = new Function('tracer', instrumentedCode);
 fn(tracer);
