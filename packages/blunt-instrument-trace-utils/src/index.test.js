@@ -94,7 +94,7 @@ describe('TraceQuerier', () => {
           nodeId: trevs[2].nodeId,
           type: 'expr',
           data: 7,
-          extra: {
+          denormalized: {
             ancestorIds: [],
             node: astQuerier.getNodesByCodeSlice('num + by')[0],
           },
@@ -115,7 +115,7 @@ describe('TraceQuerier', () => {
           nodeId: trevs[2].nodeId,
           type: 'expr',
           data: 7,
-          extra: {
+          denormalized: {
             ancestorIds: [],
             node: astQuerier.getNodesByCodeSlice('num + by')[0],
           },

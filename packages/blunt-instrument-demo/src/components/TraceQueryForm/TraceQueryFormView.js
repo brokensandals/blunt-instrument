@@ -38,7 +38,7 @@ export function TraceQueryFormView({
   }
 
   const excludeNodeTypesOptions = [];
-  for (const type of new Set(querier.query().map(trev => trev.extra.node.type))) {
+  for (const type of new Set(querier.query().map(trev => trev.denormalized.node.type))) {
     excludeNodeTypesOptions.push({ value: type, label: type });
   }
 

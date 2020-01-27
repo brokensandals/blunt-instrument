@@ -18,10 +18,10 @@ import * as types from '@babel/types';
 
 /**
   * @typedef {Trev} TrevExtended
-  * @property {Object} extra
-  * @property {Node} extra.node - the babel AST node representing the part of the original code
+  * @property {Object} denormalized
+  * @property {Node} denormalized.node - the babel AST node representing the part of the original code
   *   that led to this trev
-  * @property {number[]} extra.ancestorIds - the trev IDs of this trev's parent and its parent, etc.
+  * @property {number[]} denormalized.ancestorIds - the trev IDs of this trev's parent and its parent, etc.
   */
 
 /**
@@ -87,9 +87,9 @@ export class TraceQuerier { // eslint-disable-line import/prefer-default-export
         throw new Error(`Trev ID ${trace[i].id} has unknown node ID ${trace[i].nodeId}`);
       }
 
-      const extra = { ancestorIds, node };
+      const denormalized = { ancestorIds, node };
 
-      trevs.push({ extra, ...trace[i] });
+      trevs.push({ denormalized, ...trace[i] });
     }
     this.trevs = trevs;
   }
@@ -145,7 +145,7 @@ export class TraceQuerier { // eslint-disable-line import/prefer-default-export
     this.trevs.forEach((trev) => {
       let skip = false;
       Object.keys(excludeNodeTypes).forEach((type) => {
-        if (excludeNodeTypes[type] && types.is(type, trev.extra.node)) {
+        if (excludeNodeTypes[type] && types.is(type, trev.denormalized.node)) {
           skip = true;
         }
       });

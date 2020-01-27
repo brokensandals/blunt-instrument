@@ -148,7 +148,7 @@ function TrevTableView({
 
     const className = [
       highlightedTrevId != null && trev.id === highlightedTrevId ? 'highlighted-trev' : null,
-      highlightedTrevId != null && trev.extra.ancestorIds.includes(highlightedTrevId) ? 'highlighted-trev-descendant' : null,
+      highlightedTrevId != null && trev.denormalized.ancestorIds.includes(highlightedTrevId) ? 'highlighted-trev-descendant' : null,
       highlightedNodeId != null && trev.nodeId === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
@@ -160,7 +160,7 @@ function TrevTableView({
         <td className="id">{trev.id}</td>
         <td className="type">{trev.type}</td>
         <td className="node" onClick={handleCodeClick}>
-          <code>{trev.extra.node.codeSlice}</code>
+          <code>{trev.denormalized.node.codeSlice}</code>
         </td>
         <td className="data" onClick={() => onOpenModalData({data: trev.data})}>
           <ValuePreview value={trev.data} trevType={trev.type} />
