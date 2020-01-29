@@ -1,5 +1,7 @@
 import * as types from '@babel/types';
 
+export { toNodeKey, fromNodeKey, ASTBundle } from './ASTBundle';
+
 /**
  * Copies all node IDs from one AST to another. This should be called with
  * two ASTs that have exactly the same shape.
