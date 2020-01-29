@@ -7,48 +7,41 @@ export function TraceQueryFormView({
   highlightedNodeId,
   onTraceQueryChange = (query) => {},
   onHoveredNodeChange = (nodeId) => {},
-  querier,
   query,
+  stats,
 }) {
-  function nodeOption(node) {
-    const value = node.biId;
+  // TODO: a little hacky to be building this map here
+  const nodesByKeyAndId = new Map();
+  stats.nodes.keys().forEach((node) => nodesByKeyAndId.set(`${node.astKey}:${node.biId}`, node));
+
+  function nodeOption(node, count) {
+    const value = `${node.astKey}:${node.biId}`;
     const codeSlice = node.codeSlice;
     const codePreview = codeSlice.length > 20 ? codeSlice.slice(0, 20) + '...' : codeSlice;
-    const label = `[${value}] ${node.type}: ${codePreview}`;
+    const label = `[${value}] ${node.type} (${count}): ${codePreview}`;
     return { value, label };
   }
-  const includeNodesOptions = [];
-  for (const node of querier.astQuerier.filterNodes(Boolean)) {
-    includeNodesOptions.push(nodeOption(node));
-  }
 
-  const includeNodesValue = [];
-  for (const nodeId in query.filters.onlyNodeIds) {
-    if (query.filters.onlyNodeIds[nodeId]) {
-      includeNodesValue.push(nodeOption(querier.astQuerier.getNodeById(Number(nodeId))));
-    }
-  }
+  const includeNodesOptions = stats.nodes.entries().map(nodeOption);
+  const includeNodesValue = query.nodes.map((node) =>
+    nodeOption(node, stats.nodes.get(node))
+  );
 
   const handleIncludeNodesChange = (value) => {
-    const onlyNodeIds = {};
-    for (const selected of (value || [])) {
-      onlyNodeIds[selected.value] = true;
-    }
-    onTraceQueryChange(update(query, { filters: { onlyNodeIds: { $set: onlyNodeIds }}}))
+    const nodes = (value || []).map((selected) => nodesByKeyAndId.get(selected.value));
+    onTraceQueryChange(update(query, { nodes: { $set: nodes } }));
   }
 
-  const excludeNodeTypesOptions = [];
-  for (const type of new Set(querier.query().map(trev => trev.denormalized.node.type))) {
-    excludeNodeTypesOptions.push({ value: type, label: type });
+  function nodeTypeOption(nodeType, count) {
+    return { nodeType, label: `${nodeType} (${count})` };
   }
+  const includeNodeTypesOptions = stats.nodeTypes.entries().map(nodeTypeOption);
+  const includeNodeTypesValue = query.nodeTypes.map((nodeType) =>
+    nodeTypeOption(nodeType, stats.nodeTypes.get(nodeType))
+  );
 
-  const excludeNodeTypesValue = query.filters.excludeNodeTypes
-    .map(type => ({
-      value: type, label: type
-    }));
-
-  const handleExcludeNodeTypesChange = (value) => {
-    onTraceQueryChange(update(query, { filters: { excludeNodeTypes: { $set: (value || []).map(option => option.value) } } }));
+  const handleIncludeNodeTypesChange = (value) => {
+    onTraceQueryChange(update(query, { nodeTypes: { $set: (value || []).map(option => option.value) } }));
   }
 
   return (
@@ -68,10 +61,10 @@ export function TraceQueryFormView({
         <label className="label" id="node-type-filters-label">Exclude node types:</label>
         <Select className="node-type-filters-select"
                 isMulti
-                options={excludeNodeTypesOptions}
-                value={excludeNodeTypesValue}
-                onChange={handleExcludeNodeTypesChange}
-                placeholder="(none)"
+                options={includeNodeTypesOptions}
+                value={includeNodeTypesValue}
+                onChange={handleIncludeNodeTypesChange}
+                placeholder="(all)"
                 aria-labelledby="node-type-filters-label" />
       </div>
     </form>

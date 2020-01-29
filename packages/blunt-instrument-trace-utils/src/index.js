@@ -162,3 +162,76 @@ export class TraceQuerier { // eslint-disable-line import/prefer-default-export
     return results;
   }
 }
+
+// TODO move to ast-utils or combine these packages
+function indexNodesById(ast) {
+  const result = new Map();
+  types.traverseFast(ast, (node) => {
+    if (node.biId) {
+      result.set(node.biId, node);
+    }
+  });
+  return result;
+}
+
+export function attachDenormalizedFields(trevs, asts) {
+  let prevId = 0;
+
+  const indexedASTs = {};
+  Object.keys(asts).forEach((key) => {
+    indexedASTs[key] = indexNodesById(asts[key]);
+  });
+
+  trevs.forEach((trev) => {
+    const {
+      id,
+      parentId,
+      astKey,
+      nodeId,
+    } = trev;
+
+    if (id !== prevId + 1) {
+      throw new Error(`Trev [${id}] is out of order`);
+    }
+
+    if (parentId && parentId >= trev.id) {
+      throw new Error(`Trev [${id}] is descended from a later parent [${parentId}]`);
+    }
+
+    const ancestorIds = parentId ? [parentId].concat(trevs[parentId - 1].ancestorIds) : [];
+
+    const indexedAST = indexedASTs[astKey];
+    if (!indexedAST) {
+      throw new Error(`Trev [${id}] has has invalid astKey [${astKey}]`);
+    }
+
+    const node = indexedAST.get(nodeId);
+    if (!node) {
+      throw new Error(`Trev [${id}] has invalid nodeId [${nodeId}]`);
+    }
+
+    trev.denormalized = { ancestorIds, node }; // eslint-disable-line no-param-reassign
+
+    prevId = id;
+  });
+}
+
+export function buildTrevStats(trevs) {
+  const results = {
+    nodes: new Map(),
+    nodeTypes: new Map(),
+    types: new Map(),
+  };
+
+  trevs.forEach((trev) => {
+    const { denormalized, type } = trev;
+    const { node } = denormalized;
+    const { type: nodeType } = node;
+
+    results.nodes.set(node, (results.nodes.get(node) || 0) + 1);
+    results.nodeTypes.set(nodeType, (results.nodeTypes.get(nodeType) || 0) + 1);
+    results.types.set(type, (results.types.get(type) || 0) + 1);
+  });
+
+  return results;
+}
