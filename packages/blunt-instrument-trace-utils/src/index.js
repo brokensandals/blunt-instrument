@@ -19,9 +19,10 @@ import * as types from '@babel/types';
 /**
   * @typedef {Trev} TrevExtended
   * @property {Object} denormalized
-  * @property {Node} denormalized.node - the babel AST node representing the part of the original code
+  * @property {Node} denormalized.node - the babel AST node for the part of the original code
   *   that led to this trev
-  * @property {number[]} denormalized.ancestorIds - the trev IDs of this trev's parent and its parent, etc.
+  * @property {number[]} denormalized.ancestorIds - the trev IDs of this trev's
+  *   parent and its parent, etc.
   */
 
 /**
