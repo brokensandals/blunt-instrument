@@ -162,23 +162,23 @@ describe('configuration', () => {
     const { code } = transform('const foo = "bar"', opts, {}, true);
     // use `eval()` instead of `new Function()` so that `require` is defined
     eval(code); // eslint-disable-line no-eval
-    const astKeys = Object.keys(defaultTrace.tracers);
-    expect(astKeys).toHaveLength(1);
+    const astIds = Object.keys(defaultTrace.tracers);
+    expect(astIds).toHaveLength(1);
     expect(defaultTrace.trevs).toEqual([{
       id: 1,
       type: 'expr',
-      astKey: astKeys[0],
+      astId: astIds[0],
       nodeId: 5,
       data: 'bar',
     }]);
   });
 
-  test('using defaultTrace with specified ast key', () => {
+  test('using defaultTrace with specified ast id', () => {
     const opts = {
       runtime: {
       },
       ast: {
-        key: 'test',
+        id: 'test',
       },
     };
     const { code } = transform('const foo = "meh"', opts, {}, true);
@@ -189,7 +189,7 @@ describe('configuration', () => {
     expect(defaultTrace.trevs).toEqual([{
       id: 1,
       type: 'expr',
-      astKey: 'test',
+      astId: 'test',
       nodeId: 5,
       data: 'meh',
     }]);
@@ -552,7 +552,7 @@ describe('demo examples', () => {
     test(key, () => {
       const output = biEval(examples[key]);
       expect(output.instrumented).toMatchSnapshot();
-      expect(output.tracer.trevs).toMatchSnapshot();
+      expect(output.trace.trevs).toMatchSnapshot();
     });
   });
 });

@@ -9,21 +9,21 @@ export default class InMemoryTrace {
     this.trevIdStack = [];
   }
 
-  tracerFor(astKey = undefined) {
+  tracerFor(astId = undefined) {
     const trace = this;
 
-    if (trace.tracers[astKey]) {
-      return trace.tracers[astKey];
+    if (trace.tracers[astId]) {
+      return trace.tracers[astId];
     }
 
-    if (!astKey) {
+    if (!astId) {
       let i;
       for (i = 1; trace.tracers[i]; i += 1);
-      astKey = i.toString(); // eslint-disable-line no-param-reassign
+      astId = i.toString(); // eslint-disable-line no-param-reassign
     }
 
     const tracer = {
-      astKey,
+      astId,
 
       pushContext(id) {
         trace.trevIdStack.push(id);
@@ -42,7 +42,7 @@ export default class InMemoryTrace {
           parentId,
           id,
           type,
-          astKey,
+          astId,
           nodeId,
           data,
           ...more,
@@ -52,7 +52,7 @@ export default class InMemoryTrace {
       },
 
       registerAST(ast) {
-        trace.asts[astKey] = ast;
+        trace.asts[astId] = ast;
       },
 
       logExpr(nodeId, rawData) {
@@ -91,7 +91,7 @@ export default class InMemoryTrace {
       },
     };
 
-    trace.tracers[astKey] = tracer;
+    trace.tracers[astId] = tracer;
     return tracer;
   }
 }

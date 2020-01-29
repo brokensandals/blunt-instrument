@@ -7,10 +7,10 @@ Code instrumented by [blunt-instrument-babel-plugin][blunt-instrument-babel-plug
 The main export of this package is the `InMemoryTrace` class, which represents an appendable log of a program's execution.
 (Other `Trace` classes implementing the same interface, for example an `IndexedDBTrace` class, might be created in the future.)
 
-Its main method is `tracerFor(astKey)`, which returns a tracer instance.
+Its main method is `tracerFor(astId)`, which returns a tracer instance.
 A program may consist of multiple files which the babel plugin has processed separately.
 In that case, they should all share a Trace instance, but use different tracer instances.
-`astKey` is a string uniquely identifying the abstract syntax tree whose execution will be traced.
+`astId` is a string uniquely identifying the abstract syntax tree whose execution will be traced.
 
 After running an instrumented program, the `trevs` property of the Trace instance will contain all the trace events recorded during execution.
 See [blunt-instrument-babel-plugin's README][blunt-instrument-babel-plugin] for an example of what this array looks like.

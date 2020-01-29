@@ -24,16 +24,16 @@ describe('InMemoryTrace', () => {
       const t1 = trace.tracerFor();
       const t2 = trace.tracerFor();
       expect(t1).not.toBe(t2);
-      expect(t1.astKey).not.toEqual(t2.astKey);
+      expect(t1.astId).not.toEqual(t2.astId);
     });
   });
 
   describe('tracers', () => {
-    const astKey = 'test';
+    const astId = 'test';
     let tracer;
 
     beforeEach(() => {
-      tracer = trace.tracerFor(astKey);
+      tracer = trace.tracerFor(astId);
     });
 
     describe('logTrev', () => {
@@ -45,21 +45,21 @@ describe('InMemoryTrace', () => {
           {
             id: 1,
             type: 'expr',
-            astKey,
+            astId,
             nodeId: 1,
             data: 'foo',
           },
           {
             id: 2,
             type: 'expr',
-            astKey,
+            astId,
             nodeId: 2,
             data: 'bar',
           },
           {
             id: 3,
             type: 'expr',
-            astKey,
+            astId,
             nodeId: 3,
             data: 'baz',
           },
@@ -71,7 +71,7 @@ describe('InMemoryTrace', () => {
         expect(trace.trevs).toEqual([{
           id: 1,
           type: 'expr',
-          astKey,
+          astId,
           nodeId: 1,
           data: {
             type: 'object',
@@ -85,7 +85,7 @@ describe('InMemoryTrace', () => {
     test('registerAST', () => {
       const ast = { fake: true };
       tracer.registerAST(ast);
-      expect(trace.asts[astKey]).toBe(ast);
+      expect(trace.asts[astId]).toBe(ast);
     });
 
     test('stack operations', () => {

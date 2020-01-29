@@ -6,7 +6,7 @@ import {
 
 const buildImportTracer = template(`
   import { defaultTrace as %%tempId%% } from 'blunt-instrument-runtime';
-  const %%tracerId%% = %%tempId%%.tracerFor(%%astKey%%);
+  const %%tracerId%% = %%tempId%%.tracerFor(%%astId%%);
 `);
 
 const buildRegisterAST = template(`
@@ -275,7 +275,7 @@ export default function (api, opts) {
     } = {},
     ast: {
       callback = (ast) => {}, // eslint-disable-line no-unused-vars
-      key = undefined,
+      id: astId = undefined,
       selfRegister = true,
     } = {},
   } = opts;
@@ -299,7 +299,7 @@ export default function (api, opts) {
     if (mechanism === 'import') {
       path.node.body.unshift(...buildImportTracer({
         tempId: path.scope.generateUidIdentifier('temp'),
-        astKey: key ? types.stringLiteral(key) : 'undefined',
+        astId: astId ? types.stringLiteral(astId) : 'undefined',
         tracerId: ids.tracerId,
       }));
     }
