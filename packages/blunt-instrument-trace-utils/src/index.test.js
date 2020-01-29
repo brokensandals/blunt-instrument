@@ -1,13 +1,13 @@
 import {
   addNodeIdsToAST,
-  ASTQuerier,
+  ASTBundle,
   attachCodeSlicesToAST,
 } from 'blunt-instrument-ast-utils';
 import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
 import { TraceQuerier } from '.';
 
 describe('TraceQuerier', () => {
-  let astQuerier;
+  let astb;
 
   beforeEach(() => {
     const code = `
@@ -22,21 +22,25 @@ describe('TraceQuerier', () => {
     const ast = parseSync(code);
     addNodeIdsToAST(ast);
     attachCodeSlicesToAST(ast, code);
-    astQuerier = new ASTQuerier(ast);
+    astb = new ASTBundle({ test: ast });
   });
 
-  it('makes the astQuerier available', () => {
-    expect(new TraceQuerier(astQuerier, []).astQuerier).toBe(astQuerier);
+  it('makes the ASTBundle available', () => {
+    expect(new TraceQuerier(astb, []).astb).toBe(astb);
   });
 
   describe('constructor', () => {
     it('requires sequential trev IDs', () => {
-      expect(() => new TraceQuerier(astQuerier,
-        [{ id: 1, nodeId: 1 }, { id: 3, nodeId: 1 }])).toThrowError('Non-sequential trev ID 3');
+      expect(() => new TraceQuerier(astb,
+        [{ id: 1, astId: 'test', nodeId: 1 }, { id: 3, astId: 'test', nodeId: 1 }])).toThrowError('Non-sequential trev id [3]');
+    });
+
+    it('requires valid ast IDs', () => {
+      expect(() => new TraceQuerier(astb, [{ id: 1, astId: 'foo', nodeId: 1 }])).toThrowError('Trev ID [1] has unknown node id [1] for AST id [foo]');
     });
 
     it('requires valid node IDs', () => {
-      expect(() => new TraceQuerier(astQuerier, [{ id: 1, nodeId: 100 }])).toThrowError('Trev ID 1 has unknown node ID 100');
+      expect(() => new TraceQuerier(astb, [{ id: 1, astId: 'test', nodeId: 100 }])).toThrowError('Trev ID [1] has unknown node id [100] for AST id [test]');
     });
   });
 
@@ -48,35 +52,40 @@ describe('TraceQuerier', () => {
       trevs = [];
       trevs.push({
         id: 1,
-        nodeId: astQuerier.getNodesByCodeSlice('1')[0].biId,
+        astId: 'test',
+        nodeId: astb.filterNodes((node) => node.codeSlice === '1')[0].biId,
         type: 'expr',
         data: 1,
       });
       trevs.push({
         id: 2,
-        nodeId: astQuerier.getNodesByCodeSlice('num + by')[0].biId,
+        astId: 'test',
+        nodeId: astb.filterNodes((node) => node.codeSlice === 'num + by')[0].biId,
         type: 'expr',
         data: 4,
       });
       trevs.push({
         id: 3,
-        nodeId: astQuerier.getNodesByCodeSlice('num + by')[0].biId,
+        astId: 'test',
+        nodeId: astb.filterNodes((node) => node.codeSlice === 'num + by')[0].biId,
         type: 'expr',
         data: 7,
       });
       trevs.push({
         id: 4,
-        nodeId: astQuerier.getNodesByCodeSlice('increaseNum(3)')[0].biId,
+        astId: 'test',
+        nodeId: astb.filterNodes((node) => node.codeSlice === 'increaseNum(3)')[0].biId,
         type: 'expr',
         data: 4,
       });
       trevs.push({
         id: 5,
-        nodeId: astQuerier.getNodesByCodeSlice('increaseNum(3)')[1].biId,
+        astId: 'test',
+        nodeId: astb.filterNodes((node) => node.codeSlice === 'increaseNum(3)')[1].biId,
         type: 'expr',
         data: 7,
       });
-      traceQuerier = new TraceQuerier(astQuerier, trevs);
+      traceQuerier = new TraceQuerier(astb, trevs);
     });
 
     describe('getTrevById', () => {
@@ -91,12 +100,13 @@ describe('TraceQuerier', () => {
       it('returns correct trev by id', () => {
         expect(traceQuerier.getTrevById(3)).toEqual({
           id: 3,
+          astId: 'test',
           nodeId: trevs[2].nodeId,
           type: 'expr',
           data: 7,
           denormalized: {
             ancestorIds: [],
-            node: astQuerier.getNodesByCodeSlice('num + by')[0],
+            node: astb.filterNodes((node) => node.codeSlice === 'num + by')[0],
           },
         });
       });
@@ -112,12 +122,13 @@ describe('TraceQuerier', () => {
         const result = traceQuerier.query();
         expect(result[2]).toEqual({
           id: 3,
+          astId: 'test',
           nodeId: trevs[2].nodeId,
           type: 'expr',
           data: 7,
           denormalized: {
             ancestorIds: [],
-            node: astQuerier.getNodesByCodeSlice('num + by')[0],
+            node: astb.filterNodes((node) => node.codeSlice === 'num + by')[0],
           },
         });
       });

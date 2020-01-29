@@ -3,7 +3,6 @@ import {
   addNodeIdsToAST,
   attachCodeSlicesToAST,
   copyNodeIdsBetweenASTs,
-  ASTQuerier,
 } from './index';
 
 describe('copyNodeIdsBetweenASTs', () => {
@@ -81,67 +80,5 @@ describe('attachCodeSlicesToAST', () => {
     const ast = parseSync(code);
     ast.program.end = 10;
     expect(() => attachCodeSlicesToAST(ast, code)).toThrowError('Node start [0] or end [10] is out of range');
-  });
-});
-
-describe('ASTQuerier', () => {
-  describe('constructor', () => {
-    it('throws an error if any nodes are missing node IDs', () => {
-      const ast = parseSync('x = 1');
-      expect(() => new ASTQuerier(ast)).toThrowError('Node is missing node ID');
-    });
-  });
-
-  describe('getNodeById', () => {
-    it('finds the requested node', () => {
-      const ast = parseSync('x = 1');
-      addNodeIdsToAST(ast);
-      const astq = new ASTQuerier(ast);
-      expect(astq.getNodeById(5).name).toEqual('x');
-    });
-
-    it('returns undefined for unknown node ID', () => {
-      const ast = parseSync('x = 1');
-      addNodeIdsToAST(ast);
-      const astq = new ASTQuerier(ast);
-      expect(astq.getNodeById(100)).toBeUndefined();
-    });
-  });
-
-  describe('getNodesByCodeSlice', () => {
-    it('finds all matching nodes', () => {
-      const code = 'x = y() + 1; z = y() + 3';
-      const ast = parseSync(code);
-      addNodeIdsToAST(ast);
-      attachCodeSlicesToAST(ast, code);
-      const astq = new ASTQuerier(ast);
-      const expected = [
-        ast.program.body[0].expression.right.left,
-        ast.program.body[1].expression.right.left,
-      ];
-      expect(astq.getNodesByCodeSlice('y()')).toEqual(expected);
-    });
-
-    it('returns empty array if no matching nodes', () => {
-      const code = 'x = y() + 1; z = y() + 3';
-      const ast = parseSync(code);
-      addNodeIdsToAST(ast);
-      attachCodeSlicesToAST(ast, code);
-      const astq = new ASTQuerier(ast);
-      expect(astq.getNodesByCodeSlice('z()')).toEqual([]);
-    });
-  });
-
-  describe('filterNodes', () => {
-    it('returns matching nodes', () => {
-      const code = 'x = y() + 123; z = 4;';
-      const ast = parseSync(code);
-      addNodeIdsToAST(ast);
-      attachCodeSlicesToAST(ast, code);
-      const astq = new ASTQuerier(ast);
-      const expected = [ast.program.body[0].expression.right.right, ast.program.body[1]];
-      const actual = astq.filterNodes((node) => ['123', 'z = 4;'].includes(node.codeSlice));
-      expect(actual).toEqual(expected);
-    });
   });
 });

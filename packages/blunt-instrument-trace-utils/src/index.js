@@ -64,16 +64,16 @@ function toFilterObject(filter) {
  */
 export class TraceQuerier { // eslint-disable-line import/prefer-default-export
   /**
-   * @param {ASTQuerier} astQuerier - an ASTQuerier for the AST of the original uninstrumented code
+   * @param {ASTBundle} astb - an ASTBundle for the AST(s) of the original uninstrumented code
    * @param {Trev[]} trace - the trace produced by blunt-instrument
    */
-  constructor(astQuerier, trace) {
-    this.astQuerier = astQuerier;
+  constructor(astb, trace) {
+    this.astb = astb;
 
     const trevs = [];
     for (let i = 0; i < trace.length; i += 1) {
       if (trace[i].id !== i + 1) {
-        throw new Error(`Non-sequential trev ID ${trace[i].id}`);
+        throw new Error(`Non-sequential trev id [${trace[i].id}]`);
       }
 
       const { parentId } = trace[i];
@@ -82,9 +82,9 @@ export class TraceQuerier { // eslint-disable-line import/prefer-default-export
       }
       const ancestorIds = parentId ? [parentId].concat(trevs[parentId - 1].ancestorIds) : [];
 
-      const node = astQuerier.getNodeById(trace[i].nodeId);
+      const node = astb.getNode(trace[i].astId, trace[i].nodeId);
       if (!node) {
-        throw new Error(`Trev ID ${trace[i].id} has unknown node ID ${trace[i].nodeId}`);
+        throw new Error(`Trev ID [${trace[i].id}] has unknown node id [${trace[i].nodeId}] for AST id [${trace[i].astId}]`);
       }
 
       const denormalized = { ancestorIds, node };

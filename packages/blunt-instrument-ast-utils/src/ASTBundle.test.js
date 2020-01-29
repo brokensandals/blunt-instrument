@@ -21,11 +21,11 @@ describe('ASTBundle', () => {
       expect(() => new ASTBundle({ test: ast })).toThrowError('Node is missing node ID');
     });
 
-    it('adds biKey and biAstId fields', () => {
+    it('adds biKey and biASTId fields', () => {
       const ast = parseSync('x = 1');
       addNodeIdsToAST(ast);
       new ASTBundle({ 'foo:bar': ast }); // eslint-disable-line no-new
-      expect(ast.biAstId).toEqual('foo:bar');
+      expect(ast.biASTId).toEqual('foo:bar');
       expect(ast.biKey).toEqual(toNodeKey('foo:bar', 1));
     });
   });

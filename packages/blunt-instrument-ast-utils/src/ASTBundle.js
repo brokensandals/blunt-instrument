@@ -31,7 +31,7 @@ export function fromNodeKey(nodeKey) {
 export class ASTBundle {
   /**
    * Note: the given ASTs are modified by this method:
-   * - an `biAstId` string field is added to each node
+   * - an `biASTId` string field is added to each node
    * - a `biKey` string field is added to each node containing the result of `toNodeKey`
    * @param {object} asts a collection of ASTs; each key should be the AST's id, and each value
    *    should be the root babel Node of the AST
@@ -45,7 +45,7 @@ export class ASTBundle {
         if (!node.biId) {
           throw new Error('Node is missing node ID');
         }
-        node.biAstId = astId; // eslint-disable-line no-param-reassign
+        node.biASTId = astId; // eslint-disable-line no-param-reassign
         node.biKey = toNodeKey(astId, node.biId); // eslint-disable-line no-param-reassign
         nodesByKey.set(node.biKey, node);
       });

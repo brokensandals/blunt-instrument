@@ -2,7 +2,7 @@ import * as babel from '@babel/core';
 import examples from 'blunt-instrument-test-resources';
 import {
   attachCodeSlicesToAST,
-  ASTQuerier,
+  ASTBundle,
 } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep'; // eslint-disable-line import/no-extraneous-dependencies
 import { Encoder, UnsafeDecoder } from 'object-graph-as-json';
@@ -28,7 +28,7 @@ function transform(code, pluginOpts = {}, babelOpts = { configFile: false }, mod
  * Runs blunt-instrument-babel-plugin on the given code, then runs the instrumented code.
  * An object named "output" will be in scope for the code; the code can set properties on
  * it to communicate with the caller. The return value of this method is the "output" object,
- * with added properties "astq", "code", "instrumented" (code), and "tracer".
+ * with added properties "astb", "code", "instrumented" (code), and "tracer".
  *
  * @param {string} code
  * @returns {object}
@@ -49,10 +49,10 @@ function biEval(code, pluginOpts = {}) {
   fn(tracer, output);
   const astClone = cloneDeep(trace.asts.test);
   attachCodeSlicesToAST(astClone, code);
-  const astq = new ASTQuerier(astClone);
+  const astb = new ASTBundle({ test: astClone });
 
   return {
-    astq,
+    astb,
     code,
     instrumented,
     trace,
@@ -72,7 +72,7 @@ function trevsForNode({ trace }, node) {
 }
 
 function codeTrevs(output, target, trevType = 'expr') {
-  const nodes = output.astq.getNodesByCodeSlice(target);
+  const nodes = output.astb.filterNodes((node) => node.codeSlice === target);
   const trevs = nodes.flatMap((node) => trevsForNode(output, node));
   return trevs.filter((trev) => trev.type === trevType);
 }
@@ -92,7 +92,7 @@ function codeValue(output, target, trevType = 'expr') {
 }
 
 function namedCalls(output, target, trevType = 'fn-start') {
-  const nodes = output.astq.filterNodes(
+  const nodes = output.astb.filterNodes(
     (node) => babel.types.isFunctionDeclaration(node) && node.id.name === target,
   );
   expect(nodes).toHaveLength(1);

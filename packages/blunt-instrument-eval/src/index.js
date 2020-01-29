@@ -2,7 +2,7 @@ import * as babel from '@babel/core';
 import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
 import {
   attachCodeSlicesToAST,
-  ASTQuerier,
+  ASTBundle,
   copyNodeIdsBetweenASTs,
 } from 'blunt-instrument-ast-utils';
 import { InMemoryTrace } from 'blunt-instrument-runtime';
@@ -86,8 +86,8 @@ may interfere with instrumentedEval, the code, or both.`);
   const result = { error };
 
   attachCodeSlicesToAST(ast, source);
-  const astQuerier = new ASTQuerier(ast);
-  result.traceQuerier = new TraceQuerier(astQuerier, trevs);
+  const astb = new ASTBundle({ eval: ast });
+  result.traceQuerier = new TraceQuerier(astb, trevs);
 
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);

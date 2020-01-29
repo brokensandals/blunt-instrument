@@ -18,14 +18,14 @@ export function TraceQueryFormView({
     return { value, label };
   }
   const includeNodesOptions = [];
-  for (const node of querier.astQuerier.filterNodes(Boolean)) {
+  for (const node of querier.astb.filterNodes(Boolean)) {
     includeNodesOptions.push(nodeOption(node));
   }
 
   const includeNodesValue = [];
   for (const nodeId in query.filters.onlyNodeIds) {
     if (query.filters.onlyNodeIds[nodeId]) {
-      includeNodesValue.push(nodeOption(querier.astQuerier.getNodeById(Number(nodeId))));
+      includeNodesValue.push(nodeOption(querier.astb.getNode('eval', Number(nodeId))));
     }
   }
 

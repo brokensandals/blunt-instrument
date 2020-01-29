@@ -13,12 +13,11 @@ const example = `
 describe('instrumentedEval', () => {
   it('runs the given code and returns a TraceQuerier', () => {
     const result = instrumentedEval(example);
-    const sumNode = result.traceQuerier.astQuerier.getNodesByCodeSlice('num + by')[0];
+    const sumNode = result.traceQuerier.astb.filterNodes((node) => node.codeSlice === 'num + by')[0];
     const trevs = result.traceQuerier.query({
       filters: { onlyNodeIds: { [sumNode.biId]: true } },
     });
     expect(trevs.map((trev) => trev.data)).toEqual([4, 7]);
-    expect(result.instrumentedASTQuerier).toBeUndefined();
     expect(result.error).toBeUndefined();
   });
 
@@ -45,7 +44,9 @@ test('the code in the readme works', () => {
     factorial(5);`;
 
   const result = instrumentedEval(code);
-  const recursiveCallNode = result.traceQuerier.astQuerier.getNodesByCodeSlice('factorial(n - 1)')[0];
+  const recursiveCallNode = result.traceQuerier.astb.filterNodes(
+    (node) => node.codeSlice === 'factorial(n - 1)',
+  )[0];
   const trevs = result.traceQuerier.query({
     filters: { onlyNodeIds: recursiveCallNode.biId },
   });

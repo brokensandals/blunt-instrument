@@ -92,7 +92,7 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            <AnnotatedCode ast={evalResult.traceQuerier.astQuerier.ast}
+            <AnnotatedCode ast={evalResult.traceQuerier.astb.asts.eval}
                            highlightedNodeId={highlightedNodeId}
                            onHoveredNodeChange={onHoveredNodeChange}
                            onNodeSelectedToggle={onNodeSelectedToggle}
@@ -100,7 +100,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ASTNav ast={evalResult.traceQuerier.astQuerier.ast}
+            <ASTNav ast={evalResult.traceQuerier.astb.asts.eval}
                     highlightedNodeId={highlightedNodeId}
                     onHoveredNodeChange={onHoveredNodeChange}
                     onNodeSelectedToggle={onNodeSelectedToggle}
@@ -108,7 +108,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={evalResult.traceQuerier.astQuerier.ast} name={false} />
+            <ReactJson src={evalResult.traceQuerier.astb.asts.eval} name={false} />
           </TabPanel>
           
           <TabPanel>
