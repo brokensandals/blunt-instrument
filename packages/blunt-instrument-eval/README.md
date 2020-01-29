@@ -12,7 +12,7 @@ const code = `
   factorial(5);`;
 
 const result = instrumentedEval(code);
-const recursiveCallNode = result.traceQuerier.astQuerier.getNodesByCodeSlice('factorial(n - 1)')[0];
+const recursiveCallNode = result.traceQuerier.astb.filterNodes((node) => node.codeSlice === 'factorial(n - 1)')[0];
 const trevs = result.traceQuerier.query({ filters: { onlyNodeIds: recursiveCallNode.biId }});
 
 // This will log the four values that factorial(n - 1) evaluates to during the

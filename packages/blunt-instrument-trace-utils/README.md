@@ -10,13 +10,13 @@ See the JSDoc in [src/index.js](src/index.js) for detailed usage info.
 
 The TraceQuerier lets you query for trevs by various criteria.
 
-You must already have an ASTQuerier instance before creating a TraceQuerier; see [blunt-instrument-ast-utils][ast-utils].
+You must already have an ASTBundle instance before creating a TraceQuerier; see [blunt-instrument-ast-utils][ast-utils].
 
 A trace can be acquired by using [blunt-instrument-eval][eval], which will also create a TraceQuerier for you.
 Alternatively, you can use [blunt-instrument-babel-plugin][babel-plugin] directly, and retrieve the trace from the instrumentation object using one of the mechanisms documented in its README.
 
 ```javascript
-const traceQuerier = new TraceQuerier(astQuerier, trace);
+const traceQuerier = new TraceQuerier(astb, trace);
 
 // Retrieve all trevs - i.e., all the values recorded by the tracer.
 traceQuerier.query();
