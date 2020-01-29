@@ -6,10 +6,8 @@ import instrumentedEval from 'blunt-instrument-eval';
 
 const defaultQueryState = {
   traceQuery: {
-    filters: {
-      excludeNodeTypes: [],
-      onlyNodeIds: {},
-    }
+    nodes: {},
+    nodeTypes: {},
   },
   highlightedTrevId: null,
   highlightedNodeId: null,
@@ -32,11 +30,11 @@ class AppContainer extends React.Component {
   }
 
   handleTraceQueryChange(traceQuery) {
-    this.setState(this.doQuery(this.state.evalResult.traceQuerier, traceQuery));
+    this.setState(this.doQuery(this.state.evalResult.tc, traceQuery));
   }
 
   handleHoveredTrevChange(id) {
-    this.handleHoveredNodeChange(id == null ? null : this.state.evalResult.traceQuerier.getTrevById(id).nodeId);
+    this.handleHoveredNodeChange(id == null ? null : this.state.evalResult.tc.getTrev(id).nodeId);
     this.setState({ highlightedTrevId: id });
   }
 
@@ -45,16 +43,13 @@ class AppContainer extends React.Component {
   }
 
   handleNodeSelectedToggle(nodeId) {
-    if (!this.state.traceQuery.filters.onlyNodeIds[nodeId] &&
-          !(this.state.evalResult.traceQuerier.astb.getNode('eval', nodeId))) {
-      // The user tried to select a node that's only present in the post-instrumentation AST.
-      // We won't allow this, since there can never be any trevs associated to those nodes.
+    const node = this.state.evalResult.tc.astb.getNode('eval', nodeId);
+    if (!node) {
       return;
     }
     this.handleTraceQueryChange(
       update(this.state.traceQuery, {
-        filters: { onlyNodeIds:
-          { $toggle: [nodeId] }}
+        nodes: { $toggle: [node.biKey] }
       }));
   }
 
@@ -81,14 +76,19 @@ class AppContainer extends React.Component {
       runError: null,
       sourceDraft: source,
       ...defaultQueryState,
-      ...this.doQuery(evalResult.traceQuerier, defaultQueryState.traceQuery),
+      ...this.doQuery(evalResult.tc, defaultQueryState.traceQuery),
     };
   }
 
-  doQuery(traceQuerier, traceQuery) {
-    const trevs = traceQuerier.query(traceQuery);
+  doQuery(tc, traceQuery) {
+    const nodes = Object.keys(traceQuery.nodes).filter((key) => traceQuery.nodes[key]);
+    const nodeTypes = Object.keys(traceQuery.nodeTypes).filter((key) => traceQuery.nodeTypes[key]);
+    const filteredTC = tc.filter((trev) =>
+      (nodes.length === 0 || nodes.includes(trev.denormalized.node.biKey))
+      && (nodeTypes.length === 0 || nodeTypes.includes(trev.denormalized.node.type))
+    );
     return {
-      trevs,
+      filteredTC,
       traceQuery,
     };
   }
@@ -104,7 +104,7 @@ class AppContainer extends React.Component {
   render() {
     return (
       <AppView evalResult={this.state.evalResult}
-               trevs={this.state.trevs}
+               tc={this.state.filteredTC}
                traceQuery={this.state.traceQuery}
                sourceDraft={this.state.sourceDraft}
                highlightedTrevId={this.state.highlightedTrevId}

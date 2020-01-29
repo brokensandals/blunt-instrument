@@ -2,31 +2,42 @@
 
 When code instrumented by blunt-instrument is executed, it produces a trace.
 The trace is a sequence of trace events, which blunt-instrument refers to as "trevs".
-This package assists in working with traces and trevs.
+This package assists in working with trevs.
 
-See the JSDoc in [src/index.js](src/index.js) for detailed usage info.
+## TrevCollection
 
-## TraceQuerier
+A TrevCollection contains a list of trace events, along with the ASTs for the code that generated those events.
+It provides convenience methods for denormalizing extra data onto the trevs and getting basic statistics about them.
 
-The TraceQuerier lets you query for trevs by various criteria.
+You must already have an ASTBundle instance before creating a TrevCollection; see [blunt-instrument-ast-utils][ast-utils].
 
-You must already have an ASTBundle instance before creating a TraceQuerier; see [blunt-instrument-ast-utils][ast-utils].
-
-A trace can be acquired by using [blunt-instrument-eval][eval], which will also create a TraceQuerier for you.
-Alternatively, you can use [blunt-instrument-babel-plugin][babel-plugin] directly, and retrieve the trace from the instrumentation object using one of the mechanisms documented in its README.
+A trevs array can be acquired by using [blunt-instrument-eval][eval], which will also create a TrevCollection for you.
+Alternatively, you can use [blunt-instrument-babel-plugin][babel-plugin] directly, and retrieve the `trevs` field from whatever `Trace` instance you configure it to write to.
 
 ```javascript
-const traceQuerier = new TraceQuerier(astb, trace);
+const tc = new TrevCollection(trevs, astBundle);
 
-// Retrieve all trevs - i.e., all the values recorded by the tracer.
-traceQuerier.query();
+// Get all the trevs in the collection
+trevCollection.trevs;
 
-// Retrieve all trevs except literals; i.e., for a trace of the code 'x = y + 3',
+// Get a new TrevCollection filtered according to a function you provide -
+// in this case, find all the times that any expression evaluated to the
+// string "hello world!"
+tc.filter((trev) => trev.type === 'expr' && trev.data === 'hello world!');
+
+// Attach extra fields to all the trevs for convenience
+const fancyTC = tc.withDenormalizedInfo();
+
+// Filter out literals; i.e., for a trace of the code 'x = y + 3',
 // omit all the entries reporting that 3 evaluated to 3.
-traceQuerier.query({ filters: { excludeNodeTypes: { Literal: true } } });
+import types from '@babel/types';
+fancyTC.filter((trev) => !types.isLiteral(trev.denormalized.node));
 
-// Retrieve all trevs for the AST nodes with IDs "src-1" and "src-2".
-traceQuerier.query({ filters: { onlyNodeIds: { 'src-1': true, 'src-2': true } } });
+// Get three Maps: one mapping Nodes to the number of trevs in the collection
+// for that Node; one mapping node types to the number of trevs in the collection
+// for that node type; and one mapping trev types to the number of trevs in the
+// collection for that type.
+const { nodes, nodeTypes, types } = tc.getFacets();
 ```
 
 [ast-utils]: ../blunt-instrument-ast-utils/README.md

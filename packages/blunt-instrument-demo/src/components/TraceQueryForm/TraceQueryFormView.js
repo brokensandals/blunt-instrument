@@ -7,48 +7,48 @@ export function TraceQueryFormView({
   highlightedNodeId,
   onTraceQueryChange = (query) => {},
   onHoveredNodeChange = (nodeId) => {},
-  querier,
   query,
+  tc,
 }) {
-  function nodeOption(node) {
-    const value = node.biId;
+  function nodeOption(node, count) {
+    const value = node.biKey;
     const codeSlice = node.codeSlice;
     const codePreview = codeSlice.length > 20 ? codeSlice.slice(0, 20) + '...' : codeSlice;
-    const label = `[${value}] ${node.type}: ${codePreview}`;
+    let label = `[${value}] ${node.type}: ${codePreview}`;
+    if (count !== undefined) {
+      label += ` (${count})`;
+    }
     return { value, label };
   }
-  const includeNodesOptions = [];
-  for (const node of querier.astb.filterNodes(Boolean)) {
-    includeNodesOptions.push(nodeOption(node));
+
+  const facets = tc.getFacets();
+  
+  const nodesOptions = Array.from(facets.nodes.entries()).map(
+    ([node, count]) => nodeOption(node, count));
+  const nodesValue = Object.keys(query.nodes).filter((key) => query.nodes[key]).map(
+    (nodeKey) => nodeOption(tc.astb.getNodeByKey(nodeKey)));
+
+  const nodeTypesOptions = Array.from(facets.nodeTypes.entries()).map(
+    ([type, count]) => ({ value: type, label: `${type} (${count})` }),
+  );
+  const nodeTypesValue = Object.keys(query.nodeTypes).filter((key) => query.nodeTypes[key]).map(
+    (type) => ({ value: type, label: type }),
+  );
+
+  const handleNodesChange = (value) => {
+    const nodes = {};
+    (value || []).forEach((selected) => {
+      nodes[selected.value] = true;
+    });
+    onTraceQueryChange(update(query, { nodes: { $set: nodes }}));
   }
 
-  const includeNodesValue = [];
-  for (const nodeId in query.filters.onlyNodeIds) {
-    if (query.filters.onlyNodeIds[nodeId]) {
-      includeNodesValue.push(nodeOption(querier.astb.getNode('eval', Number(nodeId))));
-    }
-  }
-
-  const handleIncludeNodesChange = (value) => {
-    const onlyNodeIds = {};
-    for (const selected of (value || [])) {
-      onlyNodeIds[selected.value] = true;
-    }
-    onTraceQueryChange(update(query, { filters: { onlyNodeIds: { $set: onlyNodeIds }}}))
-  }
-
-  const excludeNodeTypesOptions = [];
-  for (const type of new Set(querier.query().map(trev => trev.denormalized.node.type))) {
-    excludeNodeTypesOptions.push({ value: type, label: type });
-  }
-
-  const excludeNodeTypesValue = query.filters.excludeNodeTypes
-    .map(type => ({
-      value: type, label: type
-    }));
-
-  const handleExcludeNodeTypesChange = (value) => {
-    onTraceQueryChange(update(query, { filters: { excludeNodeTypes: { $set: (value || []).map(option => option.value) } } }));
+  const handleNodeTypesChange = (value) => {
+    const nodeTypes = {};
+    (value || []).forEach((selected) => {
+      nodeTypes[selected.value] = true;
+    });
+    onTraceQueryChange(update(query, { nodeTypes: { $set: nodeTypes } }));
   }
 
   return (
@@ -57,9 +57,9 @@ export function TraceQueryFormView({
         <label className="label" id="node-filters-label">Only include nodes:</label>
         <Select className="node-filters-select"
                 isMulti
-                options={includeNodesOptions}
-                value={includeNodesValue}
-                onChange={handleIncludeNodesChange}
+                options={nodesOptions}
+                value={nodesValue}
+                onChange={handleNodesChange}
                 placeholder="(all)"
                 aria-labelledby="node-filters-select" />
       </div>
@@ -68,10 +68,10 @@ export function TraceQueryFormView({
         <label className="label" id="node-type-filters-label">Exclude node types:</label>
         <Select className="node-type-filters-select"
                 isMulti
-                options={excludeNodeTypesOptions}
-                value={excludeNodeTypesValue}
-                onChange={handleExcludeNodeTypesChange}
-                placeholder="(none)"
+                options={nodeTypesOptions}
+                value={nodeTypesValue}
+                onChange={handleNodeTypesChange}
+                placeholder="(all)"
                 aria-labelledby="node-type-filters-label" />
       </div>
     </form>

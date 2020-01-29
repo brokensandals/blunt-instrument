@@ -6,7 +6,7 @@ import {
   copyNodeIdsBetweenASTs,
 } from 'blunt-instrument-ast-utils';
 import { InMemoryTrace } from 'blunt-instrument-runtime';
-import { TraceQuerier } from 'blunt-instrument-trace-utils';
+import { TrevCollection } from 'blunt-instrument-trace-utils';
 
 /**
  * This method ties together various pieces of blunt-instrument to provide a
@@ -14,7 +14,7 @@ import { TraceQuerier } from 'blunt-instrument-trace-utils';
  * and returning the trace in a consumable format.
  *
  * The input is javascript source code as a string, and the output is an object
- * containing at least one field, `traceQuerier`. This is an instance of TraceQuerier
+ * containing at least one field, `tc`. This is an instance of TrevCollection
  * with the results of the trace.
  *
  * If the code throws an error, it will be caught and stored in the `error` field of the
@@ -87,7 +87,7 @@ may interfere with instrumentedEval, the code, or both.`);
 
   attachCodeSlicesToAST(ast, source);
   const astb = new ASTBundle({ eval: ast });
-  result.traceQuerier = new TraceQuerier(astb, trevs);
+  result.tc = new TrevCollection(trevs, astb).withDenormalizedInfo();
 
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);

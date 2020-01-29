@@ -9,11 +9,12 @@ import 'react-tabs/style/react-tabs.css';
 import examples from 'blunt-instrument-test-resources';
 import ReactJson from 'react-json-view';
 import Modal from 'react-modal';
+import { fromNodeKey } from 'blunt-instrument-ast-utils';
 
 function AppView({
   evalResult,
+  tc,
   traceQuery,
-  trevs,
   highlightedTrevId,
   highlightedNodeId,
   onTraceQueryChange,
@@ -40,8 +41,8 @@ function AppView({
   }
 
   const selectedNodeIds =
-    Object.keys(traceQuery.filters.onlyNodeIds).filter(
-      key => traceQuery.filters.onlyNodeIds[key]).map(Number);
+    Object.keys(traceQuery.nodes).filter(
+      key => traceQuery.nodes[key]).map((nodeKey) => fromNodeKey(nodeKey).nodeId);
 
   const handleSourceDraftChange =
     (event) => onSourceDraftChange(event.target.value);
@@ -92,7 +93,7 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            <AnnotatedCode ast={evalResult.traceQuerier.astb.asts.eval}
+            <AnnotatedCode ast={evalResult.tc.astb.asts.eval}
                            highlightedNodeId={highlightedNodeId}
                            onHoveredNodeChange={onHoveredNodeChange}
                            onNodeSelectedToggle={onNodeSelectedToggle}
@@ -100,7 +101,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ASTNav ast={evalResult.traceQuerier.astb.asts.eval}
+            <ASTNav ast={evalResult.tc.astb.asts.eval}
                     highlightedNodeId={highlightedNodeId}
                     onHoveredNodeChange={onHoveredNodeChange}
                     onNodeSelectedToggle={onNodeSelectedToggle}
@@ -108,7 +109,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={evalResult.traceQuerier.astb.asts.eval} name={false} />
+            <ReactJson src={evalResult.tc.astb.asts.eval} name={false} />
           </TabPanel>
           
           <TabPanel>
@@ -125,7 +126,7 @@ function AppView({
                       onTraceQueryChange={onTraceQueryChange}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
-                      querier={evalResult.traceQuerier}
+                      tc={tc}
                       query={traceQuery} />
 
       <div className="trev-tabs">
@@ -136,7 +137,7 @@ function AppView({
           </TabList>
           
           <TabPanel>
-            <TrevTable trevs={trevs}
+            <TrevTable trevs={tc.trevs}
                       highlightedTrevId={highlightedTrevId}
                       highlightedNodeId={highlightedNodeId}
                       onHoveredTrevChange={onHoveredTrevChange}
@@ -145,7 +146,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={trevs.map(({ denormalized, ...rest }) => rest)}
+            <ReactJson src={tc.trevs.map(({ denormalized, ...rest }) => rest)}
                        name={false}
                        displayDataTypes={false} />
           </TabPanel>

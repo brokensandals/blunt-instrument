@@ -12,8 +12,9 @@ const code = `
   factorial(5);`;
 
 const result = instrumentedEval(code);
-const recursiveCallNode = result.traceQuerier.astb.filterNodes((node) => node.codeSlice === 'factorial(n - 1)')[0];
-const trevs = result.traceQuerier.query({ filters: { onlyNodeIds: recursiveCallNode.biId }});
+// Look up all the trace events corresponding to the evaluation of "factorial(n - 1)":
+const { trevs } = result.tc.filter(
+  (trev) => trev.denormalized.node.codeSlice === 'factorial(n - 1)');
 
 // This will log the four values that factorial(n - 1) evaluates to during the
 // course of execution:
@@ -21,7 +22,7 @@ const trevs = result.traceQuerier.query({ filters: { onlyNodeIds: recursiveCallN
 console.log(trevs.map(trev => trev.data));
 ```
 
-For more information on doing queries, see [blunt-instrument-trace-utils][trace-utils] and [blunt-instrument-ast-utils][ast-utils].
+For more information on working with the output, see [blunt-instrument-trace-utils][trace-utils] and [blunt-instrument-ast-utils][ast-utils].
 
 Note: code is evaluated in strict mode.
 
