@@ -36,6 +36,7 @@
   cursor: pointer;
   color: blue;
   font-size: small;
+  padding: 0;
 }
 
 .save-form .view-save:hover {

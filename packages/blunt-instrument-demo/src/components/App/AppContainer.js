@@ -24,7 +24,8 @@ class AppContainer extends React.Component {
     this.handleTraceQueryChange = this.handleTraceQueryChange.bind(this);
     this.handleHoveredTrevChange = this.handleHoveredTrevChange.bind(this);
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
-    this.handleLoadByPaste = this.handleLoadByPaste.bind(this);
+    this.handleLoadByPaste = this.loadFromJSONText.bind(this);
+    this.handleLoadByFile = this.handleLoadByFile.bind(this);
     this.handleNodeSelectedToggle = this.handleNodeSelectedToggle.bind(this);
     this.handleRun = this.handleRun.bind(this);
     this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
@@ -45,7 +46,23 @@ class AppContainer extends React.Component {
     this.setState({ highlightedNodeId: nodeId });
   }
 
-  handleLoadByPaste(text) {
+  handleLoadByFile(file) {
+    try {
+      const reader = new FileReader();
+      reader.onerror = (event) => {
+        reader.abort();
+        this.setState({ action: 'load', error: 'Error while reading file' });
+      };
+      reader.onload = () => {
+        this.loadFromJSONText(reader.result);
+      };
+      reader.readAsText(file);
+    } catch (error) {
+      this.setState({ action: 'load', error });
+    }
+  }
+
+  loadFromJSONText(text) {
     try {
       const json = JSON.parse(text);
       const tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
@@ -136,6 +153,7 @@ class AppContainer extends React.Component {
                onTraceQueryChange={this.handleTraceQueryChange}
                onHoveredTrevChange={this.handleHoveredTrevChange}
                onHoveredNodeChange={this.handleHoveredNodeChange}
+               onLoadByFile={this.handleLoadByFile}
                onLoadByPaste={this.handleLoadByPaste}
                onNodeSelectedToggle={this.handleNodeSelectedToggle}
                onRun={this.handleRun}

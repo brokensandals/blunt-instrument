@@ -22,6 +22,7 @@ function AppView({
   onTraceQueryChange,
   onHoveredTrevChange,
   onHoveredNodeChange,
+  onLoadByFile,
   onLoadByPaste,
   onNodeSelectedToggle,
   onRun,
@@ -99,6 +100,14 @@ function AppView({
     FileSaver.saveAs(blob, 'trace.json');
   };
 
+  const handleLoadFile = (event) => {
+    const files = event.target.files;
+    if (files.length < 1) {
+      return;
+    }
+    onLoadByFile(files[0]);
+  };
+
   return (
     <div className="App">
       <div className="control-tabs">
@@ -131,19 +140,19 @@ function AppView({
 
           <TabPanel>
             <div className="save-form">
-              <p>You can export the trace &amp; AST to restore later.</p>
+              <p>You can export the trace &amp; AST to load later.</p>
               <ul>
-                <li><button className="view-save" onClick={() => onOpenModalData(evalResult.tc.asJSON())}>View JSON</button></li>
-                <li><button className="file-save" onClick={handleSaveFile}>Save JSON to File</button></li>
+                <li><button className="view-save" onClick={() => onOpenModalData(evalResult.tc.asJSON())}>View JSON in browser</button></li>
+                <li>Or <button className="file-save" onClick={handleSaveFile}>save to file</button></li>
               </ul>
             </div>
           </TabPanel>
           
           <TabPanel>
             <div className="load-form">
-              <p>You can load a trace &amp; AST by one of the following methods.</p>
               <ul>
                 <li>Paste the JSON here: <input className="load-paste" value="" type="text" onPaste={handleLoadByPaste} /></li>
+                <li>Or load from a file: <input className="load-file" value="" type="file" accept=".json" onChange={handleLoadFile} /></li>
               </ul>
               <div className="status-area">
                 {loadStatus}
