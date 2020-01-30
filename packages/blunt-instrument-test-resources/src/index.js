@@ -5,6 +5,22 @@ examples.factorial = `function fac(n) {
 }
 const result = fac(3);`;
 
+examples.fizzBuzzGenerator = `function* fizzbuzzer(limit) {
+  for (let i = 1; i < limit; i++) {
+    if (i % 15 === 0) {
+      yield 'FizzBuzz';
+    } else if (i % 3 === 0) {
+      yield 'Fizz';
+    } else if (i % 5 === 0) {
+      yield 'Buzz';
+    } else {
+      yield i.toString();
+    }
+  }
+}
+
+const result = Array.from(fizzbuzzer(31));`;
+
 examples.insertionSort = `function insertionSort(array) {
   for (let i = 0; i < array.length; i++) {
     for (let j = i - 1; j >= 0; j--) {
