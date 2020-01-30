@@ -12,6 +12,7 @@
 
 .control-tabs {
   grid-area: control-tabs;
+  font-size: small;
 }
 
 .control-tabs .react-tabs__tab-panel {
@@ -23,6 +24,28 @@
   display: flex;
   flex-direction: column;
   padding: 5px;
+}
+
+.save-form, .load-form {
+  padding: 0px 10px 5px 10px;
+}
+
+.save-form .view-save {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: blue;
+  font-size: small;
+}
+
+.save-form .view-save:hover {
+  text-decoration: underline;
+}
+
+.load-form .load-paste {
+  width: 10ex;
+  background-color: lightgray;
+  margin-left: 1ex;
 }
 
 .source-form .status {
@@ -40,7 +63,6 @@
 
 .source-form p {
   margin: 0;
-  font-size: small;
 }
 
 .source-form textarea {

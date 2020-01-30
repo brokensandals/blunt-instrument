@@ -3,6 +3,7 @@ import update from 'immutability-helper';
 import AppView from './AppView';
 import examples from 'blunt-instrument-test-resources';
 import instrumentedEval from 'blunt-instrument-eval';
+import { TrevCollection } from 'blunt-instrument-trace-utils';
 
 const defaultQueryState = {
   traceQuery: {
@@ -23,6 +24,7 @@ class AppContainer extends React.Component {
     this.handleTraceQueryChange = this.handleTraceQueryChange.bind(this);
     this.handleHoveredTrevChange = this.handleHoveredTrevChange.bind(this);
     this.handleHoveredNodeChange = this.handleHoveredNodeChange.bind(this);
+    this.handleLoadByPaste = this.handleLoadByPaste.bind(this);
     this.handleNodeSelectedToggle = this.handleNodeSelectedToggle.bind(this);
     this.handleRun = this.handleRun.bind(this);
     this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
@@ -41,6 +43,19 @@ class AppContainer extends React.Component {
 
   handleHoveredNodeChange(nodeId) {
     this.setState({ highlightedNodeId: nodeId });
+  }
+
+  handleLoadByPaste(text) {
+    const json = JSON.parse(text);
+    const tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
+    const evalResult = { tc };
+    this.setState({
+      evalResult,
+      runError: null,
+      sourceDraft: tc.astb.asts.eval.codeSlice,
+      ...defaultQueryState,
+      ...this.doQuery(tc, defaultQueryState.traceQuery),
+    });
   }
 
   handleNodeSelectedToggle(nodeId) {
@@ -115,6 +130,7 @@ class AppContainer extends React.Component {
                onTraceQueryChange={this.handleTraceQueryChange}
                onHoveredTrevChange={this.handleHoveredTrevChange}
                onHoveredNodeChange={this.handleHoveredNodeChange}
+               onLoadByPaste={this.handleLoadByPaste}
                onNodeSelectedToggle={this.handleNodeSelectedToggle}
                onRun={this.handleRun}
                onSourceDraftChange={this.handleSourceDraftChange}

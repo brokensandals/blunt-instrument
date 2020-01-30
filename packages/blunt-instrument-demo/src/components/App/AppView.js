@@ -21,6 +21,7 @@ function AppView({
   onTraceQueryChange,
   onHoveredTrevChange,
   onHoveredNodeChange,
+  onLoadByPaste,
   onNodeSelectedToggle,
   onRun,
   onSourceDraftChange,
@@ -70,6 +71,14 @@ function AppView({
     onTraceQueryChange(update(traceQuery, { types: { $toggle: [type] } }));
   };
 
+  const handleLoadByPaste = (event) => {
+    const text = (event.clipboardData || window.clipboardData).getData('text');
+    if (text) {
+      onLoadByPaste(text);
+    }
+    event.preventDefault();
+  }
+
   return (
     <div className="App">
       <div className="control-tabs">
@@ -100,8 +109,23 @@ function AppView({
             </form>
           </TabPanel>
 
-          <TabPanel></TabPanel>
-          <TabPanel></TabPanel>
+          <TabPanel>
+            <div className="save-form">
+              <p>You can export the trace &amp; AST to restore later.</p>
+              <ul>
+                <li><button className="view-save" onClick={() => onOpenModalData(evalResult.tc.asJSON())}>View JSON</button></li>
+              </ul>
+            </div>
+          </TabPanel>
+          
+          <TabPanel>
+            <div className="load-form">
+              <p>You can load a trace &amp; AST by one of the following methods.</p>
+              <ul>
+                <li>Paste the JSON here: <input className="load-paste" value="" type="text" onPaste={handleLoadByPaste} /></li>
+              </ul>
+            </div>
+          </TabPanel>
         </Tabs>
       </div>
 
@@ -111,7 +135,7 @@ function AppView({
             <Tab>Code</Tab>
             <Tab>AST</Tab>
             <Tab>AST JSON</Tab>
-            <Tab>Instrumented Code</Tab>
+            {evalResult.instrumentedAST ? <Tab>Instrumented Code</Tab> : null}
           </TabList>
 
           <TabPanel>
@@ -134,13 +158,14 @@ function AppView({
             <ReactJson src={evalResult.tc.astb.asts.eval} name={false} />
           </TabPanel>
           
-          <TabPanel>
-            <AnnotatedCode ast={evalResult.instrumentedAST}
-                           highlightedNodeId={highlightedNodeId}
-                           onHoveredNodeChange={onHoveredNodeChange}
-                           onNodeSelectedToggle={onNodeSelectedToggle}
-                           selectedNodeIds={selectedNodeIds} />
-          </TabPanel>
+          {evalResult.instrumentedAST ?
+            <TabPanel>
+              <AnnotatedCode ast={evalResult.instrumentedAST}
+                            highlightedNodeId={highlightedNodeId}
+                            onHoveredNodeChange={onHoveredNodeChange}
+                            onNodeSelectedToggle={onNodeSelectedToggle}
+                            selectedNodeIds={selectedNodeIds} />
+            </TabPanel> : null}
         </Tabs>
       </div>
 
