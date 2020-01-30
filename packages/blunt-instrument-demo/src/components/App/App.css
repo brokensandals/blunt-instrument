@@ -1,13 +1,23 @@
 .App {
   height: 100vh;
   display: grid;
-  grid-template-rows: 20% 10% calc(70% - 2em) 2em;
+  grid-template-rows: 20% 10% 35% calc(35% - 2em) 2em;
   grid-template-columns: 50% 50%;
   grid-template-areas:
     "control-tabs trace-query-form"
     "control-tabs trev-tabs"
     "code-tabs trev-tabs"
+    "code-tabs large-data-preview"
     "blurb blurb"
+}
+
+.large-data-preview {
+  grid-area: large-data-preview;
+  overflow: hidden;
+  font-size: small;
+  border-left: 1px solid gray;
+  border-top: 1px solid gray;
+  padding-left: 5px;
 }
 
 .control-tabs {

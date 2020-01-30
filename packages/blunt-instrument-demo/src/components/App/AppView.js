@@ -121,8 +121,7 @@ function AppView({
           <TabPanel>
             <form className="source-form">
               <p className="instructions">
-                Enter javascript code here, then click "Run" to see the trace.
-                Or, choose an example:
+                Enter javascript code &amp; click Run, or choose an example:
                 <select value={selectedExample} onChange={onChangeSelectedExample}>
                   {exampleOptions}
                 </select>
@@ -232,6 +231,10 @@ function AppView({
                        displayDataTypes={false} />
           </TabPanel>
         </Tabs>
+      </div>
+
+      <div className="large-data-preview">
+        <pre><code>{highlightedTrevId ? JSON.stringify(tc.getTrev(highlightedTrevId).data, null, 2) : null}</code></pre>
       </div>
 
       <div className="blurb">
