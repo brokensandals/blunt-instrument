@@ -33,12 +33,11 @@ const fancyTC = tc.withDenormalizedInfo();
 import types from '@babel/types';
 fancyTC.filter((trev) => !types.isLiteral(trev.denormalized.node));
 
-// Get three Maps: one mapping Nodes to the number of trevs in the collection
-// for that Node; one mapping node types to the number of trevs in the collection
-// for that node type; and one mapping trev types to the number of trevs in the
-// collection for that type.
+// Get the number of trevs by node, node type, and type.
 const { nodes, nodeTypes, types } = tc.getFacets();
 ```
+
+See the docs in [TrevCollection.js](src/TrevCollection.js) for more info.
 
 [ast-utils]: ../blunt-instrument-ast-utils/README.md
 [eval]: ../blunt-instrument-eval/README.md

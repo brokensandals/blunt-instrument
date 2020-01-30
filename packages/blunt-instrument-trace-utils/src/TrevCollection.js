@@ -1,4 +1,36 @@
+/**
+ * @typedef {Object} TrevExtended
+ * @property {number} id
+ * @property {?number} parentId - indicates the trev which enclosed this one on the call stack
+ * @property {string} type - type of trace event
+ * @property {string} astId - AST id of the node representing the code which this trev is for
+ * @property {number} nodeId - node id of the node representing the code which this trev is for
+ * @property {*} data - traced data, encoded via object-graph-as-json
+ * @property {?number} fnStartId - for type=fn-resume, the id of the type=fn-start trev in which
+ *   the generator/async function first began executing
+ * @property {?Object} denormalized - populated by TrevCollection.withDenormalizedInfo()
+ * @property {number[]} denormalized.ancestorIds - ids of every trev above this on the call stack
+ * @property {Node} denormalized.node - babel node corresponding to the astId and nodeId
+ */
+
+/**
+ * @typedef {Object} TrevCollectionFacets
+ * @property {Map} nodes - map of babel @type {Node} to @type {number} of times trevs for
+ *   that node in the collection
+ * @property {Map} nodeTypes - map of @type {string} babel node type to @type {number} of trevs
+ *   for that node type in the collection
+ * @property {Map} types - map of @type {string} trev type to @type {number} of trevs of that
+ *   type in the collection
+ */
+
+/**
+ * Wraps a group of trace events and their associated AST(s).
+ */
 export default class TrevCollection {
+  /**
+   * @param {TrevExtended} trevs
+   * @param {ASTBundle} astb
+   */
   constructor(trevs, astb) {
     this.trevs = trevs;
     this.astb = astb;
@@ -10,10 +42,18 @@ export default class TrevCollection {
     this.trevsById = trevsById;
   }
 
+  /**
+   * @param {number} id
+   * @returns the trev for the given ID, or undefined
+   */
   getTrev(id) {
     return this.trevsById.get(id);
   }
 
+  /**
+   * @returns {TrevCollection} with the `denormalized` field populated on each trev
+   * @throws when a trev's parentId or astId & nodeId combination is invalid
+   */
   withDenormalizedInfo() {
     const newTrevs = [];
     const ancestorsForParent = [];
@@ -53,6 +93,9 @@ export default class TrevCollection {
     return new TrevCollection(newTrevs, this.astb);
   }
 
+  /**
+   * @returns {TrevCollection} with the `denormalized` field removed from each trev
+   */
   withoutDenormalizedInfo() {
     const newTrevs = this.trevs.map((trev) => {
       const { denormalized, ...rest } = trev;
@@ -61,11 +104,20 @@ export default class TrevCollection {
     return new TrevCollection(newTrevs, this.astb);
   }
 
+  /**
+   * Calls the provided function for each trev in the collection, and returns a new
+   * TrevCollection containing only the ones for which it returned true.
+   * @param {function} fn
+   * @returns {TrevCollection}
+   */
   filter(fn) {
     const filtered = this.trevs.filter(fn);
     return new TrevCollection(filtered, this.astb);
   }
 
+  /**
+   * @returns {TrevCollectionFacets}
+   */
   getFacets() {
     const facets = {
       nodes: new Map(),
