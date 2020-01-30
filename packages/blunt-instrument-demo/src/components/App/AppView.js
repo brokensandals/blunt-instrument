@@ -28,7 +28,7 @@ function AppView({
   onOpenModalData,
   onCloseModalData,
   modalData,
-  runError,
+  status,
   sourceDraft,
 }) {
   function runHandler(source) {
@@ -58,13 +58,26 @@ function AppView({
     }
   }
 
-  let status;
-  if (runError) {
-    status = <p className="status error">{runError.toString()}</p>;
-  } else if (evalResult.error) {
-    status = <p className="status warning">Completed with error: {evalResult.error.toString()}</p>;
-  } else {
-    status = <p className="status">Completed successfully.</p>;
+  let runStatus = <p className="status">&nbsp;</p>; // TODO terrible hack, keeps button style consistent in Safari
+  let loadStatus = <p className="status" />;
+  switch (status.action) {
+    case 'run':
+      if (status.error) {
+        runStatus = <p className="status error">{status.error.toString()}</p>;
+      } else if (evalResult.error) {
+        runStatus = <p className="status warning">Ran and received error: {evalResult.error.toString()}</p>;
+      } else {
+        runStatus = <p className="status">Ran successfully.</p>;
+      }
+      break;
+    case 'load':
+      if (status.error) {
+        loadStatus = <p className="status error">{status.error.toString()}</p>;
+      } else {
+        loadStatus = <p className="status">Loaded trace successfully.</p>;
+      }
+      break;
+    default:
   }
 
   const handleTrevTypeSelectedToggle = (type) => {
@@ -102,9 +115,9 @@ function AppView({
                         autoComplete="false"
                         autoCorrect="false"
                         spellCheck="false" />
-              <div className="below-source">
+              <div className="status-area">
                 <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
-                {status}
+                {runStatus}
               </div>
             </form>
           </TabPanel>
@@ -124,6 +137,9 @@ function AppView({
               <ul>
                 <li>Paste the JSON here: <input className="load-paste" value="" type="text" onPaste={handleLoadByPaste} /></li>
               </ul>
+              <div className="status-area">
+                {loadStatus}
+              </div>
             </div>
           </TabPanel>
         </Tabs>

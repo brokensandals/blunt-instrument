@@ -48,7 +48,12 @@
   margin-left: 1ex;
 }
 
-.source-form .status {
+.load-form, .save-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.control-tabs .status {
   border-radius: 5px;
   color: green;
   flex-grow: 3;
@@ -58,6 +63,7 @@
 
 .source-form button {
   flex-grow: 1;
+  max-width: 80px;
   order: 2;
 }
 
@@ -72,7 +78,7 @@
   flex-grow: 1;
 }
 
-.source-form .error {
+.control-tabs .error {
   color: red;
 }
 
@@ -80,7 +86,7 @@
   color: black;
 }
 
-.source-form .below-source {
+.source-form .status-area {
   display: flex;
 }
 

@@ -46,16 +46,22 @@ class AppContainer extends React.Component {
   }
 
   handleLoadByPaste(text) {
-    const json = JSON.parse(text);
-    const tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
-    const evalResult = { tc };
-    this.setState({
-      evalResult,
-      runError: null,
-      sourceDraft: tc.astb.asts.eval.codeSlice,
-      ...defaultQueryState,
-      ...this.doQuery(tc, defaultQueryState.traceQuery),
-    });
+    try {
+      const json = JSON.parse(text);
+      const tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
+      const evalResult = { tc };
+      this.setState({
+        evalResult,
+        status: { action: 'load' },
+        sourceDraft: tc.astb.asts.eval.codeSlice,
+        ...defaultQueryState,
+        ...this.doQuery(tc, defaultQueryState.traceQuery),
+      });
+    } catch (error) {
+      this.setState({
+        status: { action: 'load', error },
+      });
+    }
   }
 
   handleNodeSelectedToggle(nodeId) {
@@ -83,13 +89,13 @@ class AppContainer extends React.Component {
       evalResult = instrumentedEval(source, { saveInstrumented: true });
     } catch (error) {
       console.log(error)
-      return { runError: error };
+      return { status: { action: 'run', error } };
     }
   
 
     return {
       evalResult,
-      runError: null,
+      status: { action: 'run' },
       sourceDraft: source,
       ...defaultQueryState,
       ...this.doQuery(evalResult.tc, defaultQueryState.traceQuery),
@@ -137,7 +143,7 @@ class AppContainer extends React.Component {
                onOpenModalData={this.handleOpenModalData}
                onCloseModalData={this.handleCloseModalData}
                modalData={this.state.modalData}
-               runError={this.state.runError} />
+               status={this.state.status} />
     )
   }
 }
