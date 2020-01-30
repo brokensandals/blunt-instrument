@@ -1,5 +1,6 @@
 .TrevTable table {
   width: 100%;
+  border-spacing: 0;
 }
 
 .TrevTable td, .TrevTable th {
@@ -9,16 +10,17 @@
   vertical-align: top;
 }
 
-.TrevTable .highlighted-node {
-  background-color: orange;
+.TrevTable .highlighted-node td {
+  border-top: 1px dotted orange;
+  border-bottom: 1px dotted orange;
 }
 
 .TrevTable .highlighted-trev {
-  background-color: yellow;
+  background-color: rgb(255, 255, 195);
 }
 
 .TrevTable .highlighted-trev-descendant .parent-id {
-  background-color: yellow;
+  background-color: rgb(255, 255, 195);
 }
 
 .TrevTable tbody .node {
@@ -30,6 +32,7 @@
 
 .TrevTable tbody .node:hover {
   border: 1px solid orange;
+  border-radius: 3px;
 }
 
 .TrevTable tbody .data {
@@ -41,6 +44,7 @@
 
 .TrevTable tbody .data:hover {
   border: 1px solid black;
+  border-radius: 3px;
 }
 
 .TrevTable tbody .type {
@@ -49,6 +53,7 @@
 
 .TrevTable tbody .type:hover {
   border: 1px solid black;
+  border-radius: 3px;
 }
 
 .TrevTable .id, .parent-id, .type {
