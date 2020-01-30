@@ -8,6 +8,7 @@ const defaultQueryState = {
   traceQuery: {
     nodes: {},
     nodeTypes: {},
+    types: {},
   },
   highlightedTrevId: null,
   highlightedNodeId: null,
@@ -83,9 +84,11 @@ class AppContainer extends React.Component {
   doQuery(tc, traceQuery) {
     const nodes = Object.keys(traceQuery.nodes).filter((key) => traceQuery.nodes[key]);
     const nodeTypes = Object.keys(traceQuery.nodeTypes).filter((key) => traceQuery.nodeTypes[key]);
+    const types = Object.keys(traceQuery.types).filter((key) => traceQuery.types[key]);
     const filteredTC = tc.filter((trev) =>
       (nodes.length === 0 || nodes.includes(trev.denormalized.node.biKey))
       && (nodeTypes.length === 0 || nodeTypes.includes(trev.denormalized.node.type))
+      && (types.length === 0 || types.includes(trev.type))
     );
     return {
       filteredTC,

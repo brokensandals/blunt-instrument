@@ -35,13 +35,20 @@ export function TraceQueryFormView({
     (type) => ({ value: type, label: type }),
   );
 
+  const typesOptions = Array.from(facets.types.entries()).map(
+    ([type, count]) => ({ value: type, label: `${type} (${count})` }),
+  );
+  const typesValue = Object.keys(query.types).filter((key) => query.types[key]).map(
+    (type) => ({ value: type, label: type }),
+  );
+
   const handleNodesChange = (value) => {
     const nodes = {};
     (value || []).forEach((selected) => {
       nodes[selected.value] = true;
     });
     onTraceQueryChange(update(query, { nodes: { $set: nodes }}));
-  }
+  };
 
   const handleNodeTypesChange = (value) => {
     const nodeTypes = {};
@@ -49,13 +56,21 @@ export function TraceQueryFormView({
       nodeTypes[selected.value] = true;
     });
     onTraceQueryChange(update(query, { nodeTypes: { $set: nodeTypes } }));
-  }
+  };
+
+  const handleTypesChange = (value) => {
+    const types = {};
+    (value || []).forEach((selected) => {
+      types[selected.value] = true;
+    });
+    onTraceQueryChange(update(query, { types: {$set: types } }));
+  };
 
   return (
     <form className="TraceQueryForm">
-      <div className="node-filters">
-        <label className="label" id="node-filters-label">Only include nodes:</label>
-        <Select className="node-filters-select"
+      <div className="filter">
+        <label className="label" id="node-filters-label">Nodes:</label>
+        <Select className="filter-select"
                 isMulti
                 options={nodesOptions}
                 value={nodesValue}
@@ -64,15 +79,26 @@ export function TraceQueryFormView({
                 aria-labelledby="node-filters-select" />
       </div>
 
-      <div className="node-type-filters">
-        <label className="label" id="node-type-filters-label">Exclude node types:</label>
-        <Select className="node-type-filters-select"
+      <div className="filter">
+        <label className="label" id="node-type-filters-label">Node types:</label>
+        <Select className="filter-select"
                 isMulti
                 options={nodeTypesOptions}
                 value={nodeTypesValue}
                 onChange={handleNodeTypesChange}
                 placeholder="(all)"
                 aria-labelledby="node-type-filters-label" />
+      </div>
+
+      <div className="filter">
+        <label className="label" id="type-filters-label">Trev types:</label>
+        <Select className="filter-select"
+                isMulti
+                options={typesOptions}
+                value={typesValue}
+                onChange={handleTypesChange}
+                placeholder="(all)"
+                aria-labelledby="type-filters-label" />
       </div>
     </form>
   );

@@ -2,27 +2,18 @@
   padding: 10px;
 }
 
-.TraceQueryForm .node-filters {
+.TraceQueryForm .filter {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
 }
 
-.TraceQueryForm .node-filters-select {
+.TraceQueryForm .filter-select {
   flex-grow: 1;
-}
-
-.TraceQueryForm .node-type-filters {
-  display: flex;
-  align-items: center;
 }
 
 .TraceQueryForm .label {
   padding-right: 5px;
   width: 20ex;
   max-width: 20ex;
-}
-
-.TraceQueryForm .node-type-filters-select {
-  flex-grow: 1;
 }
