@@ -4,17 +4,25 @@
   grid-template-rows: 20% 10% calc(70% - 2em) 2em;
   grid-template-columns: 50% 50%;
   grid-template-areas:
-    "source-form trace-query-form"
-    "source-form trev-tabs"
+    "control-tabs trace-query-form"
+    "control-tabs trev-tabs"
     "code-tabs trev-tabs"
     "blurb blurb"
 }
 
+.control-tabs {
+  grid-area: control-tabs;
+}
+
+.control-tabs .react-tabs__tab-panel {
+  height: 100%;
+}
+
 .source-form {
-  grid-area: source-form;
+  min-height: 90%; /* TODO this is hacky */
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 5px;
 }
 
 .source-form .status {
@@ -22,6 +30,7 @@
   color: green;
   flex-grow: 3;
   order: 1;
+  padding: 5px;
 }
 
 .source-form button {
@@ -31,7 +40,6 @@
 
 .source-form p {
   margin: 0;
-  padding: 5px;
   font-size: small;
 }
 

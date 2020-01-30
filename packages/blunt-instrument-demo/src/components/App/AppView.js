@@ -72,23 +72,38 @@ function AppView({
 
   return (
     <div className="App">
-      <form className="source-form">
-        <p className="instructions">
-          Enter javascript code here, then click "Run" to see the trace.
-          Or, choose an example:
-          <select value={selectedExample} onChange={onChangeSelectedExample}>
-            {exampleOptions}
-          </select>
-        </p>
-        <textarea value={sourceDraft} onChange={handleSourceDraftChange}
-                  autoComplete="false"
-                  autoCorrect="false"
-                  spellCheck="false" />
-        <div className="below-source">
-          <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
-          {status}
-        </div>
-      </form>
+      <div className="control-tabs">
+        <Tabs>
+          <TabList>
+            <Tab>Run</Tab>
+            <Tab>Save</Tab>
+            <Tab>Load</Tab>
+          </TabList>
+
+          <TabPanel>
+            <form className="source-form">
+              <p className="instructions">
+                Enter javascript code here, then click "Run" to see the trace.
+                Or, choose an example:
+                <select value={selectedExample} onChange={onChangeSelectedExample}>
+                  {exampleOptions}
+                </select>
+              </p>
+              <textarea value={sourceDraft} onChange={handleSourceDraftChange}
+                        autoComplete="false"
+                        autoCorrect="false"
+                        spellCheck="false" />
+              <div className="below-source">
+                <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
+                {status}
+              </div>
+            </form>
+          </TabPanel>
+
+          <TabPanel></TabPanel>
+          <TabPanel></TabPanel>
+        </Tabs>
+      </div>
 
       <div className="code-tabs">
         <Tabs>
