@@ -43,6 +43,14 @@
   border: 1px solid black;
 }
 
+.TrevTable tbody .type {
+  cursor: default;
+}
+
+.TrevTable tbody .type:hover {
+  border: 1px solid black;
+}
+
 .TrevTable .id, .parent-id, .type {
   width: 4ex;
   white-space: nowrap;

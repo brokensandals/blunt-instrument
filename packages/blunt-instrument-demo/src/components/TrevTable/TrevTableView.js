@@ -138,6 +138,7 @@ function TrevTableView({
   onHoveredTrevChange = (trevId) => {},
   onNodeSelectedToggle = (nodeId) => {},
   onOpenModalData = (modalData) => {},
+  onTrevTypeSelectedToggle = (type) => {},
 }) {
   const entries = [];
 
@@ -152,13 +153,14 @@ function TrevTableView({
       highlightedNodeId != null && trev.nodeId === highlightedNodeId ? 'highlighted-node' : null,
     ].join(' ');
 
+    const handleTypeClick = () => onTrevTypeSelectedToggle(trev.type);
     const handleCodeClick = () => onNodeSelectedToggle(trev.nodeId);
 
     entries.push(
       <tr key={trev.id} onMouseOver={handleMouseOver} className={className}>
         <td className="parent-id">{trev.parentId}</td>
         <td className="id">{trev.id}</td>
-        <td className="type">{trev.type}</td>
+        <td className="type" onClick={handleTypeClick}>{trev.type}</td>
         <td className="node" onClick={handleCodeClick}>
           <code>{trev.denormalized.node.codeSlice}</code>
         </td>

@@ -10,6 +10,7 @@ import examples from 'blunt-instrument-test-resources';
 import ReactJson from 'react-json-view';
 import Modal from 'react-modal';
 import { fromNodeKey } from 'blunt-instrument-ast-utils';
+import update from 'immutability-helper';
 
 function AppView({
   evalResult,
@@ -64,6 +65,10 @@ function AppView({
   } else {
     status = <p>Completed successfully.</p>;
   }
+
+  const handleTrevTypeSelectedToggle = (type) => {
+    onTraceQueryChange(update(traceQuery, { types: { $toggle: [type] } }));
+  };
 
   return (
     <div className="App">
@@ -142,7 +147,8 @@ function AppView({
                       highlightedNodeId={highlightedNodeId}
                       onHoveredTrevChange={onHoveredTrevChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
-                      onOpenModalData={onOpenModalData} />
+                      onOpenModalData={onOpenModalData}
+                      onTrevTypeSelectedToggle={handleTrevTypeSelectedToggle} />
           </TabPanel>
 
           <TabPanel>
