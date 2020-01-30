@@ -12,6 +12,7 @@ import Modal from 'react-modal';
 import { fromNodeKey } from 'blunt-instrument-ast-utils';
 import update from 'immutability-helper';
 import FileSaver from 'file-saver';
+import LargeDataPreview from '../LargeDataPreview';
 
 function AppView({
   evalResult,
@@ -234,7 +235,7 @@ function AppView({
       </div>
 
       <div className="large-data-preview">
-        <pre><code>{highlightedTrevId ? JSON.stringify(tc.getTrev(highlightedTrevId).data, null, 2) : null}</code></pre>
+        {highlightedTrevId ? <LargeDataPreview data={tc.getTrev(highlightedTrevId).data} /> : <p></p>}
       </div>
 
       <div className="blurb">
