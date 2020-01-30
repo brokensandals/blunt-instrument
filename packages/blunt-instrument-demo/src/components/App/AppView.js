@@ -227,7 +227,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={tc.withoutDenormalizedInfo()}
+            <ReactJson src={tc.withoutDenormalizedInfo().trevs}
                        name={false}
                        displayDataTypes={false} />
           </TabPanel>
