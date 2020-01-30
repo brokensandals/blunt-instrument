@@ -11,6 +11,7 @@ import ReactJson from 'react-json-view';
 import Modal from 'react-modal';
 import { fromNodeKey } from 'blunt-instrument-ast-utils';
 import update from 'immutability-helper';
+import FileSaver from 'file-saver';
 
 function AppView({
   evalResult,
@@ -92,6 +93,12 @@ function AppView({
     event.preventDefault();
   }
 
+  const handleSaveFile = (event) => {
+    const text = JSON.stringify(evalResult.tc.asJSON(), null, 2);
+    const blob = new Blob([text], { type: 'application/json' });
+    FileSaver.saveAs(blob, 'trace.json');
+  };
+
   return (
     <div className="App">
       <div className="control-tabs">
@@ -127,6 +134,7 @@ function AppView({
               <p>You can export the trace &amp; AST to restore later.</p>
               <ul>
                 <li><button className="view-save" onClick={() => onOpenModalData(evalResult.tc.asJSON())}>View JSON</button></li>
+                <li><button className="file-save" onClick={handleSaveFile}>Save JSON to File</button></li>
               </ul>
             </div>
           </TabPanel>
