@@ -53,6 +53,14 @@ export default class TrevCollection {
     return new TrevCollection(newTrevs, this.astb);
   }
 
+  withoutDenormalizedInfo() {
+    const newTrevs = this.trevs.map((trev) => {
+      const { denormalized, ...rest } = trev;
+      return rest;
+    });
+    return new TrevCollection(newTrevs, this.astb);
+  }
+
   filter(fn) {
     const filtered = this.trevs.filter(fn);
     return new TrevCollection(filtered, this.astb);

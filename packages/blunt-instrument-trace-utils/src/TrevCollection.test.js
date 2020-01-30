@@ -156,4 +156,16 @@ describe('TrevCollection', () => {
       expect(tc.trevs[2].denormalized.ancestorIds).toEqual([3]);
     });
   });
+
+  test('withoutDenormalizedInfo', () => {
+    const ast = parseSync('x = 10');
+    addNodeIdsToAST(ast);
+    const astb = new ASTBundle({ test: ast });
+    const trevs = [{ id: 1, astId: 'test', nodeId: 1 }];
+    const tc1 = new TrevCollection(trevs, astb);
+    const tc2 = tc1.withDenormalizedInfo();
+    const tc3 = tc2.withoutDenormalizedInfo();
+    expect(tc2.trevs).not.toEqual(tc1.trevs);
+    expect(tc3.trevs).toEqual(tc1.trevs);
+  });
 });
