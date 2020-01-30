@@ -133,7 +133,7 @@ function AppView({
                       onTraceQueryChange={onTraceQueryChange}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
-                      tc={tc}
+                      tc={evalResult.tc}
                       query={traceQuery} />
 
       <div className="trev-tabs">
