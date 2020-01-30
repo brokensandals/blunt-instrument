@@ -1,3 +1,5 @@
+import { ASTBundle } from 'blunt-instrument-ast-utils';
+
 /**
  * @typedef {Object} TrevExtended
  * @property {number} id
@@ -137,5 +139,31 @@ export default class TrevCollection {
     });
 
     return facets;
+  }
+
+  /**
+   * @returns {Object} a representation of this TrevCollection that can be serialized as JSON
+   *   and later deserialized and loaded using fromJSON
+   */
+  asJSON() {
+    const tc = this.withoutDenormalizedInfo();
+    return {
+      asts: tc.astb.asts,
+      trevs: tc.trevs,
+    };
+  }
+
+  /**
+   * Restores an instance that was saved using asJSON()
+   * @param {Object} input
+   * @returns {TrevCollection}
+   */
+  static fromJSON(input) {
+    if (!input.asts || !input.trevs) {
+      throw new Error('Expected `asts` and `trevs` fields');
+    }
+
+    const astb = new ASTBundle(input.asts);
+    return new TrevCollection(input.trevs, astb);
   }
 }

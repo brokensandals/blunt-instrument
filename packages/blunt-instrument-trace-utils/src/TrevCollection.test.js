@@ -168,4 +168,17 @@ describe('TrevCollection', () => {
     expect(tc2.trevs).not.toEqual(tc1.trevs);
     expect(tc3.trevs).toEqual(tc1.trevs);
   });
+
+  test('saving and loading', () => {
+    const ast = parseSync('x = 10');
+    addNodeIdsToAST(ast);
+    const astb = new ASTBundle({ test: ast });
+    const trevs = [{ id: 1, astId: 'test', nodeId: 1 }];
+    const tc = new TrevCollection(trevs, astb).withDenormalizedInfo();
+    const stringified = JSON.stringify(tc.asJSON());
+    const parsed = JSON.parse(stringified);
+    const tc2 = TrevCollection.fromJSON(parsed);
+    expect(tc2.astb.asts.test).toEqual(ast);
+    expect(tc2.trevs).toEqual(trevs);
+  });
 });
