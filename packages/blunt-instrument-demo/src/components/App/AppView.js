@@ -59,11 +59,11 @@ function AppView({
 
   let status;
   if (runError) {
-    status = <p className="error">{runError.toString()}</p>;
+    status = <p className="status error">{runError.toString()}</p>;
   } else if (evalResult.error) {
-    status = <p>Completed with error: {evalResult.error.toString()}</p>;
+    status = <p className="status warning">Completed with error: {evalResult.error.toString()}</p>;
   } else {
-    status = <p>Completed successfully.</p>;
+    status = <p className="status">Completed successfully.</p>;
   }
 
   const handleTrevTypeSelectedToggle = (type) => {
@@ -84,8 +84,10 @@ function AppView({
                   autoComplete="false"
                   autoCorrect="false"
                   spellCheck="false" />
-        {status}
-        <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
+        <div className="below-source">
+          <button className="run" onClick={runHandler(sourceDraft)}>Run</button>
+          {status}
+        </div>
       </form>
 
       <div className="code-tabs">
