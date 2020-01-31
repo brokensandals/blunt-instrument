@@ -9,7 +9,7 @@
   "devDependencies": {
     "blunt-instrument-runtime": "^0.0.0",
     "blunt-instrument-test-resources": "^0.0.0",
-    "object-graph-as-json": "^1.0.0"
+    "object-graph-as-json": "^2.0.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.7.5",
