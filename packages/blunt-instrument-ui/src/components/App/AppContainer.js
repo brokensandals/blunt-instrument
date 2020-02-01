@@ -6,16 +6,16 @@ import instrumentedEval from 'blunt-instrument-eval';
 import { TrevCollection } from 'blunt-instrument-trace-utils';
 
 /**
- * Determines whether it's necessary to invoke scrollIntoView to make an element visible.
- * @param {*} container the scrollable ancestor element
+ * Determines whether an element is currently visible within a scrollable ancestor.
  * @param {*} target the element you want to be visible
+ * @param {*} container the scrollable ancestor element
  * @param {*} min the minimum number of pixels of target that need to be visible
- * @returns {boolean} true if scrolling is needed
+ * @returns {boolean} true if the minimum number of pixels is visible
  */
-function shouldScroll(container, target, min = 5) {
-  const cr = container.getBoundingClientRect();
+function isVisibleWithin(target, container, min = 5) {
   const tr = target.getBoundingClientRect();
-  return (
+  const cr = container.getBoundingClientRect();
+  return !(
     cr.bottom - min < tr.top
     || cr.top + min > tr.bottom
     || cr.right - min < tr.left
@@ -52,12 +52,19 @@ class AppContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    // TODO this is a pretty lazy/hacky implementation of ensuring the highlighted elements
-    // are scrolled into view
+    // TODO this is a very lazy, hacky, inefficient implementation of ensuring the highlighted
+    // elements are scrolled into view
     document.querySelectorAll('.code-tabs .react-tabs__tab-panel').forEach((codePanel) => {
       const highlightedNodeEl = codePanel.querySelector('.highlighted');
-      if (highlightedNodeEl && shouldScroll(codePanel, highlightedNodeEl)) {
+      if (highlightedNodeEl && !isVisibleWithin(highlightedNodeEl, codePanel)) {
         highlightedNodeEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    document.querySelectorAll('.trev-tabs .react-tabs__tab-panel').forEach((trevPanel) => {
+      const highlightedNodeEls = trevPanel.querySelectorAll('.highlighted-node');
+      if (highlightedNodeEls.length > 0 && !Array.from(highlightedNodeEls).some((el) => isVisibleWithin(el, trevPanel))) {
+        highlightedNodeEls[0].scrollIntoView({ behavior: 'smooth' });
       }
     });
   }
