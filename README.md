@@ -17,7 +17,7 @@ Run `npm start` to run the demo app locally.
 This is a multi-package project managed using [lerna](https://github.com/lerna/lerna).
 Each package is in a subdirectory of the `packages` folder.
 Jest and Babel config are at the root and run for all packages at once, rather than being configured in each package.
-The exception is `blunt-instrument-demo`, whose babel/webpack/jest config are managed by create-react-app.
+The exception is `blunt-instrument-ui`, whose babel/webpack/jest config are managed by create-react-app.
 
 ## Contributing
 

@@ -1,6 +1,6 @@
 {
   "short_name": "Blunt Instrument",
-  "name": "Blunt Instrument Demo",
+  "name": "Blunt Instrument UI",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
