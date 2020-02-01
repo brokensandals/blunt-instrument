@@ -71,6 +71,7 @@ export function TraceQueryFormView({
       <div className="filter">
         <label className="label" id="node-filters-label">Nodes:</label>
         <Select className="filter-select"
+                classNamePrefix="filter-select"
                 isMulti
                 options={nodesOptions}
                 value={nodesValue}
@@ -82,6 +83,7 @@ export function TraceQueryFormView({
       <div className="filter">
         <label className="label" id="node-type-filters-label">Node types:</label>
         <Select className="filter-select"
+                classNamePrefix="filter-select"
                 isMulti
                 options={nodeTypesOptions}
                 value={nodeTypesValue}
@@ -93,6 +95,7 @@ export function TraceQueryFormView({
       <div className="filter">
         <label className="label" id="type-filters-label">Trev types:</label>
         <Select className="filter-select"
+                classNamePrefix="filter-select"
                 isMulti
                 options={typesOptions}
                 value={typesValue}

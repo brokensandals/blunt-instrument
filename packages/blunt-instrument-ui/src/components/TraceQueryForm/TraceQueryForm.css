@@ -12,6 +12,11 @@
   flex-grow: 1;
 }
 
+.TraceQueryForm .filter-select__control {
+  height: 2em;
+  overflow: auto;
+}
+
 .TraceQueryForm .label {
   padding-right: 5px;
   width: 20ex;
