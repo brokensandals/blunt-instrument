@@ -1,4 +1,5 @@
 .App {
+  min-height: 750px;
   height: 100vh;
   display: grid;
   grid-template-rows: 20% 10% 35% calc(35% - 2em) 2em;
