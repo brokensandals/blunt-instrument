@@ -3,7 +3,7 @@ const examples = {};
 examples.factorial = `function fac(n) {
   return n == 1 ? 1 : n * fac(n - 1);
 }
-const result = fac(3);`;
+const result = fac(10);`;
 
 examples.fizzBuzzGenerator = `function* fizzbuzzer(limit) {
   for (let i = 1; i < limit; i++) {
