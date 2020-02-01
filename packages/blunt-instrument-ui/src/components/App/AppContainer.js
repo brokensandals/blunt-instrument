@@ -5,6 +5,24 @@ import examples from 'blunt-instrument-test-resources';
 import instrumentedEval from 'blunt-instrument-eval';
 import { TrevCollection } from 'blunt-instrument-trace-utils';
 
+/**
+ * Determines whether it's necessary to invoke scrollIntoView to make an element visible.
+ * @param {*} container the scrollable ancestor element
+ * @param {*} target the element you want to be visible
+ * @param {*} min the minimum number of pixels of target that need to be visible
+ * @returns {boolean} true if scrolling is needed
+ */
+function shouldScroll(container, target, min = 5) {
+  const cr = container.getBoundingClientRect();
+  const tr = target.getBoundingClientRect();
+  return (
+    cr.bottom - min < tr.top
+    || cr.top + min > tr.bottom
+    || cr.right - min < tr.left
+    || cr.left + min > tr.right
+  );
+}
+
 const defaultQueryState = {
   traceQuery: {
     nodes: {},
@@ -31,6 +49,17 @@ class AppContainer extends React.Component {
     this.handleSourceDraftChange = this.handleSourceDraftChange.bind(this);
     this.handleOpenModalData = this.handleOpenModalData.bind(this);
     this.handleCloseModalData = this.handleCloseModalData.bind(this);
+  }
+
+  componentDidUpdate() {
+    // TODO this is a pretty lazy/hacky implementation of ensuring the highlighted elements
+    // are scrolled into view
+    document.querySelectorAll('.code-tabs .react-tabs__tab-panel').forEach((codePanel) => {
+      const highlightedNodeEl = codePanel.querySelector('.highlighted');
+      if (highlightedNodeEl && shouldScroll(codePanel, highlightedNodeEl)) {
+        highlightedNodeEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
   }
 
   handleTraceQueryChange(traceQuery) {
