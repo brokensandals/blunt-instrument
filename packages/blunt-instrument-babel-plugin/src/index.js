@@ -119,8 +119,13 @@ function addExpressionTrace(path, { tracerId }) {
   // Otherwise, we'd rewrite `x.y()` to something like `trace(x.y)()`, which
   // changes the semantics of the program: the former will bind `this` to `x`
   // but the latter will not.
-  // I don't know how (if it's possible) to trace the value of `x.y` in this
-  // scenario without either breaking the binding of `this`, or evaluating
+  // TODO the right way to do this is probably to save `x` and `x.y` into temp
+  // variables t1 and t2, and rewrite the expression to t2.apply(t1, args).
+  // (We must avoid retrieving `x.y` twice, because it might be a getter, and
+  // we don't want to change the original program's semantics by invoking a
+  // getter twice instead of once.)
+  // To be really robust though we'd also need to account for the possibility
+  // that y's `apply` method has been overridden.
   // `x.y` twice (which would change the program semantics if `y` is a getter).
   if (types.isMemberExpression(node)
       && types.isCallExpression(path.parentPath.node)
