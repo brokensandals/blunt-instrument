@@ -22,3 +22,16 @@
   width: 20ex;
   max-width: 20ex;
 }
+
+.TraceQueryForm .walkthrough-controls {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.TraceQueryForm .walkthrough-controls button {
+  width: 40px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  font-size: large;
+}

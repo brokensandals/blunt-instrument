@@ -30,6 +30,9 @@ function AppView({
   onSourceDraftChange,
   onOpenModalData,
   onCloseModalData,
+  onPlay,
+  onStop,
+  isPlaying,
   modalData,
   status,
   sourceDraft,
@@ -207,7 +210,10 @@ function AppView({
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
                       tc={evalResult.tc}
-                      query={traceQuery} />
+                      query={traceQuery}
+                      onPlay={onPlay}
+                      onStop={onStop}
+                      isPlaying={isPlaying} />
 
       <div className="trev-tabs">
         <Tabs>

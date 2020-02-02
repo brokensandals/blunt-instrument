@@ -7,6 +7,9 @@ export function TraceQueryFormView({
   highlightedNodeId,
   onTraceQueryChange = (query) => {},
   onHoveredNodeChange = (nodeId) => {},
+  onPlay = () => {},
+  onStop = () => {},
+  isPlaying,
   query,
   tc,
 }) {
@@ -102,6 +105,14 @@ export function TraceQueryFormView({
                 onChange={handleTypesChange}
                 placeholder="(all)"
                 aria-labelledby="type-filters-label" />
+      </div>
+
+      <div className="walkthrough-controls">
+        { isPlaying ?
+          <button onClick={(event) => { event.preventDefault(); onStop(); }}>&#9209;</button>
+          :
+          <button onClick={(event) => { event.preventDefault(); onPlay(); }}>&#9654;</button>
+        }
       </div>
     </form>
   );
