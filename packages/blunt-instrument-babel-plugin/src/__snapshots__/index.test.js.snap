@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`demo examples factorial 1`] = `
-"tracer.registerAST(JSON.parse(\\"{\\\\\\"type\\\\\\":\\\\\\"Program\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"sourceType\\\\\\":\\\\\\"module\\\\\\",\\\\\\"interpreter\\\\\\":null,\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"FunctionDeclaration\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":9,\\\\\\"end\\\\\\":12,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"biId\\\\\\":3},\\\\\\"generator\\\\\\":false,\\\\\\"async\\\\\\":false,\\\\\\"params\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":13,\\\\\\"end\\\\\\":14,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":14},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"biId\\\\\\":4}],\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":16,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ReturnStatement\\\\\\",\\\\\\"start\\\\\\":20,\\\\\\"end\\\\\\":55,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":2},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":37}},\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"ConditionalExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":28,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":10},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"biId\\\\\\":9},\\\\\\"operator\\\\\\":\\\\\\"==\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":32,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\"},\\\\\\"value\\\\\\":1,\\\\\\"biId\\\\\\":10},\\\\\\"biId\\\\\\":8},\\\\\\"consequent\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":36,\\\\\\"end\\\\\\":37,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":19}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\"},\\\\\\"value\\\\\\":1,\\\\\\"biId\\\\\\":11},\\\\\\"alternate\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":41,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":23},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"biId\\\\\\":13},\\\\\\"operator\\\\\\":\\\\\\"*\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":47,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":29},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"biId\\\\\\":15},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":49,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":31},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"biId\\\\\\":17},\\\\\\"operator\\\\\\":\\\\\\"-\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":52,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\"},\\\\\\"value\\\\\\":1,\\\\\\"biId\\\\\\":18},\\\\\\"biId\\\\\\":16}],\\\\\\"biId\\\\\\":14},\\\\\\"biId\\\\\\":12},\\\\\\"biId\\\\\\":7},\\\\\\"biId\\\\\\":6}],\\\\\\"directives\\\\\\":[],\\\\\\"biId\\\\\\":5},\\\\\\"biId\\\\\\":2},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":58,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":70,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"result\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"result\\\\\\",\\\\\\"biId\\\\\\":21},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":76,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":18},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"biId\\\\\\":23},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":77,\\\\\\"end\\\\\\":78,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":19},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":20}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":3,\\\\\\"raw\\\\\\":\\\\\\"3\\\\\\"},\\\\\\"value\\\\\\":3,\\\\\\"biId\\\\\\":24}],\\\\\\"biId\\\\\\":22},\\\\\\"biId\\\\\\":20}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"biId\\\\\\":19}],\\\\\\"directives\\\\\\":[],\\\\\\"biId\\\\\\":1}\\"));
+"tracer.registerAST(JSON.parse(\\"{\\\\\\"type\\\\\\":\\\\\\"Program\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":81,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":23}},\\\\\\"sourceType\\\\\\":\\\\\\"module\\\\\\",\\\\\\"interpreter\\\\\\":null,\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"FunctionDeclaration\\\\\\",\\\\\\"start\\\\\\":0,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":9,\\\\\\"end\\\\\\":12,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"biId\\\\\\":3},\\\\\\"generator\\\\\\":false,\\\\\\"async\\\\\\":false,\\\\\\"params\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":13,\\\\\\"end\\\\\\":14,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":13},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":14},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"biId\\\\\\":4}],\\\\\\"body\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BlockStatement\\\\\\",\\\\\\"start\\\\\\":16,\\\\\\"end\\\\\\":57,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":1,\\\\\\"column\\\\\\":16},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":3,\\\\\\"column\\\\\\":1}},\\\\\\"body\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"ReturnStatement\\\\\\",\\\\\\"start\\\\\\":20,\\\\\\"end\\\\\\":55,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":2},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":37}},\\\\\\"argument\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"ConditionalExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"test\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":27,\\\\\\"end\\\\\\":28,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":9},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":10},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"biId\\\\\\":9},\\\\\\"operator\\\\\\":\\\\\\"==\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":32,\\\\\\"end\\\\\\":33,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":14},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":15}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\"},\\\\\\"value\\\\\\":1,\\\\\\"biId\\\\\\":10},\\\\\\"biId\\\\\\":8},\\\\\\"consequent\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":36,\\\\\\"end\\\\\\":37,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":18},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":19}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\"},\\\\\\"value\\\\\\":1,\\\\\\"biId\\\\\\":11},\\\\\\"alternate\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":40,\\\\\\"end\\\\\\":41,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":22},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":23},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"biId\\\\\\":13},\\\\\\"operator\\\\\\":\\\\\\"*\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":54,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":36}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":44,\\\\\\"end\\\\\\":47,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":26},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":29},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"biId\\\\\\":15},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"BinaryExpression\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"left\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":48,\\\\\\"end\\\\\\":49,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":30},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":31},\\\\\\"identifierName\\\\\\":\\\\\\"n\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"n\\\\\\",\\\\\\"biId\\\\\\":17},\\\\\\"operator\\\\\\":\\\\\\"-\\\\\\",\\\\\\"right\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":52,\\\\\\"end\\\\\\":53,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":34},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":2,\\\\\\"column\\\\\\":35}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":1,\\\\\\"raw\\\\\\":\\\\\\"1\\\\\\"},\\\\\\"value\\\\\\":1,\\\\\\"biId\\\\\\":18},\\\\\\"biId\\\\\\":16}],\\\\\\"biId\\\\\\":14},\\\\\\"biId\\\\\\":12},\\\\\\"biId\\\\\\":7},\\\\\\"biId\\\\\\":6}],\\\\\\"directives\\\\\\":[],\\\\\\"biId\\\\\\":5},\\\\\\"biId\\\\\\":2},{\\\\\\"type\\\\\\":\\\\\\"VariableDeclaration\\\\\\",\\\\\\"start\\\\\\":58,\\\\\\"end\\\\\\":81,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":0},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":23}},\\\\\\"declarations\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"VariableDeclarator\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"id\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":64,\\\\\\"end\\\\\\":70,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":6},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":12},\\\\\\"identifierName\\\\\\":\\\\\\"result\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"result\\\\\\",\\\\\\"biId\\\\\\":21},\\\\\\"init\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"CallExpression\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":80,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":22}},\\\\\\"callee\\\\\\":{\\\\\\"type\\\\\\":\\\\\\"Identifier\\\\\\",\\\\\\"start\\\\\\":73,\\\\\\"end\\\\\\":76,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":15},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":18},\\\\\\"identifierName\\\\\\":\\\\\\"fac\\\\\\"},\\\\\\"name\\\\\\":\\\\\\"fac\\\\\\",\\\\\\"biId\\\\\\":23},\\\\\\"arguments\\\\\\":[{\\\\\\"type\\\\\\":\\\\\\"NumericLiteral\\\\\\",\\\\\\"start\\\\\\":77,\\\\\\"end\\\\\\":79,\\\\\\"loc\\\\\\":{\\\\\\"start\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":19},\\\\\\"end\\\\\\":{\\\\\\"line\\\\\\":4,\\\\\\"column\\\\\\":21}},\\\\\\"extra\\\\\\":{\\\\\\"rawValue\\\\\\":10,\\\\\\"raw\\\\\\":\\\\\\"10\\\\\\"},\\\\\\"value\\\\\\":10,\\\\\\"biId\\\\\\":24}],\\\\\\"biId\\\\\\":22},\\\\\\"biId\\\\\\":20}],\\\\\\"kind\\\\\\":\\\\\\"const\\\\\\",\\\\\\"biId\\\\\\":19}],\\\\\\"directives\\\\\\":[],\\\\\\"biId\\\\\\":1}\\"));
 
 function fac(n) {
   const _fnStartId = tracer.logFnStart(2, {
@@ -22,7 +22,7 @@ function fac(n) {
   tracer.logFnRet(2, undefined);
 }
 
-const result = tracer.logExpr(22, tracer.logExpr(23, fac)(tracer.logExpr(24, 3)));"
+const result = tracer.logExpr(22, tracer.logExpr(23, fac)(tracer.logExpr(24, 10)));"
 `;
 
 exports[`demo examples factorial 2`] = `
@@ -85,7 +85,7 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 3,
+    "data": 10,
     "id": 2,
     "nodeId": 24,
     "parentId": undefined,
@@ -95,7 +95,7 @@ Array [
     "astId": "test",
     "data": Object {
       ".arguments": Object {
-        ".0": 3,
+        ".0": 10,
         ".callee": Object {
           "get": Object {
             ".length": Object {
@@ -141,7 +141,7 @@ Array [
         "id": "4",
         "type": "object",
       },
-      ".n": 3,
+      ".n": 10,
       ".this": Object {
         "name": "undefined",
         "type": "builtin",
@@ -156,7 +156,7 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 3,
+    "data": 10,
     "id": 4,
     "nodeId": 9,
     "parentId": 3,
@@ -180,7 +180,7 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 3,
+    "data": 10,
     "id": 7,
     "nodeId": 13,
     "parentId": 3,
@@ -244,7 +244,7 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 3,
+    "data": 10,
     "id": 9,
     "nodeId": 17,
     "parentId": 3,
@@ -260,7 +260,7 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 2,
+    "data": 9,
     "id": 11,
     "nodeId": 16,
     "parentId": 3,
@@ -270,7 +270,7 @@ Array [
     "astId": "test",
     "data": Object {
       ".arguments": Object {
-        ".0": 2,
+        ".0": 9,
         ".callee": Object {
           "get": Object {
             ".length": Object {
@@ -316,7 +316,7 @@ Array [
         "id": "8",
         "type": "object",
       },
-      ".n": 2,
+      ".n": 9,
       ".this": Object {
         "name": "undefined",
         "type": "builtin",
@@ -331,7 +331,7 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 2,
+    "data": 9,
     "id": 13,
     "nodeId": 9,
     "parentId": 12,
@@ -355,7 +355,7 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 2,
+    "data": 9,
     "id": 16,
     "nodeId": 13,
     "parentId": 12,
@@ -419,7 +419,7 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 2,
+    "data": 9,
     "id": 18,
     "nodeId": 17,
     "parentId": 12,
@@ -435,10 +435,1235 @@ Array [
   },
   Object {
     "astId": "test",
-    "data": 1,
+    "data": 8,
     "id": 20,
     "nodeId": 16,
     "parentId": 12,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".arguments": Object {
+        ".0": 8,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "10",
+        "type": "object",
+      },
+      ".n": 8,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "9",
+      "type": "object",
+    },
+    "id": 21,
+    "nodeId": 2,
+    "parentId": 12,
+    "type": "fn-start",
+  },
+  Object {
+    "astId": "test",
+    "data": 8,
+    "id": 22,
+    "nodeId": 9,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 23,
+    "nodeId": 10,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": false,
+    "id": 24,
+    "nodeId": 8,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 8,
+    "id": 25,
+    "nodeId": 13,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  const _fnStartId = tracer.logFnStart(2, {
+    n,
+    this: this,
+    arguments: arguments
+  });
+
+  try {
+    {
+      return tracer.logFnRet(6, tracer.logExpr(7, tracer.logExpr(8, tracer.logExpr(9, n) == tracer.logExpr(10, 1)) ? tracer.logExpr(11, 1) : tracer.logExpr(12, tracer.logExpr(13, n) * tracer.logExpr(14, tracer.logExpr(15, fac)(tracer.logExpr(16, tracer.logExpr(17, n) - tracer.logExpr(18, 1)))))));
+    }
+  } catch (e) {
+    tracer.logFnThrow(2, e);
+    throw e;
+  }
+
+  tracer.logFnRet(2, undefined);
+}",
+      "type": "function",
+    },
+    "id": 26,
+    "nodeId": 15,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 8,
+    "id": 27,
+    "nodeId": 17,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 28,
+    "nodeId": 18,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 7,
+    "id": 29,
+    "nodeId": 16,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".arguments": Object {
+        ".0": 7,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "12",
+        "type": "object",
+      },
+      ".n": 7,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "11",
+      "type": "object",
+    },
+    "id": 30,
+    "nodeId": 2,
+    "parentId": 21,
+    "type": "fn-start",
+  },
+  Object {
+    "astId": "test",
+    "data": 7,
+    "id": 31,
+    "nodeId": 9,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 32,
+    "nodeId": 10,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": false,
+    "id": 33,
+    "nodeId": 8,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 7,
+    "id": 34,
+    "nodeId": 13,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  const _fnStartId = tracer.logFnStart(2, {
+    n,
+    this: this,
+    arguments: arguments
+  });
+
+  try {
+    {
+      return tracer.logFnRet(6, tracer.logExpr(7, tracer.logExpr(8, tracer.logExpr(9, n) == tracer.logExpr(10, 1)) ? tracer.logExpr(11, 1) : tracer.logExpr(12, tracer.logExpr(13, n) * tracer.logExpr(14, tracer.logExpr(15, fac)(tracer.logExpr(16, tracer.logExpr(17, n) - tracer.logExpr(18, 1)))))));
+    }
+  } catch (e) {
+    tracer.logFnThrow(2, e);
+    throw e;
+  }
+
+  tracer.logFnRet(2, undefined);
+}",
+      "type": "function",
+    },
+    "id": 35,
+    "nodeId": 15,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 7,
+    "id": 36,
+    "nodeId": 17,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 37,
+    "nodeId": 18,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 6,
+    "id": 38,
+    "nodeId": 16,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".arguments": Object {
+        ".0": 6,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "14",
+        "type": "object",
+      },
+      ".n": 6,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "13",
+      "type": "object",
+    },
+    "id": 39,
+    "nodeId": 2,
+    "parentId": 30,
+    "type": "fn-start",
+  },
+  Object {
+    "astId": "test",
+    "data": 6,
+    "id": 40,
+    "nodeId": 9,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 41,
+    "nodeId": 10,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": false,
+    "id": 42,
+    "nodeId": 8,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 6,
+    "id": 43,
+    "nodeId": 13,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  const _fnStartId = tracer.logFnStart(2, {
+    n,
+    this: this,
+    arguments: arguments
+  });
+
+  try {
+    {
+      return tracer.logFnRet(6, tracer.logExpr(7, tracer.logExpr(8, tracer.logExpr(9, n) == tracer.logExpr(10, 1)) ? tracer.logExpr(11, 1) : tracer.logExpr(12, tracer.logExpr(13, n) * tracer.logExpr(14, tracer.logExpr(15, fac)(tracer.logExpr(16, tracer.logExpr(17, n) - tracer.logExpr(18, 1)))))));
+    }
+  } catch (e) {
+    tracer.logFnThrow(2, e);
+    throw e;
+  }
+
+  tracer.logFnRet(2, undefined);
+}",
+      "type": "function",
+    },
+    "id": 44,
+    "nodeId": 15,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 6,
+    "id": 45,
+    "nodeId": 17,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 46,
+    "nodeId": 18,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 5,
+    "id": 47,
+    "nodeId": 16,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".arguments": Object {
+        ".0": 5,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "16",
+        "type": "object",
+      },
+      ".n": 5,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "15",
+      "type": "object",
+    },
+    "id": 48,
+    "nodeId": 2,
+    "parentId": 39,
+    "type": "fn-start",
+  },
+  Object {
+    "astId": "test",
+    "data": 5,
+    "id": 49,
+    "nodeId": 9,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 50,
+    "nodeId": 10,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": false,
+    "id": 51,
+    "nodeId": 8,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 5,
+    "id": 52,
+    "nodeId": 13,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  const _fnStartId = tracer.logFnStart(2, {
+    n,
+    this: this,
+    arguments: arguments
+  });
+
+  try {
+    {
+      return tracer.logFnRet(6, tracer.logExpr(7, tracer.logExpr(8, tracer.logExpr(9, n) == tracer.logExpr(10, 1)) ? tracer.logExpr(11, 1) : tracer.logExpr(12, tracer.logExpr(13, n) * tracer.logExpr(14, tracer.logExpr(15, fac)(tracer.logExpr(16, tracer.logExpr(17, n) - tracer.logExpr(18, 1)))))));
+    }
+  } catch (e) {
+    tracer.logFnThrow(2, e);
+    throw e;
+  }
+
+  tracer.logFnRet(2, undefined);
+}",
+      "type": "function",
+    },
+    "id": 53,
+    "nodeId": 15,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 5,
+    "id": 54,
+    "nodeId": 17,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 55,
+    "nodeId": 18,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 4,
+    "id": 56,
+    "nodeId": 16,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".arguments": Object {
+        ".0": 4,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "18",
+        "type": "object",
+      },
+      ".n": 4,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "17",
+      "type": "object",
+    },
+    "id": 57,
+    "nodeId": 2,
+    "parentId": 48,
+    "type": "fn-start",
+  },
+  Object {
+    "astId": "test",
+    "data": 4,
+    "id": 58,
+    "nodeId": 9,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 59,
+    "nodeId": 10,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": false,
+    "id": 60,
+    "nodeId": 8,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 4,
+    "id": 61,
+    "nodeId": 13,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  const _fnStartId = tracer.logFnStart(2, {
+    n,
+    this: this,
+    arguments: arguments
+  });
+
+  try {
+    {
+      return tracer.logFnRet(6, tracer.logExpr(7, tracer.logExpr(8, tracer.logExpr(9, n) == tracer.logExpr(10, 1)) ? tracer.logExpr(11, 1) : tracer.logExpr(12, tracer.logExpr(13, n) * tracer.logExpr(14, tracer.logExpr(15, fac)(tracer.logExpr(16, tracer.logExpr(17, n) - tracer.logExpr(18, 1)))))));
+    }
+  } catch (e) {
+    tracer.logFnThrow(2, e);
+    throw e;
+  }
+
+  tracer.logFnRet(2, undefined);
+}",
+      "type": "function",
+    },
+    "id": 62,
+    "nodeId": 15,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 4,
+    "id": 63,
+    "nodeId": 17,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 64,
+    "nodeId": 18,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 3,
+    "id": 65,
+    "nodeId": 16,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".arguments": Object {
+        ".0": 3,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "20",
+        "type": "object",
+      },
+      ".n": 3,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "19",
+      "type": "object",
+    },
+    "id": 66,
+    "nodeId": 2,
+    "parentId": 57,
+    "type": "fn-start",
+  },
+  Object {
+    "astId": "test",
+    "data": 3,
+    "id": 67,
+    "nodeId": 9,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 68,
+    "nodeId": 10,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": false,
+    "id": 69,
+    "nodeId": 8,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 3,
+    "id": 70,
+    "nodeId": 13,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  const _fnStartId = tracer.logFnStart(2, {
+    n,
+    this: this,
+    arguments: arguments
+  });
+
+  try {
+    {
+      return tracer.logFnRet(6, tracer.logExpr(7, tracer.logExpr(8, tracer.logExpr(9, n) == tracer.logExpr(10, 1)) ? tracer.logExpr(11, 1) : tracer.logExpr(12, tracer.logExpr(13, n) * tracer.logExpr(14, tracer.logExpr(15, fac)(tracer.logExpr(16, tracer.logExpr(17, n) - tracer.logExpr(18, 1)))))));
+    }
+  } catch (e) {
+    tracer.logFnThrow(2, e);
+    throw e;
+  }
+
+  tracer.logFnRet(2, undefined);
+}",
+      "type": "function",
+    },
+    "id": 71,
+    "nodeId": 15,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 3,
+    "id": 72,
+    "nodeId": 17,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 73,
+    "nodeId": 18,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 2,
+    "id": 74,
+    "nodeId": 16,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".arguments": Object {
+        ".0": 2,
+        ".callee": Object {
+          "get": Object {
+            ".length": Object {
+              "type": "property",
+              "value": 0,
+            },
+            "id": "5",
+            "source": "function () { [native code] }",
+            "type": "function",
+          },
+          "set": Object {
+            "id": "5",
+            "type": "ref",
+          },
+          "type": "property",
+        },
+        ".length": Object {
+          "configurable": true,
+          "type": "property",
+          "value": 1,
+          "writable": true,
+        },
+        "@Symbol.iterator": Object {
+          "configurable": true,
+          "type": "property",
+          "value": Object {
+            ".length": Object {
+              "configurable": true,
+              "type": "property",
+              "value": 0,
+            },
+            ".name": Object {
+              "configurable": true,
+              "type": "property",
+              "value": "values",
+            },
+            "id": "6",
+            "source": "function values() { [native code] }",
+            "type": "function",
+          },
+          "writable": true,
+        },
+        "id": "22",
+        "type": "object",
+      },
+      ".n": 2,
+      ".this": Object {
+        "name": "undefined",
+        "type": "builtin",
+      },
+      "id": "21",
+      "type": "object",
+    },
+    "id": 75,
+    "nodeId": 2,
+    "parentId": 66,
+    "type": "fn-start",
+  },
+  Object {
+    "astId": "test",
+    "data": 2,
+    "id": 76,
+    "nodeId": 9,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 77,
+    "nodeId": 10,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": false,
+    "id": 78,
+    "nodeId": 8,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 2,
+    "id": 79,
+    "nodeId": 13,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": Object {
+      ".length": Object {
+        "configurable": true,
+        "type": "property",
+        "value": 1,
+      },
+      ".name": Object {
+        "configurable": true,
+        "type": "property",
+        "value": "fac",
+      },
+      ".prototype": Object {
+        "type": "property",
+        "value": Object {
+          ".constructor": Object {
+            "configurable": true,
+            "type": "property",
+            "value": Object {
+              "id": "1",
+              "type": "ref",
+            },
+            "writable": true,
+          },
+          "id": "2",
+          "type": "object",
+        },
+        "writable": true,
+      },
+      "id": "1",
+      "source": "function fac(n) {
+  const _fnStartId = tracer.logFnStart(2, {
+    n,
+    this: this,
+    arguments: arguments
+  });
+
+  try {
+    {
+      return tracer.logFnRet(6, tracer.logExpr(7, tracer.logExpr(8, tracer.logExpr(9, n) == tracer.logExpr(10, 1)) ? tracer.logExpr(11, 1) : tracer.logExpr(12, tracer.logExpr(13, n) * tracer.logExpr(14, tracer.logExpr(15, fac)(tracer.logExpr(16, tracer.logExpr(17, n) - tracer.logExpr(18, 1)))))));
+    }
+  } catch (e) {
+    tracer.logFnThrow(2, e);
+    throw e;
+  }
+
+  tracer.logFnRet(2, undefined);
+}",
+      "type": "function",
+    },
+    "id": 80,
+    "nodeId": 15,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 2,
+    "id": 81,
+    "nodeId": 17,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 82,
+    "nodeId": 18,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 83,
+    "nodeId": 16,
+    "parentId": 75,
     "type": "expr",
   },
   Object {
@@ -488,7 +1713,7 @@ Array [
           },
           "writable": true,
         },
-        "id": "10",
+        "id": "24",
         "type": "object",
       },
       ".n": 1,
@@ -496,130 +1721,354 @@ Array [
         "name": "undefined",
         "type": "builtin",
       },
-      "id": "9",
+      "id": "23",
       "type": "object",
     },
-    "id": 21,
+    "id": 84,
     "nodeId": 2,
-    "parentId": 12,
+    "parentId": 75,
     "type": "fn-start",
   },
   Object {
     "astId": "test",
     "data": 1,
-    "id": 22,
+    "id": 85,
     "nodeId": 9,
-    "parentId": 21,
+    "parentId": 84,
     "type": "expr",
   },
   Object {
     "astId": "test",
     "data": 1,
-    "id": 23,
+    "id": 86,
     "nodeId": 10,
-    "parentId": 21,
+    "parentId": 84,
     "type": "expr",
   },
   Object {
     "astId": "test",
     "data": true,
-    "id": 24,
+    "id": 87,
     "nodeId": 8,
-    "parentId": 21,
+    "parentId": 84,
     "type": "expr",
   },
   Object {
     "astId": "test",
     "data": 1,
-    "id": 25,
+    "id": 88,
     "nodeId": 11,
-    "parentId": 21,
+    "parentId": 84,
     "type": "expr",
   },
   Object {
     "astId": "test",
     "data": 1,
-    "id": 26,
+    "id": 89,
+    "nodeId": 7,
+    "parentId": 84,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 90,
+    "nodeId": 6,
+    "parentId": 84,
+    "type": "fn-ret",
+  },
+  Object {
+    "astId": "test",
+    "data": 1,
+    "id": 91,
+    "nodeId": 14,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 2,
+    "id": 92,
+    "nodeId": 12,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 2,
+    "id": 93,
+    "nodeId": 7,
+    "parentId": 75,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 2,
+    "id": 94,
+    "nodeId": 6,
+    "parentId": 75,
+    "type": "fn-ret",
+  },
+  Object {
+    "astId": "test",
+    "data": 2,
+    "id": 95,
+    "nodeId": 14,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 6,
+    "id": 96,
+    "nodeId": 12,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 6,
+    "id": 97,
+    "nodeId": 7,
+    "parentId": 66,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 6,
+    "id": 98,
+    "nodeId": 6,
+    "parentId": 66,
+    "type": "fn-ret",
+  },
+  Object {
+    "astId": "test",
+    "data": 6,
+    "id": 99,
+    "nodeId": 14,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 24,
+    "id": 100,
+    "nodeId": 12,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 24,
+    "id": 101,
+    "nodeId": 7,
+    "parentId": 57,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 24,
+    "id": 102,
+    "nodeId": 6,
+    "parentId": 57,
+    "type": "fn-ret",
+  },
+  Object {
+    "astId": "test",
+    "data": 24,
+    "id": 103,
+    "nodeId": 14,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 120,
+    "id": 104,
+    "nodeId": 12,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 120,
+    "id": 105,
+    "nodeId": 7,
+    "parentId": 48,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 120,
+    "id": 106,
+    "nodeId": 6,
+    "parentId": 48,
+    "type": "fn-ret",
+  },
+  Object {
+    "astId": "test",
+    "data": 120,
+    "id": 107,
+    "nodeId": 14,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 720,
+    "id": 108,
+    "nodeId": 12,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 720,
+    "id": 109,
+    "nodeId": 7,
+    "parentId": 39,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 720,
+    "id": 110,
+    "nodeId": 6,
+    "parentId": 39,
+    "type": "fn-ret",
+  },
+  Object {
+    "astId": "test",
+    "data": 720,
+    "id": 111,
+    "nodeId": 14,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 5040,
+    "id": 112,
+    "nodeId": 12,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 5040,
+    "id": 113,
+    "nodeId": 7,
+    "parentId": 30,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 5040,
+    "id": 114,
+    "nodeId": 6,
+    "parentId": 30,
+    "type": "fn-ret",
+  },
+  Object {
+    "astId": "test",
+    "data": 5040,
+    "id": 115,
+    "nodeId": 14,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 40320,
+    "id": 116,
+    "nodeId": 12,
+    "parentId": 21,
+    "type": "expr",
+  },
+  Object {
+    "astId": "test",
+    "data": 40320,
+    "id": 117,
     "nodeId": 7,
     "parentId": 21,
     "type": "expr",
   },
   Object {
     "astId": "test",
-    "data": 1,
-    "id": 27,
+    "data": 40320,
+    "id": 118,
     "nodeId": 6,
     "parentId": 21,
     "type": "fn-ret",
   },
   Object {
     "astId": "test",
-    "data": 1,
-    "id": 28,
+    "data": 40320,
+    "id": 119,
     "nodeId": 14,
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "astId": "test",
-    "data": 2,
-    "id": 29,
+    "data": 362880,
+    "id": 120,
     "nodeId": 12,
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "astId": "test",
-    "data": 2,
-    "id": 30,
+    "data": 362880,
+    "id": 121,
     "nodeId": 7,
     "parentId": 12,
     "type": "expr",
   },
   Object {
     "astId": "test",
-    "data": 2,
-    "id": 31,
+    "data": 362880,
+    "id": 122,
     "nodeId": 6,
     "parentId": 12,
     "type": "fn-ret",
   },
   Object {
     "astId": "test",
-    "data": 2,
-    "id": 32,
+    "data": 362880,
+    "id": 123,
     "nodeId": 14,
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "astId": "test",
-    "data": 6,
-    "id": 33,
+    "data": 3628800,
+    "id": 124,
     "nodeId": 12,
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "astId": "test",
-    "data": 6,
-    "id": 34,
+    "data": 3628800,
+    "id": 125,
     "nodeId": 7,
     "parentId": 3,
     "type": "expr",
   },
   Object {
     "astId": "test",
-    "data": 6,
-    "id": 35,
+    "data": 3628800,
+    "id": 126,
     "nodeId": 6,
     "parentId": 3,
     "type": "fn-ret",
   },
   Object {
     "astId": "test",
-    "data": 6,
-    "id": 36,
+    "data": 3628800,
+    "id": 127,
     "nodeId": 22,
     "parentId": undefined,
     "type": "expr",
