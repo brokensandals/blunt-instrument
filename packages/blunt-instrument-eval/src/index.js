@@ -45,6 +45,7 @@ may interfere with instrumentedEval, the code, or both.`);
   const tracer = trace.tracerFor('eval');
 
   const babelOpts = {
+    configFile: false,
     plugins: [
       [bluntInstrumentPlugin,
         {
