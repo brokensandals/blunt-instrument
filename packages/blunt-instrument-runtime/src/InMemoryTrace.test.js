@@ -80,6 +80,15 @@ describe('InMemoryTrace', () => {
           },
         }]);
       });
+
+      test('with maxTrevs', () => {
+        trace = new InMemoryTrace({ maxTrevs: 2 });
+        tracer = trace.tracerFor(astId);
+        tracer.logTrev('expr', 1, 'a');
+        tracer.logTrev('expr', 2, 'b');
+        tracer.logTrev('expr', 3, 'c');
+        expect(trace.trevs).toHaveLength(2);
+      });
     });
 
     test('registerAST', () => {

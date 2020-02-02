@@ -28,9 +28,11 @@ import { TrevCollection } from 'blunt-instrument-trace-utils';
  * @param {boolean} opts.saveInstrumented - if true, the AST of the instrumented
  *   code (in addition to the AST of the orginal code) will be saved and returned
  *   in the `instrumentedAST` field of the return value
+ * @param {object} opts.traceOpts - if you need to customize the InMemoryTrace that
+ *   this function creates, pass options for its constructor here
  * @returns {object}
  */
-export default function (source, { saveInstrumented = false } = {}) {
+export default function (source, { saveInstrumented = false, traceOpts = {} } = {}) {
   const tracerVar = '_bie_tracer';
 
   if (source.includes(tracerVar)) {
@@ -39,7 +41,7 @@ export default function (source, { saveInstrumented = false } = {}) {
 may interfere with instrumentedEval, the code, or both.`);
   }
 
-  const trace = new InMemoryTrace();
+  const trace = new InMemoryTrace(traceOpts);
   const tracer = trace.tracerFor('eval');
 
   const babelOpts = {

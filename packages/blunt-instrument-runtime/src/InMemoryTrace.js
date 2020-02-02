@@ -1,9 +1,13 @@
 import { Encoder } from 'object-graph-as-json';
 
 export default class InMemoryTrace {
-  constructor({ encoder = new Encoder() } = {}) {
+  constructor({
+    encoder = new Encoder(),
+    maxTrevs = Infinity,
+  } = {}) {
     this.asts = {};
     this.encoder = encoder;
+    this.maxTrevs = maxTrevs;
     this.tracers = {};
     this.trevs = [];
     this.trevIdStack = [];
@@ -35,6 +39,10 @@ export default class InMemoryTrace {
 
       logTrev(type, nodeId, rawData, more = {}) {
         const id = trace.trevs.length + 1;
+        if (id > trace.maxTrevs) {
+          return null;
+        }
+
         const parentId = trace.trevIdStack[trace.trevIdStack.length - 1];
         const data = trace.encoder.encode(rawData);
 
