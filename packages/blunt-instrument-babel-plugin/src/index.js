@@ -173,11 +173,11 @@ const buildResumeTrace = template.expression(`
 `);
 
 /**
- * Replaces a yield expression with a traced equivalent.
- * @param {NodePath} path - path containing yield expression node
+ * Replaces a yield or await expression with a traced equivalent.
+ * @param {NodePath} path - path containing yield or await expression node
  * @param {object} state - metadata returned from addInstrumenterInit
  */
-function addYieldTrace(path, { tracerId, fnStartIdId }) {
+function addPauseTrace(path, { tracerId, fnStartIdId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
@@ -252,7 +252,7 @@ const instrumentVisitor = {
 
   Expression: {
     exit(path) {
-      if (types.isYieldExpression(path.node)) {
+      if (types.isAwaitExpression(path.node) || types.isYieldExpression(path.node)) {
         return;
       }
       addExpressionTrace(path, this.state);
@@ -267,8 +267,12 @@ const instrumentVisitor = {
     addReturnTrace(path, this.state);
   },
 
+  AwaitExpression(path) {
+    addPauseTrace(path, this.state);
+  },
+
   YieldExpression(path) {
-    addYieldTrace(path, this.state);
+    addPauseTrace(path, this.state);
   },
 };
 

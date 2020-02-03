@@ -304,6 +304,40 @@ describe('special case syntax handling', () => {
     });
   });
 
+  test('async/await', () => {
+    const output = biEval(`
+      function deferredSquare(n) {
+        return new Promise((resolve) => setTimeout(() => resolve(n * n)));
+      }
+      async function foo() {
+        const a = await deferredSquare(2);
+        const b = await deferredSquare(a);
+        return a + b;
+      }
+      output.promise = foo();
+    `);
+    return output.promise.then((result) => {
+      expect(result).toEqual(20);
+      const call1 = namedCall(output, 'foo');
+      const pause1 = codeTrev(output, 'await deferredSquare(2)', 'fn-pause');
+      expect(pause1.data.prototype).toEqual({ name: 'Promise.prototype', type: 'builtin' });
+      expect(pause1.parentId).toEqual(call1.id);
+      const resume1 = codeTrev(output, 'await deferredSquare(2)', 'fn-resume');
+      expect(resume1.data).toEqual(4);
+      expect(resume1.parentId).toBeUndefined();
+      expect(resume1.fnStartId).toEqual(call1.id);
+      const pause2 = codeTrev(output, 'await deferredSquare(a)', 'fn-pause');
+      expect(pause2.data.prototype).toEqual({ name: 'Promise.prototype', type: 'builtin' });
+      expect(pause2.parentId).toEqual(resume1.id);
+      const resume2 = codeTrev(output, 'await deferredSquare(a)', 'fn-resume');
+      expect(resume2.data).toEqual(16);
+      expect(resume2.parentId).toBeUndefined();
+      expect(resume2.fnStartId).toEqual(call1.id);
+      const ret1 = codeTrev(output, 'return a + b;', 'fn-ret');
+      expect(ret1.data).toEqual(20);
+    });
+  });
+
   describe('generators', () => {
     test('yields values and manages stack correctly', () => {
       const output = biEval(`
