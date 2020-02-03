@@ -34,6 +34,20 @@ function CodeForNode({
   let cur = start;
   const elements = [];
 
+  // For code using shorthand object property notation, i.e. `{x}` instead of `{x: x}`,
+  // there are three nodes corresponding to the code `x`: the ObjectProperty, ObjectProperty.id,
+  // and ObjectProperty.value. This special case is here to avoid displaying `x` multiple times,
+  // and to make sure the one we display is the one that trevs will actually be attached to.
+  if (node.type === 'ObjectProperty' && node.shorthand) {
+    return <CodeForNode key={node.value.biId}
+                        highlightedNodeId={highlightedNodeId}
+                        node={node.value}
+                        selectedNodeIds={selectedNodeIds}
+                        code={code}
+                        onHoveredNodeChange={onHoveredNodeChange}
+                        onNodeSelectedToggle={onNodeSelectedToggle} />;
+  }
+
   // TODO does this sorting need to look at 'end' too?
   const children = findChildNodes(node).sort((a, b) => a.start - b.start);
   for (const child of children) {
