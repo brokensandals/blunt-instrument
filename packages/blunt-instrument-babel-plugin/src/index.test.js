@@ -234,6 +234,18 @@ describe('configuration', () => {
 });
 
 describe('special case syntax handling', () => {
+  test('method declarations', () => {
+    const output = biEval(`
+      const foo = {
+        bar(x, y) {
+          return x + y;
+        }
+      };
+      output.result = foo.bar(3, 4);
+    `);
+    expect(output.result).toEqual(7);
+  });
+
   describe('errors', () => {
     test('parentId is set correctly when recovering from an error', () => {
       const output = biEval(`

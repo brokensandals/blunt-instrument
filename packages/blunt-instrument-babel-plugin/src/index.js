@@ -147,6 +147,13 @@ function addExpressionTrace(path, { tracerId }) {
   if (!(path.isReferenced())) {
     return;
   }
+  // Workaround for https://github.com/babel/babel/issues/11087
+  if ((types.isObjectMethod(path.parentPath.node)
+        || types.isClassMethod(path.parentPath.node)
+        || types.isClassPrivateMethod(path.parentPath.node))
+      && path.parentPath.node.params.includes(path.node)) {
+    return;
+  }
 
   const trace = buildExpressionTrace({
     tracerId,
