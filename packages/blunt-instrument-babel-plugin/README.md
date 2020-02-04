@@ -118,8 +118,6 @@ fn(tracer);
 
 If you are retrieving trevs from an `ArrayTrace`, the `data` field will have been cloned & encoded using a format called object-graph-as-json; see the [blunt-instrument-trace-utils README][blunt-instrument-trace-utils].
 
-See the [blunt-instrument-runtime README][blunt-instrument-runtime] regarding the `data` field.
-
 [blunt-instrument-eval]: ../blunt-instrument-eval/README.md
 [blunt-instrument-runtime]: ../blunt-instrument-runtime/README.md
 [blunt-instrument-trace-utils]: ../blunt-instrument-trace-utils/README.md
