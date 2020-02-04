@@ -179,11 +179,33 @@ class AppContainer extends React.Component {
 
   doRun(source) {
     let tc;
+    let trace;
     const status = { action: 'run' };
     try {
-      const trace = instrumentedEval(source, { saveInstrumented: true });
+      trace = instrumentedEval(source, { saveInstrumented: true });
       tc = trace.toTC().withDenormalizedInfo();
       status.tracedError = trace.error;
+
+      let refreshScheduled = false;
+      trace.onChange = () => {
+        if (refreshScheduled) {
+          return;
+        }
+        refreshScheduled = true;
+
+        window.setTimeout(() => {
+          refreshScheduled = false;
+          if (this.state.trace !== trace) {
+            return;
+          }
+
+          const tc = trace.toTC().withDenormalizedInfo();
+          this.setState({
+            tc,
+            ...this.doQuery(tc, this.state.traceQuery),
+          });
+        });
+      };
     } catch (error) {
       console.log(error)
       tc = TrevCollection.empty();
@@ -192,6 +214,7 @@ class AppContainer extends React.Component {
   
     return {
       tc,
+      trace,
       status,
       sourceDraft: source,
       ...defaultQueryState,
