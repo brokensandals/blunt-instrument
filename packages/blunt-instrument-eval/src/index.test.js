@@ -11,26 +11,27 @@ const example = `
 `;
 
 describe('instrumentedEval', () => {
-  it('runs the given code and returns a TrevCollection', () => {
-    const result = instrumentedEval(example);
-    const sumNode = result.tc.astb.filterNodes((node) => node.codeSlice === 'num + by')[0];
-    const { trevs } = result.tc.filter((trev) => trev.denormalized.node === sumNode);
+  it('runs the given code and returns an ArrayTrace', () => {
+    const trace = instrumentedEval(example);
+    const tc = trace.toTC().withDenormalizedInfo();
+    const sumNode = tc.astb.filterNodes((node) => node.codeSlice === 'num + by')[0];
+    const { trevs } = tc.filter((trev) => trev.denormalized.node === sumNode);
     expect(trevs.map((trev) => trev.data)).toEqual([4, 7]);
-    expect(result.error).toBeUndefined();
+    expect(trace.error).toBeUndefined();
   });
 
   it('returns the instrumented AST if requested', () => {
-    const result = instrumentedEval(example, { saveInstrumented: true });
-    expect(result.tc).toBeDefined();
-    expect(result.instrumentedAST).toBeDefined();
-    expect(result.instrumentedAST.codeSlice).toContain('_bie_tracer');
+    const trace = instrumentedEval(example, { saveInstrumented: true });
+    expect(trace.trevs.length).toBeGreaterThan(0);
+    expect(trace.astb.instrumentedAST).toBeDefined();
+    expect(trace.astb.instrumentedAST.codeSlice).toContain('_bie_tracer');
   });
 
   it('catches and returns errors when evaluating the code', () => {
-    const result = instrumentedEval('throw new Error("boo");');
-    expect(result.tc).toBeDefined();
-    expect(result.error).toBeDefined();
-    expect(result.error.message).toEqual('boo');
+    const trace = instrumentedEval('throw new Error("boo");');
+    expect(trace.trevs.length).toBeGreaterThan(0);
+    expect(trace.error).toBeDefined();
+    expect(trace.error.message).toEqual('boo');
   });
 });
 
@@ -41,7 +42,8 @@ test('the code in the readme works', () => {
     }
     factorial(5);`;
 
-  const result = instrumentedEval(code);
-  const { trevs } = result.tc.filter((trev) => trev.denormalized.node.codeSlice === 'factorial(n - 1)');
+  const trace = instrumentedEval(code);
+  const tc = trace.toTC().withDenormalizedInfo();
+  const { trevs } = tc.filter((trev) => trev.denormalized.node.codeSlice === 'factorial(n - 1)');
   expect(trevs.map((trev) => trev.data)).toEqual([1, 2, 6, 24]);
 });

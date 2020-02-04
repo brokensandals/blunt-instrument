@@ -2,20 +2,17 @@ import * as babel from '@babel/core';
 import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
 import {
   attachCodeSlicesToAST,
-  ASTBundle,
   copyNodeIdsBetweenASTs,
 } from 'blunt-instrument-ast-utils';
 import { Tracer } from 'blunt-instrument-runtime';
-import { ArrayTrace, TrevCollection } from 'blunt-instrument-trace-utils';
+import { ArrayTrace } from 'blunt-instrument-trace-utils';
 
 /**
  * This method ties together various pieces of blunt-instrument to provide a
  * convenient way of instrumenting a piece of javascript code, evaluating it,
  * and returning the trace in a consumable format.
  *
- * The input is javascript source code as a string, and the output is an object
- * containing at least one field, `tc`. This is an instance of TrevCollection
- * with the results of the trace.
+ * The input is javascript source code as a string, and the output is an ArrayTrace instance.
  *
  * If the code throws an error, it will be caught and stored in the `error` field of the
  * return value.
@@ -26,9 +23,9 @@ import { ArrayTrace, TrevCollection } from 'blunt-instrument-trace-utils';
  * @param {string} source - javascript code to be instrumented & evaluated
  * @param {object} opts
  * @param {boolean} opts.saveInstrumented - if true, the AST of the instrumented
- *   code (in addition to the AST of the orginal code) will be saved and returned
- *   in the `instrumentedAST` field of the return value
- * @returns {object}
+ *   code will also be saved. It will be added as a field named `instrumentedAST`
+ *   on the `astb` field of the trace.
+ * @returns {ArrayTrace}
  */
 export default function (source, { saveInstrumented = false } = {}) {
   const tracerVar = '_bie_tracer';
@@ -75,33 +72,19 @@ may interfere with instrumentedEval, the code, or both.`);
   tracer.onRegisterAST('eval', ast);
 
   const { code } = babelResult;
-  let error;
   const fn = new Function(tracerVar, `"use strict";${code}`); // eslint-disable-line no-new-func
   try {
     fn(tracer);
   } catch (e) {
-    error = e;
+    trace.error = e;
   }
-
-  const { trevs } = trace;
-  if (!trevs) {
-    if (error) {
-      throw error;
-    } else {
-      throw new Error('Unknown error prior to instrumentation init.');
-    }
-  }
-
-  const result = { error };
-
-  result.tc = new TrevCollection(trevs, trace.astb).withDenormalizedInfo();
 
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);
     copyNodeIdsBetweenASTs(babelResult.ast, parsed);
     attachCodeSlicesToAST(parsed, code);
-    result.instrumentedAST = parsed;
+    trace.astb.instrumentedAST = parsed;
   }
 
-  return result;
+  return trace;
 }

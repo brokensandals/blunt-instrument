@@ -15,8 +15,8 @@ import FileSaver from 'file-saver';
 import LargeDataPreview from '../LargeDataPreview';
 
 function AppView({
-  evalResult,
   tc,
+  filteredTC,
   traceQuery,
   highlightedTrevId,
   highlightedNodeId,
@@ -70,8 +70,8 @@ function AppView({
     case 'run':
       if (status.error) {
         runStatus = <p className="status error">{status.error.toString()}</p>;
-      } else if (evalResult.error) {
-        runStatus = <p className="status warning">Ran and received error: {evalResult.error.toString()}</p>;
+      } else if (status.tracedError) {
+        runStatus = <p className="status warning">Ran and received error: {status.tracedError.toString()}</p>;
       } else {
         runStatus = <p className="status">Ran successfully.</p>;
       }
@@ -99,7 +99,7 @@ function AppView({
   }
 
   const handleSaveFile = (event) => {
-    const text = JSON.stringify(evalResult.tc.asJSON(), null, 2);
+    const text = JSON.stringify(tc.asJSON(), null, 2);
     const blob = new Blob([text], { type: 'application/json' });
     FileSaver.saveAs(blob, 'trace.json');
   };
@@ -145,7 +145,7 @@ function AppView({
             <div className="save-form">
               <p>You can export the trace &amp; AST to load later.</p>
               <ul>
-                <li><button className="view-save" onClick={() => onOpenModalData(evalResult.tc.asJSON())}>View JSON in browser</button></li>
+                <li><button className="view-save" onClick={() => onOpenModalData(tc.asJSON())}>View JSON in browser</button></li>
                 <li>Or <button className="file-save" onClick={handleSaveFile}>save to file</button></li>
               </ul>
             </div>
@@ -171,11 +171,11 @@ function AppView({
             <Tab>Code</Tab>
             <Tab>AST</Tab>
             <Tab>AST JSON</Tab>
-            {evalResult.instrumentedAST ? <Tab>Instrumented Code</Tab> : null}
+            {tc.astb.instrumentedAST ? <Tab>Instrumented Code</Tab> : null}
           </TabList>
 
           <TabPanel>
-            <AnnotatedCode ast={evalResult.tc.astb.asts.eval}
+            <AnnotatedCode ast={tc.astb.asts.eval}
                            highlightedNodeId={highlightedNodeId}
                            onHoveredNodeChange={onHoveredNodeChange}
                            onNodeSelectedToggle={onNodeSelectedToggle}
@@ -183,7 +183,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ASTNav ast={evalResult.tc.astb.asts.eval}
+            <ASTNav ast={tc.astb.asts.eval}
                     highlightedNodeId={highlightedNodeId}
                     onHoveredNodeChange={onHoveredNodeChange}
                     onNodeSelectedToggle={onNodeSelectedToggle}
@@ -191,12 +191,12 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={evalResult.tc.astb.asts.eval} name={false} />
+            <ReactJson src={tc.astb.asts.eval} name={false} />
           </TabPanel>
           
-          {evalResult.instrumentedAST ?
+          {tc.astb.instrumentedAST ?
             <TabPanel>
-              <AnnotatedCode ast={evalResult.instrumentedAST}
+              <AnnotatedCode ast={tc.astb.instrumentedAST}
                             highlightedNodeId={highlightedNodeId}
                             onHoveredNodeChange={onHoveredNodeChange}
                             onNodeSelectedToggle={onNodeSelectedToggle}
@@ -209,7 +209,7 @@ function AppView({
                       onTraceQueryChange={onTraceQueryChange}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
-                      tc={evalResult.tc}
+                      tc={tc}
                       query={traceQuery}
                       onPlay={onPlay}
                       onStop={onStop}
@@ -223,7 +223,7 @@ function AppView({
           </TabList>
           
           <TabPanel>
-            <TrevTable trevs={tc.trevs}
+            <TrevTable trevs={filteredTC.trevs}
                       highlightedTrevId={highlightedTrevId}
                       highlightedNodeId={highlightedNodeId}
                       onHoveredTrevChange={onHoveredTrevChange}
@@ -233,7 +233,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={tc.withoutDenormalizedInfo().trevs}
+            <ReactJson src={filteredTC.withoutDenormalizedInfo().trevs}
                        name={false}
                        displayDataTypes={false} />
           </TabPanel>

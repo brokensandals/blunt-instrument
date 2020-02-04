@@ -80,11 +80,11 @@ class AppContainer extends React.Component {
   }
 
   handleTraceQueryChange(traceQuery) {
-    this.setState(this.doQuery(this.state.evalResult.tc, traceQuery));
+    this.setState(this.doQuery(this.state.tc, traceQuery));
   }
 
   handleHoveredTrevChange(id) {
-    this.handleHoveredNodeChange(id == null ? null : this.state.evalResult.tc.getTrev(id).nodeId);
+    this.handleHoveredNodeChange(id == null ? null : this.state.tc.getTrev(id).nodeId);
     this.setState({ highlightedTrevId: id });
   }
 
@@ -112,9 +112,8 @@ class AppContainer extends React.Component {
     try {
       const json = JSON.parse(text);
       const tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
-      const evalResult = { tc };
       this.setState({
-        evalResult,
+        tc,
         status: { action: 'load' },
         sourceDraft: tc.astb.asts.eval.codeSlice,
         ...defaultQueryState,
@@ -128,7 +127,7 @@ class AppContainer extends React.Component {
   }
 
   handleNodeSelectedToggle(nodeId) {
-    const node = this.state.evalResult.tc.astb.getNode('eval', nodeId);
+    const node = this.state.tc.astb.getNode('eval', nodeId);
     if (!node) {
       return;
     }
@@ -175,21 +174,21 @@ class AppContainer extends React.Component {
   }
 
   doRun(source) {
-    let evalResult;
+    let trace;
     try {
-      evalResult = instrumentedEval(source, { saveInstrumented: true });
+      trace = instrumentedEval(source, { saveInstrumented: true });
     } catch (error) {
       console.log(error)
       return { status: { action: 'run', error } };
     }
   
-
+    const tc = trace.toTC().withDenormalizedInfo();
     return {
-      evalResult,
-      status: { action: 'run' },
+      tc,
+      status: { action: 'run', tracedError: trace.error },
       sourceDraft: source,
       ...defaultQueryState,
-      ...this.doQuery(evalResult.tc, defaultQueryState.traceQuery),
+      ...this.doQuery(tc, defaultQueryState.traceQuery),
     };
   }
 
@@ -218,8 +217,8 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <AppView evalResult={this.state.evalResult}
-               tc={this.state.filteredTC}
+      <AppView tc={this.state.tc}
+               filteredTC={this.state.filteredTC}
                traceQuery={this.state.traceQuery}
                sourceDraft={this.state.sourceDraft}
                highlightedTrevId={this.state.highlightedTrevId}

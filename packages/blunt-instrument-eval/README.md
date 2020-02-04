@@ -11,10 +11,11 @@ const code = `
   }
   factorial(5);`;
 
-const result = instrumentedEval(code);
+const trace = instrumentedEval(code);
+// Get a collection of the trace events
+const tc = trace.toTC().withDenormalizedInfo();
 // Look up all the trace events corresponding to the evaluation of "factorial(n - 1)":
-const { trevs } = result.tc.filter(
-  (trev) => trev.denormalized.node.codeSlice === 'factorial(n - 1)');
+const { trevs } = tc.filter((trev) => trev.denormalized.node.codeSlice === 'factorial(n - 1)');
 
 // This will log the four values that factorial(n - 1) evaluates to during the
 // course of execution:
@@ -22,6 +23,7 @@ const { trevs } = result.tc.filter(
 console.log(trevs.map(trev => trev.data));
 ```
 
+The return value of `instrumentedEval` is an [ArrayTrace](../blunt-instrument-trace-utils/README.md#arraytrace) instance.
 For more information on working with the output, see [blunt-instrument-trace-utils][trace-utils] and [blunt-instrument-ast-utils][ast-utils].
 
 Note: code is evaluated in strict mode.

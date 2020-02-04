@@ -1,5 +1,6 @@
 import { ASTBundle } from 'blunt-instrument-ast-utils';
 import { Encoder } from 'object-graph-as-json';
+import TrevCollection from './TrevCollection';
 
 /**
  * Holds an in-memory trace of some instrumented code's execution.
@@ -31,6 +32,13 @@ export default class ArrayTrace {
     tracer.onRegisterAST = this.handleRegisterAST.bind(this);
     // eslint-disable-next-line no-param-reassign
     tracer.onTrev = this.handleTrev.bind(this);
+  }
+
+  /**
+   * @returns {TrevCollection}
+   */
+  toTC() {
+    return new TrevCollection(this.trevs, this.astb);
   }
 
   handleRegisterAST(astId, ast) {
