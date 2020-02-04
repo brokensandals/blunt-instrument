@@ -1,3 +1,13 @@
+/**
+ * Instrumented code uses an instance of Tracer to report everything that happens.
+ * This supports registering two callbacks:
+ * - onRegisterAST(astId, ast): if the babel plugin is configured to, the instrumented code will
+ *     call this with its AST so that you can look up the babel nodes referenced in each trev.
+ * - onTrev(trev): called when a trace event occurs. Note that the 'data' field will be the raw
+ *     data, not cloned or encoded in any way.
+ *
+ * You may override the generateId() method if desired. Other methods are for internal use.
+ */
 export default class Tracer {
   constructor({
     onRegisterAST = () => {},
@@ -9,6 +19,9 @@ export default class Tracer {
     this.stack = [];
   }
 
+  /**
+   * @returns {number} an ID for a new trev
+   */
   generateId() {
     return this.nextId++; // eslint-disable-line no-plusplus
   }

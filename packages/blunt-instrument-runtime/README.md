@@ -1,24 +1,38 @@
 # blunt-instrument-runtime
 
-Code instrumented by [blunt-instrument-babel-plugin][blunt-instrument-babel-plugin] uses this library to record tracing data.
+Code instrumented by [blunt-instrument-babel-plugin][blunt-instrument-babel-plugin] uses this library to report tracing data.
 
-## InMemoryTrace class
+## Tracer class
 
-The main export of this package is the `InMemoryTrace` class, which represents an appendable log of a program's execution.
-(Other `Trace` classes implementing the same interface, for example an `IndexedDBTrace` class, might be created in the future.)
+The main export of this package is the `Tracer` class.
+Instrumented code must be given an instance of that class; you can either create an instance via `new Tracer()` or rely on the `defaultTracer` instance exported by the package.
+If you're using [blunt-instrument-eval][blunt-instrument-eval], it will create an instance for you; if you're using the [babel plugin][blunt-instrument-babel-plugin] directly, you can configure it as documented there.
 
-Its main method is `tracerFor(astId)`, which returns a tracer instance.
-A program may consist of multiple files which the babel plugin has processed separately.
-In that case, they should all share a Trace instance, but use different tracer instances.
-`astId` is a string uniquely identifying the abstract syntax tree whose execution will be traced.
+The `Tracer` supports two callbacks, described below.
+These can be used for recording the data of a trace - see `ArrayTrace` in [blunt-instrument-trace-utils][blunt-instrument-trace-utils] for a basic implementation.
 
-After running an instrumented program, the `trevs` property of the Trace instance will contain all the trace events recorded during execution.
-See [blunt-instrument-babel-plugin's README][blunt-instrument-babel-plugin] for an example of what this array looks like.
+### onTrev
 
-## Data Encoding
+This will be called every time the instrumented code reports that a tracing event ("trev") occurred.
+These events include the evaluation of an expression, that start of a function call, returning from a function call, etc.
 
-One difficulty in producing a full trace of a program is that every value (every number and string, every state of every array and object) needs to be copied or serialized in some way.
-Currently, the `data` field in every trev is produced using [object-graph-as-json][object-graph-as-json], which attempts to preserve as much information about the objects being copied as it can.
+```js
+tracer.onTrev = (trev) => console.log(trev);
+```
+
+See [blunt-instrument-babel-plugin's README][blunt-instrument-babel-plugin] for an example of what trevs look like.
+Unlike what's shown there, though, the `data` field on this trev object has not been cloned or encoded in any way, so it might be modified as soon as control returns to the instrumented code.
+(The `ArrayTracer` class replaces the `data` field with an encoded copy.)
+
+### onRegisterAST
+
+This will be called when the instrumented code is initializing, unless that functionality has been disabled in the babel plugin opts.
+The arguments are the AST ID (important if you have instrumented multiple files that are all reporting to the same Tracer) and the root babel Node of the AST.
+
+```js
+tracer.onRegisterAST = (astId, ast) => console.log(ast);
+```
 
 [blunt-instrument-babel-plugin]: ../blunt-instrument-babel-plugin/README.md
-[object-graph-as-json]: https://github.com/brokensandals/object-graph-as-json
+[blunt-instrument-eval]: ../blunt-instrument-eval/README.md
+[blunt-instrument-trace-utils]: ../blunt-instrument-trace-utils/README.md
