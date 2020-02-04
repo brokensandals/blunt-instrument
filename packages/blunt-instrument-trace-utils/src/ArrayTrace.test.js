@@ -15,14 +15,14 @@ describe('ArrayTrace', () => {
     it('saves the AST', () => {
       const node = { foo: 'bar' };
       callbacks.onRegisterAST('test', node);
-      expect(trace.asts.test).toBe(node);
+      expect(trace.astb.asts.test).toBe(node);
     });
 
     it('invokes onChange callback', (done) => {
       const node = { foo: 'bar' };
       trace.onChange = function () { // eslint-disable-line func-names
         expect(this).toBe(trace);
-        expect(trace.asts.test).toBe(node);
+        expect(trace.astb.asts.test).toBe(node);
         done();
       };
       callbacks.onRegisterAST('test', node);

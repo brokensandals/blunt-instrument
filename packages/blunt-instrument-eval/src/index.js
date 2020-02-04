@@ -39,6 +39,7 @@ export default function (source, { saveInstrumented = false } = {}) {
 may interfere with instrumentedEval, the code, or both.`);
   }
 
+  let ast;
   const trace = new ArrayTrace();
   const tracer = new Tracer();
   trace.attach(tracer);
@@ -53,7 +54,7 @@ may interfere with instrumentedEval, the code, or both.`);
             tracerVar,
           },
           ast: {
-            callback: (id, a) => { trace.asts.eval = JSON.parse(JSON.stringify(a)); },
+            callback: (id, a) => { ast = JSON.parse(JSON.stringify(a)); },
             id: 'eval',
             selfRegister: false,
           },
@@ -66,8 +67,14 @@ may interfere with instrumentedEval, the code, or both.`);
   }
 
   const babelResult = babel.transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
-  const { code } = babelResult;
 
+  if (!ast) {
+    throw new Error('blunt-instrument-babel-plugin did not invoke callback with AST');
+  }
+  attachCodeSlicesToAST(ast, source);
+  tracer.onRegisterAST('eval', ast);
+
+  const { code } = babelResult;
   let error;
   const fn = new Function(tracerVar, `"use strict";${code}`); // eslint-disable-line no-new-func
   try {
@@ -76,9 +83,8 @@ may interfere with instrumentedEval, the code, or both.`);
     error = e;
   }
 
-  const ast = trace.asts.eval;
   const { trevs } = trace;
-  if (!ast || !trevs) {
+  if (!trevs) {
     if (error) {
       throw error;
     } else {
@@ -88,9 +94,7 @@ may interfere with instrumentedEval, the code, or both.`);
 
   const result = { error };
 
-  attachCodeSlicesToAST(ast, source);
-  const astb = new ASTBundle({ eval: ast });
-  result.tc = new TrevCollection(trevs, astb).withDenormalizedInfo();
+  result.tc = new TrevCollection(trevs, trace.astb).withDenormalizedInfo();
 
   if (saveInstrumented) {
     const parsed = babel.parseSync(code);

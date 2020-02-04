@@ -30,28 +30,37 @@ export function fromNodeKey(nodeKey) {
  */
 export class ASTBundle {
   /**
-   * Note: the given ASTs are modified by this method:
-   * - an `biASTId` string field is added to each node
-   * - a `biKey` string field is added to each node containing the result of `toNodeKey`
+   * Note: all the ASTs will be passed to the add() method, which mutates them
    * @param {object} asts a collection of ASTs; each key should be the AST's id, and each value
    *    should be the root babel Node of the AST
    */
-  constructor(asts) {
-    this.asts = asts;
-    const nodesByKey = new Map();
+  constructor(asts = {}) {
+    this.asts = { ...asts };
+    this.nodesByKey = new Map();
 
     Object.keys(asts).forEach((astId) => {
-      types.traverseFast(asts[astId], (node) => {
-        if (!node.biId) {
-          throw new Error('Node is missing node ID');
-        }
-        node.biASTId = astId; // eslint-disable-line no-param-reassign
-        node.biKey = toNodeKey(astId, node.biId); // eslint-disable-line no-param-reassign
-        nodesByKey.set(node.biKey, node);
-      });
+      this.add(astId, asts[astId]);
     });
+  }
 
-    this.nodesByKey = nodesByKey;
+  /**
+   * Adds and indexes the given AST.
+    * Note: the given AST is modified by this method:
+   * - an `biASTId` string field is added to each node
+   * - a `biKey` string field is added to each node containing the result of `toNodeKey`
+   * @param {string} astId
+   * @param {Node} ast - root babel node of the AST
+   */
+  add(astId, ast) {
+    this.asts[astId] = ast;
+    types.traverseFast(ast, (node) => {
+      if (!node.biId) {
+        throw new Error('Node is missing node ID');
+      }
+      node.biASTId = astId; // eslint-disable-line no-param-reassign
+      node.biKey = toNodeKey(astId, node.biId); // eslint-disable-line no-param-reassign
+      this.nodesByKey.set(node.biKey, node);
+    });
   }
 
   /**

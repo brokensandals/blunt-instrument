@@ -23,6 +23,8 @@ trace.attach(myTracer);
 console.log(trace.trevs);
 ```
 
+See the jsdoc in [ArrayTrace.js](src/ArrayTrace.js) for more info.
+
 See the [babel plugin's README][babel-plugin] for an example of what an array of trevs looks like.
 
 ### Data Encoding

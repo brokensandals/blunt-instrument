@@ -1,3 +1,4 @@
+import { ASTBundle } from 'blunt-instrument-ast-utils';
 import { Encoder } from 'object-graph-as-json';
 
 /**
@@ -9,15 +10,14 @@ import { Encoder } from 'object-graph-as-json';
  * is encoded using object-graph-as-json so that later mutations to the object will not
  * alter the trev.
  *
- * ASTs are stored in an object in a property named `asts`. The key is the AST id, and the
- * value is the root babel node of the AST.
+ * ASTs are stored in an ASTBundle held in the property named `astb`.
  *
  * You can set the property `onChange` to a function, and it will be called after any additions
- * to the `asts` object or the `trevs` array.
+ * to the `astb` object or the `trevs` array.
  */
 export default class ArrayTrace {
   constructor({ encoder = new Encoder() } = {}) {
-    this.asts = {};
+    this.astb = new ASTBundle();
     this.encoder = encoder;
     this.trevs = [];
   }
@@ -34,7 +34,7 @@ export default class ArrayTrace {
   }
 
   handleRegisterAST(astId, ast) {
-    this.asts[astId] = ast;
+    this.astb.add(astId, ast);
     if (this.onChange) {
       this.onChange();
     }
