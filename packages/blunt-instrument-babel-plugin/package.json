@@ -9,6 +9,7 @@
   "devDependencies": {
     "blunt-instrument-runtime": "^0.0.0",
     "blunt-instrument-test-resources": "^0.0.0",
+    "blunt-instrument-trace-utils": "^0.0.0",
     "object-graph-as-json": "^2.0.0"
   },
   "peerDependencies": {

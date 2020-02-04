@@ -12,8 +12,5 @@
   "bugs": {
     "url": "https://github.com/brokensandals/blunt-instrument/issues"
   },
-  "homepage": "https://github.com/brokensandals/blunt-instrument#readme",
-  "dependencies": {
-    "object-graph-as-json": "^2.0.0"
-  }
+  "homepage": "https://github.com/brokensandals/blunt-instrument#readme"
 }

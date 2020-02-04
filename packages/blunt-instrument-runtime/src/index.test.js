@@ -1,5 +1,5 @@
 import * as runtime from '.';
 
-test('defaultTrace is created', () => {
-  expect(runtime.defaultTrace).toBeInstanceOf(runtime.InMemoryTrace);
+test('defaultTracer is created', () => {
+  expect(runtime.defaultTracer).toBeInstanceOf(runtime.Tracer);
 });

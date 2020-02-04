@@ -1,5 +1,5 @@
-import InMemoryTrace from './InMemoryTrace';
+import Tracer from './Tracer';
 
-const defaultTrace = new InMemoryTrace();
+const defaultTracer = new Tracer();
 
-export { InMemoryTrace, defaultTrace };
+export { Tracer, defaultTracer };

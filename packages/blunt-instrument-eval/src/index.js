@@ -5,8 +5,8 @@ import {
   ASTBundle,
   copyNodeIdsBetweenASTs,
 } from 'blunt-instrument-ast-utils';
-import { InMemoryTrace } from 'blunt-instrument-runtime';
-import { TrevCollection } from 'blunt-instrument-trace-utils';
+import { Tracer } from 'blunt-instrument-runtime';
+import { ArrayTrace, TrevCollection } from 'blunt-instrument-trace-utils';
 
 /**
  * This method ties together various pieces of blunt-instrument to provide a
@@ -39,8 +39,9 @@ export default function (source, { saveInstrumented = false } = {}) {
 may interfere with instrumentedEval, the code, or both.`);
   }
 
-  const trace = new InMemoryTrace();
-  const tracer = trace.tracerFor('eval');
+  const trace = new ArrayTrace();
+  const tracer = new Tracer();
+  trace.attach(tracer);
 
   const babelOpts = {
     configFile: false,
@@ -52,7 +53,8 @@ may interfere with instrumentedEval, the code, or both.`);
             tracerVar,
           },
           ast: {
-            callback: (a) => { tracer.ast = JSON.parse(JSON.stringify(a)); },
+            callback: (id, a) => { trace.asts.eval = JSON.parse(JSON.stringify(a)); },
+            id: 'eval',
             selfRegister: false,
           },
         }],
@@ -74,7 +76,7 @@ may interfere with instrumentedEval, the code, or both.`);
     error = e;
   }
 
-  const { ast } = tracer;
+  const ast = trace.asts.eval;
   const { trevs } = trace;
   if (!ast || !trevs) {
     if (error) {

@@ -5,8 +5,9 @@ import {
   ASTBundle,
 } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep'; // eslint-disable-line import/no-extraneous-dependencies
-import { Encoder, UnsafeDecoder } from 'object-graph-as-json';
-import { InMemoryTrace, defaultTrace } from 'blunt-instrument-runtime';
+import { UnsafeDecoder } from 'object-graph-as-json';
+import { Tracer, defaultTracer } from 'blunt-instrument-runtime';
+import { ArrayTrace } from 'blunt-instrument-trace-utils';
 import bluntInstrumentPlugin from '.';
 
 /**
@@ -16,7 +17,12 @@ import bluntInstrumentPlugin from '.';
  * @param {object} babelOpts - options for babel
  * @returns {string}
  */
-function transform(code, pluginOpts = {}, babelOpts = { configFile: false }, modules = false) {
+function transform(
+  code,
+  pluginOpts = { ast: { id: 'test' } },
+  babelOpts = { configFile: false },
+  modules = false,
+) {
   const plugins = [[bluntInstrumentPlugin, pluginOpts]];
   if (modules) {
     plugins.push('@babel/plugin-transform-modules-commonjs');
@@ -33,7 +39,7 @@ function transform(code, pluginOpts = {}, babelOpts = { configFile: false }, mod
  * @param {string} code
  * @returns {object}
  */
-function biEval(code, pluginOpts = {}) {
+function biEval(code, pluginOpts = { ast: { id: 'test' } }) {
   const { code: instrumented } = transform(code, {
     runtime: {
       mechanism: 'var',
@@ -42,8 +48,9 @@ function biEval(code, pluginOpts = {}) {
     ...pluginOpts,
   });
 
-  const trace = new InMemoryTrace({ encoder: new Encoder() });
-  const tracer = trace.tracerFor('test');
+  const tracer = new Tracer();
+  const trace = new ArrayTrace();
+  trace.attach(tracer);
   const fn = new Function('tracer', 'output', `"use strict";${instrumented}`); // eslint-disable-line no-new-func
   const output = {};
   fn(tracer, output);
@@ -56,7 +63,6 @@ function biEval(code, pluginOpts = {}) {
     code,
     instrumented,
     trace,
-    tracer,
     ...output,
   };
 }
@@ -148,29 +154,16 @@ describe('general examples', () => {
 });
 
 describe('configuration', () => {
+  let trace;
+
   beforeEach(() => {
-    // TODO this is hacky
-    defaultTrace.trevs = [];
-    defaultTrace.tracers = {};
+    trace = new ArrayTrace();
+    trace.attach(defaultTracer);
   });
 
-  test('using defaultTrace', () => {
-    const opts = {
-      runtime: {
-      },
-    };
-    const { code } = transform('const foo = "bar"', opts, {}, true);
-    // use `eval()` instead of `new Function()` so that `require` is defined
-    eval(code); // eslint-disable-line no-eval
-    const astIds = Object.keys(defaultTrace.tracers);
-    expect(astIds).toHaveLength(1);
-    expect(defaultTrace.trevs).toEqual([{
-      id: 1,
-      type: 'expr',
-      astId: astIds[0],
-      nodeId: 5,
-      data: 'bar',
-    }]);
+  afterEach(() => {
+    defaultTracer.onTrev = () => {};
+    defaultTracer.onRegisterAST = () => {};
   });
 
   test('using defaultTrace with specified ast id', () => {
@@ -182,11 +175,11 @@ describe('configuration', () => {
       },
     };
     const { code } = transform('const foo = "meh"', opts, {}, true);
-    expect(code).toContain('registerAST');
+    expect(code).toContain('onRegisterAST');
     // use `eval()` instead of `new Function()` so that `require` is defined
     eval(code); // eslint-disable-line no-eval
-    expect(defaultTrace.asts.test).not.toBeNull();
-    expect(defaultTrace.trevs).toEqual([{
+    expect(trace.asts.test).not.toBeNull();
+    expect(trace.trevs).toEqual([{
       id: 1,
       type: 'expr',
       astId: 'test',
@@ -202,13 +195,15 @@ describe('configuration', () => {
         tracerVar: 'tracer',
       },
       ast: {
+        id: 'test',
         selfRegister: false,
       },
     };
     const { code } = transform('const foo = "meh"', opts, {});
-    const trace = new InMemoryTrace();
-    const tracer = trace.tracerFor('test');
-    expect(code).not.toContain('ast');
+    const tracer = new Tracer();
+    trace = new ArrayTrace();
+    trace.attach(tracer);
+    expect(code).not.toContain('onRegisterAST');
     const fn = new Function('tracer', `"use strict";${code}`); // eslint-disable-line no-new-func
     fn(tracer);
     expect(tracer.ast).toBeUndefined();
@@ -216,6 +211,7 @@ describe('configuration', () => {
   });
 
   test('with AST callback', () => {
+    let astId;
     let ast;
     const opts = {
       runtime: {
@@ -223,11 +219,13 @@ describe('configuration', () => {
         tracerVar: 'tracer',
       },
       ast: {
-        callback: (a) => { ast = JSON.parse(JSON.stringify(a)); },
+        id: 'test',
+        callback: (id, a) => { astId = id; ast = JSON.parse(JSON.stringify(a)); },
         selfRegister: false,
       },
     };
     transform('const foo = "meh"', opts, {});
+    expect(astId).toEqual('test');
     expect(ast).not.toBeNull();
     expect(ast.biId).toEqual(1);
   });

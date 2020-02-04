@@ -5,30 +5,34 @@ import {
 } from 'blunt-instrument-ast-utils';
 
 const buildImportTracer = template(`
-  import { defaultTrace as %%tempId%% } from 'blunt-instrument-runtime';
-  const %%tracerId%% = %%tempId%%.tracerFor(%%astId%%);
+  import { defaultTracer as %%tempId%% } from 'blunt-instrument-runtime';
+  const %%tracerId%% = %%tempId%%;
+`);
+
+const buildSetAstId = template(`
+  const %%astIdId%% = %%astId%%;
 `);
 
 const buildRegisterAST = template(`
-  %%tracerId%%.registerAST(JSON.parse(%%astString%%));
+  %%tracerId%%.onRegisterAST(%%astIdId%%, JSON.parse(%%astString%%));
 `);
 
 const buildFnTrace = template(`{
-  const %%fnStartIdId%% = %%tracerId%%.logFnStart(%%nodeId%%, %%args%%);
+  const %%fnStartIdId%% = %%tracerId%%.traceFnStart(%%astIdId%%, %%nodeId%%, %%args%%);
   try {
     %%body%%
   } catch (e) {
-    %%tracerId%%.logFnThrow(%%nodeId%%, e);
+    %%tracerId%%.traceFnThrow(%%astIdId%%, %%nodeId%%, e);
     throw e;
   }
-  %%tracerId%%.logFnRet(%%nodeId%%, undefined);
+  %%tracerId%%.traceFnRet(%%astIdId%%, %%nodeId%%, undefined);
 }`);
 
 const buildReturnTrace = template(`
-  return %%tracerId%%.logFnRet(%%nodeId%%, %%retval%%);
+  return %%tracerId%%.traceFnRet(%%astIdId%%, %%nodeId%%, %%retval%%);
 `);
 
-function addFnTrace(path, { tracerId, fnStartIdId }) {
+function addFnTrace(path, { astIdId, tracerId, fnStartIdId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
@@ -67,6 +71,7 @@ function addFnTrace(path, { tracerId, fnStartIdId }) {
   if (types.isExpression(body)) {
     body = buildReturnTrace({
       tracerId,
+      astIdId,
       nodeId: types.numericLiteral(node.biId),
       retval: node.body,
     });
@@ -76,6 +81,7 @@ function addFnTrace(path, { tracerId, fnStartIdId }) {
     body,
     tracerId,
     fnStartIdId,
+    astIdId,
     nodeId: types.numericLiteral(node.biId),
     args: types.objectExpression(properties),
   });
@@ -84,7 +90,7 @@ function addFnTrace(path, { tracerId, fnStartIdId }) {
   node.biTracedFn = true;
 }
 
-function addReturnTrace(path, { tracerId }) {
+function addReturnTrace(path, { astIdId, tracerId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
@@ -94,6 +100,7 @@ function addReturnTrace(path, { tracerId }) {
 
   const trace = buildReturnTrace({
     tracerId,
+    astIdId,
     nodeId: types.numericLiteral(node.biId),
     retval: node.argument,
   });
@@ -101,7 +108,7 @@ function addReturnTrace(path, { tracerId }) {
 }
 
 const buildExpressionTrace = template(`
-  %%tracerId%%.logExpr(%%nodeId%%, %%expression%%)
+  %%tracerId%%.traceExpr(%%astIdId%%, %%nodeId%%, %%expression%%)
 `);
 
 /**
@@ -110,7 +117,7 @@ const buildExpressionTrace = template(`
  * @param {NodePath} path - path containing expression node
  * @param {object} state - metadata returned from addInstrumenterInit
  */
-function addExpressionTrace(path, { tracerId }) {
+function addExpressionTrace(path, { astIdId, tracerId }) {
   const { node } = path;
 
   // Don't trace the retrieval of a method from an object.
@@ -157,6 +164,7 @@ function addExpressionTrace(path, { tracerId }) {
 
   const trace = buildExpressionTrace({
     tracerId,
+    astIdId,
     nodeId: types.numericLiteral(node.biId),
     expression: node,
   });
@@ -165,11 +173,11 @@ function addExpressionTrace(path, { tracerId }) {
 }
 
 const buildPauseTrace = template.expression(`
-  %%tracerId%%.logFnPause(%%nodeId%%, %%argument%%)
+  %%tracerId%%.traceFnPause(%%astIdId%%, %%nodeId%%, %%argument%%)
 `);
 
 const buildResumeTrace = template.expression(`
-  %%tracerId%%.logFnResume(%%nodeId%%, %%expression%%, %%fnStartIdId%%)
+  %%tracerId%%.traceFnResume(%%astIdId%%, %%nodeId%%, %%expression%%, %%fnStartIdId%%)
 `);
 
 /**
@@ -177,7 +185,7 @@ const buildResumeTrace = template.expression(`
  * @param {NodePath} path - path containing yield or await expression node
  * @param {object} state - metadata returned from addInstrumenterInit
  */
-function addPauseTrace(path, { tracerId, fnStartIdId }) {
+function addPauseTrace(path, { astIdId, tracerId, fnStartIdId }) {
   const { node } = path;
 
   // Don't trace nodes without a node ID - those are nodes we added
@@ -192,6 +200,7 @@ function addPauseTrace(path, { tracerId, fnStartIdId }) {
 
   const pauseTrace = buildPauseTrace({
     tracerId,
+    astIdId,
     nodeId: types.numericLiteral(node.biId),
     argument: node.argument,
   });
@@ -199,6 +208,7 @@ function addPauseTrace(path, { tracerId, fnStartIdId }) {
   const resumeTrace = buildResumeTrace({
     tracerId,
     fnStartIdId,
+    astIdId,
     nodeId: types.numericLiteral(node.biId),
     expression: node,
   });
@@ -290,14 +300,19 @@ export default function (api, opts) {
       tracerVar,
     } = {},
     ast: {
-      callback = (ast) => {}, // eslint-disable-line no-unused-vars
-      id: astId = undefined,
+      callback = () => {},
+      id: astId,
       selfRegister = true,
     } = {},
   } = opts;
 
+  if (!astId) {
+    throw new Error('opts.ast.id is required');
+  }
+
   function addInstrumenterInit(path) {
     const ids = {
+      astIdId: path.scope.generateUidIdentifier('astId'),
       tracerId: tracerVar ? types.identifier(tracerVar)
         : path.scope.generateUidIdentifier('tracer'),
       fnStartIdId: path.scope.generateUidIdentifier('fnStartId'),
@@ -307,15 +322,20 @@ export default function (api, opts) {
       // TODO insert object directly instead of via json
       const astString = types.stringLiteral(JSON.stringify(path.node));
       path.node.body.unshift(buildRegisterAST({
+        astIdId: ids.astIdId,
         tracerId: ids.tracerId,
         astString,
       }));
     }
 
+    path.node.body.unshift(buildSetAstId({
+      astIdId: ids.astIdId,
+      astId: types.stringLiteral(astId),
+    }));
+
     if (mechanism === 'import') {
       path.node.body.unshift(...buildImportTracer({
         tempId: path.scope.generateUidIdentifier('temp'),
-        astId: astId ? types.stringLiteral(astId) : 'undefined',
         tracerId: ids.tracerId,
       }));
     }
@@ -327,7 +347,7 @@ export default function (api, opts) {
     visitor: {
       Program(path) {
         addNodeIdsToAST(path.node);
-        callback(path.node);
+        callback(astId, path.node);
         const state = addInstrumenterInit(path);
         path.traverse(instrumentVisitor, { state });
       },
