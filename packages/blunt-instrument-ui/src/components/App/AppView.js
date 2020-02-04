@@ -112,6 +112,8 @@ function AppView({
     onLoadByFile(files[0]);
   };
 
+  const ast = tc.astb.asts.eval || {};
+
   return (
     <div className="App">
       <div className="control-tabs">
@@ -175,7 +177,7 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            <AnnotatedCode ast={tc.astb.asts.eval}
+            <AnnotatedCode ast={ast}
                            highlightedNodeId={highlightedNodeId}
                            onHoveredNodeChange={onHoveredNodeChange}
                            onNodeSelectedToggle={onNodeSelectedToggle}
@@ -183,7 +185,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ASTNav ast={tc.astb.asts.eval}
+            <ASTNav ast={ast}
                     highlightedNodeId={highlightedNodeId}
                     onHoveredNodeChange={onHoveredNodeChange}
                     onNodeSelectedToggle={onNodeSelectedToggle}
@@ -191,7 +193,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={tc.astb.asts.eval} name={false} />
+            <ReactJson src={ast} name={false} />
           </TabPanel>
           
           {tc.astb.instrumentedAST ?

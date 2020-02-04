@@ -109,21 +109,25 @@ class AppContainer extends React.Component {
   }
 
   loadFromJSONText(text) {
+    let tc;
+    const status = { action: 'load' };
+    let sourceDraft = '';
     try {
       const json = JSON.parse(text);
-      const tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
-      this.setState({
-        tc,
-        status: { action: 'load' },
-        sourceDraft: tc.astb.asts.eval.codeSlice,
-        ...defaultQueryState,
-        ...this.doQuery(tc, defaultQueryState.traceQuery),
-      });
+      tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
+      sourceDraft = tc.astb.asts.eval.codeSlice;
     } catch (error) {
-      this.setState({
-        status: { action: 'load', error },
-      });
+      status.error = error;
+      tc = TrevCollection.empty();
     }
+
+    this.setState({
+      tc,
+      status,
+      sourceDraft,
+      ...defaultQueryState,
+      ...this.doQuery(tc, defaultQueryState.traceQuery),
+    });
   }
 
   handleNodeSelectedToggle(nodeId) {
@@ -174,18 +178,21 @@ class AppContainer extends React.Component {
   }
 
   doRun(source) {
-    let trace;
+    let tc;
+    const status = { action: 'run' };
     try {
-      trace = instrumentedEval(source, { saveInstrumented: true });
+      const trace = instrumentedEval(source, { saveInstrumented: true });
+      tc = trace.toTC().withDenormalizedInfo();
+      status.tracedError = trace.error;
     } catch (error) {
       console.log(error)
-      return { status: { action: 'run', error } };
+      tc = TrevCollection.empty();
+      status.error = error;
     }
   
-    const tc = trace.toTC().withDenormalizedInfo();
     return {
       tc,
-      status: { action: 'run', tracedError: trace.error },
+      status,
       sourceDraft: source,
       ...defaultQueryState,
       ...this.doQuery(tc, defaultQueryState.traceQuery),

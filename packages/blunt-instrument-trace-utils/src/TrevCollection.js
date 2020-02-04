@@ -166,4 +166,11 @@ export default class TrevCollection {
     const astb = new ASTBundle(input.asts);
     return new TrevCollection(input.trevs, astb);
   }
+
+  /**
+   * @returns {TrevCollection} empty TrevCollection with no ASTs.
+   */
+  static empty() {
+    return new TrevCollection([], new ASTBundle());
+  }
 }
