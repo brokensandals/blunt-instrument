@@ -5,6 +5,14 @@ examples.factorial = `function fac(n) {
 }
 const result = fac(10);`;
 
+examples.fetch = `async function fetchAndLog() {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const json = await response.json();
+  console.log(json);
+}
+
+fetchAndLog();`;
+
 examples.fizzBuzzGenerator = `function* fizzbuzzer(limit) {
   for (let i = 1; i < limit; i++) {
     if (i % 15 === 0) {

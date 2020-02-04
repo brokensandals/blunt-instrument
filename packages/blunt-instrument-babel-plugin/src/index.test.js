@@ -594,6 +594,12 @@ describe('special case syntax handling', () => {
 
 describe('demo examples', () => {
   Object.keys(examples).forEach((key) => {
+    if (key === 'fetch') {
+      // This example makes a network call; that introduces more chance for variability than
+      // this test is worth.
+      return;
+    }
+
     test(key, () => {
       const output = biEval(examples[key]);
       expect(output.instrumented).toMatchSnapshot();
