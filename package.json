@@ -14,10 +14,13 @@
     "eslint-plugin-react-hooks": "^2.3.0",
     "jest": "^24.9.0",
     "lerna": "^3.19.0",
-    "rimraf": "^3.0.1"
+    "rimraf": "^3.0.1",
+    "watch": "1.0.2"
   },
   "scripts": {
     "build": "lerna run build",
+    "build:cjs": "lerna run build:cjs",
+    "build:cjs:watch": "watch 'lerna run build:cjs' packages/*/src",
     "clean": "lerna run clean",
     "coverage": "jest --coverage",
     "lint": "eslint packages/*/src",
