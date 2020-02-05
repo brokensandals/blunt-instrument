@@ -2,7 +2,6 @@ import * as babel from '@babel/core';
 import examples from 'blunt-instrument-test-resources';
 import {
   attachCodeSlicesToAST,
-  ASTBundle,
 } from 'blunt-instrument-ast-utils';
 import cloneDeep from 'lodash/cloneDeep'; // eslint-disable-line import/no-extraneous-dependencies
 import { UnsafeDecoder } from 'object-graph-as-json';
