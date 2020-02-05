@@ -1,5 +1,28 @@
 const examples = {};
 
+examples.countdown = `class Countdown {
+  constructor(name, from, millis) {
+    this.name = name;
+    this.from = from;
+    this.millis = millis;
+  }
+
+  start() {
+    this.intervalId = window.setInterval(this.tick.bind(this), this.millis);
+  }
+
+  tick() {
+    console.log(\`\${this.name}: \${this.from}\`);
+    this.from--;
+    if (this.from <= 0) {
+      window.clearInterval(this.intervalId);
+    }
+  }
+}
+
+new Countdown('A', 10, 5000).start();
+new Countdown('B', 10, 10000).start();`;
+
 examples.factorial = `function fac(n) {
   return n == 1 ? 1 : n * fac(n - 1);
 }

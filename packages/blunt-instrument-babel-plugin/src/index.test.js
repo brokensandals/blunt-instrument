@@ -598,6 +598,10 @@ describe('demo examples', () => {
       // this test is worth.
       return;
     }
+    if (key === 'countdown') {
+      // This example uses timers, not worth the bother.
+      return;
+    }
 
     test(key, () => {
       const output = biEval(examples[key]);
