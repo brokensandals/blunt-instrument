@@ -12,6 +12,7 @@ import { ASTBundle } from 'blunt-instrument-ast-utils';
  *   the generator/async function first began executing
  * @property {?Object} denormalized - populated by TrevCollection.withDenormalizedInfo()
  * @property {number[]} denormalized.ancestorIds - ids of every trev above this on the call stack
+ * @property {TrevExtended[]} denormalized.children - all trevs of which this is the direct parent
  * @property {Node} denormalized.node - babel node corresponding to the astId and nodeId
  */
 
