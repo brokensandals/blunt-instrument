@@ -3,6 +3,15 @@
   "version": "0.0.0",
   "description": "Instruments code with blunt-instrument and runs it.",
   "main": "src/index.js",
+  "scripts": {
+    "build:cjs": "BABEL_MODULES=cjs babel src/ --out-dir target/cjs/ --ignore src/**/*.test.js --root-mode upward",
+    "build:esm": "BABEL_MODULES=false babel src/ --out-dir target/esm/ --ignore src/**/*.test.js --root-mode upward",
+    "build": "npm run build:cjs && npm run build:esm",
+    "clean": "rimraf target"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5"
+  },
   "dependencies": {
     "@babel/core": "^7.7.5",
     "blunt-instrument-ast-utils": "^0.0.0",

@@ -2,9 +2,18 @@
   "name": "blunt-instrument-ast-utils",
   "version": "0.0.0",
   "description": "Utilities for dealing with babel ASTs for use with blunt-instrument..",
-  "main": "src/index.js",
+  "main": "target/cjs/index.js",
+  "scripts": {
+    "build:cjs": "BABEL_MODULES=cjs babel src/ --out-dir target/cjs/ --ignore src/**/*.test.js --root-mode upward",
+    "build:esm": "BABEL_MODULES=false babel src/ --out-dir target/esm/ --ignore src/**/*.test.js --root-mode upward",
+    "build": "npm run build:cjs && npm run build:esm",
+    "clean": "rimraf target"
+  },
   "dependencies": {
     "@babel/types": "^7.7.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5"
   },
   "repository": {
     "type": "git",

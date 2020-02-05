@@ -13,9 +13,12 @@
     "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "jest": "^24.9.0",
-    "lerna": "^3.19.0"
+    "lerna": "^3.19.0",
+    "rimraf": "^3.0.1"
   },
   "scripts": {
+    "build": "lerna run build",
+    "clean": "lerna run clean",
     "coverage": "jest --coverage",
     "lint": "eslint packages/*/src",
     "start": "lerna run start --stream --scope blunt-instrument-ui",
