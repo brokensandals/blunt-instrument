@@ -1,4 +1,4 @@
-import * as babel from '@babel/core';
+import { parseSync, transformSync } from '@babel/core';
 import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
 import {
   attachCodeSlicesToAST,
@@ -63,7 +63,7 @@ may interfere with instrumentedEval, the code, or both.`);
     babelOpts.ast = true;
   }
 
-  const babelResult = babel.transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
+  const babelResult = transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
 
   if (!ast) {
     throw new Error('blunt-instrument-babel-plugin did not invoke callback with AST');
@@ -80,7 +80,7 @@ may interfere with instrumentedEval, the code, or both.`);
   }
 
   if (saveInstrumented) {
-    const parsed = babel.parseSync(code);
+    const parsed = parseSync(code);
     copyNodeIdsBetweenASTs(babelResult.ast, parsed);
     attachCodeSlicesToAST(parsed, code);
     trace.astb.instrumentedAST = parsed;
