@@ -59,6 +59,7 @@ export default class TrevCollection {
   withDenormalizedInfo() {
     const newTrevs = [];
     const ancestorsForParent = [];
+    const childrenForParent = new Map();
     const getAncestors = (parentId) => {
       if (!parentId) {
         return [];
@@ -85,14 +86,33 @@ export default class TrevCollection {
         throw new Error(`Trev id [${trev.id}] has unknown node id [${trev.nodeId}] for AST id [${trev.astId}]`);
       }
 
+      if (trev.parentId) {
+        let array = childrenForParent.get(trev.parentId);
+        if (!array) {
+          array = [];
+          childrenForParent.set(trev.parentId, array);
+        }
+        array.push(trev.id);
+      }
+
       const denormalized = {
         ancestorIds: getAncestors(trev.parentId),
+        children: [],
         node,
       };
       newTrevs.push({ ...trev, denormalized });
     });
 
-    return new TrevCollection(newTrevs, this.astb);
+    const newTC = new TrevCollection(newTrevs, this.astb);
+
+    childrenForParent.forEach((children, parentId) => {
+      const newTrev = newTC.getTrev(parentId);
+      if (newTrev) {
+        newTrev.denormalized.children = children.map((id) => newTC.getTrev(id));
+      }
+    });
+
+    return newTC;
   }
 
   /**

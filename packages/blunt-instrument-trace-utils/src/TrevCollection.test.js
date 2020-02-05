@@ -155,6 +155,42 @@ describe('TrevCollection', () => {
       expect(tc.trevs[1].denormalized.ancestorIds).toEqual([]);
       expect(tc.trevs[2].denormalized.ancestorIds).toEqual([3]);
     });
+
+    it('populates `children`', () => {
+      const trevs = [
+        {
+          id: 1,
+          astId: 'test',
+          nodeId: 5,
+        },
+        {
+          id: 2,
+          parentId: 1,
+          astId: 'test',
+          nodeId: 3,
+        },
+        {
+          id: 3,
+          parentId: 2,
+          astId: 'test',
+          nodeId: 3,
+        },
+        {
+          id: 4,
+          parentId: 1,
+          astId: 'test',
+          nodeId: 2,
+        },
+      ];
+      const tc = new TrevCollection(trevs, astb).withDenormalizedInfo();
+      expect(tc.getTrev(1).denormalized.children).toHaveLength(2);
+      expect(tc.getTrev(1).denormalized.children[0]).toBe(tc.getTrev(2));
+      expect(tc.getTrev(1).denormalized.children[1]).toBe(tc.getTrev(4));
+      expect(tc.getTrev(2).denormalized.children).toHaveLength(1);
+      expect(tc.getTrev(2).denormalized.children[0]).toBe(tc.getTrev(3));
+      expect(tc.getTrev(3).denormalized.children).toEqual([]);
+      expect(tc.getTrev(4).denormalized.children).toEqual([]);
+    });
   });
 
   test('withoutDenormalizedInfo', () => {
