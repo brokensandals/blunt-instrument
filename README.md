@@ -1,5 +1,22 @@
 # blunt-instrument
 
+This is a tool for tracing the execution of javascript code.
+It does not require you to make changes to your source code; instrumentation is automated.
+The instrumented code will report the value of every expression it evaluates, and other execution details such as the tree of function calls.
+
+This can be used in a few ways:
+
+- The UI lets you run code directly in the browser and explore the trace.
+FIXME: link to UI
+- The libraries can help you build interactive explanations of algorithms.
+You can evaluate arbitrary code at runtime and get programmatic access to the full trace.
+Jump to the [blunt-instrument-eval README][eval] to get started.
+FIXME: link to example
+- The Babel plugin can instrument your code for troubleshooting purposes.
+FIXME: example & better support
+
+Contents:
+
 1. [Development](#development)
 1. [Contributing](#contributing)
 1. [License](#license)
@@ -32,3 +49,5 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/broken
 ## License
 
 This is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+[eval]: packages/blunt-instrument-eval/README.md

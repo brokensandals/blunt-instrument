@@ -2,6 +2,14 @@
 
 This package ties together various parts of blunt-instrument to provide an easy way to take javascript code stored in a string, instrument it, evaluate it, and get the trace in a consumable format.
 
+First, install the package (or see [blunt-instrument-standalone][standalone] if you prefer to load the dependency from a `<script>` tag):
+
+```sh
+npm install --save blunt-instrument-eval
+```
+
+Then you can use the `instrumentedEval` function to trace code:
+
 ```javascript
 import instrumentedEval from 'blunt-instrument-eval';
 
@@ -30,3 +38,4 @@ Note: code is evaluated in strict mode.
 
 [trace-utils]: ../blunt-instrument-trace-utils/README.md
 [ast-utils]: ../blunt-instrument-ast-utils/README.md
+[standalone]: ../blunt-instrument-standalone/README.md
