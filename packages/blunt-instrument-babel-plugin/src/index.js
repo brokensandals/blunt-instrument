@@ -37,8 +37,14 @@ const buildReturnTrace = template(`
   return %%tracerId%%.traceFnRet(%%astIdId%%, %%nodeId%%, %%retval%%);
 `);
 
-function addFnTrace(path, { astIdId, tracerId, fnStartIdId }) {
+function addFnTrace(path, {
+  astIdId, tracerId, fnStartIdId, checkEnabled,
+}) {
   const { node } = path;
+
+  if (!checkEnabled(node)) {
+    return;
+  }
 
   // Don't trace nodes without a node ID - those are nodes we added
   if (!node.biId) {
@@ -95,8 +101,12 @@ function addFnTrace(path, { astIdId, tracerId, fnStartIdId }) {
   node.biTracedFn = true;
 }
 
-function addReturnTrace(path, { astIdId, tracerId }) {
+function addReturnTrace(path, { astIdId, tracerId, checkEnabled }) {
   const { node } = path;
+
+  if (!checkEnabled(node)) {
+    return;
+  }
 
   // Don't trace nodes without a node ID - those are nodes we added
   if (!node.biId) {
@@ -122,8 +132,12 @@ const buildExpressionTrace = template(`
  * @param {NodePath} path - path containing expression node
  * @param {object} state - metadata returned from addInstrumenterInit
  */
-function addExpressionTrace(path, { astIdId, tracerId }) {
+function addExpressionTrace(path, { astIdId, tracerId, checkEnabled }) {
   const { node } = path;
+
+  if (!checkEnabled(node)) {
+    return;
+  }
 
   // Don't trace the retrieval of a method from an object.
   // In other words, this if block detects if we're looking at a node like
@@ -190,8 +204,14 @@ const buildResumeTrace = template.expression(`
  * @param {NodePath} path - path containing yield or await expression node
  * @param {object} state - metadata returned from addInstrumenterInit
  */
-function addPauseTrace(path, { astIdId, tracerId, fnStartIdId }) {
+function addPauseTrace(path, {
+  astIdId, tracerId, fnStartIdId, checkEnabled,
+}) {
   const { node } = path;
+
+  if (!checkEnabled(node)) {
+    return;
+  }
 
   // Don't trace nodes without a node ID - those are nodes we added
   if (!node.biId) {
@@ -291,6 +311,53 @@ const instrumentVisitor = {
   },
 };
 
+const directiveRegexes = [
+  [/^\s*bi-enable-line\s*$/, 'enable-line'],
+  [/^\s*bi-disable-line\s*$/, 'disable-line'],
+  [/^\s*bi-enable\s*$/, 'enable'],
+  [/^\s*bi-disable\s*$/, 'disable'],
+];
+
+function enabledChecker(path) {
+  const directives = [];
+  types.traverseFast(path.node, (node) => {
+    (node.trailingComments || []).forEach((comment) => {
+      const match = directiveRegexes.find(([regex]) => regex.test(comment.value));
+      if (match) {
+        directives[comment.loc.start.line] = match[1]; // eslint-disable-line prefer-destructuring
+      }
+    });
+  });
+
+  const enabled = [];
+  let current = true;
+  for (let i = 1; i < directives.length; i += 1) {
+    switch (directives[i]) {
+      case 'enable-line':
+        enabled[i] = true;
+        break;
+      case 'disable-line':
+        enabled[i] = false;
+        break;
+      case 'enable':
+        enabled[i] = true;
+        current = true;
+        break;
+      case 'disable':
+        enabled[i] = false;
+        current = false;
+        break;
+      default:
+        enabled[i] = current;
+    }
+  }
+
+  return (node) => {
+    const line = node.loc && node.loc.start && node.loc.start.line;
+    return enabled[line] === undefined ? true : enabled[line];
+  };
+}
+
 /**
  * Babel plugin that instruments source code for automatic tracing.
  *
@@ -369,9 +436,10 @@ export default function (api, opts) {
   return {
     visitor: {
       Program(path) {
+        const checkEnabled = enabledChecker(path);
         addNodeIdsToAST(path.node);
         callback(astId, path.node);
-        const state = addInstrumenterInit(path);
+        const state = { ...addInstrumenterInit(path), checkEnabled };
         path.traverse(instrumentVisitor, { state });
       },
     },

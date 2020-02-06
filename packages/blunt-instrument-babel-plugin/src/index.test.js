@@ -644,6 +644,46 @@ describe('special case syntax handling', () => {
   });
 });
 
+test('comment controls', () => {
+  const code = `
+  function square(a) {
+    return a * a;
+  }
+
+  function cube(b) {
+    const squared = square(b); // bi-disable-line
+    return squared * b;
+  }
+
+  // bi-disable
+  function fourth(c) {
+    const cubed = cube(c); // bi-enable-line
+    return cubed * c;
+  }
+
+  const one = square(1);
+  const eight = cube(2);
+  // bi-enable
+
+  const sixteen = square(4);
+  const alsoSixteen = fourth(2);
+  `;
+
+  const output = biEval(code);
+
+  expect(codeTrevs(output, 'cube(c)')).toHaveLength(1);
+  expect(codeTrevs(output, 'squared * b')).toHaveLength(2);
+  expect(codeTrevs(output, 'square(4)')).toHaveLength(1);
+  expect(codeTrevs(output, 'fourth(2)')).toHaveLength(1);
+  expect(namedCalls(output, 'square')).toHaveLength(4);
+  expect(namedCalls(output, 'cube')).toHaveLength(2);
+
+  expect(codeTrevs(output, 'square(b)')).toHaveLength(0);
+  expect(codeTrevs(output, 'square(1)')).toHaveLength(0);
+  expect(codeTrevs(output, 'cube(2)')).toHaveLength(0);
+  expect(namedCalls(output, 'fourth')).toHaveLength(0);
+});
+
 describe('demo examples', () => {
   Object.keys(examples).forEach((key) => {
     if (key === 'fetch') {

@@ -128,5 +128,28 @@ fn(tracer);
 
 If you are retrieving trevs from an `ArrayTrace`, the `data` field will have been cloned & encoded using a format called object-graph-as-json; see the [blunt-instrument-core README][blunt-instrument-core].
 
+## Enabling and Disabling Tracing
+
+You can use comments to enable or disable tracing on a per-line or set-of-lines basis.
+In the following example, `1`, `3`, `5`, and `7` would be traced:
+
+```js
+const a = 1;
+
+// bi-disable
+const b = 2;
+const c = 3; // bi-enable-line
+const d = 4;
+// bi-enable
+
+const e = 5;
+const f = 6; // bi-disable-line
+const g = 7;
+```
+
+**Note**: currently, you should avoid disabling the first line of a function definition unless you also disable tracing for all return/yield/await clauses within that function, and vice versa.
+Otherwise, the tracer will not keep track of the stack correctly at runtime.
+Ideally, the plugin should ensure it always enables/disables the function start/return/yield/await tracing for any given function as a unit, but it's not smart enough yet for that.
+
 [blunt-instrument-eval]: ../blunt-instrument-eval/README.md
 [blunt-instrument-core]: ../blunt-instrument-core/README.md
