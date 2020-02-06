@@ -39,7 +39,11 @@ function transform(
  * @param {string} code
  * @returns {object}
  */
-function biEval(code, pluginOpts = { ast: { id: 'test' } }) {
+function biEval(code, pluginOpts = {}) {
+  if (!pluginOpts.ast) {
+    pluginOpts.ast = {}; // eslint-disable-line no-param-reassign
+  }
+  pluginOpts.ast.id = 'test'; // eslint-disable-line no-param-reassign
   const { code: instrumented } = transform(code, {
     runtime: {
       mechanism: 'var',
@@ -229,6 +233,31 @@ describe('configuration', () => {
     expect(astId).toEqual('test');
     expect(ast).not.toBeNull();
     expect(ast.biId).toEqual(1);
+  });
+
+  test('defaultEnabled = false', () => {
+    const code = `
+      const a = 1;
+      const b = 2; // bi-enable-line
+      const c = 3;
+      // bi-enable
+      const d = 4;
+      const e = 5;
+      // bi-disable
+      const f = 6;
+    `;
+    const opts = {
+      instrument: {
+        defaultEnabled: false,
+      },
+    };
+    const output = biEval(code, opts);
+    expect(codeTrevs(output, '1')).toHaveLength(0);
+    expect(codeTrevs(output, '2')).toHaveLength(1);
+    expect(codeTrevs(output, '3')).toHaveLength(0);
+    expect(codeTrevs(output, '4')).toHaveLength(1);
+    expect(codeTrevs(output, '5')).toHaveLength(1);
+    expect(codeTrevs(output, '6')).toHaveLength(0);
   });
 
   describe('console writer', () => {

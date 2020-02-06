@@ -42,6 +42,9 @@ const opts = {
     callback: (ast) => {}, // If provided, this function will be called with the AST of the
                            // original code after the biId property has been added to each node.
   },
+  instrument: {
+    defaultEnabled: true, // Set to false if you only want to instrument specific lines
+  },
 };
 
 const instrumentedCode = babel.transformSync(
@@ -147,7 +150,10 @@ const f = 6; // bi-disable-line
 const g = 7;
 ```
 
-**Note**: currently, you should avoid disabling the first line of a function definition unless you also disable tracing for all return/yield/await clauses within that function, and vice versa.
+(This assumes `defaultEnabled` is set to `true` in the plugin's config, which is its default value.
+If you override it to `false`, this same code would trace `3`, `5`, and `7`, but not `1`.)
+
+**Note**: Currently, you should avoid disabling the first line of a function definition unless you also disable tracing for all return/yield/await clauses within that function, and vice versa.
 Otherwise, the tracer will not keep track of the stack correctly at runtime.
 Ideally, the plugin should ensure it always enables/disables the function start/return/yield/await tracing for any given function as a unit, but it's not smart enough yet for that.
 

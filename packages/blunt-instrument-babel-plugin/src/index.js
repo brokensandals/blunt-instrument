@@ -318,7 +318,7 @@ const directiveRegexes = [
   [/^\s*bi-disable\s*$/, 'disable'],
 ];
 
-function enabledChecker(path) {
+function enabledChecker(defaultEnabled, path) {
   const directives = [];
   types.traverseFast(path.node, (node) => {
     (node.trailingComments || []).forEach((comment) => {
@@ -330,7 +330,7 @@ function enabledChecker(path) {
   });
 
   const enabled = [];
-  let current = true;
+  let current = defaultEnabled;
   for (let i = 1; i < directives.length; i += 1) {
     switch (directives[i]) {
       case 'enable-line':
@@ -354,7 +354,7 @@ function enabledChecker(path) {
 
   return (node) => {
     const line = node.loc && node.loc.start && node.loc.start.line;
-    return enabled[line] === undefined ? true : enabled[line];
+    return enabled[line] === undefined ? defaultEnabled : enabled[line];
   };
 }
 
@@ -378,6 +378,9 @@ export default function (api, opts) {
       callback = () => {},
       id: astId,
       selfRegister = true,
+    },
+    instrument: {
+      defaultEnabled = true,
     } = {},
   } = opts;
 
@@ -436,7 +439,7 @@ export default function (api, opts) {
   return {
     visitor: {
       Program(path) {
-        const checkEnabled = enabledChecker(path);
+        const checkEnabled = enabledChecker(defaultEnabled, path);
         addNodeIdsToAST(path.node);
         callback(astId, path.node);
         const state = { ...addInstrumenterInit(path), checkEnabled };
