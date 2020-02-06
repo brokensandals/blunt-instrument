@@ -6,6 +6,7 @@ import fromNodeKey from './ast/fromNodeKey';
 import toNodeKey from './ast/toNodeKey';
 
 import ArrayTrace from './trace/ArrayTrace';
+import ConsoleTraceWriter from './trace/ConsoleTraceWriter';
 import Tracer from './trace/Tracer';
 import TrevCollection from './trace/TrevCollection';
 
@@ -19,6 +20,7 @@ export {
   fromNodeKey,
   toNodeKey,
   ArrayTrace,
+  ConsoleTraceWriter,
   Tracer,
   TrevCollection,
   defaultTracer,

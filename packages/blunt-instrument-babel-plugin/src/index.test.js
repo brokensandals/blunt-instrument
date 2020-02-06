@@ -230,6 +230,58 @@ describe('configuration', () => {
     expect(ast).not.toBeNull();
     expect(ast.biId).toEqual(1);
   });
+
+  describe('console writer', () => {
+    let spyLog;
+    let spyDir;
+
+    beforeEach(() => {
+      spyLog = jest.spyOn(console, 'log').mockImplementation();
+      spyDir = jest.spyOn(console, 'dir').mockImplementation();
+    });
+
+    afterEach(() => {
+      spyLog.mockRestore();
+      spyDir.mockRestore();
+    });
+
+    it('does not override an already-registered listener', () => {
+      const opts = {
+        runtime: {
+          writer: {
+            type: 'console',
+          },
+        },
+        ast: {
+          id: 'test',
+        },
+      };
+      const { code } = transform('const foo = "meh"', opts, {}, true);
+      // use `eval()` instead of `new Function()` so that `require` is defined
+      eval(code); // eslint-disable-line no-eval
+      expect(spyLog).not.toHaveBeenCalled();
+    });
+
+    it('attaches a listener', () => {
+      defaultTracer.onTrev = null;
+      defaultTracer.onRegisterAST = null;
+      const opts = {
+        runtime: {
+          writer: {
+            type: 'console',
+          },
+        },
+        ast: {
+          id: 'test',
+        },
+      };
+      const { code } = transform('const foo = "meh"', opts, {}, true);
+      // use `eval()` instead of `new Function()` so that `require` is defined
+      eval(code); // eslint-disable-line no-eval
+      expect(spyLog).toHaveBeenCalledWith('onTrev loc [1:12] trev:');
+      expect(spyDir).toHaveBeenCalled();
+    });
+  });
 });
 
 describe('special case syntax handling', () => {

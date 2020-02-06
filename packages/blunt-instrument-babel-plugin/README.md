@@ -23,6 +23,16 @@ const opts = {
   runtime: {
     mechanism: 'import',
     tracerVar: undefined, // For mechanism='var', make this a string
+    writer: {
+      // If you want the instrumented code to configure the tracer to log to the console,
+      // set type to 'console'. Note that this will generate an 'import' statement for
+      // blunt-instrument-core.
+      // This is provided for convenience, but could also be accomplished yourself
+      // by calling `new ConsoleTraceWriter().attach(tracer)`.
+      // Note that if there is already a listener attached to the Tracer, this won't
+      // do anything.
+      type: undefined,
+    },
   },
   ast: {
     id: 'myCode', // This can be any non-empty string, but if you're instrumenting multiple source

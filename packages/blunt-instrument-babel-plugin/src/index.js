@@ -7,6 +7,13 @@ const buildImportTracer = template(`
   const %%tracerId%% = %%tempId%%;
 `);
 
+const buildAttachConsoleTraceWriter = template(`
+  import { ConsoleTraceWriter as %%tempId%% } from 'blunt-instrument-core';
+  if (!(%%tracerId%%.onRegisterAST || %%tracerId%%.onTrev)) {
+    new %%tempId%%().attach(%%tracerId%%);
+  }
+`);
+
 const buildSetAstId = template(`
   const %%astIdId%% = %%astId%%;
 `);
@@ -296,6 +303,9 @@ export default function (api, opts) {
     runtime: {
       mechanism = 'import',
       tracerVar,
+      writer: {
+        type: writerType,
+      } = {},
     } = {},
     ast: {
       callback = () => {},
@@ -330,6 +340,21 @@ export default function (api, opts) {
       astIdId: ids.astIdId,
       astId: types.stringLiteral(astId),
     }));
+
+    switch (writerType) {
+      case undefined:
+      case null:
+        // nothing
+        break;
+      case 'console':
+        path.node.body.unshift(...buildAttachConsoleTraceWriter({
+          tempId: path.scope.generateUidIdentifier('temp'),
+          tracerId: ids.tracerId,
+        }));
+        break;
+      default:
+        throw new Error(`Unrecognized writer type ${writerType}`);
+    }
 
     if (mechanism === 'import') {
       path.node.body.unshift(...buildImportTracer({
