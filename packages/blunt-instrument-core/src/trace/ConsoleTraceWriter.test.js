@@ -1,8 +1,8 @@
+import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
 import addNodeIdsToAST from '../ast/addNodeIdsToAST';
 import attachCodeSlicesToAST from '../ast/attachCodeSlicesToAST';
 import ConsoleTraceWriter from './ConsoleTraceWriter';
 import traverseAST from '../ast/traverseAST';
-import { parseSync } from '@babel/core'; // eslint-next-line import/no-extraneous-dependencies
 
 describe('ConsoleTraceWriter', () => {
   let spyLog;
