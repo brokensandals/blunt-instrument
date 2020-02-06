@@ -31,11 +31,7 @@ const { trevs } = tc.filter((trev) => trev.denormalized.node.codeSlice === 'fact
 console.log(trevs.map(trev => trev.data));
 ```
 
-The return value of `instrumentedEval` is an [ArrayTrace](../blunt-instrument-trace-utils/README.md#arraytrace) instance.
-For more information on working with the output, see [blunt-instrument-trace-utils][trace-utils] and [blunt-instrument-ast-utils][ast-utils].
+The return value of `instrumentedEval` is an [ArrayTrace](../blunt-instrument-core/README.md#arraytrace) instance.
 
 Note: code is evaluated in strict mode.
-
-[trace-utils]: ../blunt-instrument-trace-utils/README.md
-[ast-utils]: ../blunt-instrument-ast-utils/README.md
 [standalone]: ../blunt-instrument-standalone/README.md

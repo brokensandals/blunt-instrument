@@ -3,7 +3,7 @@ import update from 'immutability-helper';
 import AppView from './AppView';
 import examples from 'blunt-instrument-test-resources';
 import instrumentedEval from 'blunt-instrument-eval';
-import { TrevCollection } from 'blunt-instrument-trace-utils';
+import { TrevCollection } from 'blunt-instrument-core';
 
 /**
  * Determines whether an element is currently visible within a scrollable ancestor.

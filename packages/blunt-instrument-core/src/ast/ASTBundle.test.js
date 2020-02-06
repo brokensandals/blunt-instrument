@@ -1,18 +1,8 @@
 import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
-import { toNodeKey, fromNodeKey, ASTBundle } from './ASTBundle';
-import { addNodeIdsToAST, attachCodeSlicesToAST } from '.';
-
-describe('toNodeKey', () => {
-  it('escapes colons', () => {
-    expect(toNodeKey('foo:bar', 10)).toEqual('foo%3Abar:10');
-  });
-});
-
-describe('fromNodeKey', () => {
-  it('decodes colons', () => {
-    expect(fromNodeKey('foo%3Abar:10')).toEqual({ astId: 'foo:bar', nodeId: 10 });
-  });
-});
+import addNodeIdsToAST from './addNodeIdsToAST';
+import attachCodeSlicesToAST from './attachCodeSlicesToAST';
+import ASTBundle from './ASTBundle';
+import toNodeKey from './toNodeKey';
 
 describe('ASTBundle', () => {
   describe('constructor', () => {

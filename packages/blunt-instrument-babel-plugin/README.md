@@ -41,11 +41,11 @@ const instrumentedCode = babel.transformSync(
 
 ### Injecting the Tracer and retrieving the trace
 
-The instrumented code will report data to an instance of the Tracer class from [blunt-instrument-runtime][blunt-instrument-runtime].
-To do anything with the trace, you need to set up the callbacks on the Tracer instance, either manually or by attaching an `ArrayTrace` from [blunt-instrument-trace-utils][blunt-instrument-trace-utils].
+The instrumented code will report data to an instance of the [Tracer](../blunt-instrument-core/README.md#tracer) class.
+To do anything with the trace, you need to set up the callbacks on the Tracer instance, either manually or by attaching an [ArrayTrace](../blunt-instrument-core/README.md#arraytrace).
 Make sure the callbacks have been set on the Tracer *before* the instrumented code is executed.
 
-By default, the instrumented code attempts to use a global tracer by importing `defaultTracer` from [blunt-instrument-runtime][blunt-instrument-runtime].
+By default, the instrumented code attempts to use a global tracer by importing `defaultTracer` from [blunt-instrument-core][blunt-instrument-core].
 
 Alternatively, you can indicate that the tracer instance should be found in a specific variable, by setting `runtime.mechanism` to `'var'` and specifying the variable name in `runtime.tracerVar`:
 
@@ -116,8 +116,7 @@ fn(tracer);
 ]
 ```
 
-If you are retrieving trevs from an `ArrayTrace`, the `data` field will have been cloned & encoded using a format called object-graph-as-json; see the [blunt-instrument-trace-utils README][blunt-instrument-trace-utils].
+If you are retrieving trevs from an `ArrayTrace`, the `data` field will have been cloned & encoded using a format called object-graph-as-json; see the [blunt-instrument-core README][blunt-instrument-core].
 
 [blunt-instrument-eval]: ../blunt-instrument-eval/README.md
-[blunt-instrument-runtime]: ../blunt-instrument-runtime/README.md
-[blunt-instrument-trace-utils]: ../blunt-instrument-trace-utils/README.md
+[blunt-instrument-core]: ../blunt-instrument-core/README.md

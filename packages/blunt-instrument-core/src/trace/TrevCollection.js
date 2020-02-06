@@ -1,4 +1,4 @@
-import { ASTBundle } from 'blunt-instrument-ast-utils';
+import ASTBundle from '../ast/ASTBundle';
 
 /**
  * @typedef {Object} TrevExtended

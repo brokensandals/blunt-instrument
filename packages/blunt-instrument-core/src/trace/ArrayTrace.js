@@ -1,5 +1,5 @@
-import { ASTBundle } from 'blunt-instrument-ast-utils';
 import { Encoder } from 'object-graph-as-json';
+import ASTBundle from '../ast/ASTBundle';
 import TrevCollection from './TrevCollection';
 
 /**

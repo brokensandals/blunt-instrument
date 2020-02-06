@@ -10,13 +10,11 @@
     "clean": "rimraf target"
   },
   "dependencies": {
-    "blunt-instrument-ast-utils": "^0.0.0"
+    "blunt-instrument-core": "^0.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
-    "blunt-instrument-runtime": "^0.0.0",
     "blunt-instrument-test-resources": "^0.0.0",
-    "blunt-instrument-trace-utils": "^0.0.0",
     "object-graph-as-json": "^2.0.0"
   },
   "peerDependencies": {

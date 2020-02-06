@@ -14,10 +14,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.7.5",
-    "blunt-instrument-ast-utils": "^0.0.0",
-    "blunt-instrument-babel-plugin": "^0.0.0",
-    "blunt-instrument-runtime": "^0.0.0",
-    "blunt-instrument-trace-utils": "^0.0.0"
+    "blunt-instrument-core": "^0.0.0",
+    "blunt-instrument-babel-plugin": "^0.0.0"
   },
   "repository": {
     "type": "git",

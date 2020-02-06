@@ -1,34 +1,12 @@
-import * as types from '@babel/types';
-
-/**
- * Builds a string composite key from an AST id and a node id.
- * @param {string} astId
- * @param {number} nodeId
- * @returns {string}
- */
-export function toNodeKey(astId, nodeId) {
-  return `${encodeURIComponent(astId)}:${nodeId}`;
-}
-
-/**
- * Parses a string composite key for a node back into an AST id and a node id.
- * @param {string} nodeKey
- * @returns {object} object with string property `astId` and number property `nodeId`
- */
-export function fromNodeKey(nodeKey) {
-  const split = nodeKey.split(':');
-  return {
-    astId: decodeURIComponent(split[0]),
-    nodeId: Number(split[1]),
-  };
-}
+import toNodeKey from './toNodeKey';
+import traverseAST from './traverseAST';
 
 /**
  * Holds a group of ASTs that were instrumented together, and allows looking up individual
  * nodes by the combination of AST id and node id (or, equivalently, the composite key).
  * All nodes should have a `biId` field before being passed to this class.
  */
-export class ASTBundle {
+export default class ASTBundle {
   /**
    * Note: all the ASTs will be passed to the add() method, which mutates them
    * @param {object} asts a collection of ASTs; each key should be the AST's id, and each value
@@ -53,7 +31,7 @@ export class ASTBundle {
    */
   add(astId, ast) {
     this.asts[astId] = ast;
-    types.traverseFast(ast, (node) => {
+    traverseAST(ast, (node) => {
       if (!node.biId) {
         throw new Error('Node is missing node ID');
       }
@@ -90,7 +68,7 @@ export class ASTBundle {
   filterNodes(filterFn) {
     const results = [];
     Object.keys(this.asts).forEach((astId) => {
-      types.traverseFast(this.asts[astId], (node) => {
+      traverseAST(this.asts[astId], (node) => {
         if (filterFn(node)) {
           results.push(node);
         }

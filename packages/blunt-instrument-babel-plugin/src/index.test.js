@@ -1,12 +1,13 @@
 import * as babel from '@babel/core';
 import examples from 'blunt-instrument-test-resources';
 import {
+  ArrayTrace,
   attachCodeSlicesToAST,
-} from 'blunt-instrument-ast-utils';
+  defaultTracer,
+  Tracer,
+} from 'blunt-instrument-core';
 import cloneDeep from 'lodash/cloneDeep'; // eslint-disable-line import/no-extraneous-dependencies
 import { UnsafeDecoder } from 'object-graph-as-json';
-import { Tracer, defaultTracer } from 'blunt-instrument-runtime';
-import { ArrayTrace } from 'blunt-instrument-trace-utils';
 import bluntInstrumentPlugin from '.';
 
 /**

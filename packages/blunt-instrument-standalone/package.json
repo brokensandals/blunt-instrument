@@ -11,11 +11,9 @@
     "clean": "rimraf target"
   },
   "dependencies": {
-    "blunt-instrument-ast-utils": "^0.0.0",
     "blunt-instrument-babel-plugin": "^0.0.0",
-    "blunt-instrument-eval": "^0.0.0",
-    "blunt-instrument-runtime": "^0.0.0",
-    "blunt-instrument-trace-utils": "^0.0.0"
+    "blunt-instrument-core": "^0.0.0",
+    "blunt-instrument-eval": "^0.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

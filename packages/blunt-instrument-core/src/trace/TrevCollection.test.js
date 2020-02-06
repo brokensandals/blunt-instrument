@@ -1,8 +1,6 @@
-import {
-  addNodeIdsToAST,
-  ASTBundle,
-} from 'blunt-instrument-ast-utils';
 import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
+import addNodeIdsToAST from '../ast/addNodeIdsToAST';
+import ASTBundle from '../ast/ASTBundle';
 import TrevCollection from './TrevCollection';
 
 describe('TrevCollection', () => {

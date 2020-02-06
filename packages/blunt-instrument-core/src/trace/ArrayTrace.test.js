@@ -1,4 +1,4 @@
-import Encoder from 'object-graph-as-json/target/cjs/Encoder';
+import { Encoder } from 'object-graph-as-json';
 import ArrayTrace from './ArrayTrace';
 
 describe('ArrayTrace', () => {

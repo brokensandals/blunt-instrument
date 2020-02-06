@@ -1,45 +1,5 @@
 import { parseSync } from '@babel/core'; // eslint-disable-line import/no-extraneous-dependencies
-import {
-  addNodeIdsToAST,
-  attachCodeSlicesToAST,
-  copyNodeIdsBetweenASTs,
-} from './index';
-
-describe('copyNodeIdsBetweenASTs', () => {
-  it('throws an error if the trees are different sizes', () => {
-    const ast1 = parseSync('x = y');
-    const ast2 = parseSync('x = y()');
-    expect(() => copyNodeIdsBetweenASTs(ast1, ast2)).toThrowError('Source tree has 6 nodes but destination tree has 7');
-  });
-
-  it('throws an error if the trees have different node types', () => {
-    const ast1 = parseSync('x = y');
-    const ast2 = parseSync('x = 4');
-    expect(() => copyNodeIdsBetweenASTs(ast1, ast2)).toThrowError('Source node type Identifier does not match destination node type NumericLiteral');
-  });
-
-  it('copies node IDs', () => {
-    const ast1 = parseSync('x = y');
-    addNodeIdsToAST(ast1);
-    const ast2 = parseSync('x = y');
-    copyNodeIdsBetweenASTs(ast1, ast2);
-    expect(ast2.biId).toEqual(1);
-    expect(ast1).toEqual(ast2);
-  });
-});
-
-describe('addNodeIdsToAST', () => {
-  it('assigns an identifier to each node', () => {
-    const ast = parseSync('let x = 4');
-    addNodeIdsToAST(ast);
-    expect(ast.biId).toEqual(1);
-    expect(ast.program.biId).toEqual(2);
-    expect(ast.program.body[0].biId).toEqual(3);
-    expect(ast.program.body[0].declarations[0].biId).toEqual(4);
-    expect(ast.program.body[0].declarations[0].id.biId).toEqual(5);
-    expect(ast.program.body[0].declarations[0].init.biId).toEqual(6);
-  });
-});
+import attachCodeSlicesToAST from './attachCodeSlicesToAST';
 
 describe('attachCodeSlicesToAST', () => {
   it('assigns the code snippet to each node', () => {

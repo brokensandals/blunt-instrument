@@ -1,11 +1,11 @@
 import { parseSync, transformSync } from '@babel/core';
 import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
 import {
+  ArrayTrace,
   attachCodeSlicesToAST,
   copyNodeIdsBetweenASTs,
-} from 'blunt-instrument-ast-utils';
-import { Tracer } from 'blunt-instrument-runtime';
-import { ArrayTrace } from 'blunt-instrument-trace-utils';
+  Tracer,
+} from 'blunt-instrument-core';
 
 /**
  * This method ties together various pieces of blunt-instrument to provide a

@@ -9,7 +9,7 @@ import 'react-tabs/style/react-tabs.css';
 import examples from 'blunt-instrument-test-resources';
 import ReactJson from 'react-json-view';
 import Modal from 'react-modal';
-import { fromNodeKey } from 'blunt-instrument-ast-utils';
+import { fromNodeKey } from 'blunt-instrument-core';
 import update from 'immutability-helper';
 import FileSaver from 'file-saver';
 import LargeDataPreview from '../LargeDataPreview';

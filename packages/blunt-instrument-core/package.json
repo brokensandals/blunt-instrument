@@ -1,28 +1,24 @@
 {
-  "name": "blunt-instrument-ast-utils",
+  "name": "blunt-instrument-core",
   "version": "0.0.0",
-  "description": "Utilities for dealing with babel ASTs for use with blunt-instrument..",
+  "description": "Utilities for recording and managing code traces.",
   "main": "target/cjs/index.js",
   "scripts": {
-    "build:cjs": "BABEL_MODULES=cjs babel src/ --out-dir target/cjs/ --ignore src/**/*.test.js --root-mode upward",
-    "build:esm": "BABEL_MODULES=false babel src/ --out-dir target/esm/ --ignore src/**/*.test.js --root-mode upward",
+    "build:cjs": "BABEL_MODULES=cjs babel src/ --out-dir target/cjs/ --ignore src/ast/*.test.js,src/trace/*.test.js --root-mode upward",
+    "build:esm": "BABEL_MODULES=false babel src/ --out-dir target/esm/ --ignore src/ast/*.test.js,src/trace/*.test.js --root-mode upward",
     "build": "npm run build:cjs && npm run build:esm",
     "clean": "rimraf target"
   },
-  "dependencies": {
-    "@babel/types": "^7.7.5"
-  },
   "devDependencies": {
     "@babel/cli": "^7.7.5"
+  },
+  "dependencies": {
+    "object-graph-as-json": "^2.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brokensandals/blunt-instrument.git"
   },
-  "keywords": [
-    "instrument",
-    "trace"
-  ],
   "author": "Jacob Williams <jacobaw@gmail.com> (https://brokensandals.net)",
   "license": "MIT",
   "bugs": {

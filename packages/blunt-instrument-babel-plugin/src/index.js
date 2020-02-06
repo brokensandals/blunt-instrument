@@ -1,11 +1,9 @@
 import template from '@babel/template';
 import * as types from '@babel/types';
-import {
-  addNodeIdsToAST,
-} from 'blunt-instrument-ast-utils';
+import { addNodeIdsToAST } from 'blunt-instrument-core';
 
 const buildImportTracer = template(`
-  import { defaultTracer as %%tempId%% } from 'blunt-instrument-runtime';
+  import { defaultTracer as %%tempId%% } from 'blunt-instrument-core';
   const %%tracerId%% = %%tempId%%;
 `);
 
