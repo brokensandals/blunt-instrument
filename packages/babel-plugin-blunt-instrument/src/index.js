@@ -10,7 +10,7 @@ const buildImportTracer = template(`
 const buildAttachConsoleTraceWriter = template(`
   import { ConsoleTraceWriter as %%tempId%% } from 'blunt-instrument-core';
   if (!%%tracerId%%.attachedConsoleWriterByPlugin) {
-    %%tracerId%%.addListener(new %%tempId%%());
+    %%tracerId%%.addListener(new %%tempId%%({ encode: %%encode%% }));
     %%tracerId%%.attachedConsoleWriterByPlugin = true;
   }
 `);
@@ -406,10 +406,11 @@ export default function (api, opts) {
       astId: types.stringLiteral(astId),
     }));
 
-    if (consoleWriter === 'raw') {
+    if (consoleWriter === 'raw' || consoleWriter === 'encoded') {
       path.node.body.unshift(...buildAttachConsoleTraceWriter({
         tempId: path.scope.generateUidIdentifier('temp'),
         tracerId: ids.tracerId,
+        encode: types.booleanLiteral(consoleWriter === 'encoded'),
       }));
     } else if (consoleWriter) {
       throw new Error(`Unrecognized value of consoleWriter: ${consoleWriter}`);

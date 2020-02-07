@@ -1,3 +1,4 @@
+import { Encoder } from 'object-graph-as-json';
 import ASTBundle from '../ast/ASTBundle';
 
 /**
@@ -5,16 +6,22 @@ import ASTBundle from '../ast/ASTBundle';
  * to the console.
  */
 export default class ConsoleTraceWriter {
-  constructor() {
+  constructor({ encode = false } = {}) {
     this.astb = new ASTBundle();
+    if (encode) {
+      this.encoder = new Encoder();
+    }
   }
 
   handleRegisterAST(astId, ast) {
     this.astb.add(astId, ast);
     // eslint-disable-next-line no-console
     console.log(`onRegisterAST id [${astId}] AST:`);
-    // eslint-disable-next-line no-console
-    console.dir(ast);
+    if (this.encoder) {
+      console.log(JSON.stringify(ast, null, 2)); // eslint-disable-line no-console
+    } else {
+      console.dir(ast); // eslint-disable-line no-console
+    }
   }
 
   handleTrev(trev) {
@@ -29,7 +36,15 @@ export default class ConsoleTraceWriter {
     summary += ' trev:';
     // eslint-disable-next-line no-console
     console.log(summary);
-    // eslint-disable-next-line no-console
-    console.dir(trev);
+    if (this.encoder) {
+      // eslint-disable-next-line no-console
+      console.log(JSON.stringify(
+        { ...trev, data: this.encoder.encode(trev.data) },
+        null,
+        2,
+      ));
+    } else {
+      console.dir(trev); // eslint-disable-line no-console
+    }
   }
 }

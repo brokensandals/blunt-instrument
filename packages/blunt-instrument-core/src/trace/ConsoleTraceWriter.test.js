@@ -82,4 +82,44 @@ const z = y - 2`;
     expect(spyDir).toHaveBeenCalledTimes(2);
     expect(spyDir).toHaveBeenLastCalledWith(trev);
   });
+
+  describe('encode = true', () => {
+    beforeEach(() => {
+      writer = new ConsoleTraceWriter({ encode: true });
+    });
+
+    it('logs ASTs', () => {
+      const ast = { type: 'Identifier', biId: 1 };
+      writer.handleRegisterAST('test', ast);
+      expect(spyLog.mock.calls).toEqual([['onRegisterAST id [test] AST:'], [JSON.stringify(ast, null, 2)]]);
+      expect(spyDir).not.toHaveBeenCalled();
+    });
+
+    it('logs trevs', () => {
+      const code = `const x = 1;
+const y = x + 1;
+const z = y - 2`;
+      const ast = parseSync(code);
+      addNodeIdsToAST(ast);
+      let target;
+      traverseAST(ast, (node) => {
+        if (node.start === code.indexOf('x + 1')
+            && node.end === code.indexOf('x + 1') + 'x + 1'.length) {
+          target = node;
+        }
+      });
+
+      writer.handleRegisterAST('test', ast);
+      const trev = {
+        id: 1, astId: 'test', nodeId: target.biId, data: { foo: 'bar' },
+      };
+      writer.handleTrev(trev);
+
+      trev.data = { id: '1', type: 'object', '.foo': 'bar' };
+      expect(spyLog).toHaveBeenCalledTimes(4);
+      expect(spyLog.mock.calls[2]).toEqual(['onTrev loc [2:10] trev:']);
+      expect(spyLog.mock.calls[3]).toEqual([JSON.stringify(trev, null, 2)]);
+      expect(spyDir).not.toHaveBeenCalled();
+    });
+  });
 });

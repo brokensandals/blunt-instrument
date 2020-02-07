@@ -44,8 +44,8 @@ const opts = {
   callback: (astId, ast) => {},
   
   // If you want the instrumented code to configure the tracer to log to the console,
-  // set writerType to 'console'. Note that this will generate an 'import' statement for
-  // blunt-instrument-core.
+  // set consoleWriter to 'raw' or 'encoded'.
+  // Note that this will generate an 'import' statement for blunt-instrument-core.
   // This is provided for convenience, but could also be accomplished yourself
   // by calling `tracer.attach(new ConsoleTraceWriter())`.
   consoleWriter: false,

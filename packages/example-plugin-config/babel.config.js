@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [
     ['blunt-instrument', {
-      consoleWriter: 'raw',
+      consoleWriter: 'encoded',
     }]],
   presets: ['@babel/preset-env'],
 };
