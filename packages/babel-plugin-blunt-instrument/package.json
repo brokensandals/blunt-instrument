@@ -1,5 +1,5 @@
 {
-  "name": "blunt-instrument-babel-plugin",
+  "name": "babel-plugin-blunt-instrument",
   "version": "0.0.0",
   "description": "Instruments javascript code for automatic tracing.",
   "main": "target/cjs/index.js",

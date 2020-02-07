@@ -1,4 +1,4 @@
-# blunt-instrument-babel-plugin
+# babel-plugin-blunt-instrument
 
 A babel plugin that automatically adds tracing to the input code (as much as possible).
 When the output code is executed, it will produce a log of all the expressions that were evaluated during the course of execution, and their values at each point.
@@ -11,7 +11,7 @@ When the output code is executed, it will produce a log of all the expressions t
 
 ```javascript
 import * as babel from '@babel/core';
-import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
+import bluntInstrumentPlugin from 'babel-plugin-blunt-instrument';
 
 const originalCode = `
   function fac(n) {

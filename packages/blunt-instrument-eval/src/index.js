@@ -1,5 +1,5 @@
 import { parseSync, transformSync } from '@babel/core';
-import bluntInstrumentPlugin from 'blunt-instrument-babel-plugin';
+import bluntInstrumentPlugin from 'babel-plugin-blunt-instrument';
 import {
   ArrayTrace,
   attachCodeSlicesToAST,

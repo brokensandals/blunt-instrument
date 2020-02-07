@@ -10,7 +10,7 @@
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/node": "^7.7.5",
-    "blunt-instrument-babel-plugin": "^0.0.0",
+    "babel-plugin-blunt-instrument": "^0.0.0",
     "blunt-instrument-core": "^0.0.0"
   },
   "repository": {

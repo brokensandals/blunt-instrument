@@ -1,5 +1,5 @@
 import * as core from 'blunt-instrument-core';
-import babelPlugin from 'blunt-instrument-babel-plugin';
+import babelPlugin from 'babel-plugin-blunt-instrument';
 import instrumentedEval from 'blunt-instrument-eval';
 
 export {

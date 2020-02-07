@@ -61,7 +61,7 @@ These events include the evaluation of an expression, that start of a function c
 tracer.onTrev = (trev) => console.log(trev);
 ```
 
-See [blunt-instrument-babel-plugin's README][babel-plugin] for an example of what trevs look like.
+See [babel-plugin-blunt-instrument's README][babel-plugin] for an example of what trevs look like.
 Unlike what's shown there, though, the `data` field on this trev object has not been cloned or encoded in any way, so it might be modified as soon as control returns to the instrumented code.
 (The `ArrayTracer` class replaces the `data` field with an encoded copy.)
 
@@ -137,5 +137,5 @@ See the JSDoc in [TrevCollection.js](src/trace/TrevCollection.js) for more info.
 
 [babel-ast]: https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md#toc-asts
 [eval]: ../blunt-instrument-eval/README.md
-[babel-plugin]: ../blunt-instrument-babel-plugin/README.md
+[babel-plugin]: ../babel-plugin-blunt-instrument/README.md
 [object-graph-as-json]: https://github.com/brokensandals/object-graph-as-json

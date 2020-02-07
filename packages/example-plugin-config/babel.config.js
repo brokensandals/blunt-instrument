@@ -1,6 +1,6 @@
 module.exports = {
   plugins: [
-    ['module:blunt-instrument-babel-plugin', {
+    ['blunt-instrument', {
       runtime: {
         writer: {
           type: 'console',
