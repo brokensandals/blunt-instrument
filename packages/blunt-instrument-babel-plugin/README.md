@@ -18,7 +18,7 @@ const originalCode = `
     return n == 1 ? n * fac(n - 1);
   }`;
 
-// All options EXCEPT ast.id are optional. The defaults of the others are shown here.
+// All options EXCEPT (sometimes) ast.id are optional. The defaults of the others are shown here.
 const opts = {
   runtime: {
     mechanism: 'import',
@@ -29,14 +29,14 @@ const opts = {
       // blunt-instrument-core.
       // This is provided for convenience, but could also be accomplished yourself
       // by calling `new ConsoleTraceWriter().attach(tracer)`.
-      // Note that if there is already a listener attached to the Tracer, this won't
-      // do anything.
       type: undefined,
     },
   },
   ast: {
-    id: 'myCode', // This can be any non-empty string, but if you're instrumenting multiple source
+    id: filename, // This can be any non-empty string, but if you're instrumenting multiple source
                   // files that will be traced together, each one should get a unique id.
+                  // By default this tries to get the filename from babel, but if that's not
+                  // available, you need to supply something.
     selfRegister: true, // Causes the AST of the original code to be embedded in the generated
                         // code. After the code runs, it can be retrieved from trace.asts[key]
     callback: (ast) => {}, // If provided, this function will be called with the AST of the

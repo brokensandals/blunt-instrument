@@ -275,6 +275,7 @@ describe('configuration', () => {
     });
 
     it('does not override an already-registered listener', () => {
+      defaultTracer.attachedWriterByPlugin = true;
       const opts = {
         runtime: {
           writer: {
@@ -292,8 +293,7 @@ describe('configuration', () => {
     });
 
     it('attaches a listener', () => {
-      defaultTracer.onTrev = null;
-      defaultTracer.onRegisterAST = null;
+      delete defaultTracer.attachedWriterByPlugin;
       const opts = {
         runtime: {
           writer: {
@@ -314,6 +314,10 @@ describe('configuration', () => {
 });
 
 describe('special case syntax handling', () => {
+  test('imports', () => {
+    expect(() => transform('import foo from "bar"')).not.toThrow();
+  });
+
   test('method declarations', () => {
     const output = biEval(`
       const foo = {

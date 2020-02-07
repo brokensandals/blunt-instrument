@@ -9,8 +9,9 @@ const buildImportTracer = template(`
 
 const buildAttachConsoleTraceWriter = template(`
   import { ConsoleTraceWriter as %%tempId%% } from 'blunt-instrument-core';
-  if (!(%%tracerId%%.onRegisterAST || %%tracerId%%.onTrev)) {
+  if (!%%tracerId%%.attachedWriterByPlugin) {
     new %%tempId%%().attach(%%tracerId%%);
+    %%tracerId%%.attachedWriterByPlugin = true;
   }
 `);
 
@@ -136,6 +137,11 @@ function addExpressionTrace(path, { astIdId, tracerId, checkEnabled }) {
   const { node } = path;
 
   if (!checkEnabled(node)) {
+    return;
+  }
+
+  // Don't try to instrument the "bar" in `import foo from "bar"`
+  if (types.isImportDeclaration(path.parentPath.node)) {
     return;
   }
 
@@ -376,17 +382,15 @@ export default function (api, opts) {
     } = {},
     ast: {
       callback = () => {},
-      id: astId,
+      id: givenASTId,
       selfRegister = true,
-    },
+    } = {},
     instrument: {
       defaultEnabled = true,
     } = {},
   } = opts;
 
-  if (!astId) {
-    throw new Error('opts.ast.id is required');
-  }
+  let astId;
 
   function addInstrumenterInit(path) {
     const ids = {
@@ -439,6 +443,10 @@ export default function (api, opts) {
   return {
     visitor: {
       Program(path) {
+        astId = givenASTId || this.file.opts.filename;
+        if (!astId) {
+          throw new Error('opts.ast.id is required when no filename is available');
+        }
         const checkEnabled = enabledChecker(defaultEnabled, path);
         addNodeIdsToAST(path.node);
         callback(astId, path.node);

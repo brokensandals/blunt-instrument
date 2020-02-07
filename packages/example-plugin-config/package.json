@@ -1,0 +1,26 @@
+{
+  "name": "example-plugin-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Example of configuring a project so that it will be instrumented.",
+  "main": "index.js",
+  "scripts": {
+    "exec": "babel-node index"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/node": "^7.7.5",
+    "blunt-instrument-babel-plugin": "^0.0.0",
+    "blunt-instrument-core": "^0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brokensandals/blunt-instrument.git"
+  },
+  "author": "Jacob Williams <jacobaw@gmail.com> (https://brokensandals.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brokensandals/blunt-instrument/issues"
+  },
+  "homepage": "https://github.com/brokensandals/blunt-instrument#readme"
+}
