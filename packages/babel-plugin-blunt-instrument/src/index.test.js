@@ -257,10 +257,10 @@ describe('configuration', () => {
     });
 
     it('does not override an already-registered listener', () => {
-      defaultTracer.attachedWriterByPlugin = true;
+      defaultTracer.attachedConsoleWriterByPlugin = true;
       const opts = {
         tracerVar: undefined,
-        writerType: 'console',
+        consoleWriter: 'raw',
         astId: 'test',
       };
       const { code } = transform('const foo = "meh"', opts, {}, true);
@@ -270,10 +270,10 @@ describe('configuration', () => {
     });
 
     it('attaches a listener', () => {
-      delete defaultTracer.attachedWriterByPlugin;
+      delete defaultTracer.attachedConsoleWriterByPlugin;
       const opts = {
         tracerVar: undefined,
-        writerType: 'console',
+        consoleWriter: 'raw',
         astId: 'test',
       };
       const { code } = transform('const foo = "meh"', opts, {}, true);

@@ -48,7 +48,7 @@ const opts = {
   // blunt-instrument-core.
   // This is provided for convenience, but could also be accomplished yourself
   // by calling `tracer.attach(new ConsoleTraceWriter())`.
-  writerType: undefined,
+  consoleWriter: false,
 };
 
 const instrumentedCode = babel.transformSync(

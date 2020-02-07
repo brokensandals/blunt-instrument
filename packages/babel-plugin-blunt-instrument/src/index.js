@@ -9,9 +9,9 @@ const buildImportTracer = template(`
 
 const buildAttachConsoleTraceWriter = template(`
   import { ConsoleTraceWriter as %%tempId%% } from 'blunt-instrument-core';
-  if (!%%tracerId%%.attachedWriterByPlugin) {
+  if (!%%tracerId%%.attachedConsoleWriterByPlugin) {
     %%tracerId%%.addListener(new %%tempId%%());
-    %%tracerId%%.attachedWriterByPlugin = true;
+    %%tracerId%%.attachedConsoleWriterByPlugin = true;
   }
 `);
 
@@ -374,7 +374,7 @@ function enabledChecker(defaultEnabled, path) {
 export default function (api, opts) {
   const {
     tracerVar,
-    writerType,
+    consoleWriter = false,
     astCallback = () => {},
     astId: givenASTId,
     astSelfRegister = true,
@@ -406,19 +406,13 @@ export default function (api, opts) {
       astId: types.stringLiteral(astId),
     }));
 
-    switch (writerType) {
-      case undefined:
-      case null:
-        // nothing
-        break;
-      case 'console':
-        path.node.body.unshift(...buildAttachConsoleTraceWriter({
-          tempId: path.scope.generateUidIdentifier('temp'),
-          tracerId: ids.tracerId,
-        }));
-        break;
-      default:
-        throw new Error(`Unrecognized writer type ${writerType}`);
+    if (consoleWriter === 'raw') {
+      path.node.body.unshift(...buildAttachConsoleTraceWriter({
+        tempId: path.scope.generateUidIdentifier('temp'),
+        tracerId: ids.tracerId,
+      }));
+    } else if (consoleWriter) {
+      throw new Error(`Unrecognized value of consoleWriter: ${consoleWriter}`);
     }
 
     if (!tracerVar) {
