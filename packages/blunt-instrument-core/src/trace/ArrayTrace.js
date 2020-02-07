@@ -38,9 +38,8 @@ export default class ArrayTrace {
   }
 
   handleTrev(trev) {
-    // eslint-disable-next-line no-param-reassign
-    trev.data = this.encoder.encode(trev.data);
-    this.trevs.push(trev);
+    const encoded = { ...trev, data: this.encoder.encode(trev.data) };
+    this.trevs.push(encoded);
     if (this.onChange) {
       this.onChange();
     }
