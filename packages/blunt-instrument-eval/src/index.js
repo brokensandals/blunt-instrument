@@ -46,15 +46,10 @@ may interfere with instrumentedEval, the code, or both.`);
     plugins: [
       [bluntInstrumentPlugin,
         {
-          runtime: {
-            mechanism: 'var',
-            tracerVar,
-          },
-          ast: {
-            callback: (id, a) => { ast = JSON.parse(JSON.stringify(a)); },
-            id: 'eval',
-            selfRegister: false,
-          },
+          tracerVar,
+          astCallback: (id, a) => { ast = JSON.parse(JSON.stringify(a)); },
+          astId: 'eval',
+          astSelfRegister: false,
         }],
     ],
   };

@@ -18,17 +18,42 @@ const originalCode = `
     return n == 1 ? n * fac(n - 1);
   }`;
 
-// All options EXCEPT (sometimes) ast.id are optional. The defaults of the others are shown here.
+// All options EXCEPT (sometimes) astId are optional. The defaults of the others are shown here.
 const opts = {
+  // If true, instrumentation is enabled for all lines of code by default.
+  // If false, you must use code comments to enable tracing; see "Enabling and Disabling Tracing" below.
+  defaultEnabled: true,
+
+  // See "Injecting the Tracer" below. Note that when this is undefined, an 'import'
+  // statement for blunt-instrument-core will be generated.
+  tracerVar: undefined,
+  
+  // This can be any non-empty string, but if you're instrumenting multiple source
+  // files that will be traced together, each one should get a unique id.
+  // By default this tries to get the filename from babel, but if that's not
+  // available, you need to supply something.
+  astId: filename,
+
+  // Causes the AST of the original code to be embedded in the generated code.
+  // When the code runs, the Tracer's onRegisterAST method will be called.
+  astSelfRegister: true,
+
+  // If provided, this function will be called with the AST of the original code
+  // after the biId property has been added to each node. This is an alternative
+  // to astSelfRegister.
+  callback: (astId, ast) => {},
+  
+  // If you want the instrumented code to configure the tracer to log to the console,
+  // set writerType to 'console'. Note that this will generate an 'import' statement for
+  // blunt-instrument-core.
+  // This is provided for convenience, but could also be accomplished yourself
+  // by calling `new ConsoleTraceWriter().attach(tracer)`.
+  writerType: undefined,
   runtime: {
     mechanism: 'import',
     tracerVar: undefined, // For mechanism='var', make this a string
     writer: {
-      // If you want the instrumented code to configure the tracer to log to the console,
-      // set type to 'console'. Note that this will generate an 'import' statement for
-      // blunt-instrument-core.
-      // This is provided for convenience, but could also be accomplished yourself
-      // by calling `new ConsoleTraceWriter().attach(tracer)`.
+      
       type: undefined,
     },
   },

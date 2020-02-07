@@ -373,21 +373,12 @@ function enabledChecker(defaultEnabled, path) {
  */
 export default function (api, opts) {
   const {
-    runtime: {
-      mechanism = 'import',
-      tracerVar,
-      writer: {
-        type: writerType,
-      } = {},
-    } = {},
-    ast: {
-      callback = () => {},
-      id: givenASTId,
-      selfRegister = true,
-    } = {},
-    instrument: {
-      defaultEnabled = true,
-    } = {},
+    tracerVar,
+    writerType,
+    astCallback = () => {},
+    astId: givenASTId,
+    astSelfRegister = true,
+    defaultEnabled = true,
   } = opts;
 
   let astId;
@@ -400,7 +391,7 @@ export default function (api, opts) {
       fnStartIdId: path.scope.generateUidIdentifier('fnStartId'),
     };
 
-    if (selfRegister) {
+    if (astSelfRegister) {
       // TODO insert object directly instead of via json
       const astString = types.stringLiteral(JSON.stringify(path.node));
       path.node.body.unshift(buildRegisterAST({
@@ -430,7 +421,7 @@ export default function (api, opts) {
         throw new Error(`Unrecognized writer type ${writerType}`);
     }
 
-    if (mechanism === 'import') {
+    if (!tracerVar) {
       path.node.body.unshift(...buildImportTracer({
         tempId: path.scope.generateUidIdentifier('temp'),
         tracerId: ids.tracerId,
@@ -445,11 +436,11 @@ export default function (api, opts) {
       Program(path) {
         astId = givenASTId || this.file.opts.filename;
         if (!astId) {
-          throw new Error('opts.ast.id is required when no filename is available');
+          throw new Error('opts.astId is required when no filename is available');
         }
         const checkEnabled = enabledChecker(defaultEnabled, path);
         addNodeIdsToAST(path.node);
-        callback(astId, path.node);
+        astCallback(astId, path.node);
         const state = { ...addInstrumenterInit(path), checkEnabled };
         path.traverse(instrumentVisitor, { state });
       },

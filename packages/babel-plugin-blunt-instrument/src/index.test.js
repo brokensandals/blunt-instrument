@@ -19,7 +19,7 @@ import bluntInstrumentPlugin from '.';
  */
 function transform(
   code,
-  pluginOpts = { ast: { id: 'test' } },
+  pluginOpts = { astId: 'test' },
   babelOpts = { configFile: false },
   modules = false,
 ) {
@@ -40,17 +40,12 @@ function transform(
  * @returns {object}
  */
 function biEval(code, pluginOpts = {}) {
-  if (!pluginOpts.ast) {
-    pluginOpts.ast = {}; // eslint-disable-line no-param-reassign
-  }
-  pluginOpts.ast.id = 'test'; // eslint-disable-line no-param-reassign
-  const { code: instrumented } = transform(code, {
-    runtime: {
-      mechanism: 'var',
-      tracerVar: 'tracer',
-    },
+  const opts = {
+    astId: 'test',
+    tracerVar: 'tracer',
     ...pluginOpts,
-  });
+  };
+  const { code: instrumented } = transform(code, opts);
 
   const tracer = new Tracer();
   const trace = new ArrayTrace();
@@ -60,7 +55,7 @@ function biEval(code, pluginOpts = {}) {
   fn(tracer, output);
   const astClone = cloneDeep(trace.astb.asts.test);
   attachCodeSlicesToAST(astClone, code);
-  tracer.onRegisterAST(pluginOpts.ast.id, astClone);
+  tracer.onRegisterAST(opts.astId, astClone);
   const { astb } = trace;
 
   return {
@@ -173,11 +168,8 @@ describe('configuration', () => {
 
   test('using defaultTrace with specified ast id', () => {
     const opts = {
-      runtime: {
-      },
-      ast: {
-        id: 'test',
-      },
+      tracerVar: undefined,
+      astId: 'test',
     };
     const { code } = transform('const foo = "meh"', opts, {}, true);
     expect(code).toContain('onRegisterAST');
@@ -193,16 +185,11 @@ describe('configuration', () => {
     }]);
   });
 
-  test('with selfRegister disabled', () => {
+  test('with astSelfRegister disabled', () => {
     const opts = {
-      runtime: {
-        mechanism: 'var',
-        tracerVar: 'tracer',
-      },
-      ast: {
-        id: 'test',
-        selfRegister: false,
-      },
+      tracerVar: 'tracer',
+      astId: 'test',
+      astSelfRegister: false,
     };
     const { code } = transform('const foo = "meh"', opts, {});
     const tracer = new Tracer();
@@ -219,15 +206,10 @@ describe('configuration', () => {
     let astId;
     let ast;
     const opts = {
-      runtime: {
-        mechanism: 'var',
-        tracerVar: 'tracer',
-      },
-      ast: {
-        id: 'test',
-        callback: (id, a) => { astId = id; ast = JSON.parse(JSON.stringify(a)); },
-        selfRegister: false,
-      },
+      tracerVar: 'tracer',
+      astId: 'test',
+      astCallback: (id, a) => { astId = id; ast = JSON.parse(JSON.stringify(a)); },
+      astSelfRegister: false,
     };
     transform('const foo = "meh"', opts, {});
     expect(astId).toEqual('test');
@@ -247,9 +229,7 @@ describe('configuration', () => {
       const f = 6;
     `;
     const opts = {
-      instrument: {
-        defaultEnabled: false,
-      },
+      defaultEnabled: false,
     };
     const output = biEval(code, opts);
     expect(codeTrevs(output, '1')).toHaveLength(0);
@@ -277,14 +257,9 @@ describe('configuration', () => {
     it('does not override an already-registered listener', () => {
       defaultTracer.attachedWriterByPlugin = true;
       const opts = {
-        runtime: {
-          writer: {
-            type: 'console',
-          },
-        },
-        ast: {
-          id: 'test',
-        },
+        tracerVar: undefined,
+        writerType: 'console',
+        astId: 'test',
       };
       const { code } = transform('const foo = "meh"', opts, {}, true);
       // use `eval()` instead of `new Function()` so that `require` is defined
@@ -295,14 +270,9 @@ describe('configuration', () => {
     it('attaches a listener', () => {
       delete defaultTracer.attachedWriterByPlugin;
       const opts = {
-        runtime: {
-          writer: {
-            type: 'console',
-          },
-        },
-        ast: {
-          id: 'test',
-        },
+        tracerVar: undefined,
+        writerType: 'console',
+        astId: 'test',
       };
       const { code } = transform('const foo = "meh"', opts, {}, true);
       // use `eval()` instead of `new Function()` so that `require` is defined
