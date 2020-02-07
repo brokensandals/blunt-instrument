@@ -36,7 +36,6 @@ export default function (source, { saveInstrumented = false } = {}) {
 may interfere with instrumentedEval, the code, or both.`);
   }
 
-  let ast;
   const trace = new ArrayTrace();
   const tracer = new Tracer();
   tracer.addListener(trace);
@@ -47,7 +46,7 @@ may interfere with instrumentedEval, the code, or both.`);
       [bluntInstrumentPlugin,
         {
           tracerVar,
-          astCallback: (id, a) => { ast = JSON.parse(JSON.stringify(a)); },
+          astCallback: trace.handleRegisterAST.bind(trace),
           astId: 'eval',
           astSelfRegister: false,
         }],
@@ -60,11 +59,10 @@ may interfere with instrumentedEval, the code, or both.`);
 
   const babelResult = transformSync(source, { ast: true, sourceType: 'module', ...babelOpts });
 
+  const ast = trace.astb.asts.eval;
   if (!ast) {
     throw new Error('blunt-instrument-babel-plugin did not invoke callback with AST');
   }
-  attachCodeSlicesToAST(ast, source);
-  tracer.onRegisterAST('eval', ast);
 
   const { code } = babelResult;
   const fn = new Function(tracerVar, `"use strict";${code}`); // eslint-disable-line no-new-func

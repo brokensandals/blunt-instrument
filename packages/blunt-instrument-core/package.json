@@ -13,6 +13,7 @@
     "@babel/cli": "^7.7.5"
   },
   "dependencies": {
+    "lodash": "^4.17.15",
     "object-graph-as-json": "^2.0.0"
   },
   "repository": {

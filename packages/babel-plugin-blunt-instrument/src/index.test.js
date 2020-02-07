@@ -55,7 +55,7 @@ function biEval(code, pluginOpts = {}) {
   fn(tracer, output);
   const astClone = cloneDeep(trace.astb.asts.test);
   attachCodeSlicesToAST(astClone, code);
-  tracer.onRegisterAST(opts.astId, astClone);
+  tracer.onRegisterAST(opts.astId, astClone, code);
   const { astb } = trace;
 
   return {
@@ -279,7 +279,7 @@ describe('configuration', () => {
       const { code } = transform('const foo = "meh"', opts, {}, true);
       // use `eval()` instead of `new Function()` so that `require` is defined
       eval(code); // eslint-disable-line no-eval
-      expect(spyLog).toHaveBeenCalledWith('onTrev loc [1:12] trev:');
+      expect(spyLog).toHaveBeenCalledWith('onTrev loc [1:12] code ["meh"] trev:');
       expect(spyDir).toHaveBeenCalled();
     });
   });

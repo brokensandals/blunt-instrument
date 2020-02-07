@@ -24,6 +24,7 @@
  * @callback Tracer~handleRegisterAST
  * @param {string} astId - identifier to distinguish the AST from other files' ASTs
  * @param {Node} ast - root babel node of the AST
+ * @param {string} code - source code corresponding to the AST
  */
 
 /**
@@ -66,10 +67,10 @@ export default class Tracer {
         : () => {};
       this.onTrev = listener.handleTrev ? listener.handleTrev.bind(listener) : () => {};
     } else {
-      this.onRegisterAST = (astId, ast) => {
+      this.onRegisterAST = (astId, ast, code) => {
         this.listeners.forEach((lis) => {
           if (lis.handleRegisterAST) {
-            lis.handleRegisterAST(astId, ast);
+            lis.handleRegisterAST(astId, ast, code);
           }
         });
       };

@@ -20,7 +20,7 @@ const buildSetAstId = template(`
 `);
 
 const buildRegisterAST = template(`
-  %%tracerId%%.onRegisterAST(%%astIdId%%, JSON.parse(%%astString%%));
+  %%tracerId%%.onRegisterAST(%%astIdId%%, JSON.parse(%%astString%%), %%codeString%%);
 `);
 
 const buildFnTrace = template(`{
@@ -383,7 +383,7 @@ export default function (api, opts) {
 
   let astId;
 
-  function addInstrumenterInit(path) {
+  function addInstrumenterInit(path, code) {
     const ids = {
       astIdId: path.scope.generateUidIdentifier('astId'),
       tracerId: tracerVar ? types.identifier(tracerVar)
@@ -398,6 +398,7 @@ export default function (api, opts) {
         astIdId: ids.astIdId,
         tracerId: ids.tracerId,
         astString,
+        codeString: types.stringLiteral(code),
       }));
     }
 
@@ -430,13 +431,14 @@ export default function (api, opts) {
     visitor: {
       Program(path) {
         astId = givenASTId || this.file.opts.filename;
+        const { code } = this.file;
         if (!astId) {
           throw new Error('opts.astId is required when no filename is available');
         }
         const checkEnabled = enabledChecker(defaultEnabled, path);
         addNodeIdsToAST(path.node);
-        astCallback(astId, path.node);
-        const state = { ...addInstrumenterInit(path), checkEnabled };
+        astCallback(astId, path.node, code);
+        const state = { ...addInstrumenterInit(path, code), checkEnabled };
         path.traverse(instrumentVisitor, { state });
       },
     },

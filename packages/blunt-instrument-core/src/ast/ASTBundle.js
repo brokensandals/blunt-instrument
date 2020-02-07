@@ -1,3 +1,5 @@
+import cloneDeep from 'lodash/cloneDeep';
+import attachCodeSlicesToAST from './attachCodeSlicesToAST';
 import toNodeKey from './toNodeKey';
 import traverseAST from './traverseAST';
 
@@ -7,30 +9,24 @@ import traverseAST from './traverseAST';
  * All nodes should have a `biId` field before being passed to this class.
  */
 export default class ASTBundle {
-  /**
-   * Note: all the ASTs will be passed to the add() method, which mutates them
-   * @param {object} asts a collection of ASTs; each key should be the AST's id, and each value
-   *    should be the root babel Node of the AST
-   */
-  constructor(asts = {}) {
-    this.asts = { ...asts };
+  constructor() {
+    this.asts = {};
     this.nodesByKey = new Map();
-
-    Object.keys(asts).forEach((astId) => {
-      this.add(astId, asts[astId]);
-    });
+    this.sources = {};
   }
 
   /**
-   * Adds and indexes the given AST.
-    * Note: the given AST is modified by this method:
-   * - an `biASTId` string field is added to each node
-   * - a `biKey` string field is added to each node containing the result of `toNodeKey`
+   * Clones, adds, and indexes the given AST.
+   * The following fields are added to each AST node method:
+   * - a `biASTId` string field
+   * - a `biKey` string field containing the result of `toNodeKey`
+   * - a `codeSlice` string field
    * @param {string} astId
    * @param {Node} ast - root babel node of the AST
+   * @param {string} code - the source code corresponding to the AST
    */
-  add(astId, ast) {
-    this.asts[astId] = ast;
+  add(astId, ast, code) {
+    ast = cloneDeep(ast); // eslint-disable-line no-param-reassign
     traverseAST(ast, (node) => {
       if (!node.biId) {
         throw new Error('Node is missing node ID');
@@ -39,6 +35,9 @@ export default class ASTBundle {
       node.biKey = toNodeKey(astId, node.biId); // eslint-disable-line no-param-reassign
       this.nodesByKey.set(node.biKey, node);
     });
+    attachCodeSlicesToAST(ast, code);
+    this.asts[astId] = ast;
+    this.sources[astId] = code;
   }
 
   /**
@@ -75,5 +74,44 @@ export default class ASTBundle {
       });
     });
     return results;
+  }
+
+  /**
+   * @returns {Object} a representation of this ASTBundle that can be serialized as JSON
+   *   and later deserialized and loaded using fromJSON
+   */
+  asJSON() {
+    const asts = {};
+
+    Object.keys(this.asts).forEach((key) => {
+      asts[key] = cloneDeep(this.asts[key]);
+      traverseAST(asts[key], (node) => {
+        delete node.biASTId; // eslint-disable-line no-param-reassign
+        delete node.biKey; // eslint-disable-line no-param-reassign
+        delete node.codeSlice; // eslint-disable-line no-param-reassign
+      });
+    });
+
+    return {
+      asts,
+      sources: this.sources,
+    };
+  }
+
+  /**
+   * Restores an instance that was saved using asJSON()
+   * @param {Object} input
+   * @returns {ASTBundle}
+   */
+  static fromJSON(input) {
+    if (!input.asts || !input.sources) {
+      throw new Error('Expected `asts` and `sources` fields');
+    }
+
+    const astb = new ASTBundle();
+    Object.keys(input.asts).forEach((key) => {
+      astb.add(key, input.asts[key], input.sources[key]);
+    });
+    return astb;
   }
 }

@@ -13,8 +13,8 @@ export default class ConsoleTraceWriter {
     }
   }
 
-  handleRegisterAST(astId, ast) {
-    this.astb.add(astId, ast);
+  handleRegisterAST(astId, ast, code) {
+    this.astb.add(astId, ast, code);
     // eslint-disable-next-line no-console
     console.log(`onRegisterAST id [${astId}] AST:`);
     if (this.encoder) {

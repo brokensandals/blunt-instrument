@@ -168,8 +168,9 @@ export default class TrevCollection {
    */
   asJSON() {
     const tc = this.withoutDenormalizedInfo();
+
     return {
-      asts: tc.astb.asts,
+      astb: tc.astb.asJSON(),
       trevs: tc.trevs,
     };
   }
@@ -180,12 +181,11 @@ export default class TrevCollection {
    * @returns {TrevCollection}
    */
   static fromJSON(input) {
-    if (!input.asts || !input.trevs) {
-      throw new Error('Expected `asts` and `trevs` fields');
+    if (!input.astb || !input.trevs) {
+      throw new Error('Expected `astb` and `trevs` fields');
     }
 
-    const astb = new ASTBundle(input.asts);
-    return new TrevCollection(input.trevs, astb);
+    return new TrevCollection(input.trevs, ASTBundle.fromJSON(input.astb));
   }
 
   /**

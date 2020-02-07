@@ -30,8 +30,8 @@ export default class ArrayTrace {
     return new TrevCollection(this.trevs, this.astb);
   }
 
-  handleRegisterAST(astId, ast) {
-    this.astb.add(astId, ast);
+  handleRegisterAST(astId, ast, code) {
+    this.astb.add(astId, ast, code);
     if (this.onChange) {
       this.onChange();
     }

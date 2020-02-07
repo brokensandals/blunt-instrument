@@ -14,7 +14,7 @@ describe('TrevCollection', () => {
 
   test('filter', () => {
     const trevs = [{ id: 5, data: 'a' }, { id: 1, data: 'b' }];
-    const astb = new ASTBundle({});
+    const astb = new ASTBundle();
     const tc = new TrevCollection(trevs, astb);
     const tc2 = tc.filter((trev) => trev.data === 'a');
     expect(tc2.trevs).toEqual([trevs[0]]);
@@ -24,10 +24,11 @@ describe('TrevCollection', () => {
   test('getFacets', () => {
     const ast = parseSync('x = 10; y = 12');
     addNodeIdsToAST(ast);
-    const astb = new ASTBundle({ one: ast });
-    const node1 = ast.program.body[0].expression;
-    const node2 = ast.program.body[0].expression.right;
-    const node3 = ast.program.body[1].expression.right;
+    const astb = new ASTBundle();
+    astb.add('one', ast, 'x = 10; y = 12');
+    const node1 = astb.getNode('one', ast.program.body[0].expression.biId);
+    const node2 = astb.getNode('one', ast.program.body[0].expression.right.biId);
+    const node3 = astb.getNode('one', ast.program.body[1].expression.right.biId);
     const trevs = [
       {
         id: 1,
@@ -75,14 +76,14 @@ describe('TrevCollection', () => {
     let astb;
 
     beforeEach(() => {
-      ast = parseSync(`
-        function pow(x, n) {
-          return n === 1 ? x : x * pow(x, n - 1);
-        }
-        pow(2, 3);
-      `);
+      const code = `function pow(x, n) {
+        return n === 1 ? x : x * pow(x, n - 1);
+      }
+      pow(2, 3);`;
+      ast = parseSync(code);
       addNodeIdsToAST(ast);
-      astb = new ASTBundle({ test: ast });
+      astb = new ASTBundle();
+      astb.add('test', ast, code);
     });
 
     it('throws error for invalid parentId', () => {
@@ -124,7 +125,7 @@ describe('TrevCollection', () => {
       }];
       const tc = new TrevCollection(trevs, astb).withDenormalizedInfo();
       expect(tc.trevs[0]).not.toBe(trevs[0]);
-      expect(tc.trevs[0].denormalized.node).toBe(ast.program.body[0]);
+      expect(tc.trevs[0].denormalized.node).toBe(astb.getNode('test', ast.program.body[0].biId));
     });
 
     it('populates `ancestorIds`', () => {
@@ -194,7 +195,8 @@ describe('TrevCollection', () => {
   test('withoutDenormalizedInfo', () => {
     const ast = parseSync('x = 10');
     addNodeIdsToAST(ast);
-    const astb = new ASTBundle({ test: ast });
+    const astb = new ASTBundle();
+    astb.add('test', ast, 'x = 10');
     const trevs = [{ id: 1, astId: 'test', nodeId: 1 }];
     const tc1 = new TrevCollection(trevs, astb);
     const tc2 = tc1.withDenormalizedInfo();
@@ -206,13 +208,14 @@ describe('TrevCollection', () => {
   test('saving and loading', () => {
     const ast = parseSync('x = 10');
     addNodeIdsToAST(ast);
-    const astb = new ASTBundle({ test: ast });
+    const astb = new ASTBundle();
+    astb.add('test', ast, 'x = 10');
     const trevs = [{ id: 1, astId: 'test', nodeId: 1 }];
     const tc = new TrevCollection(trevs, astb).withDenormalizedInfo();
     const stringified = JSON.stringify(tc.asJSON());
     const parsed = JSON.parse(stringified);
     const tc2 = TrevCollection.fromJSON(parsed);
-    expect(tc2.astb.asts.test).toEqual(ast);
+    expect(tc2.astb.asts.test).toEqual(astb.asts.test);
     expect(tc2.trevs).toEqual(trevs);
   });
 });
