@@ -327,7 +327,7 @@ const directiveRegexes = [
 function enabledChecker(defaultEnabled, path) {
   const directives = [];
   types.traverseFast(path.node, (node) => {
-    (node.trailingComments || []).forEach((comment) => {
+    (node.leadingComments || node.trailingComments || []).forEach((comment) => {
       const match = directiveRegexes.find(([regex]) => regex.test(comment.value));
       if (match) {
         directives[comment.loc.start.line] = match[1]; // eslint-disable-line prefer-destructuring
