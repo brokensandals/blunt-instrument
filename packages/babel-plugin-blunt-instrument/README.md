@@ -49,27 +49,6 @@ const opts = {
   // This is provided for convenience, but could also be accomplished yourself
   // by calling `tracer.attach(new ConsoleTraceWriter())`.
   writerType: undefined,
-  runtime: {
-    mechanism: 'import',
-    tracerVar: undefined, // For mechanism='var', make this a string
-    writer: {
-      
-      type: undefined,
-    },
-  },
-  ast: {
-    id: filename, // This can be any non-empty string, but if you're instrumenting multiple source
-                  // files that will be traced together, each one should get a unique id.
-                  // By default this tries to get the filename from babel, but if that's not
-                  // available, you need to supply something.
-    selfRegister: true, // Causes the AST of the original code to be embedded in the generated
-                        // code. After the code runs, it can be retrieved from trace.asts[key]
-    callback: (ast) => {}, // If provided, this function will be called with the AST of the
-                           // original code after the biId property has been added to each node.
-  },
-  instrument: {
-    defaultEnabled: true, // Set to false if you only want to instrument specific lines
-  },
 };
 
 const instrumentedCode = babel.transformSync(
