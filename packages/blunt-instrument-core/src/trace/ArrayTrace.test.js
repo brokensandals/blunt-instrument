@@ -3,18 +3,15 @@ import ArrayTrace from './ArrayTrace';
 
 describe('ArrayTrace', () => {
   let trace;
-  let callbacks;
 
   beforeEach(() => {
     trace = new ArrayTrace();
-    callbacks = {};
-    trace.attach(callbacks);
   });
 
-  describe('onRegisterAST', () => {
+  describe('handleRegisterAST', () => {
     it('saves the AST', () => {
       const node = { foo: 'bar' };
-      callbacks.onRegisterAST('test', node);
+      trace.handleRegisterAST('test', node);
       expect(trace.astb.asts.test).toBe(node);
     });
 
@@ -25,14 +22,14 @@ describe('ArrayTrace', () => {
         expect(trace.astb.asts.test).toBe(node);
         done();
       };
-      callbacks.onRegisterAST('test', node);
+      trace.handleRegisterAST('test', node);
     });
   });
 
-  describe('onTrev', () => {
+  describe('handleTrev', () => {
     it('encodes and saves given trevs', () => {
-      callbacks.onTrev({ id: 1, type: 'expr', data: 'whatevs' });
-      callbacks.onTrev({ id: 2, type: 'fn-start', data: { foo: 'bar' } });
+      trace.handleTrev({ id: 1, type: 'expr', data: 'whatevs' });
+      trace.handleTrev({ id: 2, type: 'fn-start', data: { foo: 'bar' } });
       expect(trace.trevs).toEqual([
         {
           id: 1,
@@ -58,7 +55,7 @@ describe('ArrayTrace', () => {
       const data = { am: 3 };
       encoder.encode(data);
       trace.encoder = encoder;
-      callbacks.onTrev({ id: 1, type: 'expr', data });
+      trace.handleTrev({ id: 1, type: 'expr', data });
       expect(trace.trevs).toEqual([{
         id: 1,
         type: 'expr',
@@ -84,7 +81,7 @@ describe('ArrayTrace', () => {
         }]);
         done();
       };
-      callbacks.onTrev({ id: 1, type: 'expr', data: { foo: 'bar' } });
+      trace.handleTrev({ id: 1, type: 'expr', data: { foo: 'bar' } });
     });
   });
 });

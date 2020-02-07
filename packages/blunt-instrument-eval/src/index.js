@@ -39,7 +39,7 @@ may interfere with instrumentedEval, the code, or both.`);
   let ast;
   const trace = new ArrayTrace();
   const tracer = new Tracer();
-  trace.attach(tracer);
+  tracer.addListener(trace);
 
   const babelOpts = {
     configFile: false,

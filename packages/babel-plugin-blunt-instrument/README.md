@@ -47,7 +47,7 @@ const opts = {
   // set writerType to 'console'. Note that this will generate an 'import' statement for
   // blunt-instrument-core.
   // This is provided for convenience, but could also be accomplished yourself
-  // by calling `new ConsoleTraceWriter().attach(tracer)`.
+  // by calling `tracer.attach(new ConsoleTraceWriter())`.
   writerType: undefined,
   runtime: {
     mechanism: 'import',

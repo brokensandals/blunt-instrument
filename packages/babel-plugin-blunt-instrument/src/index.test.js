@@ -49,7 +49,7 @@ function biEval(code, pluginOpts = {}) {
 
   const tracer = new Tracer();
   const trace = new ArrayTrace();
-  trace.attach(tracer);
+  tracer.addListener(trace);
   const fn = new Function('tracer', 'output', `"use strict";${instrumented}`); // eslint-disable-line no-new-func
   const output = {};
   fn(tracer, output);
@@ -158,12 +158,14 @@ describe('configuration', () => {
 
   beforeEach(() => {
     trace = new ArrayTrace();
-    trace.attach(defaultTracer);
+    defaultTracer.addListener(trace);
   });
 
   afterEach(() => {
+    // TODO add a removeListener method instead
     defaultTracer.onTrev = () => {};
     defaultTracer.onRegisterAST = () => {};
+    defaultTracer.listeners = [];
   });
 
   test('using defaultTrace with specified ast id', () => {
@@ -194,7 +196,7 @@ describe('configuration', () => {
     const { code } = transform('const foo = "meh"', opts, {});
     const tracer = new Tracer();
     trace = new ArrayTrace();
-    trace.attach(tracer);
+    tracer.addListener(trace);
     expect(code).not.toContain('onRegisterAST');
     const fn = new Function('tracer', `"use strict";${code}`); // eslint-disable-line no-new-func
     fn(tracer);

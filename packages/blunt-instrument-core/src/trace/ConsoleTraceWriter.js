@@ -1,23 +1,12 @@
 import ASTBundle from '../ast/ASTBundle';
 
 /**
- * If you attach an instance of this class to a Tracer, all the trace evnts will be logged
+ * If you attach this using Tracer's addListener() method, all the trace evnts will be logged
  * to the console.
  */
 export default class ConsoleTraceWriter {
   constructor() {
     this.astb = new ASTBundle();
-  }
-
-  /**
-   * Configures the given Tracer to send events to this ConsoleTraceWriter instance.
-   * @param {Tracer} tracer
-   */
-  attach(tracer) {
-    // eslint-disable-next-line no-param-reassign
-    tracer.onRegisterAST = this.handleRegisterAST.bind(this);
-    // eslint-disable-next-line no-param-reassign
-    tracer.onTrev = this.handleTrev.bind(this);
   }
 
   handleRegisterAST(astId, ast) {

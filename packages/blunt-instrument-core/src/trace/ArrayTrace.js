@@ -4,7 +4,7 @@ import TrevCollection from './TrevCollection';
 
 /**
  * Holds an in-memory trace of some instrumented code's execution.
- * This should be attached to a Tracer using the attach() method. Subsequently, any trevs
+ * This should be attached using a Tracer's addListener() method. Subsequently, any trevs
  * or AST registrations reported by the Tracer will be stored.
  *
  * Trevs are stored in an array in a property named `trevs`. The `data` field of each trev
@@ -21,17 +21,6 @@ export default class ArrayTrace {
     this.astb = new ASTBundle();
     this.encoder = encoder;
     this.trevs = [];
-  }
-
-  /**
-   * Configures the given Tracer to send events to this ArrayTrace instance.
-   * @param {Tracer} tracer
-   */
-  attach(tracer) {
-    // eslint-disable-next-line no-param-reassign
-    tracer.onRegisterAST = this.handleRegisterAST.bind(this);
-    // eslint-disable-next-line no-param-reassign
-    tracer.onTrev = this.handleTrev.bind(this);
   }
 
   /**

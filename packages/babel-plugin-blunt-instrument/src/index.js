@@ -10,7 +10,7 @@ const buildImportTracer = template(`
 const buildAttachConsoleTraceWriter = template(`
   import { ConsoleTraceWriter as %%tempId%% } from 'blunt-instrument-core';
   if (!%%tracerId%%.attachedWriterByPlugin) {
-    new %%tempId%%().attach(%%tracerId%%);
+    %%tracerId%%.addListener(new %%tempId%%());
     %%tracerId%%.attachedWriterByPlugin = true;
   }
 `);

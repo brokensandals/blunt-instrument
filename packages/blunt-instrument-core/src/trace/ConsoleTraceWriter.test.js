@@ -8,14 +8,11 @@ describe('ConsoleTraceWriter', () => {
   let spyLog;
   let spyDir;
   let writer;
-  let callbacks;
 
   beforeEach(() => {
     spyLog = jest.spyOn(console, 'log').mockImplementation();
     spyDir = jest.spyOn(console, 'dir').mockImplementation();
     writer = new ConsoleTraceWriter();
-    callbacks = {};
-    writer.attach(callbacks);
   });
 
   afterEach(() => {
@@ -25,14 +22,14 @@ describe('ConsoleTraceWriter', () => {
 
   it('handles trevs for unknown nodes gracefully', () => {
     const trev = { id: 1, astId: 'bogus', nodeId: 1 };
-    callbacks.onTrev(trev);
+    writer.handleTrev(trev);
     expect(spyLog.mock.calls).toEqual([['onTrev trev:']]);
     expect(spyDir.mock.calls).toEqual([[trev]]);
   });
 
   it('logs ASTs', () => {
     const ast = { type: 'Identifier', biId: 1 };
-    callbacks.onRegisterAST('test', ast);
+    writer.handleRegisterAST('test', ast);
     expect(spyLog.mock.calls).toEqual([['onRegisterAST id [test] AST:']]);
     expect(spyDir.mock.calls).toEqual([[ast]]);
   });
@@ -51,9 +48,9 @@ const z = y - 2`;
       }
     });
 
-    callbacks.onRegisterAST('test', ast);
+    writer.handleRegisterAST('test', ast);
     const trev = { id: 1, astId: 'test', nodeId: target.biId };
-    callbacks.onTrev(trev);
+    writer.handleTrev(trev);
 
     expect(spyLog).toHaveBeenCalledTimes(2);
     expect(spyLog).toHaveBeenLastCalledWith('onTrev loc [2:10] trev:');
@@ -76,9 +73,9 @@ const z = y - 2`;
     });
     attachCodeSlicesToAST(ast, code);
 
-    callbacks.onRegisterAST('test', ast);
+    writer.handleRegisterAST('test', ast);
     const trev = { id: 1, astId: 'test', nodeId: target.biId };
-    callbacks.onTrev(trev);
+    writer.handleTrev(trev);
 
     expect(spyLog).toHaveBeenCalledTimes(2);
     expect(spyLog).toHaveBeenLastCalledWith('onTrev loc [2:10] code [x + 1] trev:');
