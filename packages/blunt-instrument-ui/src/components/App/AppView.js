@@ -15,6 +15,9 @@ import FileSaver from 'file-saver';
 import LargeDataPreview from '../LargeDataPreview';
 
 function buildASTNames(astIds) {
+  if (astIds.length === 0) {
+    return {};
+  }
   const partArrays = astIds.map((id) => id.split('/'));
   while (partArrays.every((array) => array.length > 1 && array[0] === partArrays[0][0])) {
     partArrays.forEach((array) => array.shift());
