@@ -40,5 +40,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "."
+  "homepage": ".",
+  "devDependencies": {
+    "react-test-renderer": "^16.12.0"
+  }
 }

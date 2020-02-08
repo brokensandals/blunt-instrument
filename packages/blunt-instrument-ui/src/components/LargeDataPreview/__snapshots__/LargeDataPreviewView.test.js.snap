@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LargeDataPreviewView boolean false 1`] = `
+<p
+  className="LargeDataPreview boolean"
+>
+  false
+</p>
+`;
+
+exports[`LargeDataPreviewView boolean true 1`] = `
+<p
+  className="LargeDataPreview boolean"
+>
+  true
+</p>
+`;
+
+exports[`LargeDataPreviewView multiline string 1`] = `
+<pre
+  className="LargeDataPreview string"
+>
+  Hello, "World"!
+I am so pleased to exist and, secondarily, to make your acquaintance.
+Bye now.
+</pre>
+`;
+
+exports[`LargeDataPreviewView number 1`] = `
+<p
+  className="LargeDataPreview number"
+>
+  1234567
+</p>
+`;
+
+exports[`LargeDataPreviewView object 1`] = `
+<pre
+  className="LargeDataPreview object"
+>
+  <code>
+    {
+  "foo": "bar"
+}
+  </code>
+</pre>
+`;
+
+exports[`LargeDataPreviewView short string 1`] = `
+<pre
+  className="LargeDataPreview string"
+>
+  Hello World
+</pre>
+`;
