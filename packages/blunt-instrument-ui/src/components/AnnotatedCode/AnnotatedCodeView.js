@@ -18,6 +18,10 @@ function findNodes(object) {
   return Object.keys(object).flatMap(k => findNodes(object[k]));
 }
 
+/**
+ * Finds the direct children of the given Babel node.
+ * @param {Node} node
+ */
 function findChildNodes(node) {
   return Object.keys(node).flatMap(k => findNodes(node[k]));
 }
