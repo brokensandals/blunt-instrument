@@ -214,9 +214,7 @@ function AppView({
         </Tabs>
       </div>
 
-      <TraceQueryForm highlightedNodeKey={highlightedNodeKey}
-                      onTraceQueryChange={onTraceQueryChange}
-                      onHoveredNodeChange={onHoveredNodeChange}
+      <TraceQueryForm onTraceQueryChange={onTraceQueryChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
                       tc={tc}
                       query={traceQuery}

@@ -4,9 +4,7 @@ import update from 'immutability-helper';
 import Select from 'react-select';
 
 export function TraceQueryFormView({
-  highlightedNodeKey,
   onTraceQueryChange = (query) => {},
-  onHoveredNodeChange = (nodeKey) => {},
   onPlay = () => {},
   onStop = () => {},
   isPlaying,
