@@ -3,31 +3,32 @@ import './TrevTable.css';
 
 function ValuePreview({ value, trevType }) {
   const output = [];
+  let outputKey = 1;
 
   function recurse(current, classes = '', top = false) {
     if (current === undefined) {
       return;
     } else if (current === null) {
-      output.push(<span className={`preview-null ${classes}`}>null</span>);
+      output.push(<span key={outputKey++} className={`preview-null ${classes}`}>null</span>);
       return;
     }
   
     switch (typeof current) {
       case 'number':
-        output.push(<span className={`preview-number ${classes}`}>{current}</span>);
+        output.push(<span key={outputKey++} className={`preview-number ${classes}`}>{current}</span>);
         return;
       case 'boolean':
-        output.push(<span className={`preview-boolean ${classes}`}>{current.toString()}</span>);
+        output.push(<span key={outputKey++} className={`preview-boolean ${classes}`}>{current.toString()}</span>);
         return;
       case 'string':
-        output.push(<span className={`preview-string ${classes}`}>{JSON.stringify(current)}</span>);
+        output.push(<span key={outputKey++} className={`preview-string ${classes}`}>{JSON.stringify(current)}</span>);
         return;
       case 'object':
         switch (current.type) {
           case 'array':
             {
               const keys = Object.keys(current);
-              output.push(<span className="preview-array-start">[</span>);
+              output.push(<span key={outputKey++} className="preview-array-start">[</span>);
               let count = 0;
               let fixedWidth = top;
               for (let i = 0; i < keys.length; i++) {
@@ -36,10 +37,10 @@ function ValuePreview({ value, trevType }) {
                   continue;
                 }
                 if (count > 0) {
-                  output.push(<span className="preview-array-comma">,</span>);
+                  output.push(<span key={outputKey++} className="preview-array-comma">,</span>);
                 }
                 if (count > 4 || key !== `.${count}`) {
-                  output.push(<span className="preview-array-more">...</span>);
+                  output.push(<span key={outputKey++} className="preview-array-more">...</span>);
                   break;
                 }
                 fixedWidth = fixedWidth
@@ -49,29 +50,29 @@ function ValuePreview({ value, trevType }) {
                 count++;
                 recurse(current[key], fixedWidth ? 'preview-array-fixed-element' : '');
               }
-              output.push(<span className="preview-array-end">]</span>);
+              output.push(<span key={outputKey++} className="preview-array-end">]</span>);
               return;
             }
           case 'bigint':
-            output.push(<span className={`preview-bigint ${classes}`}>{current.string}</span>);
+            output.push(<span key={outputKey++} className={`preview-bigint ${classes}`}>{current.string}</span>);
             return;
           case 'builtin':
-            output.push(<span className={`preview-builtin ${classes}`}>{current.name}</span>);
+            output.push(<span key={outputKey++} className={`preview-builtin ${classes}`}>{current.name}</span>);
             return;
           case 'function':
             if (current['.name'] && current['.name'].value) {
-              output.push(<span className={`preview-function ${classes}`}>{current['.name'].value}</span>);
+              output.push(<span key={outputKey++} className={`preview-function ${classes}`}>{current['.name'].value}</span>);
             } else {
               let truncated = current.source.slice(0, 20);
               if (truncated.length < current.source.length) {
                 truncated += '...';
               }
-              output.push(<span className={`preview-function ${classes}`}>{truncated}</span>);
+              output.push(<span key={outputKey++} className={`preview-function ${classes}`}>{truncated}</span>);
             }
             return;
           case 'object':
             {
-              output.push(<span className="preview-object-start">{'{'}</span>);
+              output.push(<span key={outputKey++} className="preview-object-start">{'{'}</span>);
               let more = false;
               const keys = Object.keys(current);
               let count = 0;
@@ -93,27 +94,27 @@ function ValuePreview({ value, trevType }) {
                   break;
                 }
                 if (count > 0) {
-                  output.push(<span className="preview-object-comma">,</span>);
+                  output.push(<span key={outputKey++} className="preview-object-comma">,</span>);
                 }
                 count++;
-                output.push(<span className="preview-object-key">{key.slice(1)}</span>);
-                output.push(<span className="preview-object-colon">:</span>);
+                output.push(<span key={outputKey++} className="preview-object-key">{key.slice(1)}</span>);
+                output.push(<span key={outputKey++} className="preview-object-colon">:</span>);
                 recurse(current[key]);
               }
               if (more) {
                 if (count > 0) {
-                  output.push(<span className="preview-object-comma">,</span>);
+                  output.push(<span key={outputKey++} className="preview-object-comma">,</span>);
                 }
-                output.push(<span className="preview-object-more">...</span>);
+                output.push(<span key={outputKey++} className="preview-object-more">...</span>);
               }
-              output.push(<span className="preview-object-end">{'}'}</span>);
+              output.push(<span key={outputKey++} className="preview-object-end">{'}'}</span>);
               return;
             }
           case 'symbol':
             if (current.description) {
-              output.push(<span className={`preview-symbol ${classes}`}>~{current.description}</span>);
+              output.push(<span key={outputKey++} className={`preview-symbol ${classes}`}>~{current.description}</span>);
             } else {
-              output.push(<span className={`preview-symbol ${classes}`}>~{current.id}</span>);
+              output.push(<span key={outputKey++} className={`preview-symbol ${classes}`}>~{current.id}</span>);
             }
             return;
           default:

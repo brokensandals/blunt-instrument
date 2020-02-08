@@ -54,9 +54,9 @@ function AppView({
     (event) => onSourceDraftChange(event.target.value);
   
   let selectedExample = '';
-  const exampleOptions = [<option value=""></option>];
+  const exampleOptions = [<option key="BLANK" value=""></option>];
   for (const key in examples) {
-    exampleOptions.push(<option value={key}>{key}</option>);
+    exampleOptions.push(<option key={key} value={key}>{key}</option>);
     if (sourceDraft === examples[key]) {
       selectedExample = key;
     }
