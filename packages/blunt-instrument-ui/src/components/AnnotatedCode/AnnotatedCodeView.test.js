@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { render, fireEvent } from '@testing-library/react'
 import { parseSync } from '@babel/core';
 import { addNodeIdsToAST, ASTBundle } from 'blunt-instrument-core';
 import AnnotatedCodeView from './AnnotatedCodeView';
@@ -34,5 +35,21 @@ describe('AnnotatedCodeView', () => {
     const result = renderer.create(
       <AnnotatedCodeView ast={ast} selectedNodeKeys={['test:5', 'test:8']} />).toJSON();
     expect(result).toMatchSnapshot();
+  });
+
+  test('hovering', () => {
+    const fn = jest.fn();
+    const { getByText } = render(<AnnotatedCodeView ast={ast} onHoveredNodeChange={fn} />);
+    fireEvent.mouseOver(getByText(/return/));
+    expect(fn).toHaveBeenCalledWith(astb.filterNodes(
+      (node) => node.codeSlice === 'return n === 1 ? 1 : n * fac(n - 1);')[0].biKey);
+  });
+
+  test('selecting', () => {
+    const fn = jest.fn();
+    const { getByText } = render(<AnnotatedCodeView ast={ast} onNodeSelectedToggle={fn} />);
+    fireEvent.click(getByText(/return/));
+    expect(fn).toHaveBeenCalledWith(astb.filterNodes(
+      (node) => node.codeSlice === 'return n === 1 ? 1 : n * fac(n - 1);')[0].biKey);
   });
 });
