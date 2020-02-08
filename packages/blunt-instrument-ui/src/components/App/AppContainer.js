@@ -4,6 +4,7 @@ import AppView from './AppView';
 import examples from 'blunt-instrument-test-resources';
 import instrumentedEval from 'blunt-instrument-eval';
 import { TrevCollection } from 'blunt-instrument-core';
+import { FileTraceWriter } from 'blunt-instrument-core';
 
 /**
  * Determines whether an element is currently visible within a scrollable ancestor.
@@ -114,12 +115,18 @@ class AppContainer extends React.Component {
     let sourceDraft = '';
     try {
       const json = JSON.parse(text);
-      tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
-      sourceDraft = (tc.astb.asts.eval && tc.astb.asts.eval.codeSlice) || '';
+      tc = TrevCollection.fromJSON(json);
     } catch (error) {
-      status.error = error;
-      tc = TrevCollection.empty();
+      try {
+        tc = FileTraceWriter.parseToTC(text);
+      } catch (error2) {
+        status.error = `Failed to parse as TrevCollection json [error=${error}] or as FileTraceWriter output [error=${error2}]`;
+        tc = TrevCollection.empty();
+      }
     }
+
+    tc = tc.withDenormalizedInfo();
+    sourceDraft = (tc.astb.asts.eval && tc.astb.asts.eval.codeSlice) || '';
 
     this.setState({
       tc,

@@ -156,7 +156,7 @@ function AppView({
             <div className="load-form">
               <ul>
                 <li>Paste the JSON here: <input className="load-paste" value="" type="text" onPaste={handleLoadByPaste} /></li>
-                <li>Or load from a file: <input className="load-file" value="" type="file" accept=".json" onChange={handleLoadFile} /></li>
+                <li>Or load from a file: <input className="load-file" value="" type="file" accept=".json, .tracebi" onChange={handleLoadFile} /></li>
               </ul>
               <div className="status-area">
                 {loadStatus}

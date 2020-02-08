@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 import { Encoder } from 'object-graph-as-json';
+import ASTBundle from '../ast/ASTBundle';
+import TrevCollection from './TrevCollection';
 
 /**
  * Attach this using a Tracer's addListener() method. All data from the tracer will be
@@ -48,5 +50,39 @@ export default class FileTraceWriter {
       this.endReject = reject;
       this.ws.end(resolve);
     });
+  }
+
+  /**
+   * Read a file created by FileTraceWriter.
+   * @param {string} path
+   * @returns {Promise<TrevCollection>}
+   */
+  static readToTC(path) {
+    return fs.promises.readFile(path, { encoding: 'utf8' }).then(this.parseToTC);
+  }
+
+  /**
+   * Parse a file created by FileTraceWriter.
+   * @param {string} text - the contents of a trace file
+   * @returns {TrevCollection}
+   */
+  static parseToTC(text) {
+    const astb = new ASTBundle();
+    const trevs = [];
+
+    text.split(/[\r\n]+/).forEach((line) => {
+      if (line.length === 0) {
+        return;
+      }
+
+      const json = JSON.parse(line);
+      if (json.ast) {
+        astb.add(json.astId, json.ast, json.code);
+      } else {
+        trevs.push(json);
+      }
+    });
+
+    return new TrevCollection(trevs, astb);
   }
 }

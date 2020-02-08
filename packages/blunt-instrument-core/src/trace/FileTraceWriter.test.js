@@ -1,11 +1,10 @@
 import * as fs from 'fs';
 import { parseSync } from '@babel/core';
-import FileTraceReader from './FileTraceReader';
 import FileTraceWriter from './FileTraceWriter';
 import addNodeIdsToAST from '../ast/addNodeIdsToAST';
 import ASTBundle from '../ast/ASTBundle';
 
-describe('FileTraceReader and FileTraceWriter', () => {
+describe('FileTraceWriter', () => {
   const dir = 'tmp-FileTrace-test';
 
   beforeEach(() => {
@@ -34,7 +33,7 @@ describe('FileTraceReader and FileTraceWriter', () => {
     writer.handleRegisterAST('test', ast, code);
     writer.handleTrev(trev);
     writer.end().then(() => {
-      new FileTraceReader({ path: writer.filename }).readAsTC().then((tc) => {
+      FileTraceWriter.readToTC(writer.filename).then((tc) => {
         expect(tc.astb).toEqual(astb);
         expect(tc.trevs).toEqual([{
           ...trev,
