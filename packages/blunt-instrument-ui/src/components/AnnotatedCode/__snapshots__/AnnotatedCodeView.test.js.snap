@@ -1,0 +1,448 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AnnotatedCodeView nothing highlighted or selected 1`] = `
+<pre
+  className="AnnotatedCode"
+  onMouseLeave={null}
+>
+  <code>
+    <span
+      className=" "
+      onClick={null}
+      onMouseOver={null}
+    >
+      <span
+        className=" "
+        onClick={null}
+        onMouseOver={null}
+      >
+        <span
+          className=" "
+          onClick={null}
+          onMouseOver={null}
+        >
+          function 
+          <span
+            className=" "
+            onClick={null}
+            onMouseOver={null}
+          >
+            fac
+          </span>
+          (
+          <span
+            className=" "
+            onClick={null}
+            onMouseOver={null}
+          >
+            n
+          </span>
+          ) 
+          <span
+            className=" "
+            onClick={null}
+            onMouseOver={null}
+          >
+            {
+    
+            <span
+              className=" "
+              onClick={null}
+              onMouseOver={null}
+            >
+              return 
+              <span
+                className=" "
+                onClick={null}
+                onMouseOver={null}
+              >
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    n
+                  </span>
+                   === 
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    1
+                  </span>
+                </span>
+                 ? 
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  1
+                </span>
+                 : 
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    n
+                  </span>
+                   * 
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    <span
+                      className=" "
+                      onClick={null}
+                      onMouseOver={null}
+                    >
+                      fac
+                    </span>
+                    (
+                    <span
+                      className=" "
+                      onClick={null}
+                      onMouseOver={null}
+                    >
+                      <span
+                        className=" "
+                        onClick={null}
+                        onMouseOver={null}
+                      >
+                        n
+                      </span>
+                       - 
+                      <span
+                        className=" "
+                        onClick={null}
+                        onMouseOver={null}
+                      >
+                        1
+                      </span>
+                    </span>
+                    )
+                  </span>
+                </span>
+              </span>
+              ;
+            </span>
+            
+  }
+          </span>
+        </span>
+      </span>
+    </span>
+  </code>
+</pre>
+`;
+
+exports[`AnnotatedCodeView with a node highlighted 1`] = `
+<pre
+  className="AnnotatedCode"
+  onMouseLeave={null}
+>
+  <code>
+    <span
+      className=" "
+      onClick={null}
+      onMouseOver={null}
+    >
+      <span
+        className=" "
+        onClick={null}
+        onMouseOver={null}
+      >
+        <span
+          className=" "
+          onClick={null}
+          onMouseOver={null}
+        >
+          function 
+          <span
+            className=" "
+            onClick={null}
+            onMouseOver={null}
+          >
+            fac
+          </span>
+          (
+          <span
+            className="highlighted "
+            onClick={null}
+            onMouseOver={null}
+          >
+            n
+          </span>
+          ) 
+          <span
+            className=" "
+            onClick={null}
+            onMouseOver={null}
+          >
+            {
+    
+            <span
+              className=" "
+              onClick={null}
+              onMouseOver={null}
+            >
+              return 
+              <span
+                className=" "
+                onClick={null}
+                onMouseOver={null}
+              >
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    n
+                  </span>
+                   === 
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    1
+                  </span>
+                </span>
+                 ? 
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  1
+                </span>
+                 : 
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    n
+                  </span>
+                   * 
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    <span
+                      className=" "
+                      onClick={null}
+                      onMouseOver={null}
+                    >
+                      fac
+                    </span>
+                    (
+                    <span
+                      className=" "
+                      onClick={null}
+                      onMouseOver={null}
+                    >
+                      <span
+                        className=" "
+                        onClick={null}
+                        onMouseOver={null}
+                      >
+                        n
+                      </span>
+                       - 
+                      <span
+                        className=" "
+                        onClick={null}
+                        onMouseOver={null}
+                      >
+                        1
+                      </span>
+                    </span>
+                    )
+                  </span>
+                </span>
+              </span>
+              ;
+            </span>
+            
+  }
+          </span>
+        </span>
+      </span>
+    </span>
+  </code>
+</pre>
+`;
+
+exports[`AnnotatedCodeView with nodes selected 1`] = `
+<pre
+  className="AnnotatedCode"
+  onMouseLeave={null}
+>
+  <code>
+    <span
+      className=" "
+      onClick={null}
+      onMouseOver={null}
+    >
+      <span
+        className=" "
+        onClick={null}
+        onMouseOver={null}
+      >
+        <span
+          className=" "
+          onClick={null}
+          onMouseOver={null}
+        >
+          function 
+          <span
+            className=" "
+            onClick={null}
+            onMouseOver={null}
+          >
+            fac
+          </span>
+          (
+          <span
+            className=" selected"
+            onClick={null}
+            onMouseOver={null}
+          >
+            n
+          </span>
+          ) 
+          <span
+            className=" "
+            onClick={null}
+            onMouseOver={null}
+          >
+            {
+    
+            <span
+              className=" "
+              onClick={null}
+              onMouseOver={null}
+            >
+              return 
+              <span
+                className=" selected"
+                onClick={null}
+                onMouseOver={null}
+              >
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    n
+                  </span>
+                   === 
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    1
+                  </span>
+                </span>
+                 ? 
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  1
+                </span>
+                 : 
+                <span
+                  className=" "
+                  onClick={null}
+                  onMouseOver={null}
+                >
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    n
+                  </span>
+                   * 
+                  <span
+                    className=" "
+                    onClick={null}
+                    onMouseOver={null}
+                  >
+                    <span
+                      className=" "
+                      onClick={null}
+                      onMouseOver={null}
+                    >
+                      fac
+                    </span>
+                    (
+                    <span
+                      className=" "
+                      onClick={null}
+                      onMouseOver={null}
+                    >
+                      <span
+                        className=" "
+                        onClick={null}
+                        onMouseOver={null}
+                      >
+                        n
+                      </span>
+                       - 
+                      <span
+                        className=" "
+                        onClick={null}
+                        onMouseOver={null}
+                      >
+                        1
+                      </span>
+                    </span>
+                    )
+                  </span>
+                </span>
+              </span>
+              ;
+            </span>
+            
+  }
+          </span>
+        </span>
+      </span>
+    </span>
+  </code>
+</pre>
+`;
