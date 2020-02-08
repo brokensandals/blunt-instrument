@@ -19,7 +19,7 @@ function AppView({
   filteredTC,
   traceQuery,
   highlightedTrevId,
-  highlightedNodeId,
+  highlightedNodeKey,
   onTraceQueryChange,
   onHoveredTrevChange,
   onHoveredNodeChange,
@@ -48,9 +48,7 @@ function AppView({
     onRun(examples[event.target.value] || '');
   }
 
-  const selectedNodeIds =
-    Object.keys(traceQuery.nodes).filter(
-      key => traceQuery.nodes[key]).map((nodeKey) => fromNodeKey(nodeKey).nodeId);
+  const selectedNodeKeys = Object.keys(traceQuery.nodes).filter((key) => traceQuery.nodes[key]);
 
   const handleSourceDraftChange =
     (event) => onSourceDraftChange(event.target.value);
@@ -178,18 +176,18 @@ function AppView({
 
           <TabPanel>
             <AnnotatedCode ast={ast}
-                           highlightedNodeId={highlightedNodeId}
+                           highlightedNodeKey={highlightedNodeKey}
                            onHoveredNodeChange={onHoveredNodeChange}
                            onNodeSelectedToggle={onNodeSelectedToggle}
-                           selectedNodeIds={selectedNodeIds} />
+                           selectedNodeKeys={selectedNodeKeys} />
           </TabPanel>
 
           <TabPanel>
             <ASTNav ast={ast}
-                    highlightedNodeId={highlightedNodeId}
+                    highlightedNodeKey={highlightedNodeKey}
                     onHoveredNodeChange={onHoveredNodeChange}
                     onNodeSelectedToggle={onNodeSelectedToggle}
-                    selectedNodeIds={selectedNodeIds} />
+                    selectedNodeKeys={selectedNodeKeys} />
           </TabPanel>
 
           <TabPanel>
@@ -199,15 +197,15 @@ function AppView({
           {tc.astb.instrumentedAST ?
             <TabPanel>
               <AnnotatedCode ast={tc.astb.instrumentedAST}
-                            highlightedNodeId={highlightedNodeId}
+                            highlightedNodeKey={highlightedNodeKey}
                             onHoveredNodeChange={onHoveredNodeChange}
                             onNodeSelectedToggle={onNodeSelectedToggle}
-                            selectedNodeIds={selectedNodeIds} />
+                            selectedNodeKeys={selectedNodeKeys} />
             </TabPanel> : null}
         </Tabs>
       </div>
 
-      <TraceQueryForm highlightedNodeId={highlightedNodeId}
+      <TraceQueryForm highlightedNodeKey={highlightedNodeKey}
                       onTraceQueryChange={onTraceQueryChange}
                       onHoveredNodeChange={onHoveredNodeChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
@@ -227,7 +225,7 @@ function AppView({
           <TabPanel>
             <TrevTable trevs={filteredTC.trevs}
                       highlightedTrevId={highlightedTrevId}
-                      highlightedNodeId={highlightedNodeId}
+                      highlightedNodeKey={highlightedNodeKey}
                       onHoveredTrevChange={onHoveredTrevChange}
                       onNodeSelectedToggle={onNodeSelectedToggle}
                       onOpenModalData={onOpenModalData}

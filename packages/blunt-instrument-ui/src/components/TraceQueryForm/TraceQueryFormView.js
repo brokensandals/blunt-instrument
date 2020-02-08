@@ -4,9 +4,9 @@ import update from 'immutability-helper';
 import Select from 'react-select';
 
 export function TraceQueryFormView({
-  highlightedNodeId,
+  highlightedNodeKey,
   onTraceQueryChange = (query) => {},
-  onHoveredNodeChange = (nodeId) => {},
+  onHoveredNodeChange = (nodeKey) => {},
   onPlay = () => {},
   onStop = () => {},
   isPlaying,
@@ -28,6 +28,7 @@ export function TraceQueryFormView({
   
   const nodesOptions = Array.from(facets.nodes.entries()).map(
     ([node, count]) => nodeOption(node, count));
+
   const nodesValue = Object.keys(query.nodes).filter((key) => query.nodes[key]).map(
     (nodeKey) => nodeOption(tc.astb.getNodeByKey(nodeKey)));
 

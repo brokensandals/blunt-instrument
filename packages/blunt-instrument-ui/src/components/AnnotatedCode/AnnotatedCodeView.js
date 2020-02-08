@@ -24,13 +24,13 @@ function findChildNodes(node) {
 
 function CodeForNode({
   code,
-  highlightedNodeId,
+  highlightedNodeKey,
   node,
   onHoveredNodeChange,
   onNodeSelectedToggle,
-  selectedNodeIds,
+  selectedNodeKeys,
 }) {
-  const { biId: nodeId, start, end } = node;
+  const { biKey: nodeKey, start, end } = node;
   let cur = start;
   const elements = [];
 
@@ -39,10 +39,10 @@ function CodeForNode({
   // and ObjectProperty.value. This special case is here to avoid displaying `x` multiple times,
   // and to make sure the one we display is the one that trevs will actually be attached to.
   if (node.type === 'ObjectProperty' && node.shorthand) {
-    return <CodeForNode key={node.value.biId}
-                        highlightedNodeId={highlightedNodeId}
+    return <CodeForNode key={node.value.biKey}
+                        highlightedNodeKey={highlightedNodeKey}
                         node={node.value}
-                        selectedNodeIds={selectedNodeIds}
+                        selectedNodeKeys={selectedNodeKeys}
                         code={code}
                         onHoveredNodeChange={onHoveredNodeChange}
                         onNodeSelectedToggle={onNodeSelectedToggle} />;
@@ -56,10 +56,10 @@ function CodeForNode({
     }
     
     elements.push(
-      <CodeForNode key={child.biId}
-                     highlightedNodeId={highlightedNodeId}
+      <CodeForNode key={child.biKey}
+                     highlightedNodeKey={highlightedNodeKey}
                      node={child}
-                     selectedNodeIds={selectedNodeIds}
+                     selectedNodeKeys={selectedNodeKeys}
                      code={code}
                      onHoveredNodeChange={onHoveredNodeChange}
                      onNodeSelectedToggle={onNodeSelectedToggle} />
@@ -72,19 +72,19 @@ function CodeForNode({
     elements.push(code.slice(cur, end));
   }
 
-  const handleMouseOver = nodeId && onHoveredNodeChange ? (event) => {
-    onHoveredNodeChange(nodeId);
+  const handleMouseOver = nodeKey && onHoveredNodeChange ? (event) => {
+    onHoveredNodeChange(nodeKey);
     event.stopPropagation();
   } : null;
 
-  const handleClick = nodeId && onNodeSelectedToggle ? (event) => {
-    onNodeSelectedToggle(nodeId);
+  const handleClick = nodeKey && onNodeSelectedToggle ? (event) => {
+    onNodeSelectedToggle(nodeKey);
     event.stopPropagation();
   } : null;
 
   const className = [
-    nodeId && nodeId === highlightedNodeId ? 'highlighted' : '',
-    nodeId && selectedNodeIds.includes(nodeId) ? 'selected' : '',
+    nodeKey && nodeKey === highlightedNodeKey ? 'highlighted' : '',
+    nodeKey && selectedNodeKeys.includes(nodeKey) ? 'selected' : '',
   ].join(' ')
 
   return <span className={className}
@@ -96,18 +96,18 @@ function CodeForNode({
 
 function AnnotatedCodeView({
   ast,
-  highlightedNodeId,
+  highlightedNodeKey,
   onHoveredNodeChange = null,
   onNodeSelectedToggle = null,
-  selectedNodeIds,
+  selectedNodeKeys,
 }) {
   const clearHover = onHoveredNodeChange ? () => onHoveredNodeChange(null) : null;
   return (
     <pre className="AnnotatedCode" onMouseLeave={clearHover}>
       <code>
-        <CodeForNode highlightedNodeId={highlightedNodeId}
+        <CodeForNode highlightedNodeKey={highlightedNodeKey}
                        node={ast}
-                       selectedNodeIds={selectedNodeIds}
+                       selectedNodeKeys={selectedNodeKeys}
                        code={ast.codeSlice}
                        onHoveredNodeChange={onHoveredNodeChange}
                        onNodeSelectedToggle={onNodeSelectedToggle} />

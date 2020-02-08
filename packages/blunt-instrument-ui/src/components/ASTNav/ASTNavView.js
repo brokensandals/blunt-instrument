@@ -7,16 +7,19 @@ function locString({ start, end }) {
 }
 
 function ASTObjectView({
-  highlightedNodeId,
+  highlightedNodeKey,
   object,
   onHoveredNodeChange,
   onNodeSelectedToggle,
-  selectedNodeIds,
+  selectedNodeKeys,
 }) {
   const {
     biId: nodeId,
+    biKey: nodeKey,
     type,
     loc,
+    // eslint-disable-next-line no-unused-vars
+    biASTId,
     // eslint-disable-next-line no-unused-vars
     start,
     // eslint-disable-next-line no-unused-vars
@@ -46,10 +49,10 @@ function ASTObjectView({
           {val.map((item, index) => (
             <li key={index}>
               <ASTObjectView object={item}
-                             highlightedNodeId={highlightedNodeId}
+                             highlightedNodeKey={highlightedNodeKey}
                              onHoveredNodeChange={onHoveredNodeChange}
                              onNodeSelectedToggle={onNodeSelectedToggle}
-                             selectedNodeIds={selectedNodeIds} />
+                             selectedNodeKeys={selectedNodeKeys} />
             </li>
           ))}
         </ol>
@@ -57,10 +60,10 @@ function ASTObjectView({
     } else if (typeof val === 'object' && val != null) {
       entries.push([1, key,
         <ASTObjectView object={val}
-                       highlightedNodeId={highlightedNodeId}
+                       highlightedNodeKey={highlightedNodeKey}
                        onHoveredNodeChange={onHoveredNodeChange}
                        onNodeSelectedToggle={onNodeSelectedToggle}
-                       selectedNodeIds={selectedNodeIds} />
+                       selectedNodeKeys={selectedNodeKeys} />
       ]);
     } else {
       entries.push([0, key, <span className="primitive">{JSON.stringify(val)}</span>]);
@@ -69,21 +72,21 @@ function ASTObjectView({
 
   entries.sort();
 
-  const handleMouseOver = nodeId && onHoveredNodeChange ? (event) => {
-    onHoveredNodeChange(nodeId);
+  const handleMouseOver = nodeKey && onHoveredNodeChange ? (event) => {
+    onHoveredNodeChange(nodeKey);
     event.stopPropagation();
   } : null;
 
-  const handleClick = nodeId && onNodeSelectedToggle ? (event) => {
-    onNodeSelectedToggle(nodeId);
+  const handleClick = nodeKey && onNodeSelectedToggle ? (event) => {
+    onNodeSelectedToggle(nodeKey);
     event.stopPropagation();
   } : null;
 
   const className = [
     'object',
-    nodeId ? 'node' : null,
-    nodeId && nodeId === highlightedNodeId ? 'highlighted' : null,
-    nodeId && selectedNodeIds.includes(nodeId) ? 'selected' : null,
+    nodeKey ? 'node' : null,
+    nodeKey && nodeKey === highlightedNodeKey ? 'highlighted' : null,
+    nodeKey && selectedNodeKeys.includes(nodeKey) ? 'selected' : null,
   ].join(' ');
 
   return (
@@ -103,20 +106,20 @@ function ASTObjectView({
 
 function ASTNavView({
   ast,
-  highlightedNodeId,
+  highlightedNodeKey,
   onHoveredNodeChange = null,
   onNodeSelectedToggle = null,
-  selectedNodeIds,
+  selectedNodeKeys,
 }) {
   const clearHover = onHoveredNodeChange ? () => onHoveredNodeChange(null) : null;
 
   return (
     <div className="ASTNav" onMouseLeave={clearHover}>
       <ASTObjectView object={ast}
-                     highlightedNodeId={highlightedNodeId}
+                     highlightedNodeKey={highlightedNodeKey}
                      onHoveredNodeChange={onHoveredNodeChange}
                      onNodeSelectedToggle={onNodeSelectedToggle}
-                     selectedNodeIds={selectedNodeIds} />
+                     selectedNodeKeys={selectedNodeKeys} />
     </div>
   );
 }

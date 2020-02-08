@@ -30,7 +30,7 @@ const defaultQueryState = {
     types: {},
   },
   highlightedTrevId: null,
-  highlightedNodeId: null,
+  highlightedNodeKey: null,
 }
 
 class AppContainer extends React.Component {
@@ -84,12 +84,12 @@ class AppContainer extends React.Component {
   }
 
   handleHoveredTrevChange(id) {
-    this.handleHoveredNodeChange(id == null ? null : this.state.tc.getTrev(id).nodeId);
+    this.handleHoveredNodeChange(id == null ? null : this.state.tc.getTrev(id).denormalized.node.biKey);
     this.setState({ highlightedTrevId: id });
   }
 
-  handleHoveredNodeChange(nodeId) {
-    this.setState({ highlightedNodeId: nodeId });
+  handleHoveredNodeChange(nodeKey) {
+    this.setState({ highlightedNodeKey: nodeKey });
   }
 
   handleLoadByFile(file) {
@@ -130,14 +130,10 @@ class AppContainer extends React.Component {
     });
   }
 
-  handleNodeSelectedToggle(nodeId) {
-    const node = this.state.tc.astb.getNode('eval', nodeId);
-    if (!node) {
-      return;
-    }
+  handleNodeSelectedToggle(nodeKey) {
     this.handleTraceQueryChange(
       update(this.state.traceQuery, {
-        nodes: { $toggle: [node.biKey] }
+        nodes: { $toggle: [nodeKey] }
       }));
   }
 
@@ -252,7 +248,7 @@ class AppContainer extends React.Component {
                traceQuery={this.state.traceQuery}
                sourceDraft={this.state.sourceDraft}
                highlightedTrevId={this.state.highlightedTrevId}
-               highlightedNodeId={this.state.highlightedNodeId}
+               highlightedNodeKey={this.state.highlightedNodeKey}
                onTraceQueryChange={this.handleTraceQueryChange}
                onHoveredTrevChange={this.handleHoveredTrevChange}
                onHoveredNodeChange={this.handleHoveredNodeChange}
