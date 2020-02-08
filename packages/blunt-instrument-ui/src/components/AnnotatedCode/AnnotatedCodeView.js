@@ -1,30 +1,6 @@
 import React from 'react';
 import './AnnotatedCode.css';
-
-// TODO babel probably provides a better way to do this
-function findNodes(object) {
-  if (object == null || typeof object !== 'object') {
-    return [];
-  }
-
-  if (Array.isArray(object)) {
-    return object.flatMap(findNodes);
-  }
-
-  if (object.type) {
-    return [object];
-  }
-
-  return Object.keys(object).flatMap(k => findNodes(object[k]));
-}
-
-/**
- * Finds the direct children of the given Babel node.
- * @param {Node} node
- */
-function findChildNodes(node) {
-  return Object.keys(node).flatMap(k => findNodes(node[k]));
-}
+import findChildNodes from '../../util/findChildNodes';
 
 function CodeForNode({
   code,

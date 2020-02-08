@@ -25,8 +25,8 @@
     "coverage": "jest --coverage",
     "lint": "eslint packages/*/src",
     "start": "lerna run start --stream --scope blunt-instrument-ui",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "jest --testPathIgnorePatterns=packages/blunt-instrument-ui/ && lerna run test --scope=blunt-instrument-ui -- -- --watchAll=false",
+    "test:watch": "echo 'NOTE: you must run npm test for blunt-instrument-ui separately' && jest --watch --testPathIgnorePatterns=packages/blunt-instrument-ui/",
     "test:updateSnapshot": "jest --updateSnapshot"
   }
 }

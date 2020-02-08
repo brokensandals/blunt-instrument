@@ -55,6 +55,8 @@ Run `npm run build:cjs` or `npm run build:cjs:watch` to build the library packag
 You must do this before running tests, and you must rebuild a package before changes to it will affect other packages' tests.
 
 Run `npm test` or `npm run test:watch` to run the unit tests.
+**Note**: `test:watch` in the root directory will not run the UI's tests.
+You can run `npm test` in `packages/blunt-instrument-ui` to watch the UI tests.
 
 Run `npm start` to run the UI locally.
 
