@@ -1,7 +1,7 @@
 import React from 'react';
 import './SmallDataPreview.css';
 
-export default function SmallDataPreviewView({ value, trevType }) {
+export default function SmallDataPreviewView({ data, trevType }) {
   const output = [];
   let outputKey = 1;
 
@@ -118,7 +118,7 @@ export default function SmallDataPreviewView({ value, trevType }) {
             }
             return;
           default:
-            output.push(JSON.stringify(value));
+            output.push(JSON.stringify(current));
             return;
         }
       default:
@@ -127,7 +127,7 @@ export default function SmallDataPreviewView({ value, trevType }) {
     }
   }
 
-  recurse(value, '', true);
+  recurse(data, '', true);
 
   return output;
 }

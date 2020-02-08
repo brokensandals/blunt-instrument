@@ -36,7 +36,7 @@ function TrevTableView({
           <code>{trev.denormalized.node.codeSlice}</code>
         </td>
         <td className="data" onClick={() => onOpenModalData({data: trev.data})}>
-          <SmallDataPreview value={trev.data} trevType={trev.type} />
+          <SmallDataPreview data={trev.data} trevType={trev.type} />
         </td>
       </tr>
     );
