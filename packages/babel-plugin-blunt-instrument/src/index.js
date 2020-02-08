@@ -15,6 +15,14 @@ const buildAttachConsoleTraceWriter = template(`
   }
 `);
 
+const buildAttachFileTraceWriter = template(`
+  import { FileTraceWriter as %%tempId%% } from 'blunt-instrument-core';
+  if (!%%tracerId%%.attachedFileWriterByPlugin) {
+    %%tracerId%%.addListener(new %%tempId%%({ prefix: %%prefix%% }));
+    %%tracerId%%.attachedFileWriterByPlugin = true;
+  }
+`);
+
 const buildSetAstId = template(`
   const %%astIdId%% = %%astId%%;
 `);
@@ -375,6 +383,7 @@ export default function (api, opts) {
   const {
     tracerVar,
     consoleWriter = false,
+    fileWriterPath = false,
     astCallback = () => {},
     astId: givenASTId,
     astSelfRegister = true,
@@ -415,6 +424,14 @@ export default function (api, opts) {
       }));
     } else if (consoleWriter) {
       throw new Error(`Unrecognized value of consoleWriter: ${consoleWriter}`);
+    }
+
+    if (fileWriterPath) {
+      path.node.body.unshift(...buildAttachFileTraceWriter({
+        tempId: path.scope.generateUidIdentifier('temp'),
+        tracerId: ids.tracerId,
+        prefix: types.stringLiteral(fileWriterPath),
+      }));
     }
 
     if (!tracerVar) {

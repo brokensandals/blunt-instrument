@@ -1,4 +1,5 @@
 import * as babel from '@babel/core';
+import * as fs from 'fs';
 import examples from 'blunt-instrument-test-resources';
 import {
   ArrayTrace,
@@ -281,6 +282,44 @@ describe('configuration', () => {
       eval(code); // eslint-disable-line no-eval
       expect(spyLog).toHaveBeenCalledWith('onTrev loc [1:12] code ["meh"] trev:');
       expect(spyDir).toHaveBeenCalled();
+    });
+  });
+
+  describe('file writer', () => {
+    const dir = 'tmp-babel-plugin-blunt-instrument-file-writer-test';
+
+    beforeEach(() => {
+      fs.mkdirSync(dir);
+    });
+
+    afterEach(() => {
+      fs.rmdirSync(dir, { recursive: true });
+    });
+
+    it('does not override an already-registered listener', () => {
+      defaultTracer.attachedFileWriterByPlugin = true;
+      const opts = {
+        tracerVar: undefined,
+        fileWriterPath: `${dir}/trace`,
+        astId: 'test',
+      };
+      const { code } = transform('const foo = "meh"', opts, {}, true);
+      // use `eval()` instead of `new Function()` so that `require` is defined
+      eval(code); // eslint-disable-line no-eval
+      expect(fs.readdirSync(dir)).toHaveLength(0);
+    });
+
+    it('attaches a listener', () => {
+      delete defaultTracer.attachedFileWriterByPlugin;
+      const opts = {
+        tracerVar: undefined,
+        fileWriterPath: `${dir}/trace`,
+        astId: 'test',
+      };
+      const { code } = transform('const foo = "meh"', opts, {}, true);
+      // use `eval()` instead of `new Function()` so that `require` is defined
+      eval(code); // eslint-disable-line no-eval
+      expect(fs.readdirSync(dir)).toHaveLength(1);
     });
   });
 });

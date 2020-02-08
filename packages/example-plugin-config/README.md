@@ -1,6 +1,6 @@
 This is an example of configuring a project to be instrumented by [babel-plugin-blunt-instrument][babel-plugin].
 
-In this example, tracing is logged to the console, and the entire program is traced.
+In this example, tracing is logged to both the console and a file in the current directory (look for the `.tracebi` extension), and the entire program is traced.
 
 Key points:
 

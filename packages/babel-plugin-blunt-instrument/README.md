@@ -46,9 +46,19 @@ const opts = {
   // If you want the instrumented code to configure the tracer to log to the console,
   // set consoleWriter to 'raw' or 'encoded'.
   // Note that this will generate an 'import' statement for blunt-instrument-core.
+  //
   // This is provided for convenience, but could also be accomplished yourself
   // by calling `tracer.attach(new ConsoleTraceWriter())`.
   consoleWriter: false,
+
+  // If you want the instrumented code to configure the tracer to log to a file,
+  // set fileWriterPath to a string. A timestamp and extension will be appended
+  // to the given string to create the filename.
+  // Note that this will generate an 'import' statement for blunt-instrument-core.
+  //
+  // This is provided for convenience, but could also be accomplished yourself
+  // by calling `tracer.attach(new FileTraceWriter({ prefix: fileWriterPath }))`.
+  fileWriterPath: false,
 };
 
 const instrumentedCode = babel.transformSync(

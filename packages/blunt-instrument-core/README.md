@@ -6,6 +6,7 @@ Contents:
 - [Tracer](#tracer)
 - [ArrayTrace](#arraytrace)
 - [TrevCollection](#trevcollection)
+- [File traces](#file-traces)
 
 ## ASTBundle
 
@@ -140,6 +141,37 @@ const { nodes, nodeTypes, types } = tc.getFacets();
 ```
 
 See the JSDoc in [TrevCollection.js](src/trace/TrevCollection.js) for more info.
+
+## File traces
+
+### FileTraceWriter
+
+A `FileTraceWriter` will listen to everything reported by a `Tracer` and write it to a file.
+Like `ArrayTrace`, this encodes the `data` field using [object-graph-as-json][object-graph-as-json], and the constructor supports an optional `encoder` param.
+
+```js
+import { FileTraceWriter } from 'blunt-instrument-core';
+
+const writer = new FileTraceWriter({ prefix: 'some-dir/some-filename-prefix' });
+tracer.addListener(writer);
+
+// After invoking instrumented code, a file with a name like "some-dir/some-filename-prefix.123456789.tracebi" will exist.
+```
+
+See the jsdoc in [FileTraceWriter.js](src/trace/FileTraceWriter.js) for more info.
+
+### FileTraceReader
+
+To load a trace produced by `FileTraceWriter`, use `FileTraceReader` to get a `TrevCollection`:
+
+```js
+import { FileTraceWriter } from 'blunt-instrument-core';
+
+const reader = new FileTraceReader({ path: 'some-dir/some-filename-prefix.123456789.tracebi' });
+reader.readAsTC().then((tc) => console.log(tc));
+```
+
+See the jsdoc in [FileTraceReader.js](src/trace/FileTraceReader.js) for more info.
 
 [babel-ast]: https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md#toc-asts
 [eval]: ../blunt-instrument-eval/README.md
