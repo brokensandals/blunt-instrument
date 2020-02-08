@@ -109,7 +109,7 @@ function ASTNavView({
   highlightedNodeKey,
   onHoveredNodeChange = null,
   onNodeSelectedToggle = null,
-  selectedNodeKeys,
+  selectedNodeKeys = [],
 }) {
   const clearHover = onHoveredNodeChange ? () => onHoveredNodeChange(null) : null;
 
