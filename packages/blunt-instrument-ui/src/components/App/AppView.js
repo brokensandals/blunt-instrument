@@ -14,6 +14,19 @@ import update from 'immutability-helper';
 import FileSaver from 'file-saver';
 import LargeDataPreview from '../LargeDataPreview';
 
+function buildASTNames(astIds) {
+  const partArrays = astIds.map((id) => id.split('/'));
+  while (partArrays.every((array) => array.length > 1 && array[0] === partArrays[0][0])) {
+    partArrays.forEach((array) => array.shift());
+  }
+  const names = partArrays.map((array) => array.join('/'));
+  const result = {};
+  for (let i = 0; i < astIds.length; i += 1) {
+    result[astIds[i]] = names[i];
+  }
+  return result;
+}
+
 function AppView({
   tc,
   filteredTC,
@@ -112,6 +125,7 @@ function AppView({
 
   const astIds = Object.keys(tc.astb.asts);
   astIds.sort();
+  const astNames = buildASTNames(astIds);
 
   return (
     <div className="App">
@@ -177,7 +191,7 @@ function AppView({
 
           <TabPanel>
             {astIds.map((astId) => <section key="astId">
-              {astIds.length > 1 ? <h1>{astId}</h1> : null}
+              {astIds.length > 1 ? <h1>{astNames[astId]}</h1> : null}
               <AnnotatedCode ast={tc.astb.asts[astId]}
                              highlightedNodeKey={highlightedNodeKey}
                              onHoveredNodeChange={onHoveredNodeChange}
@@ -188,7 +202,7 @@ function AppView({
 
           <TabPanel>
             {astIds.map((astId) => <section key="astId">
-              {astIds.length > 1 ? <h1>{astId}</h1> : null}
+              {astIds.length > 1 ? <h1>{astNames[astId]}</h1> : null}
               <ASTNav ast={tc.astb.asts[astId]}
                       highlightedNodeKey={highlightedNodeKey}
                       onHoveredNodeChange={onHoveredNodeChange}
@@ -220,7 +234,8 @@ function AppView({
                       query={traceQuery}
                       onPlay={onPlay}
                       onStop={onStop}
-                      isPlaying={isPlaying} />
+                      isPlaying={isPlaying}
+                      astNames={astNames} />
 
       <div className="trev-tabs">
         <Tabs>

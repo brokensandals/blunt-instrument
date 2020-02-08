@@ -12,12 +12,14 @@ export function TraceQueryFormView({
   isPlaying,
   query,
   tc,
+  astNames,
 }) {
   function nodeOption(node, count) {
     const value = node.biKey;
+    const prefix = Object.keys(astNames).length > 1 ? `${astNames[node.biASTId]}:` : '';
     const codeSlice = node.codeSlice;
     const codePreview = codeSlice.length > 20 ? codeSlice.slice(0, 20) + '...' : codeSlice;
-    let label = `[${value}] ${node.type}: ${codePreview}`;
+    let label = `[${prefix}${node.biId}] ${node.type}: ${codePreview}`;
     if (count !== undefined) {
       label += ` (${count})`;
     }
