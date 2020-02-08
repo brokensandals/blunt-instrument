@@ -1,6 +1,6 @@
 This is an example of configuring a project to be instrumented by [babel-plugin-blunt-instrument][babel-plugin].
 
-In this example, tracing is logged to both the console and a file in the current directory (look for the `.tracebi` extension), and the entire program is traced.
+In this example, tracing is logged to both the console and a file in the current directory, and the entire program is traced.
 
 Key points:
 
@@ -11,5 +11,7 @@ Key points:
 
 Use `npm run exec` to invoke the program.
 This uses `babel-node` to run `index.js`.
+
+The trace file it produces (with extension `.tracebi`) can be loaded into the UI to explore.
 
 [babel-plugin]: ../babel-plugin-blunt-instrument/README.md
