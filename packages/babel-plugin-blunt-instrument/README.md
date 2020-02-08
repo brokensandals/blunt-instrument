@@ -120,11 +120,18 @@ fn(tracer);
     id: 2,
     type: 'fn-start', // these trevs record the beginning of a function's execution
     nodeId: 'src-2', // the Function node that is being entered
-    // FIXME: the data field is now encoded using object-graph-as-json, as mentioned below, so it actually looks slightly different than this
     data: { // the values of `this`, `arguments`, and all named parameters, at the beginning of the function's execution
-      this: { /* ... */ },
-      arguments: { 0: 'bar'},
-      myParam: 'bar'
+    {
+      "id": "1",
+      "type": "object",
+      ".myParam": "bar",
+      ".this": { "type": "builtin", "name": "undefined" },
+      ".arguments": {
+        "id": "2",
+        "type": "object",
+        ".0": "bar",
+        /** ... a bunch more standard stuff for the arguments object... */
+      }
     },
   },
   {

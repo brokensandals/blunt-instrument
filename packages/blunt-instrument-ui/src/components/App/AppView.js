@@ -170,6 +170,7 @@ function AppView({
           
           <TabPanel>
             <div className="load-form">
+              <p>You can load a `.json` file saved by this UI or a `.tracebi` file saved by FileTraceWriter.</p>
               <ul>
                 <li>Paste the JSON here: <input className="load-paste" value="" type="text" onPaste={handleLoadByPaste} /></li>
                 <li>Or load from a file: <input className="load-file" value="" type="file" accept=".json, .tracebi" onChange={handleLoadFile} /></li>
@@ -269,7 +270,7 @@ function AppView({
       </div>
 
       <div className="blurb">
-        created by <a href="https://brokensandals.net">brokensandals</a> | source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
+        created by <a href="https://brokensandals.net">brokensandals</a> | documentation and source code on <a href="https://github.com/brokensandals/blunt-instrument">github</a>
       </div>
 
       <Modal isOpen={modalData !== undefined}
