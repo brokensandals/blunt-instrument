@@ -110,7 +110,8 @@ function AppView({
     onLoadByFile(files[0]);
   };
 
-  const ast = tc.astb.asts.eval || {};
+  const astIds = Object.keys(tc.astb.asts);
+  astIds.sort();
 
   return (
     <div className="App">
@@ -175,23 +176,29 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            <AnnotatedCode ast={ast}
-                           highlightedNodeKey={highlightedNodeKey}
-                           onHoveredNodeChange={onHoveredNodeChange}
-                           onNodeSelectedToggle={onNodeSelectedToggle}
-                           selectedNodeKeys={selectedNodeKeys} />
+            {astIds.map((astId) => <section key="astId">
+              {astIds.length > 1 ? <h1>{astId}</h1> : null}
+              <AnnotatedCode ast={tc.astb.asts[astId]}
+                             highlightedNodeKey={highlightedNodeKey}
+                             onHoveredNodeChange={onHoveredNodeChange}
+                             onNodeSelectedToggle={onNodeSelectedToggle}
+                             selectedNodeKeys={selectedNodeKeys} />
+            </section>)}
           </TabPanel>
 
           <TabPanel>
-            <ASTNav ast={ast}
-                    highlightedNodeKey={highlightedNodeKey}
-                    onHoveredNodeChange={onHoveredNodeChange}
-                    onNodeSelectedToggle={onNodeSelectedToggle}
-                    selectedNodeKeys={selectedNodeKeys} />
+            {astIds.map((astId) => <section key="astId">
+              {astIds.length > 1 ? <h1>{astId}</h1> : null}
+              <ASTNav ast={tc.astb.asts[astId]}
+                      highlightedNodeKey={highlightedNodeKey}
+                      onHoveredNodeChange={onHoveredNodeChange}
+                      onNodeSelectedToggle={onNodeSelectedToggle}
+                      selectedNodeKeys={selectedNodeKeys} />
+            </section>)}
           </TabPanel>
 
           <TabPanel>
-            <ReactJson src={ast} name={false} />
+            <ReactJson src={tc.astb.asJSON()} name={false} />
           </TabPanel>
           
           {tc.astb.instrumentedAST ?

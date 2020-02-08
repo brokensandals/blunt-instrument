@@ -115,7 +115,7 @@ class AppContainer extends React.Component {
     try {
       const json = JSON.parse(text);
       tc = TrevCollection.fromJSON(json).withDenormalizedInfo();
-      sourceDraft = tc.astb.asts.eval.codeSlice;
+      sourceDraft = (tc.astb.asts.eval && tc.astb.asts.eval.codeSlice) || '';
     } catch (error) {
       status.error = error;
       tc = TrevCollection.empty();
