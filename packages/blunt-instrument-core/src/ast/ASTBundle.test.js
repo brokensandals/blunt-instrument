@@ -6,9 +6,11 @@ import traverseAST from './traverseAST';
 
 describe('ASTBundle', () => {
   describe('add', () => {
-    it('throws an error if any nodes are missing node IDs', () => {
+    it('skips nodes are missing node IDs', () => {
       const ast = parseSync('x = 1');
-      expect(() => new ASTBundle().add(test, ast, 'x = 1')).toThrowError('Node is missing node ID');
+      const astb = new ASTBundle();
+      astb.add(test, ast, 'x = 1');
+      expect(astb.nodesByKey.size).toBe(0);
     });
 
     it('adds biKey and biASTId fields', () => {

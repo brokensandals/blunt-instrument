@@ -29,7 +29,7 @@ export default class ASTBundle {
     ast = cloneDeep(ast); // eslint-disable-line no-param-reassign
     traverseAST(ast, (node) => {
       if (!node.biId) {
-        throw new Error('Node is missing node ID');
+        return;
       }
       node.biASTId = astId; // eslint-disable-line no-param-reassign
       node.biKey = toNodeKey(astId, node.biId); // eslint-disable-line no-param-reassign

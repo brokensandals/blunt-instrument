@@ -2,7 +2,7 @@ import { parseSync, transformSync } from '@babel/core';
 import bluntInstrumentPlugin from 'babel-plugin-blunt-instrument';
 import {
   ArrayTrace,
-  attachCodeSlicesToAST,
+  ASTBundle,
   copyNodeIdsBetweenASTs,
   Tracer,
 } from 'blunt-instrument-core';
@@ -75,8 +75,9 @@ may interfere with instrumentedEval, the code, or both.`);
   if (saveInstrumented) {
     const parsed = parseSync(code);
     copyNodeIdsBetweenASTs(babelResult.ast, parsed);
-    attachCodeSlicesToAST(parsed, code);
-    trace.astb.instrumentedAST = parsed;
+    const instrumentedASTB = new ASTBundle();
+    instrumentedASTB.add('eval', parsed, code);
+    trace.astb.instrumentedAST = instrumentedASTB.asts.eval;
   }
 
   return trace;
