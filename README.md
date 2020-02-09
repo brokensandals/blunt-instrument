@@ -15,6 +15,8 @@ FIXME: link to example
 - The Babel plugin can instrument your code for troubleshooting purposes.
 See [example-plugin-config](packages/example-plugin-config) to see how.
 
+![Screenshot of the UI](ui-screenshot.png)
+
 Contents:
 
 1. [Limitations](#limitations)
