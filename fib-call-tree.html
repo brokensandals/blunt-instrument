@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <script src="blunt-instrument-standalone.min.js"></script>
+    <script type="text/javascript">
+      // Called when the input changes
+      function update() {
+        // Get the value specified by the user, and make sure it's not too large
+        const n = document.getElementById('n').value;
+        if (n > 15) {
+          document.getElementById('n').value = 15;
+        }
+
+        // Get the source code for the function we're going to call
+        let code = document.getElementById('fib-code').innerText;
+        // Add the code to actually call the function
+        code += '; fib(' + n + ');';
+        // Evaluate the code and retrieve the trace
+        const trace = BluntInstrument.instrumentedEval(code);
+
+        // Make the trace easier to consume
+        const tc = trace.toTC().withDenormalizedInfo();
+        // Look for the first function execution in the trace
+        const rootCall = tc.filter((trev) => trev.type === 'fn-start').trevs[0];
+        // Create the HTML for showing the tree
+        const newRootEl = buildLI(rootCall);
+
+        // Replace the old HTML
+        const rootEl = document.getElementById('tree-root');
+        newRootEl.id = 'tree-root';
+        rootEl.replaceWith(newRootEl);
+      }
+
+      // Builds the HTML for displaying a function call and all its children
+      // The parameter is a "fn-start" trev
+      function buildLI(callNode) {
+          const li = document.createElement('li');
+          
+          // The `data` field of fn-start trevs contains the parameters passed to the function
+          const param = callNode.data['.n'];
+          // Find the trev representing the return from the function call
+          const ret = callNode.denormalized.children.find((trev) => trev.type === 'fn-ret').data;
+          // Display the param and return value
+          li.append('fib(' + param + ') = ' + ret);
+
+          // Look for any child function calls
+          const childCalls = callNode.denormalized.children.filter((trev) => trev.type === 'fn-start');
+          if (childCalls.length > 0) {
+            const ul = document.createElement('ul');
+            li.append(ul);
+            childCalls.forEach((child) => {
+              ul.append(buildLI(child));
+            });
+          }
+
+          return li;
+        }
+
+      window.addEventListener('load', update);
+    </script>
+
+    <style type="text/css">
+      html {
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+      }
+      body {
+        max-width: 600px;
+      }
+      @media(max-width: 600px) {
+        body {
+          width: 100%;
+        }
+      }
+      ul {
+        list-style-type: none;
+        white-space: nowrap;
+        padding-left: 3ex;
+      }
+      li {
+        margin-top: 1em;
+        padding-left: 5px;
+        border-left: 1px solid lightgray;
+      }
+    </style>
+
+    <link rel="stylesheet"
+      href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+
+  <body>
+    <p>
+      When you change the number in the input box, the code you see will be executed with that parameter.
+      The call tree will be shown below.
+    </p>
+
+    <p>
+      The call tree is built using the data provided by blunt-instrument about what actually occurred during execution of the code; no logging or display code was manually added to the function.
+      View this page's source to see how it works, or visit <a href="https://github.com/brokensandals/blunt-instrument/README.md">the documentation</a>.
+    </p>
+    <form>
+      <label for="n">n:</label>
+      <input type="number" id="n" value="5" onchange="update()" />
+    </form>
+
+    <pre><code class="language-js" id="fib-code">function fib(n) {
+  if (n &lt; 2) {
+    return n;
+  }
+  return fib(n - 2) + fib(n - 1);
+}</code></pre>
+
+    <ul>
+      <li id="tree-root"></li>
+    </ul>
+  </body>
+</html>
