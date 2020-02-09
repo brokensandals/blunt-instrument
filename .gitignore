@@ -1,6 +1,7 @@
 .vscode
 target
 *.tracebi
+.DS_Store
 
 # Logs
 logs
