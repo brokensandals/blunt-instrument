@@ -67,7 +67,7 @@ describe('AppContainer', () => {
   });
 
   it('loads TrevCollection json from clipboard', () => {
-    const { getByText, getAllByText, getByLabelText } = render(<AppContainer />);
+    const { getByText, getByLabelText } = render(<AppContainer />);
     getByText('Load').click();
     const json = JSON.stringify(instrumentedEval('const x = 25 * 4 * 200').toTC().asJSON());
     window.clipboardData = { getData() { return json } };
