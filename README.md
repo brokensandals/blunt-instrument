@@ -7,11 +7,10 @@ The instrumented code will report the value of every expression it evaluates, an
 This can be used in a few ways:
 
 - The UI lets you run code directly in the browser and explore the trace.
-FIXME: link to UI
+It's deployed to https://brokensandals.github.io/blunt-instrument/ and the source code is in [packages/blunt-instrument-ui][ui].
 - The libraries can help you build interactive explanations of algorithms.
 You can evaluate arbitrary code at runtime and get programmatic access to the full trace.
-Jump to the [blunt-instrument-eval README][eval] to get started.
-FIXME: link to example
+Jump to the [blunt-instrument-eval README][eval] to get started, or see https://brokensandals.github.io/blunt-instrument/fib-call-tree.html for a simple example of usage in the browser.
 - The Babel plugin can instrument your code for troubleshooting purposes.
 See [example-plugin-config](packages/example-plugin-config) to see how.
 
@@ -74,3 +73,4 @@ This is available as open source under the terms of the [MIT License](https://op
 
 [eval]: packages/blunt-instrument-eval/README.md
 [enabling-disabling]: packages/babel-plugin-blunt-instrument/README.md#enabling-and-disabling-tracing
+[ui]: packages/blunt-instrument-ui/
