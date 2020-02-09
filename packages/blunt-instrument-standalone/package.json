@@ -1,6 +1,6 @@
 {
   "name": "blunt-instrument-standalone",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Single dependency exporting all the blunt-instrument libraries.",
   "main": "target/cjs/index.js",
   "scripts": {
@@ -11,9 +11,9 @@
     "clean": "rimraf target"
   },
   "dependencies": {
-    "babel-plugin-blunt-instrument": "^0.0.0",
-    "blunt-instrument-core": "^0.0.0",
-    "blunt-instrument-eval": "^0.0.0"
+    "babel-plugin-blunt-instrument": "^0.1.0",
+    "blunt-instrument-core": "^0.1.0",
+    "blunt-instrument-eval": "^0.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

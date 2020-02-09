@@ -1,6 +1,6 @@
 {
   "name": "blunt-instrument-eval",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Instruments code with blunt-instrument and runs it.",
   "main": "src/index.js",
   "scripts": {
@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.7.5",
-    "babel-plugin-blunt-instrument": "^0.0.0",
-    "blunt-instrument-core": "^0.0.0"
+    "babel-plugin-blunt-instrument": "^0.1.0",
+    "blunt-instrument-core": "^0.1.0"
   },
   "repository": {
     "type": "git",
