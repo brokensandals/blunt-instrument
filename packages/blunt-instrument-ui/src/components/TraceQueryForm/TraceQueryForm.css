@@ -1,0 +1,37 @@
+.TraceQueryForm {
+  padding: 10px;
+}
+
+.TraceQueryForm .filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.TraceQueryForm .filter-select {
+  flex-grow: 1;
+}
+
+.TraceQueryForm .filter-select__control {
+  height: 2em;
+  overflow: auto;
+}
+
+.TraceQueryForm .label {
+  padding-right: 5px;
+  width: 20ex;
+  max-width: 20ex;
+}
+
+.TraceQueryForm .walkthrough-controls {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.TraceQueryForm .walkthrough-controls button {
+  width: 40px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  font-size: large;
+}

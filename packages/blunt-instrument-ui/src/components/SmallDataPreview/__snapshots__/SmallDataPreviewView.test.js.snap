@@ -1,0 +1,344 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallDataPreviewView array with object 1`] = `
+Array [
+  <span
+    className="preview-array-start"
+  >
+    [
+  </span>,
+  <span
+    className="preview-number preview-array-fixed-element"
+  >
+    1
+  </span>,
+  <span
+    className="preview-array-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-number preview-array-fixed-element"
+  >
+    2
+  </span>,
+  <span
+    className="preview-array-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-object-start"
+  >
+    {
+  </span>,
+  <span
+    className="preview-object-key"
+  >
+    foo
+  </span>,
+  <span
+    className="preview-object-colon"
+  >
+    :
+  </span>,
+  <span
+    className="preview-string "
+  >
+    "bar"
+  </span>,
+  <span
+    className="preview-object-end"
+  >
+    }
+  </span>,
+  <span
+    className="preview-array-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-number "
+  >
+    3
+  </span>,
+  <span
+    className="preview-array-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-number "
+  >
+    4
+  </span>,
+  <span
+    className="preview-array-end"
+  >
+    ]
+  </span>,
+]
+`;
+
+exports[`SmallDataPreviewView bigint 1`] = `
+<span
+  className="preview-bigint "
+>
+  1234567890123456789
+</span>
+`;
+
+exports[`SmallDataPreviewView boolean false 1`] = `
+<span
+  className="preview-boolean "
+>
+  false
+</span>
+`;
+
+exports[`SmallDataPreviewView boolean true 1`] = `
+<span
+  className="preview-boolean "
+>
+  true
+</span>
+`;
+
+exports[`SmallDataPreviewView builtin 1`] = `
+<span
+  className="preview-builtin "
+>
+  globalThis
+</span>
+`;
+
+exports[`SmallDataPreviewView fn-start trev 1`] = `
+Array [
+  <span
+    className="preview-object-start"
+  >
+    {
+  </span>,
+  <span
+    className="preview-object-key"
+  >
+    meh
+  </span>,
+  <span
+    className="preview-object-colon"
+  >
+    :
+  </span>,
+  <span
+    className="preview-string "
+  >
+    "baz"
+  </span>,
+  <span
+    className="preview-object-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-object-more"
+  >
+    ...
+  </span>,
+  <span
+    className="preview-object-end"
+  >
+    }
+  </span>,
+]
+`;
+
+exports[`SmallDataPreviewView named function 1`] = `
+<span
+  className="preview-function "
+>
+  greet
+</span>
+`;
+
+exports[`SmallDataPreviewView number 1`] = `
+<span
+  className="preview-number "
+>
+  12345678
+</span>
+`;
+
+exports[`SmallDataPreviewView object 1`] = `
+Array [
+  <span
+    className="preview-object-start"
+  >
+    {
+  </span>,
+  <span
+    className="preview-object-key"
+  >
+    foo
+  </span>,
+  <span
+    className="preview-object-colon"
+  >
+    :
+  </span>,
+  <span
+    className="preview-object-start"
+  >
+    {
+  </span>,
+  <span
+    className="preview-object-key"
+  >
+    bar
+  </span>,
+  <span
+    className="preview-object-colon"
+  >
+    :
+  </span>,
+  <span
+    className="preview-string "
+  >
+    "baz"
+  </span>,
+  <span
+    className="preview-object-end"
+  >
+    }
+  </span>,
+  <span
+    className="preview-object-end"
+  >
+    }
+  </span>,
+]
+`;
+
+exports[`SmallDataPreviewView object with prototype 1`] = `
+Array [
+  <span
+    className="preview-object-start"
+  >
+    {
+  </span>,
+  <span
+    className="preview-object-key"
+  >
+    x
+  </span>,
+  <span
+    className="preview-object-colon"
+  >
+    :
+  </span>,
+  <span
+    className="preview-number "
+  >
+    10
+  </span>,
+  <span
+    className="preview-object-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-object-more"
+  >
+    ...
+  </span>,
+  <span
+    className="preview-object-end"
+  >
+    }
+  </span>,
+]
+`;
+
+exports[`SmallDataPreviewView short array 1`] = `
+Array [
+  <span
+    className="preview-array-start"
+  >
+    [
+  </span>,
+  <span
+    className="preview-number preview-array-fixed-element"
+  >
+    1
+  </span>,
+  <span
+    className="preview-array-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-number preview-array-fixed-element"
+  >
+    2
+  </span>,
+  <span
+    className="preview-array-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-number preview-array-fixed-element"
+  >
+    3
+  </span>,
+  <span
+    className="preview-array-comma"
+  >
+    ,
+  </span>,
+  <span
+    className="preview-number preview-array-fixed-element"
+  >
+    4
+  </span>,
+  <span
+    className="preview-array-end"
+  >
+    ]
+  </span>,
+]
+`;
+
+exports[`SmallDataPreviewView string 1`] = `
+<span
+  className="preview-string "
+>
+  "Hello World! It is so nice to meet a world. Are you a good world?"
+</span>
+`;
+
+exports[`SmallDataPreviewView symbol with description 1`] = `
+<span
+  className="preview-symbol "
+>
+  ~
+  whatevs
+</span>
+`;
+
+exports[`SmallDataPreviewView symbol without description 1`] = `
+<span
+  className="preview-symbol "
+>
+  ~
+  14
+</span>
+`;
+
+exports[`SmallDataPreviewView unnamed function 1`] = `
+<span
+  className="preview-function "
+>
+  function () {
+    re...
+</span>
+`;

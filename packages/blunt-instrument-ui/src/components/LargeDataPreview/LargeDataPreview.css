@@ -1,0 +1,11 @@
+.LargeDataPreview.string {
+  color: rgb(203, 75, 22);
+}
+
+.LargeDataPreview.number {
+  color: rgb(38, 139, 210);
+}
+
+.LargeDataPreview.boolean {
+  color: rgb(42, 161, 152);
+}

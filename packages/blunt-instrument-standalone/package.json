@@ -1,0 +1,37 @@
+{
+  "name": "blunt-instrument-standalone",
+  "version": "0.0.0",
+  "description": "Single dependency exporting all the blunt-instrument libraries.",
+  "main": "target/cjs/index.js",
+  "scripts": {
+    "build:cjs": "BABEL_MODULES=cjs babel src/ --out-dir target/cjs/ --ignore src/**/*.test.js --root-mode upward",
+    "build:esm": "BABEL_MODULES=false babel src/ --out-dir target/esm/ --ignore src/**/*.test.js --root-mode upward",
+    "build:umd": "webpack --mode=production",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:umd",
+    "clean": "rimraf target"
+  },
+  "dependencies": {
+    "babel-plugin-blunt-instrument": "^0.0.0",
+    "blunt-instrument-core": "^0.0.0",
+    "blunt-instrument-eval": "^0.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brokensandals/blunt-instrument.git"
+  },
+  "keywords": [
+    "instrument",
+    "trace"
+  ],
+  "author": "Jacob Williams <jacobaw@gmail.com> (https://brokensandals.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brokensandals/blunt-instrument/issues"
+  },
+  "homepage": "https://github.com/brokensandals/blunt-instrument#readme"
+}

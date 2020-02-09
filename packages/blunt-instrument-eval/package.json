@@ -1,0 +1,34 @@
+{
+  "name": "blunt-instrument-eval",
+  "version": "0.0.0",
+  "description": "Instruments code with blunt-instrument and runs it.",
+  "main": "src/index.js",
+  "scripts": {
+    "build:cjs": "BABEL_MODULES=cjs babel src/ --out-dir target/cjs/ --ignore src/**/*.test.js --root-mode upward",
+    "build:esm": "BABEL_MODULES=false babel src/ --out-dir target/esm/ --ignore src/**/*.test.js --root-mode upward",
+    "build": "npm run build:cjs && npm run build:esm",
+    "clean": "rimraf target"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5"
+  },
+  "dependencies": {
+    "@babel/core": "^7.7.5",
+    "babel-plugin-blunt-instrument": "^0.0.0",
+    "blunt-instrument-core": "^0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brokensandals/blunt-instrument.git"
+  },
+  "keywords": [
+    "instrument",
+    "trace"
+  ],
+  "author": "Jacob Williams <jacobaw@gmail.com> (https://brokensandals.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brokensandals/blunt-instrument/issues"
+  },
+  "homepage": "https://github.com/brokensandals/blunt-instrument#readme"
+}

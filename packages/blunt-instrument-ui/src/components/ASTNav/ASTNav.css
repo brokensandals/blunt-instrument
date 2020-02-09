@@ -1,0 +1,78 @@
+.ASTNav dl {
+  margin: 0;
+}
+
+.ASTNav dt {
+  font-size: .8em;
+}
+
+.ASTNav dt::after {
+  content: ":";
+}
+
+.ASTNav dd {
+  margin-left: 15px;
+}
+
+.ASTNav ol {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.ASTNav .primitive {
+  font-size: .8em;
+  color: slateblue;
+}
+
+.ASTNav .object {
+  padding-left: 3px;
+  padding-top: 3px;
+  margin-top: 4px;
+}
+
+.ASTNav .node {
+  border-left: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  background-color: white;
+  cursor: default;
+}
+
+.ASTNav .node.selected {
+  background-color: lightgray;
+}
+
+.ASTNav .node.highlighted {
+  background-color: rgb(255, 255, 195);
+}
+
+.ASTNav .type {
+  font-size: .8em;
+  color: gray;
+}
+
+.ASTNav .nodeId {
+  font-size: .8em;
+  color: gray;
+}
+
+.ASTNav .nodeId:before {
+  content: '[';
+}
+
+.ASTNav .nodeId:after {
+  content: ']';
+}
+
+.ASTNav .loc {
+  font-size: .7em;
+  color: gray;
+}
+
+.ASTNav .loc:before {
+  content: '(';
+}
+
+.ASTNav .loc:after {
+  content: ')';
+}

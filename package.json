@@ -1,0 +1,32 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.7",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-flowtype": "^4.6.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "jest": "^24.9.0",
+    "lerna": "^3.19.0",
+    "rimraf": "^3.0.1",
+    "watch": "1.0.2"
+  },
+  "scripts": {
+    "build": "lerna run build",
+    "build:cjs": "lerna run build:cjs",
+    "build:cjs:watch": "watch 'lerna run build:cjs' packages/*/src",
+    "clean": "lerna run clean",
+    "coverage": "jest --coverage",
+    "lint": "eslint packages/*/src",
+    "start": "lerna run start --stream --scope blunt-instrument-ui",
+    "test": "jest --testPathIgnorePatterns=packages/blunt-instrument-ui/ && lerna run test --scope=blunt-instrument-ui -- -- --watchAll=false",
+    "test:watch": "echo 'NOTE: you must run npm test for blunt-instrument-ui separately' && jest --watch --testPathIgnorePatterns=packages/blunt-instrument-ui/",
+    "test:updateSnapshot": "jest --updateSnapshot"
+  }
+}

@@ -1,0 +1,59 @@
+.preview-null, .preview-builtin {
+  color: black;
+}
+
+.preview-number, .preview-bigint {
+  color: rgb(38, 139, 210);
+}
+
+.preview-bigint::after {
+  content: 'n';
+}
+
+.preview-boolean {
+  color: rgb(42, 161, 152);
+}
+
+.preview-function {
+  color: slateblue;
+  font-style: italic;
+}
+
+.preview-string {
+  color: rgb(203, 75, 22);
+}
+
+.preview-symbol {
+  color: rgb(194, 60, 134);
+  font-style: italic;
+}
+
+.preview-array-start,
+.preview-object-start,
+.preview-object-colon {
+  padding-right: .3ex;
+}
+
+.preview-array-end,
+.preview-object-end {
+  padding-left: .3ex;
+}
+
+.preview-array-comma,
+.preview-object-comma {
+  padding-left: .3ex;
+  padding-right: .3ex;
+}
+
+.preview-object-key {
+  color: gray;
+}
+
+.preview-array-fixed-element {
+  width: 4ex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+}

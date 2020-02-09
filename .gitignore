@@ -1,3 +1,7 @@
+.vscode
+target
+*.tracebi
+
 # Logs
 logs
 *.log

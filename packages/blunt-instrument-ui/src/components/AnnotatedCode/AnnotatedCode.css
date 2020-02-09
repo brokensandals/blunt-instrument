@@ -1,0 +1,18 @@
+.AnnotatedCode {
+  padding: 0 10px;
+}
+
+.AnnotatedCode span {
+  cursor: default;
+}
+
+.AnnotatedCode .selected {
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  border-radius: 2px;
+  background-color: lightgray;
+}
+
+.AnnotatedCode .highlighted {
+  background-color: rgb(255, 255, 195);
+}
