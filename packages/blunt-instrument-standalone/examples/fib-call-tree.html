@@ -9,9 +9,10 @@
       // Called when the input changes
       function update() {
         // Get the value specified by the user, and make sure it's not too large
-        const n = document.getElementById('n').value;
+        let n = document.getElementById('n').value;
         if (n > 15) {
-          document.getElementById('n').value = 15;
+          n = 15;
+          document.getElementById('n').value = n;
         }
 
         // Get the source code for the function we're going to call
@@ -104,7 +105,7 @@
       The call tree is built using the data provided by blunt-instrument about what actually occurred during execution of the code; no logging or display code was manually added to the function.
       View this page's source to see how it works, or visit <a href="https://github.com/brokensandals/blunt-instrument/README.md">the documentation</a>.
     </p>
-    <form>
+    <form onsubmit="event.preventDefault()">
       <label for="n">n:</label>
       <input type="number" id="n" value="5" onchange="update()" />
     </form>
