@@ -34,4 +34,5 @@ console.log(trevs.map(trev => trev.data));
 The return value of `instrumentedEval` is an [ArrayTrace](../blunt-instrument-core/README.md#arraytrace) instance.
 
 Note: code is evaluated in strict mode.
+
 [standalone]: ../blunt-instrument-standalone/README.md
