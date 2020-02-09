@@ -128,11 +128,12 @@ function AppView({
             <form className="source-form">
               <p className="instructions">
                 Enter javascript code &amp; click Run, or choose an example:
-                <select value={selectedExample} onChange={onChangeSelectedExample}>
+                <select title="Choose an example" value={selectedExample} onChange={onChangeSelectedExample}>
                   {exampleOptions}
                 </select>
               </p>
-              <textarea value={sourceDraft} onChange={handleSourceDraftChange}
+              <textarea title="Enter source code to run"
+                        value={sourceDraft} onChange={handleSourceDraftChange}
                         autoComplete="false"
                         autoCorrect="false"
                         spellCheck="false" />
@@ -157,8 +158,14 @@ function AppView({
             <div className="load-form">
               <p>You can load a `.json` file saved by this UI or a `.tracebi` file saved by FileTraceWriter.</p>
               <ul>
-                <li>Paste the JSON here: <input className="load-paste" value="" type="text" onPaste={handleLoadByPaste} /></li>
-                <li>Or load from a file: <input className="load-file" value="" type="file" accept=".json, .tracebi" onChange={handleLoadFile} /></li>
+                <li>
+                  <label htmlFor="load-paste">Paste the JSON here: </label>
+                  <input id="load-paste" value="" type="text" onChange={() => {}} onPaste={handleLoadByPaste} />
+                </li>
+                <li>
+                  <label htmlFor="load-file">Or load from a file: </label>
+                  <input id="load-file" value="" type="file" accept=".json, .tracebi" onChange={handleLoadFile} />
+                </li>
               </ul>
               <div className="status-area">
                 {loadStatus}
@@ -178,7 +185,7 @@ function AppView({
           </TabList>
 
           <TabPanel>
-            {astIds.map((astId) => <section key="astId">
+            {astIds.map((astId) => <section key={astId}>
               {astIds.length > 1 ? <h1>{astNames[astId]}</h1> : null}
               <AnnotatedCode ast={tc.astb.asts[astId]}
                              highlightedNodeKey={highlightedNodeKey}
@@ -189,7 +196,7 @@ function AppView({
           </TabPanel>
 
           <TabPanel>
-            {astIds.map((astId) => <section key="astId">
+            {astIds.map((astId) => <section key={astId}>
               {astIds.length > 1 ? <h1>{astNames[astId]}</h1> : null}
               <ASTNav ast={tc.astb.asts[astId]}
                       highlightedNodeKey={highlightedNodeKey}

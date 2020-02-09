@@ -104,6 +104,8 @@ class AppContainer extends React.Component {
         tc = FileTraceWriter.parseToTC(text);
       } catch (error2) {
         status.error = `Failed to parse as TrevCollection json [error=${error}] or as FileTraceWriter output [error=${error2}]`;
+        console.log(error);
+        console.log(error2);
         tc = TrevCollection.empty();
       }
     }
