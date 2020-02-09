@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react'
-import { parseSync } from '@babel/core';
 import instrumentedEval from 'blunt-instrument-eval';
 import TraceQueryFormView from './TraceQueryFormView';
 import buildASTNames from '../../util/buildASTNames';
