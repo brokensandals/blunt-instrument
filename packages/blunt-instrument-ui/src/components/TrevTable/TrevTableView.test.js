@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react'
 import instrumentedEval from 'blunt-instrument-eval';
 import TrevTableView from './TrevTableView';
-import buildASTNames from '../../util/buildASTNames';
 
 describe('TrevTableView', () => {
   const code = `function fac(n) {
