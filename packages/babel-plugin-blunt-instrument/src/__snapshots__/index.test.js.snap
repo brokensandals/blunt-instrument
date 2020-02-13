@@ -103,6 +103,10 @@ Array [
               "type": "property",
               "value": 0,
             },
+            ".name": Object {
+              "type": "property",
+              "value": "",
+            },
             "id": "5",
             "source": "function () { [native code] }",
             "type": "function",
@@ -277,6 +281,10 @@ Array [
             ".length": Object {
               "type": "property",
               "value": 0,
+            },
+            ".name": Object {
+              "type": "property",
+              "value": "",
             },
             "id": "5",
             "source": "function () { [native code] }",
@@ -453,6 +461,10 @@ Array [
               "type": "property",
               "value": 0,
             },
+            ".name": Object {
+              "type": "property",
+              "value": "",
+            },
             "id": "5",
             "source": "function () { [native code] }",
             "type": "function",
@@ -627,6 +639,10 @@ Array [
             ".length": Object {
               "type": "property",
               "value": 0,
+            },
+            ".name": Object {
+              "type": "property",
+              "value": "",
             },
             "id": "5",
             "source": "function () { [native code] }",
@@ -803,6 +819,10 @@ Array [
               "type": "property",
               "value": 0,
             },
+            ".name": Object {
+              "type": "property",
+              "value": "",
+            },
             "id": "5",
             "source": "function () { [native code] }",
             "type": "function",
@@ -977,6 +997,10 @@ Array [
             ".length": Object {
               "type": "property",
               "value": 0,
+            },
+            ".name": Object {
+              "type": "property",
+              "value": "",
             },
             "id": "5",
             "source": "function () { [native code] }",
@@ -1153,6 +1177,10 @@ Array [
               "type": "property",
               "value": 0,
             },
+            ".name": Object {
+              "type": "property",
+              "value": "",
+            },
             "id": "5",
             "source": "function () { [native code] }",
             "type": "function",
@@ -1327,6 +1355,10 @@ Array [
             ".length": Object {
               "type": "property",
               "value": 0,
+            },
+            ".name": Object {
+              "type": "property",
+              "value": "",
             },
             "id": "5",
             "source": "function () { [native code] }",
@@ -1503,6 +1535,10 @@ Array [
               "type": "property",
               "value": 0,
             },
+            ".name": Object {
+              "type": "property",
+              "value": "",
+            },
             "id": "5",
             "source": "function () { [native code] }",
             "type": "function",
@@ -1677,6 +1713,10 @@ Array [
             ".length": Object {
               "type": "property",
               "value": 0,
+            },
+            ".name": Object {
+              "type": "property",
+              "value": "",
             },
             "id": "5",
             "source": "function () { [native code] }",
@@ -2526,6 +2566,10 @@ Array [
             ".length": Object {
               "type": "property",
               "value": 0,
+            },
+            ".name": Object {
+              "type": "property",
+              "value": "",
             },
             "id": "14",
             "source": "function () { [native code] }",
@@ -8164,6 +8208,10 @@ Array [
             ".length": Object {
               "type": "property",
               "value": 0,
+            },
+            ".name": Object {
+              "type": "property",
+              "value": "",
             },
             "id": "6",
             "source": "function () { [native code] }",

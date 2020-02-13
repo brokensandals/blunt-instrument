@@ -59,6 +59,9 @@ Run `npm test` or `npm run test:watch` to run the unit tests.
 **Note**: `test:watch` in the root directory will not run the UI's tests.
 You can run `npm test` in `packages/blunt-instrument-ui` to watch the UI tests.
 
+Some of the snapshot tests are a bit sensitive to the version of Node you're running - for example, in 12.16.0 the `name` property is present on some functions for which it is missing in 12.13.1.
+I need a better strategy for dealing with this, but my current aim is to check in the results corresponding to the latest version of Node 12.
+
 Run `npm start` to run the UI locally.
 
 Run `npm run build` to build all packages, including the UI and ESM builds of the libraries.
