@@ -1,5 +1,7 @@
 # blunt-instrument
 
+[![Build Status](https://travis-ci.org/brokensandals/blunt-instrument.svg?branch=master)](https://travis-ci.org/brokensandals/blunt-instrument)
+
 This is a tool for tracing the execution of javascript code.
 It does not require you to make changes to your source code; instrumentation is automated.
 The instrumented code will report the value of every expression it evaluates, and other execution details such as the tree of function calls.
