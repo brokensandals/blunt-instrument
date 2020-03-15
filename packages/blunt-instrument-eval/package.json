@@ -2,7 +2,7 @@
   "name": "blunt-instrument-eval",
   "version": "0.1.0",
   "description": "Instruments code with blunt-instrument and runs it.",
-  "main": "src/index.js",
+  "main": "target/cjs/index.js",
   "scripts": {
     "build:cjs": "BABEL_MODULES=cjs babel src/ --out-dir target/cjs/ --ignore src/**/*.test.js --root-mode upward",
     "build:esm": "BABEL_MODULES=false babel src/ --out-dir target/esm/ --ignore src/**/*.test.js --root-mode upward",
